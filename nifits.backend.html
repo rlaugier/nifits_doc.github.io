@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>nifits.backend package &mdash; NIFITS 0.0.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+      <link rel="stylesheet" href="_static/fonts.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=f6245a2f"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            NIFITS
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">nifits.backend package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-nifits.backend.backend">nifits.backend.backend module</a><ul>
+<li><a class="reference internal" href="#nifits.backend.backend.NI_Backend"><code class="docutils literal notranslate"><span class="pre">NI_Backend</span></code></a><ul>
+<li><a class="reference internal" href="#nifits.backend.backend.NI_Backend.add_instrument_definition"><code class="docutils literal notranslate"><span class="pre">NI_Backend.add_instrument_definition()</span></code></a></li>
+<li><a class="reference internal" href="#nifits.backend.backend.NI_Backend.add_observation_data"><code class="docutils literal notranslate"><span class="pre">NI_Backend.add_observation_data()</span></code></a></li>
+<li><a class="reference internal" href="#nifits.backend.backend.NI_Backend.create_fov_function_all"><code class="docutils literal notranslate"><span class="pre">NI_Backend.create_fov_function_all()</span></code></a></li>
+<li><a class="reference internal" href="#nifits.backend.backend.NI_Backend.geometric_phasor"><code class="docutils literal notranslate"><span class="pre">NI_Backend.geometric_phasor()</span></code></a></li>
+<li><a class="reference internal" href="#nifits.backend.backend.NI_Backend.get_Is"><code class="docutils literal notranslate"><span class="pre">NI_Backend.get_Is()</span></code></a></li>
+<li><a class="reference internal" href="#nifits.backend.backend.NI_Backend.get_KIs"><code class="docutils literal notranslate"><span class="pre">NI_Backend.get_KIs()</span></code></a></li>
+<li><a class="reference internal" href="#nifits.backend.backend.NI_Backend.get_all_outs"><code class="docutils literal notranslate"><span class="pre">NI_Backend.get_all_outs()</span></code></a></li>
+<li><a class="reference internal" href="#nifits.backend.backend.NI_Backend.get_modulation_phasor"><code class="docutils literal notranslate"><span class="pre">NI_Backend.get_modulation_phasor()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-nifits.backend">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">NIFITS</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">nifits.backend package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/nifits.backend.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="nifits-backend-package">
+<h1>nifits.backend package<a class="headerlink" href="#nifits-backend-package" title="Permalink to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading"></a></h2>
+</section>
+<section id="module-nifits.backend.backend">
+<span id="nifits-backend-backend-module"></span><h2>nifits.backend.backend module<a class="headerlink" href="#module-nifits.backend.backend" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="nifits.backend.backend.NI_Backend">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nifits.backend.backend.</span></span><span class="sig-name descname"><span class="pre">NI_Backend</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nifits:</span> <span class="pre">~nifits.io.oifits.nifits</span> <span class="pre">|</span> <span class="pre">None</span> <span class="pre">=</span> <span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">module=&lt;module</span> <span class="pre">'numpy'</span> <span class="pre">from</span> <span class="pre">'/lhome/romain/miniconda3/envs/scify/lib/python3.8/site-packages/numpy/__init__.py'&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nifits/backend/backend.html#NI_Backend"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.backend.backend.NI_Backend" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A class to produce calculations based on the NIFITS standard.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="nifits.backend.backend.NI_Backend.add_instrument_definition">
+<span class="sig-name descname"><span class="pre">add_instrument_definition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nifits_instrument</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="nifits.io.html#nifits.io.oifits.nifits" title="nifits.io.oifits.nifits"><span class="pre">nifits</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nifits/backend/backend.html#NI_Backend.add_instrument_definition"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.backend.backend.NI_Backend.add_instrument_definition" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nifits.backend.backend.NI_Backend.add_observation_data">
+<span class="sig-name descname"><span class="pre">add_observation_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nifits_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="nifits.io.html#nifits.io.oifits.nifits" title="nifits.io.oifits.nifits"><span class="pre">nifits</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nifits/backend/backend.html#NI_Backend.add_observation_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.backend.backend.NI_Backend.add_observation_data" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nifits.backend.backend.NI_Backend.create_fov_function_all">
+<span class="sig-name descname"><span class="pre">create_fov_function_all</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">md=&lt;module</span> <span class="pre">'numpy'</span> <span class="pre">from</span> <span class="pre">'/lhome/romain/miniconda3/envs/scify/lib/python3.8/site-packages/numpy/__init__.py'&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nifits/backend/backend.html#NI_Backend.create_fov_function_all"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.backend.backend.NI_Backend.create_fov_function_all" title="Permalink to this definition"></a></dt>
+<dd><p>Constructs the method to get the chromatic phasor
+given by injection for all the time series.</p>
+<p><strong>Arguments:</strong></p>
+<p>Sets up <cite>self.ni_fov.xy2phasor</cite></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nifits.backend.backend.NI_Backend.geometric_phasor">
+<span class="sig-name descname"><span class="pre">geometric_phasor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">alpha</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">beta</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_mod=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">md=&lt;module</span> <span class="pre">'numpy'</span> <span class="pre">from</span> <span class="pre">'/lhome/romain/miniconda3/envs/scify/lib/python3.8/site-packages/numpy/__init__.py'&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nifits/backend/backend.html#NI_Backend.geometric_phasor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.backend.backend.NI_Backend.geometric_phasor" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the complex phasor corresponding to the locations
+of the family of sources</p>
+<p><strong>Parameters:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">alpha</span></code>         : The coordinate matched to X in the array geometry</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">beta</span></code>          : The coordinate matched to Y in the array geometry</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">anarray</span></code>       : The array geometry (n_input, 2)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">include_mod</span></code>   : Include the modulation phasor</p></li>
+</ul>
+<p><strong>Returns</strong> : A vector of complex phasors</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nifits.backend.backend.NI_Backend.get_Is">
+<span class="sig-name descname"><span class="pre">get_Is</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">md=&lt;module</span> <span class="pre">'numpy'</span> <span class="pre">from</span> <span class="pre">'/lhome/romain/miniconda3/envs/scify/lib/python3.8/site-packages/numpy/__init__.py'&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nifits/backend/backend.html#NI_Backend.get_Is"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.backend.backend.NI_Backend.get_Is" title="Permalink to this definition"></a></dt>
+<dd><p>Get intensity from an array of sources.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nifits.backend.backend.NI_Backend.get_KIs">
+<span class="sig-name descname"><span class="pre">get_KIs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">Iarray:</span> <span class="pre">~numpy._typing._array_like._SupportsArray[~numpy.dtype]</span> <span class="pre">|</span> <span class="pre">~numpy._typing._nested_sequence._NestedSequence[~numpy._typing._array_like._SupportsArray[~numpy.dtype]]</span> <span class="pre">|</span> <span class="pre">bool</span> <span class="pre">|</span> <span class="pre">int</span> <span class="pre">|</span> <span class="pre">float</span> <span class="pre">|</span> <span class="pre">complex</span> <span class="pre">|</span> <span class="pre">str</span> <span class="pre">|</span> <span class="pre">bytes</span> <span class="pre">|</span> <span class="pre">~numpy._typing._nested_sequence._NestedSequence[bool</span> <span class="pre">|</span> <span class="pre">int</span> <span class="pre">|</span> <span class="pre">float</span> <span class="pre">|</span> <span class="pre">complex</span> <span class="pre">|</span> <span class="pre">str</span> <span class="pre">|</span> <span class="pre">bytes],</span> <span class="pre">md:</span> <span class="pre">module</span> <span class="pre">=</span> <span class="pre">&lt;module</span> <span class="pre">'numpy'</span> <span class="pre">from</span> <span class="pre">'/lhome/romain/miniconda3/envs/scify/lib/python3.8/site-packages/numpy/__init__.py'&gt;</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nifits/backend/backend.html#NI_Backend.get_KIs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.backend.backend.NI_Backend.get_KIs" title="Permalink to this definition"></a></dt>
+<dd><p>Get the prost-processed observable from an array of output intensities. The
+post-processing matrix K is taken from <code class="docutils literal notranslate"><span class="pre">self.nifits.ni_kmat.K</span></code></p>
+<p><strong>Arguments:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">I</span></code>     : (n_frames, n_wl, n_outputs, n_batch)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">md</span></code>    : a python module with a numpy-like interface.</p></li>
+</ul>
+<p><strong>Returns:</strong>
+The vector <span class="math notranslate nohighlight">\(\boldsymbol{\kappa} = \mathbf{K}\cdot\mathbf{I}\)</span></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nifits.backend.backend.NI_Backend.get_all_outs">
+<span class="sig-name descname"><span class="pre">get_all_outs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">alphas</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">betas</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kernels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nifits/backend/backend.html#NI_Backend.get_all_outs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.backend.backend.NI_Backend.get_all_outs" title="Permalink to this definition"></a></dt>
+<dd><p>Compute the transmission map for an array of coordinates. The map can be seen
+as equivalent collecting power expressed in [m^2] for each point sampled so as
+to facilitate comparison with models in Jansky multiplied by the exposure time
+of each frame (available in <cite>nifits.ni_mod.int_time</cite>).</p>
+<p><strong>Argrguments:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">alphas</span></code> : 1D array of coordinates in right ascension</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">betas</span></code>  : 1D array of coordinates in declination</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">kernels</span></code> : (bool) if True, then computes the post-processed
+observables as per the KMAT matrix.</p></li>
+</ul>
+<p><strong>Returns:</strong></p>
+<ul class="simple">
+<li><p>if <code class="docutils literal notranslate"><span class="pre">kernels</span></code> is False: the <em>raw transmission output</em>.</p></li>
+<li><p>if <code class="docutils literal notranslate"><span class="pre">kernels</span></code> is True: the <em>differential observable</em>.</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nifits.backend.backend.NI_Backend.get_modulation_phasor">
+<span class="sig-name descname"><span class="pre">get_modulation_phasor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">md=&lt;module</span> <span class="pre">'numpy'</span> <span class="pre">from</span> <span class="pre">'/lhome/romain/miniconda3/envs/scify/lib/python3.8/site-packages/numpy/__init__.py'&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nifits/backend/backend.html#NI_Backend.get_modulation_phasor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.backend.backend.NI_Backend.get_modulation_phasor" title="Permalink to this definition"></a></dt>
+<dd><p>Computes and returns the modulation phasor [n_wl, n_input]</p>
+<p>The modulation phasor includes is computed in units of collected amplitude
+so that the output of the transmission map in square modulus provides equivalent
+collecting power in m^2 for each point of the map. This is done to facilitate the
+usag of the map with models in jansky.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-nifits.backend">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-nifits.backend" title="Permalink to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, R. Laugier.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

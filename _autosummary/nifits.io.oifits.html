@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>nifits.io.oifits &mdash; NIFITS 0.0.1 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/fonts.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=f6245a2f"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            NIFITS
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">nifits.io.oifits</a></li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">NIFITS</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">nifits.io.oifits</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/_autosummary/nifits.io.oifits.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-nifits.io.oifits">
+<span id="nifits-io-oifits"></span><h1>nifits.io.oifits<a class="headerlink" href="#module-nifits.io.oifits" title="Permalink to this heading"></a></h1>
+<p>A module for reading/writing NIFITS files and handling the data.</p>
+<p>To open an existing NIFITS file, use <code class="docutils literal notranslate"><span class="pre">nifits.from_nifits</span></code> constructor.</p>
+<p>To save an NIFITS object to a file, use <code class="docutils literal notranslate"><span class="pre">nifits.to_nifits</span></code> method.</p>
+<p>A summary of the information in the oifits object can be obtained by
+using the info() method:</p>
+<blockquote>
+<div><p>&gt; import oifits
+&gt; oifitsobj = oifits.open(‘foo.fits’)
+&gt; oifitsobj.info()</p>
+</div></blockquote>
+<p>For further information, contact R. Laugier</p>
+<p class="rubric">Functions</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="../nifits.io.html#nifits.io.oifits.create_basic_fov_data" title="nifits.io.oifits.create_basic_fov_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_basic_fov_data</span></code></a>(D, offset, lamb, n)</p></td>
+<td><p>A convenience function to help define the FOV function and data model</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../nifits.io.html#nifits.io.oifits.getclass" title="nifits.io.oifits.getclass"><code class="xref py py-obj docutils literal notranslate"><span class="pre">getclass</span></code></a>(classname)</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Classes</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="../nifits.io.html#nifits.io.oifits.NI_CATM" title="nifits.io.oifits.NI_CATM"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NI_CATM</span></code></a>(data_table, header, data_array)</p></td>
+<td><p>The complex amplitude transfre function</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../nifits.io.html#nifits.io.oifits.NI_EXTENSION" title="nifits.io.oifits.NI_EXTENSION"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NI_EXTENSION</span></code></a>(data_table, header)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">NI_EXTENSION</span></code> Generic class for NIFITS extensions</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../nifits.io.html#nifits.io.oifits.NI_EXTENSION_ARRAY" title="nifits.io.oifits.NI_EXTENSION_ARRAY"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NI_EXTENSION_ARRAY</span></code></a>(data_table, header, ...)</p></td>
+<td><p>Generic class for NIFITS array extensions</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../nifits.io.html#nifits.io.oifits.NI_EXTENSION_CPX_ARRAY" title="nifits.io.oifits.NI_EXTENSION_CPX_ARRAY"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NI_EXTENSION_CPX_ARRAY</span></code></a>(data_table, header, ...)</p></td>
+<td><p>Generic class for NIFITS array extensions.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../nifits.io.html#nifits.io.oifits.NI_FOV" title="nifits.io.oifits.NI_FOV"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NI_FOV</span></code></a>(data_table, header)</p></td>
+<td><p>The <code class="docutils literal notranslate"><span class="pre">NI_FOV</span></code> data containing information of the field of view (vigneting) function as a function of wavelength.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../nifits.io.html#nifits.io.oifits.NI_IOUT" title="nifits.io.oifits.NI_IOUT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NI_IOUT</span></code></a>(data_table, header)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">NI_IOUT</span></code> : a recording of the output values, given in intensity, flux, counts or arbitrary units.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../nifits.io.html#nifits.io.oifits.NI_KCOV" title="nifits.io.oifits.NI_KCOV"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NI_KCOV</span></code></a>(data_table, header, data_array)</p></td>
+<td><p>The covariance matrix for the processed data contained in KIOUT.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../nifits.io.html#nifits.io.oifits.NI_KIOUT" title="nifits.io.oifits.NI_KIOUT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NI_KIOUT</span></code></a>(data_table, header)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">NI_KIOUT</span></code> : a recording of the processed output values using the the post-processing matrix given by <code class="docutils literal notranslate"><span class="pre">NI_KMAT</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../nifits.io.html#nifits.io.oifits.NI_KMAT" title="nifits.io.oifits.NI_KMAT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NI_KMAT</span></code></a>(data_table, header, data_array)</p></td>
+<td><p>The kernel matrix that defines the post-processing operation between outputs.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../nifits.io.html#nifits.io.oifits.NI_KOUT" title="nifits.io.oifits.NI_KOUT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NI_KOUT</span></code></a>(data_table, header)</p></td>
+<td><p>Differential output observations</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../nifits.io.html#nifits.io.oifits.NI_MOD" title="nifits.io.oifits.NI_MOD"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NI_MOD</span></code></a>(data_table, header)</p></td>
+<td><p>Contains input modulation vector for the given observation. The format</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../nifits.io.html#nifits.io.oifits.NI_OUT" title="nifits.io.oifits.NI_OUT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NI_OUT</span></code></a>(data_table, header, value_out)</p></td>
+<td><p>Contains measured intensities of the outputs of the instrument.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../nifits.io.html#nifits.io.oifits.OI_ARRAY" title="nifits.io.oifits.OI_ARRAY"><code class="xref py py-obj docutils literal notranslate"><span class="pre">OI_ARRAY</span></code></a>(data_table, header)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">OI_ARRAY</span></code> definition</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../nifits.io.html#nifits.io.oifits.OI_STATION" title="nifits.io.oifits.OI_STATION"><code class="xref py py-obj docutils literal notranslate"><span class="pre">OI_STATION</span></code></a>([tel_name, sta_name, diameter, ...])</p></td>
+<td><p>This class corresponds to a single row (i.e.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../nifits.io.html#nifits.io.oifits.OI_TARGET" title="nifits.io.oifits.OI_TARGET"><code class="xref py py-obj docutils literal notranslate"><span class="pre">OI_TARGET</span></code></a>(data_table, header)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">OI_TARGET</span></code> definition.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../nifits.io.html#nifits.io.oifits.OI_WAVELENGTH" title="nifits.io.oifits.OI_WAVELENGTH"><code class="xref py py-obj docutils literal notranslate"><span class="pre">OI_WAVELENGTH</span></code></a>(data_table, header)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../nifits.io.html#nifits.io.oifits.nifits" title="nifits.io.oifits.nifits"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nifits</span></code></a>([header, ni_catm, ni_fov, ni_kmat, ...])</p></td>
+<td><p>Class representation of the nifits object.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, R. Laugier.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

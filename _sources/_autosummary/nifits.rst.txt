@@ -1,0 +1,32 @@
+﻿nifits
+======
+
+.. automodule:: nifits
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+
+.. rubric:: Modules
+
+.. autosummary::
+   :toctree:
+   :recursive:
+
+   nifits.backend
+   nifits.io
+

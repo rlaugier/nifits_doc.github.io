@@ -1,0 +1,52 @@
+﻿nifits.io.oifits
+================
+
+.. automodule:: nifits.io.oifits
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      create_basic_fov_data
+      getclass
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      NI_CATM
+      NI_EXTENSION
+      NI_EXTENSION_ARRAY
+      NI_EXTENSION_CPX_ARRAY
+      NI_FOV
+      NI_IOUT
+      NI_KCOV
+      NI_KIOUT
+      NI_KMAT
+      NI_KOUT
+      NI_MOD
+      NI_OUT
+      OI_ARRAY
+      OI_STATION
+      OI_TARGET
+      OI_WAVELENGTH
+      nifits
+   
+   
+
+   
+   
+   
+
+
+

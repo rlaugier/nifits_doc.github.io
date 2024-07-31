@@ -1,0 +1,29 @@
+nifits.backend
+==============
+
+.. automodule:: nifits.backend
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      NI_Backend
+   
+   
+
+   
+   
+   
+
+
+
