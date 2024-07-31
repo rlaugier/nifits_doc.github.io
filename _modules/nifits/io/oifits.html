@@ -237,24 +237,6 @@
                                         <span class="p">(</span><span class="s2">&quot;FOV_TELDIAM_UNIT&quot;</span><span class="p">,</span> <span class="s2">&quot;m&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">),</span>
                                         <span class="p">(</span><span class="s2">&quot;WL_SHIFT_MODE&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)])</span>
 
-<span class="c1"># TODO : fix this in a more elegant manner</span>
-<div class="viewcode-block" id="get_ni_fov_default_header"><a class="viewcode-back" href="../../../nifits.io.html#nifits.io.oifits.get_ni_fov_default_header">[docs]</a><span class="k">def</span> <span class="nf">get_ni_fov_default_header</span><span class="p">():</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    A quick fix for python 3.12</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">NI_FOV_DEFAULT_HEADER</span></div>
-
-<div class="viewcode-block" id="get_ni_mod_default_header"><a class="viewcode-back" href="../../../nifits.io.html#nifits.io.oifits.get_ni_mod_default_header">[docs]</a><span class="k">def</span> <span class="nf">get_ni_mod_default_header</span><span class="p">():</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    A quick fix for python 3.12</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">NI_MOD_DEFAULT_HEADER</span></div>
-    
-<div class="viewcode-block" id="get_ni_out_default_header"><a class="viewcode-back" href="../../../nifits.io.html#nifits.io.oifits.get_ni_out_default_header">[docs]</a><span class="k">def</span> <span class="nf">get_ni_out_default_header</span><span class="p">():</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    A quick fix for python 3.12</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">NI_OUT_DEFAULT_HEADER</span></div>
     
 
 <div class="viewcode-block" id="NI_EXTENSION"><a class="viewcode-back" href="../../../nifits.io.html#nifits.io.oifits.NI_EXTENSION">[docs]</a><span class="nd">@dataclass</span>
@@ -269,6 +251,9 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">data_table</span><span class="p">:</span> <span class="n">Table</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="n">Table</span><span class="p">)</span>
     <span class="n">header</span><span class="p">:</span> <span class="n">fits</span><span class="o">.</span><span class="n">Header</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="n">fits</span><span class="o">.</span><span class="n">Header</span><span class="p">)</span>
+    <span class="c1"># TODO: Potentially, this should be a None by default, while still being a </span>
+    <span class="c1"># fits.Header type hint... We can if we have a None, we can catch it with </span>
+    <span class="c1"># a __post_init__ method. TODO this will help cleanup the signature in the doc.</span>
 
 <div class="viewcode-block" id="NI_EXTENSION.from_hdu"><a class="viewcode-back" href="../../../nifits.io.html#nifits.io.oifits.NI_EXTENSION.from_hdu">[docs]</a>    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">from_hdu</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">hdu</span><span class="p">:</span> <span class="nb">type</span><span class="p">(</span><span class="n">fits</span><span class="o">.</span><span class="n">hdu</span><span class="o">.</span><span class="n">TableHDU</span><span class="p">)):</span>
