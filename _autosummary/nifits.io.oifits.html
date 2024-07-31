@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>nifits.io.oifits &mdash; NIFITS 0.0.1 documentation</title>
+  <title>nifits.io.oifits &mdash; NIFITS 0.0.3 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
@@ -15,7 +15,7 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=f6245a2f"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=65a4545c"></script>
         <script src="../_static/doctools.js?v=888ff710"></script>
         <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
     <script src="../_static/js/theme.js"></script>
@@ -90,7 +90,19 @@ using the info() method:</p>
 <tr class="row-odd"><td><p><a class="reference internal" href="../nifits.io.html#nifits.io.oifits.create_basic_fov_data" title="nifits.io.oifits.create_basic_fov_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_basic_fov_data</span></code></a>(D, offset, lamb, n)</p></td>
 <td><p>A convenience function to help define the FOV function and data model</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="../nifits.io.html#nifits.io.oifits.getclass" title="nifits.io.oifits.getclass"><code class="xref py py-obj docutils literal notranslate"><span class="pre">getclass</span></code></a>(classname)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../nifits.io.html#nifits.io.oifits.get_ni_fov_default_header" title="nifits.io.oifits.get_ni_fov_default_header"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_ni_fov_default_header</span></code></a>()</p></td>
+<td><p>A quick fix for python 3.12</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../nifits.io.html#nifits.io.oifits.get_ni_mod_default_header" title="nifits.io.oifits.get_ni_mod_default_header"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_ni_mod_default_header</span></code></a>()</p></td>
+<td><p>A quick fix for python 3.12</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../nifits.io.html#nifits.io.oifits.get_ni_out_default_header" title="nifits.io.oifits.get_ni_out_default_header"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_ni_out_default_header</span></code></a>()</p></td>
+<td><p>A quick fix for python 3.12</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../nifits.io.html#nifits.io.oifits.getclass" title="nifits.io.oifits.getclass"><code class="xref py py-obj docutils literal notranslate"><span class="pre">getclass</span></code></a>(classname)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../nifits.io.html#nifits.io.oifits.nulfunc" title="nifits.io.oifits.nulfunc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nulfunc</span></code></a>(self, *args, **kwargs)</p></td>
 <td><p></p></td>
 </tr>
 </tbody>
@@ -129,7 +141,7 @@ using the info() method:</p>
 <td><p>Differential output observations</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="../nifits.io.html#nifits.io.oifits.NI_MOD" title="nifits.io.oifits.NI_MOD"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NI_MOD</span></code></a>(data_table, header)</p></td>
-<td><p>Contains input modulation vector for the given observation. The format</p></td>
+<td><p>Contains input modulation vector for the given observation.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="../nifits.io.html#nifits.io.oifits.NI_OUT" title="nifits.io.oifits.NI_OUT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NI_OUT</span></code></a>(data_table, header, value_out)</p></td>
 <td><p>Contains measured intensities of the outputs of the instrument.</p></td>

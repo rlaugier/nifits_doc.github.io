@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Welcome to NIFITS &mdash; NIFITS 0.0.3 documentation</title>
+  <title>Installing the nifits package &mdash; NIFITS 0.0.3 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/custom.css" type="text/css" />
@@ -44,9 +44,9 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <!-- Local TOC -->
               <div class="local-toc"><ul>
-<li><a class="reference internal" href="#">Welcome to NIFITS</a><ul>
-<li><a class="reference internal" href="#principles-of-the-package">Principles of the package</a></li>
-<li><a class="reference internal" href="#setup-guide">Setup guide</a></li>
+<li><a class="reference internal" href="#">Installing the nifits package</a><ul>
+<li><a class="reference internal" href="#dependencies">Dependencies</a></li>
+<li><a class="reference internal" href="#setup">setup</a></li>
 </ul>
 </li>
 </ul>
@@ -65,9 +65,9 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Welcome to NIFITS</li>
+      <li class="breadcrumb-item active">Installing the nifits package</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/introduction.md.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/setup.md.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -75,13 +75,35 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="welcome-to-nifits">
-<h1>Welcome to NIFITS<a class="headerlink" href="#welcome-to-nifits" title="Permalink to this heading"></a></h1>
-<section id="principles-of-the-package">
-<h2>Principles of the package<a class="headerlink" href="#principles-of-the-package" title="Permalink to this heading"></a></h2>
+  <section id="installing-the-nifits-package">
+<span id="setup-tips"></span><h1>Installing the nifits package<a class="headerlink" href="#installing-the-nifits-package" title="Permalink to this heading"></a></h1>
+<p>This procedure was mostly tested on ubuntu. If problems accur attempting to install on other platforms, please file an issue on the github repository.</p>
+<section id="dependencies">
+<h2>Dependencies<a class="headerlink" href="#dependencies" title="Permalink to this heading"></a></h2>
+<p>Although initially developped for python 3.8 and numpy 1.24, the setup installation routine was not working reliably.</p>
+<p>After some patches (version 0.0.3+), we now recommend python 3.12 and numpy 2.0+ for a smooth experience. Most dependencies should install automatically.</p>
+<p>The main dependencies are:</p>
+<ul class="simple">
+<li><p>astropy</p></li>
+<li><p>numpy</p></li>
+<li><p>scipy</p></li>
+<li><p>matplotlib</p></li>
+<li><p>sympy</p></li>
+</ul>
 </section>
-<section id="setup-guide">
-<h2>Setup guide<a class="headerlink" href="#setup-guide" title="Permalink to this heading"></a></h2>
+<section id="setup">
+<h2>setup<a class="headerlink" href="#setup" title="Permalink to this heading"></a></h2>
+<p>Working in a specific conda environment is recommended.</p>
+<p>Clone the repo:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/rlaugier/nifits
+</pre></div>
+</div>
+<p>Navigate to the repo and setup:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>nifits
+python<span class="w"> </span>setup.py<span class="w"> </span>develop
+</pre></div>
+</div>
+<p>Note that using the action <code class="docutils literal notranslate"><span class="pre">develop</span></code> is recommended during this period of active development to avoid the need to re-install each time you pull the repo. Just restarting the kernel should suffice, unless there are changes in the package architecture.</p>
 </section>
 </section>
 
