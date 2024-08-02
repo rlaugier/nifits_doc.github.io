@@ -70,6 +70,27 @@
   <h1>Source code for nifits.backend.backend</h1><div class="highlight"><pre>
 <span></span>
 
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Backend module</span>
+<span class="sd">--------------</span>
+
+<span class="sd">This module handles basic computation based on the NIFITS standard</span>
+<span class="sd">for representing the instrument. It reconstructs the model-in-a-kit</span>
+<span class="sd">following the standard.</span>
+
+<span class="sd">It offers a limited capability to be powered with computing backends</span>
+<span class="sd">that have a numpy-compatible API.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+
+
+
+
+
+
+
+
+
 <span class="kn">import</span> <span class="nn">nifits.io</span> <span class="k">as</span> <span class="nn">io</span>
 <span class="kn">from</span> <span class="nn">nifits.io.oifits</span> <span class="kn">import</span> <span class="n">NIFITS_EXTENSIONS</span><span class="p">,</span> <span class="n">STATIC_EXTENSIONS</span>
 <span class="kn">from</span> <span class="nn">nifits.io.oifits</span> <span class="kn">import</span> <span class="n">nifits</span> <span class="k">as</span> <span class="n">NIFITSClass</span>
@@ -79,19 +100,194 @@
 <span class="kn">from</span> <span class="nn">numpy.typing</span> <span class="kn">import</span> <span class="n">ArrayLike</span>
 <span class="kn">from</span> <span class="nn">types</span> <span class="kn">import</span> <span class="n">ModuleType</span>
 
+<span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
+
+<span class="n">mas2rad</span> <span class="o">=</span> <span class="n">units</span><span class="o">.</span><span class="n">mas</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">units</span><span class="o">.</span><span class="n">rad</span><span class="p">)</span>
+<span class="n">rad2mas</span> <span class="o">=</span> <span class="n">units</span><span class="o">.</span><span class="n">rad</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">units</span><span class="o">.</span><span class="n">mas</span><span class="p">)</span>
+
+
+
+<span class="c1"># TODO Add methods to __add__ PointCollections for variable sampling</span>
+<span class="c1"># TODO Add a shorthand to surface element ds, taken from the overal surface</span>
+<span class="c1"># divided by the number of points. WARNING: we will have to handle redundancy.</span>
+
+<div class="viewcode-block" id="PointCollection"><a class="viewcode-back" href="../../../nifits.backend.html#nifits.backend.backend.PointCollection">[docs]</a><span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">PointCollection</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        A class to hold arrays of coordinates. Handy to compute</span>
+<span class="sd">    the transmission map on a large number of points.</span>
+
+<span class="sd">    **Units default to mas.**</span>
+
+<span class="sd">    ** Arguments:**</span>
+
+<span class="sd">    * ``aa``    : [unit (mas)] (ArrayLike) first coordinate flat array, </span>
+<span class="sd">      typically RA.</span>
+<span class="sd">    * ``bb``    : [unit (mas)] (ArrayLike) second coordinate flat array, </span>
+<span class="sd">      typically Dec.</span>
+
+<span class="sd">    **Constructors:**</span>
+
+<span class="sd">    * ``from_uniform_disk`` : </span>
+<span class="sd">    * ``from_grid``         :</span>
+<span class="sd">    * ``from_centered_square``   :</span>
+
+<span class="sd">    **Handles:**</span>
+
+<span class="sd">    * ``coords``         : The array values as first provided</span>
+<span class="sd">    * ``coords_rad``     : The array values, converted from </span>
+<span class="sd">      ``self.unit`` into radians.</span>
+<span class="sd">    * ``coords_quantity``: Return the values as a quantity.</span>
+<span class="sd">    * ``coords_radial``  : Returns the radial coordinates (rho,theta)</span>
+<span class="sd">    * ``extent``         : The [left, right, top, bottom] extent</span>
+<span class="sd">      (used for some plots).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">aa</span><span class="p">:</span> <span class="n">ArrayLike</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">bb</span><span class="p">:</span> <span class="n">ArrayLike</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">unit</span><span class="p">:</span> <span class="n">units</span><span class="o">.</span><span class="n">Unit</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">def</span> <span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">shape</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">aa</span><span class="o">.</span><span class="n">shape</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">unit</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">unit</span> <span class="o">=</span> <span class="n">units</span><span class="o">.</span><span class="n">mas</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;orig_shape&quot;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">orig_shape</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">shape</span>
+
+<div class="viewcode-block" id="PointCollection.from_uniform_disk"><a class="viewcode-back" href="../../../nifits.backend.html#nifits.backend.backend.PointCollection.from_uniform_disk">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_uniform_disk</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                <span class="n">n</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
+                <span class="n">phi_0</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.</span><span class="p">,</span>
+                <span class="n">offset</span><span class="p">:</span> <span class="n">ArrayLike</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">((</span><span class="mf">0.</span><span class="p">,</span><span class="mf">0.</span><span class="p">)),</span>
+                <span class="n">md</span><span class="p">:</span> <span class="n">ModuleType</span> <span class="o">=</span> <span class="n">np</span><span class="p">,</span>
+                <span class="n">unit</span><span class="p">:</span> <span class="n">units</span><span class="o">.</span><span class="n">Unit</span> <span class="o">=</span> <span class="n">units</span><span class="o">.</span><span class="n">mas</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Create a point collection as a uniformly sampled disk.</span>
+
+<span class="sd">        **Arguments:**</span>
+
+<span class="sd">        * ``a_coords`` : The array of samples along the first axis</span>
+<span class="sd">          (typically alpha)</span>
+<span class="sd">        * ``b_coords`` : The array of samples along the second axis</span>
+<span class="sd">          (typically beta, the second dimension)</span>
+
+<span class="sd">        **Handles:**</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">alpha</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="p">(</span><span class="mi">3</span> <span class="o">-</span> <span class="n">md</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>    <span class="c1"># the &quot;golden angle&quot;</span>
+        <span class="n">points</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">md</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+          <span class="n">theta</span> <span class="o">=</span> <span class="n">k</span> <span class="o">*</span> <span class="n">alpha</span> <span class="o">+</span> <span class="n">phi_0</span>
+          <span class="n">r</span> <span class="o">=</span> <span class="n">radius</span> <span class="o">*</span> <span class="n">md</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">k</span><span class="p">)</span><span class="o">/</span><span class="n">n</span><span class="p">)</span>
+          <span class="n">points</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">r</span> <span class="o">*</span> <span class="n">md</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">),</span> <span class="n">r</span> <span class="o">*</span> <span class="n">md</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">)))</span>
+        <span class="n">points</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">points</span><span class="p">)</span><span class="o">.</span><span class="n">T</span> <span class="o">+</span> <span class="n">offset</span><span class="p">[:,</span><span class="kc">None</span><span class="p">]</span>
+        <span class="n">myobj</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">(</span><span class="o">*</span><span class="n">points</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="n">unit</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">myobj</span></div>
+
+<div class="viewcode-block" id="PointCollection.from_grid"><a class="viewcode-back" href="../../../nifits.backend.html#nifits.backend.backend.PointCollection.from_grid">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_grid</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">a_coords</span><span class="p">:</span> <span class="n">ArrayLike</span><span class="p">,</span> <span class="n">b_coords</span><span class="p">:</span> <span class="n">ArrayLike</span><span class="p">,</span>
+                        <span class="n">md</span><span class="p">:</span> <span class="n">ModuleType</span> <span class="o">=</span> <span class="n">np</span><span class="p">,</span>
+                        <span class="n">unit</span><span class="p">:</span> <span class="n">units</span><span class="o">.</span><span class="n">Unit</span> <span class="o">=</span> <span class="n">units</span><span class="o">.</span><span class="n">mas</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Create a point collection as a cartesian grid.</span>
+
+<span class="sd">        **Arguments:**</span>
+
+<span class="sd">        * ``a_coords`` : The array of samples along the first axis</span>
+<span class="sd">          (typically alpha)</span>
+<span class="sd">        * ``b_coords`` : The array of samples along the second axis</span>
+<span class="sd">          (typically beta, the second dimension)</span>
+
+<span class="sd">        **Handles:**</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">aa</span><span class="p">,</span> <span class="n">bb</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">a_coords</span><span class="p">,</span> <span class="n">b_coords</span><span class="p">)</span>
+        <span class="n">original_shape</span> <span class="o">=</span> <span class="n">aa</span><span class="o">.</span><span class="n">shape</span>
+        <span class="n">aa</span> <span class="o">=</span> <span class="n">aa</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+        <span class="n">bb</span> <span class="o">=</span> <span class="n">bb</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+        <span class="n">myobj</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">(</span><span class="n">aa</span><span class="o">=</span><span class="n">aa</span><span class="p">,</span> <span class="n">bb</span><span class="o">=</span><span class="n">bb</span><span class="p">)</span>
+        <span class="n">myobj</span><span class="o">.</span><span class="n">extent</span> <span class="o">=</span> <span class="p">[</span><span class="n">md</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">a_coords</span><span class="p">),</span> <span class="n">md</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">a_coords</span><span class="p">),</span>
+                        <span class="n">md</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">b_coords</span><span class="p">),</span> <span class="n">md</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">b_coords</span><span class="p">)]</span>
+        <span class="n">myobj</span><span class="o">.</span><span class="n">orig_shape</span> <span class="o">=</span> <span class="n">original_shape</span>
+        <span class="k">return</span> <span class="n">myobj</span></div>
+
+<div class="viewcode-block" id="PointCollection.from_centered_square_grid"><a class="viewcode-back" href="../../../nifits.backend.html#nifits.backend.backend.PointCollection.from_centered_square_grid">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_centered_square_grid</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">radius</span><span class="p">,</span> <span class="n">resolution</span><span class="p">,</span>
+                            <span class="n">md</span><span class="p">:</span> <span class="n">ModuleType</span> <span class="o">=</span> <span class="n">np</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Create a centered square cartesian grid object</span>
+
+<span class="sd">        **Arguments:**</span>
+
+<span class="sd">        * ``radius``      : The radial extent of the grid.</span>
+<span class="sd">        * ``resolution``  : The number of pixels across the width.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">a_coords</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="n">radius</span><span class="p">,</span> <span class="n">radius</span><span class="p">,</span> <span class="n">resolution</span><span class="p">)</span>
+        <span class="n">b_coords</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="n">radius</span><span class="p">,</span> <span class="n">radius</span><span class="p">,</span> <span class="n">resolution</span><span class="p">)</span>
+        <span class="n">myobj</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">from_grid</span><span class="p">(</span><span class="n">a_coords</span><span class="o">=</span><span class="n">a_coords</span><span class="p">,</span>
+                            <span class="n">b_coords</span><span class="o">=</span><span class="n">b_coords</span><span class="p">,</span>
+                            <span class="n">md</span><span class="o">=</span><span class="n">md</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">myobj</span></div>
+        
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">coords</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns a tuple with the ``alpha`` and ``beta`` coordinates in </span>
+<span class="sd">        flat arrays.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">aa</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">bb</span><span class="p">)</span>
+    
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">coords_rad</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">mas2rad</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">aa</span><span class="p">,</span> <span class="n">mas2rad</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">bb</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">coords_radial</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the radial coordinates of points. (rho, theta) ([unit], [rad]).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cpx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">aa</span> <span class="o">+</span> <span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">bb</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">cpx</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">angle</span><span class="p">(</span><span class="n">cpx</span><span class="p">))</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">coords_shaped</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;orig_shape&quot;</span><span class="p">):</span>
+            <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">aa</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">orig_shape</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">bb</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">orig_shape</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s2">&quot;Did not have an original shape&quot;</span><span class="p">)</span></div>
+
 
 <div class="viewcode-block" id="NI_Backend"><a class="viewcode-back" href="../../../nifits.backend.html#nifits.backend.backend.NI_Backend">[docs]</a><span class="k">class</span> <span class="nc">NI_Backend</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A class to produce calculations based on the NIFITS standard.</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># def __init__(self, myfits: type(io.oifits.NIFITS)):</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nifits</span><span class="p">:</span> <span class="n">NIFITSClass</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                     <span class="n">module</span><span class="o">=</span><span class="n">np</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">nifits</span> <span class="o">=</span> <span class="n">nifits</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Backend object. Typically created empty. The nifits</span>
+<span class="sd">        instrument information are added later with:</span>
+
+<span class="sd">        * ``.add_instrument_definition``</span>
+<span class="sd">        * ``.add_observation_data``</span>
+<span class="sd">        </span>
+<span class="sd">        **Arguments:**</span>
+
+<span class="sd">        * ``nifits``    : NIFITSClass </span>
+<span class="sd">        * ``module``    : A backend module for advanced math.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="NI_Backend.add_instrument_definition"><a class="viewcode-back" href="../../../nifits.backend.html#nifits.backend.backend.NI_Backend.add_instrument_definition">[docs]</a>    <span class="k">def</span> <span class="nf">add_instrument_definition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nifits_instrument</span><span class="p">:</span> <span class="n">NIFITSClass</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                                     <span class="n">force</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
                                     <span class="n">verbose</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Adds the instrument definition to the model.</span>
+<span class="sd">        </span>
+<span class="sd">        **Arguments:**</span>
+
+<span class="sd">        * ``nifits_instrument``   : NIFITS object</span>
+<span class="sd">        * ``force``               : ``Bool`` if True, then the existing extensions</span>
+<span class="sd">          will be replaced</span>
+<span class="sd">        * ``verbose``             : Get more printed information</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">nifits_instrument</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">nifits</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">nifits</span> <span class="o">=</span> <span class="n">nifits_instrument</span>
@@ -111,7 +307,14 @@
                                     <span class="n">force</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
                                     <span class="n">verbose</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">            </span>
+<span class="sd">        Adds the observation data to the model.</span>
+<span class="sd">        </span>
+<span class="sd">        **Arguments:**</span>
+
+<span class="sd">        * ``nifits_instrument``   : NIFITS object</span>
+<span class="sd">        * ``force``               : ``Bool`` if True, then the existing extensions</span>
+<span class="sd">          will be replaced</span>
+<span class="sd">        * ``verbose``             : Get more printed information</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">nifits_data</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">nifits</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -146,6 +349,11 @@
         <span class="k">def</span> <span class="nf">xy2phasor</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">):</span>
 <span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">            x and y in rad.</span>
+
+<span class="sd">            **Arguments:**</span>
+
+<span class="sd">            * x     : ArrayLike [rad] Coordinate in the Fov.</span>
+<span class="sd">            * y     : ArrayLike [rad] Coordinate in the Fov.</span>
 <span class="sd">            &quot;&quot;&quot;</span>
             <span class="n">r</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">hypot</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,:]</span><span class="o">-</span><span class="n">offset</span><span class="p">[:,:,</span><span class="mi">0</span><span class="p">,</span><span class="kc">None</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span><span class="kc">None</span><span class="p">,:]</span><span class="o">-</span><span class="n">offset</span><span class="p">[:,:,</span><span class="mi">1</span><span class="p">,</span><span class="kc">None</span><span class="p">])</span>
             <span class="n">phasor</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">r</span><span class="p">[:,:]</span><span class="o">/</span><span class="n">r_0</span><span class="p">[:,</span><span class="kc">None</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
@@ -218,7 +426,7 @@
 <span class="sd">        **Returns:**</span>
 <span class="sd">        The vector :math:`\boldsymbol{\kappa} = \mathbf{K}\cdot\mathbf{I}`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">KI</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s2">&quot;i m, t w o i -&gt; t w o m&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_kmat</span><span class="o">.</span><span class="n">K</span><span class="p">[:,:],</span> <span class="n">Iarray</span><span class="p">)</span>
+        <span class="n">KI</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s2">&quot;k o, t w o m -&gt; t w k m&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_kmat</span><span class="o">.</span><span class="n">K</span><span class="p">[:,:],</span> <span class="n">Iarray</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">KI</span></div>
         
 <div class="viewcode-block" id="NI_Backend.get_all_outs"><a class="viewcode-back" href="../../../nifits.backend.html#nifits.backend.backend.NI_Backend.get_all_outs">[docs]</a>    <span class="k">def</span> <span class="nf">get_all_outs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">alphas</span><span class="p">,</span> <span class="n">betas</span><span class="p">,</span> <span class="n">kernels</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
@@ -230,8 +438,8 @@
 
 <span class="sd">        **Argrguments:**</span>
 
-<span class="sd">        * ``alphas`` : 1D array of coordinates in right ascension</span>
-<span class="sd">        * ``betas``  : 1D array of coordinates in declination</span>
+<span class="sd">        * ``alphas``  : ArrayLike [rad] 1D array of coordinates in right ascension</span>
+<span class="sd">        * ``betas``   : ArrayLike [rad] 1D array of coordinates in declination</span>
 <span class="sd">        * ``kernels`` : (bool) if True, then computes the post-processed</span>
 <span class="sd">          observables as per the KMAT matrix.</span>
 
@@ -239,6 +447,8 @@
 
 <span class="sd">        * if ``kernels`` is False: the *raw transmission output*.</span>
 <span class="sd">        * if ``kernels`` is True: the *differential observable*.</span>
+
+<span class="sd">        **Shape:** (n_frames, n_wl, n_outputs, n_points)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># The phasor from the incidence on the array:</span>
         <span class="n">xs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometric_phasor</span><span class="p">(</span><span class="n">alphas</span><span class="p">,</span> <span class="n">betas</span><span class="p">,</span> <span class="n">include_mod</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>

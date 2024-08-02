@@ -1,4 +1,4 @@
-nifits.backend
+﻿nifits.backend
 ==============
 
 .. automodule:: nifits.backend
@@ -18,6 +18,7 @@ nifits.backend
    .. autosummary::
    
       NI_Backend
+      PointCollection
    
    
 

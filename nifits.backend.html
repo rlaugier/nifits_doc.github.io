@@ -48,6 +48,7 @@
 <li><a class="reference internal" href="#">nifits.backend package</a><ul>
 <li><a class="reference internal" href="#submodules">Submodules</a></li>
 <li><a class="reference internal" href="#module-nifits.backend.backend">nifits.backend.backend module</a><ul>
+<li><a class="reference internal" href="#backend-module">Backend module</a></li>
 <li><a class="reference internal" href="#nifits.backend.backend.NI_Backend"><code class="docutils literal notranslate"><span class="pre">NI_Backend</span></code></a><ul>
 <li><a class="reference internal" href="#nifits.backend.backend.NI_Backend.add_instrument_definition"><code class="docutils literal notranslate"><span class="pre">NI_Backend.add_instrument_definition()</span></code></a></li>
 <li><a class="reference internal" href="#nifits.backend.backend.NI_Backend.add_observation_data"><code class="docutils literal notranslate"><span class="pre">NI_Backend.add_observation_data()</span></code></a></li>
@@ -57,6 +58,20 @@
 <li><a class="reference internal" href="#nifits.backend.backend.NI_Backend.get_KIs"><code class="docutils literal notranslate"><span class="pre">NI_Backend.get_KIs()</span></code></a></li>
 <li><a class="reference internal" href="#nifits.backend.backend.NI_Backend.get_all_outs"><code class="docutils literal notranslate"><span class="pre">NI_Backend.get_all_outs()</span></code></a></li>
 <li><a class="reference internal" href="#nifits.backend.backend.NI_Backend.get_modulation_phasor"><code class="docutils literal notranslate"><span class="pre">NI_Backend.get_modulation_phasor()</span></code></a></li>
+<li><a class="reference internal" href="#nifits.backend.backend.NI_Backend.nifits"><code class="docutils literal notranslate"><span class="pre">NI_Backend.nifits</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#nifits.backend.backend.PointCollection"><code class="docutils literal notranslate"><span class="pre">PointCollection</span></code></a><ul>
+<li><a class="reference internal" href="#nifits.backend.backend.PointCollection.aa"><code class="docutils literal notranslate"><span class="pre">PointCollection.aa</span></code></a></li>
+<li><a class="reference internal" href="#nifits.backend.backend.PointCollection.bb"><code class="docutils literal notranslate"><span class="pre">PointCollection.bb</span></code></a></li>
+<li><a class="reference internal" href="#nifits.backend.backend.PointCollection.coords"><code class="docutils literal notranslate"><span class="pre">PointCollection.coords</span></code></a></li>
+<li><a class="reference internal" href="#nifits.backend.backend.PointCollection.coords_rad"><code class="docutils literal notranslate"><span class="pre">PointCollection.coords_rad</span></code></a></li>
+<li><a class="reference internal" href="#nifits.backend.backend.PointCollection.coords_radial"><code class="docutils literal notranslate"><span class="pre">PointCollection.coords_radial</span></code></a></li>
+<li><a class="reference internal" href="#nifits.backend.backend.PointCollection.coords_shaped"><code class="docutils literal notranslate"><span class="pre">PointCollection.coords_shaped</span></code></a></li>
+<li><a class="reference internal" href="#nifits.backend.backend.PointCollection.from_centered_square_grid"><code class="docutils literal notranslate"><span class="pre">PointCollection.from_centered_square_grid()</span></code></a></li>
+<li><a class="reference internal" href="#nifits.backend.backend.PointCollection.from_grid"><code class="docutils literal notranslate"><span class="pre">PointCollection.from_grid()</span></code></a></li>
+<li><a class="reference internal" href="#nifits.backend.backend.PointCollection.from_uniform_disk"><code class="docutils literal notranslate"><span class="pre">PointCollection.from_uniform_disk()</span></code></a></li>
+<li><a class="reference internal" href="#nifits.backend.backend.PointCollection.unit"><code class="docutils literal notranslate"><span class="pre">PointCollection.unit</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -97,6 +112,14 @@
 </section>
 <section id="module-nifits.backend.backend">
 <span id="nifits-backend-backend-module"></span><h2>nifits.backend.backend module<a class="headerlink" href="#module-nifits.backend.backend" title="Permalink to this heading"></a></h2>
+<section id="backend-module">
+<h3>Backend module<a class="headerlink" href="#backend-module" title="Permalink to this heading"></a></h3>
+<p>This module handles basic computation based on the NIFITS standard
+for representing the instrument. It reconstructs the model-in-a-kit
+following the standard.</p>
+<p>It offers a limited capability to be powered with computing backends
+that have a numpy-compatible API.</p>
+</section>
 <dl class="py class">
 <dt class="sig sig-object py" id="nifits.backend.backend.NI_Backend">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nifits.backend.backend.</span></span><span class="sig-name descname"><span class="pre">NI_Backend</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nifits:</span> <span class="pre">~nifits.io.oifits.nifits</span> <span class="pre">|</span> <span class="pre">None</span> <span class="pre">=</span> <span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">module=&lt;module</span> <span class="pre">'numpy'</span> <span class="pre">from</span> <span class="pre">'/lhome/romain/miniconda3/envs/scify/lib/python3.8/site-packages/numpy/__init__.py'&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nifits/backend/backend.html#NI_Backend"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.backend.backend.NI_Backend" title="Permalink to this definition"></a></dt>
@@ -105,12 +128,28 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="nifits.backend.backend.NI_Backend.add_instrument_definition">
 <span class="sig-name descname"><span class="pre">add_instrument_definition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nifits_instrument</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="nifits.io.html#nifits.io.oifits.nifits" title="nifits.io.oifits.nifits"><span class="pre">nifits</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nifits/backend/backend.html#NI_Backend.add_instrument_definition"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.backend.backend.NI_Backend.add_instrument_definition" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Adds the instrument definition to the model.</p>
+<p><strong>Arguments:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">nifits_instrument</span></code>   : NIFITS object</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">force</span></code>               : <code class="docutils literal notranslate"><span class="pre">Bool</span></code> if True, then the existing extensions
+will be replaced</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">verbose</span></code>             : Get more printed information</p></li>
+</ul>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="nifits.backend.backend.NI_Backend.add_observation_data">
 <span class="sig-name descname"><span class="pre">add_observation_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nifits_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="nifits.io.html#nifits.io.oifits.nifits" title="nifits.io.oifits.nifits"><span class="pre">nifits</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nifits/backend/backend.html#NI_Backend.add_observation_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.backend.backend.NI_Backend.add_observation_data" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Adds the observation data to the model.</p>
+<p><strong>Arguments:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">nifits_instrument</span></code>   : NIFITS object</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">force</span></code>               : <code class="docutils literal notranslate"><span class="pre">Bool</span></code> if True, then the existing extensions
+will be replaced</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">verbose</span></code>             : Get more printed information</p></li>
+</ul>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="nifits.backend.backend.NI_Backend.create_fov_function_all">
@@ -165,8 +204,8 @@ to facilitate comparison with models in Jansky multiplied by the exposure time
 of each frame (available in <cite>nifits.ni_mod.int_time</cite>).</p>
 <p><strong>Argrguments:</strong></p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">alphas</span></code> : 1D array of coordinates in right ascension</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">betas</span></code>  : 1D array of coordinates in declination</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">alphas</span></code>  : ArrayLike [rad] 1D array of coordinates in right ascension</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">betas</span></code>   : ArrayLike [rad] 1D array of coordinates in declination</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">kernels</span></code> : (bool) if True, then computes the post-processed
 observables as per the KMAT matrix.</p></li>
 </ul>
@@ -175,6 +214,7 @@ observables as per the KMAT matrix.</p></li>
 <li><p>if <code class="docutils literal notranslate"><span class="pre">kernels</span></code> is False: the <em>raw transmission output</em>.</p></li>
 <li><p>if <code class="docutils literal notranslate"><span class="pre">kernels</span></code> is True: the <em>differential observable</em>.</p></li>
 </ul>
+<p><strong>Shape:</strong> (n_frames, n_wl, n_outputs, n_points)</p>
 </dd></dl>
 
 <dl class="py method">
@@ -186,6 +226,139 @@ so that the output of the transmission map in square modulus provides equivalent
 collecting power in m^2 for each point of the map. This is done to facilitate the
 usag of the map with models in jansky.</p>
 </dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nifits.backend.backend.NI_Backend.nifits">
+<span class="sig-name descname"><span class="pre">nifits</span></span><a class="headerlink" href="#nifits.backend.backend.NI_Backend.nifits" title="Permalink to this definition"></a></dt>
+<dd><p>Backend object. Typically created empty. The nifits
+instrument information are added later with:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">.add_instrument_definition</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">.add_observation_data</span></code></p></li>
+</ul>
+<p><strong>Arguments:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">nifits</span></code>    : NIFITSClass</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">module</span></code>    : A backend module for advanced math.</p></li>
+</ul>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nifits.backend.backend.PointCollection">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nifits.backend.backend.</span></span><span class="sig-name descname"><span class="pre">PointCollection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">aa</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">_SupportsArray</span><span class="p"><span class="pre">[</span></span><span class="pre">dtype</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">_NestedSequence</span><span class="p"><span class="pre">[</span></span><span class="pre">_SupportsArray</span><span class="p"><span class="pre">[</span></span><span class="pre">dtype</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">complex</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">bytes</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">_NestedSequence</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">complex</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">bytes</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bb</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">_SupportsArray</span><span class="p"><span class="pre">[</span></span><span class="pre">dtype</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">_NestedSequence</span><span class="p"><span class="pre">[</span></span><span class="pre">_SupportsArray</span><span class="p"><span class="pre">[</span></span><span class="pre">dtype</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">complex</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">bytes</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">_NestedSequence</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">complex</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">bytes</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Unit</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nifits/backend/backend.html#PointCollection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.backend.backend.PointCollection" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<blockquote>
+<div><p>A class to hold arrays of coordinates. Handy to compute</p>
+</div></blockquote>
+<p>the transmission map on a large number of points.</p>
+<p><strong>Units default to mas.</strong></p>
+<p>** Arguments:**</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">aa</span></code>    : [unit (mas)] (ArrayLike) first coordinate flat array, 
+typically RA.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">bb</span></code>    : [unit (mas)] (ArrayLike) second coordinate flat array, 
+typically Dec.</p></li>
+</ul>
+<p><strong>Constructors:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">from_uniform_disk</span></code> :</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">from_grid</span></code>         :</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">from_centered_square</span></code>   :</p></li>
+</ul>
+<p><strong>Handles:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">coords</span></code>         : The array values as first provided</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">coords_rad</span></code>     : The array values, converted from 
+<code class="docutils literal notranslate"><span class="pre">self.unit</span></code> into radians.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">coords_quantity</span></code>: Return the values as a quantity.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">coords_radial</span></code>  : Returns the radial coordinates (rho,theta)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">extent</span></code>         : The [left, right, top, bottom] extent
+(used for some plots).</p></li>
+</ul>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nifits.backend.backend.PointCollection.aa">
+<span class="sig-name descname"><span class="pre">aa</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">_SupportsArray</span><span class="p"><span class="pre">[</span></span><span class="pre">dtype</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">_NestedSequence</span><span class="p"><span class="pre">[</span></span><span class="pre">_SupportsArray</span><span class="p"><span class="pre">[</span></span><span class="pre">dtype</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">complex</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">bytes</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">_NestedSequence</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">complex</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">bytes</span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#nifits.backend.backend.PointCollection.aa" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nifits.backend.backend.PointCollection.bb">
+<span class="sig-name descname"><span class="pre">bb</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">_SupportsArray</span><span class="p"><span class="pre">[</span></span><span class="pre">dtype</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">_NestedSequence</span><span class="p"><span class="pre">[</span></span><span class="pre">_SupportsArray</span><span class="p"><span class="pre">[</span></span><span class="pre">dtype</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">complex</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">bytes</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">_NestedSequence</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">complex</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">bytes</span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#nifits.backend.backend.PointCollection.bb" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="nifits.backend.backend.PointCollection.coords">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">coords</span></span><a class="headerlink" href="#nifits.backend.backend.PointCollection.coords" title="Permalink to this definition"></a></dt>
+<dd><p>Returns a tuple with the <code class="docutils literal notranslate"><span class="pre">alpha</span></code> and <code class="docutils literal notranslate"><span class="pre">beta</span></code> coordinates in 
+flat arrays.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="nifits.backend.backend.PointCollection.coords_rad">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">coords_rad</span></span><a class="headerlink" href="#nifits.backend.backend.PointCollection.coords_rad" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="nifits.backend.backend.PointCollection.coords_radial">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">coords_radial</span></span><a class="headerlink" href="#nifits.backend.backend.PointCollection.coords_radial" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the radial coordinates of points. (rho, theta) ([unit], [rad]).</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="nifits.backend.backend.PointCollection.coords_shaped">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">coords_shaped</span></span><a class="headerlink" href="#nifits.backend.backend.PointCollection.coords_shaped" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nifits.backend.backend.PointCollection.from_centered_square_grid">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_centered_square_grid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">radius</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resolution</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">md:</span> <span class="pre">module</span> <span class="pre">=</span> <span class="pre">&lt;module</span> <span class="pre">'numpy'</span> <span class="pre">from</span> <span class="pre">'/lhome/romain/miniconda3/envs/scify/lib/python3.8/site-packages/numpy/__init__.py'&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nifits/backend/backend.html#PointCollection.from_centered_square_grid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.backend.backend.PointCollection.from_centered_square_grid" title="Permalink to this definition"></a></dt>
+<dd><blockquote>
+<div><p>Create a centered square cartesian grid object</p>
+</div></blockquote>
+<p><strong>Arguments:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">radius</span></code>      : The radial extent of the grid.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">resolution</span></code>  : The number of pixels across the width.</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nifits.backend.backend.PointCollection.from_grid">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_grid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">a_coords:</span> <span class="pre">~numpy._typing._array_like._SupportsArray[~numpy.dtype]</span> <span class="pre">|</span> <span class="pre">~numpy._typing._nested_sequence._NestedSequence[~numpy._typing._array_like._SupportsArray[~numpy.dtype]]</span> <span class="pre">|</span> <span class="pre">bool</span> <span class="pre">|</span> <span class="pre">int</span> <span class="pre">|</span> <span class="pre">float</span> <span class="pre">|</span> <span class="pre">complex</span> <span class="pre">|</span> <span class="pre">str</span> <span class="pre">|</span> <span class="pre">bytes</span> <span class="pre">|</span> <span class="pre">~numpy._typing._nested_sequence._NestedSequence[bool</span> <span class="pre">|</span> <span class="pre">int</span> <span class="pre">|</span> <span class="pre">float</span> <span class="pre">|</span> <span class="pre">complex</span> <span class="pre">|</span> <span class="pre">str</span> <span class="pre">|</span> <span class="pre">bytes],</span> <span class="pre">b_coords:</span> <span class="pre">~numpy._typing._array_like._SupportsArray[~numpy.dtype]</span> <span class="pre">|</span> <span class="pre">~numpy._typing._nested_sequence._NestedSequence[~numpy._typing._array_like._SupportsArray[~numpy.dtype]]</span> <span class="pre">|</span> <span class="pre">bool</span> <span class="pre">|</span> <span class="pre">int</span> <span class="pre">|</span> <span class="pre">float</span> <span class="pre">|</span> <span class="pre">complex</span> <span class="pre">|</span> <span class="pre">str</span> <span class="pre">|</span> <span class="pre">bytes</span> <span class="pre">|</span> <span class="pre">~numpy._typing._nested_sequence._NestedSequence[bool</span> <span class="pre">|</span> <span class="pre">int</span> <span class="pre">|</span> <span class="pre">float</span> <span class="pre">|</span> <span class="pre">complex</span> <span class="pre">|</span> <span class="pre">str</span> <span class="pre">|</span> <span class="pre">bytes],</span> <span class="pre">md:</span> <span class="pre">module</span> <span class="pre">=</span> <span class="pre">&lt;module</span> <span class="pre">'numpy'</span> <span class="pre">from</span> <span class="pre">'/lhome/romain/miniconda3/envs/scify/lib/python3.8/site-packages/numpy/__init__.py'&gt;,</span> <span class="pre">unit:</span> <span class="pre">~astropy.units.core.Unit</span> <span class="pre">=</span> <span class="pre">Unit(&quot;mas&quot;)</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nifits/backend/backend.html#PointCollection.from_grid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.backend.backend.PointCollection.from_grid" title="Permalink to this definition"></a></dt>
+<dd><blockquote>
+<div><p>Create a point collection as a cartesian grid.</p>
+</div></blockquote>
+<p><strong>Arguments:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">a_coords</span></code> : The array of samples along the first axis
+(typically alpha)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">b_coords</span></code> : The array of samples along the second axis
+(typically beta, the second dimension)</p></li>
+</ul>
+<p><strong>Handles:</strong></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nifits.backend.backend.PointCollection.from_uniform_disk">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_uniform_disk</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">radius=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phi_0:</span> <span class="pre">float</span> <span class="pre">=</span> <span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">offset:</span> <span class="pre">~numpy._typing._array_like._SupportsArray[~numpy.dtype]</span> <span class="pre">|</span> <span class="pre">~numpy._typing._nested_sequence._NestedSequence[~numpy._typing._array_like._SupportsArray[~numpy.dtype]]</span> <span class="pre">|</span> <span class="pre">bool</span> <span class="pre">|</span> <span class="pre">int</span> <span class="pre">|</span> <span class="pre">float</span> <span class="pre">|</span> <span class="pre">complex</span> <span class="pre">|</span> <span class="pre">str</span> <span class="pre">|</span> <span class="pre">bytes</span> <span class="pre">|</span> <span class="pre">~numpy._typing._nested_sequence._NestedSequence[bool</span> <span class="pre">|</span> <span class="pre">int</span> <span class="pre">|</span> <span class="pre">float</span> <span class="pre">|</span> <span class="pre">complex</span> <span class="pre">|</span> <span class="pre">str</span> <span class="pre">|</span> <span class="pre">bytes]</span> <span class="pre">=</span> <span class="pre">array([0.</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">0.])</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">md:</span> <span class="pre">module</span> <span class="pre">=</span> <span class="pre">&lt;module</span> <span class="pre">'numpy'</span> <span class="pre">from</span> <span class="pre">'/lhome/romain/miniconda3/envs/scify/lib/python3.8/site-packages/numpy/__init__.py'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unit:</span> <span class="pre">~astropy.units.core.Unit</span> <span class="pre">=</span> <span class="pre">Unit(&quot;mas&quot;)</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nifits/backend/backend.html#PointCollection.from_uniform_disk"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.backend.backend.PointCollection.from_uniform_disk" title="Permalink to this definition"></a></dt>
+<dd><blockquote>
+<div><p>Create a point collection as a uniformly sampled disk.</p>
+</div></blockquote>
+<p><strong>Arguments:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">a_coords</span></code> : The array of samples along the first axis
+(typically alpha)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">b_coords</span></code> : The array of samples along the second axis
+(typically beta, the second dimension)</p></li>
+</ul>
+<p><strong>Handles:</strong></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nifits.backend.backend.PointCollection.unit">
+<span class="sig-name descname"><span class="pre">unit</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Unit</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#nifits.backend.backend.PointCollection.unit" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
 
 </dd></dl>
 
