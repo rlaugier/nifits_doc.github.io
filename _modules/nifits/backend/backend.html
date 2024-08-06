@@ -14,9 +14,9 @@
   
         <script src="../../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js?v=65a4545c"></script>
-        <script src="../../../_static/doctools.js?v=888ff710"></script>
-        <script src="../../../_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="../../../_static/documentation_options.js?v=47de8214"></script>
+        <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
@@ -111,7 +111,9 @@
 <span class="c1"># TODO Add a shorthand to surface element ds, taken from the overal surface</span>
 <span class="c1"># divided by the number of points. WARNING: we will have to handle redundancy.</span>
 
-<div class="viewcode-block" id="PointCollection"><a class="viewcode-back" href="../../../nifits.backend.html#nifits.backend.backend.PointCollection">[docs]</a><span class="nd">@dataclass</span>
+<div class="viewcode-block" id="PointCollection">
+<a class="viewcode-back" href="../../../nifits.backend.html#nifits.backend.backend.PointCollection">[docs]</a>
+<span class="nd">@dataclass</span>
 <span class="k">class</span> <span class="nc">PointCollection</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        A class to hold arrays of coordinates. Handy to compute</span>
@@ -152,7 +154,9 @@
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;orig_shape&quot;</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">orig_shape</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">shape</span>
 
-<div class="viewcode-block" id="PointCollection.from_uniform_disk"><a class="viewcode-back" href="../../../nifits.backend.html#nifits.backend.backend.PointCollection.from_uniform_disk">[docs]</a>    <span class="nd">@classmethod</span>
+<div class="viewcode-block" id="PointCollection.from_uniform_disk">
+<a class="viewcode-back" href="../../../nifits.backend.html#nifits.backend.backend.PointCollection.from_uniform_disk">[docs]</a>
+    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">from_uniform_disk</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                 <span class="n">n</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
                 <span class="n">phi_0</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.</span><span class="p">,</span>
@@ -181,7 +185,10 @@
         <span class="n">myobj</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">(</span><span class="o">*</span><span class="n">points</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="n">unit</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">myobj</span></div>
 
-<div class="viewcode-block" id="PointCollection.from_grid"><a class="viewcode-back" href="../../../nifits.backend.html#nifits.backend.backend.PointCollection.from_grid">[docs]</a>    <span class="nd">@classmethod</span>
+
+<div class="viewcode-block" id="PointCollection.from_grid">
+<a class="viewcode-back" href="../../../nifits.backend.html#nifits.backend.backend.PointCollection.from_grid">[docs]</a>
+    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">from_grid</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">a_coords</span><span class="p">:</span> <span class="n">ArrayLike</span><span class="p">,</span> <span class="n">b_coords</span><span class="p">:</span> <span class="n">ArrayLike</span><span class="p">,</span>
                         <span class="n">md</span><span class="p">:</span> <span class="n">ModuleType</span> <span class="o">=</span> <span class="n">np</span><span class="p">,</span>
                         <span class="n">unit</span><span class="p">:</span> <span class="n">units</span><span class="o">.</span><span class="n">Unit</span> <span class="o">=</span> <span class="n">units</span><span class="o">.</span><span class="n">mas</span><span class="p">):</span>
@@ -207,7 +214,40 @@
         <span class="n">myobj</span><span class="o">.</span><span class="n">orig_shape</span> <span class="o">=</span> <span class="n">original_shape</span>
         <span class="k">return</span> <span class="n">myobj</span></div>
 
-<div class="viewcode-block" id="PointCollection.from_centered_square_grid"><a class="viewcode-back" href="../../../nifits.backend.html#nifits.backend.backend.PointCollection.from_centered_square_grid">[docs]</a>    <span class="nd">@classmethod</span>
+
+<div class="viewcode-block" id="PointCollection.from_segment">
+<a class="viewcode-back" href="../../../nifits.backend.html#nifits.backend.backend.PointCollection.from_segment">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_segment</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">start_coords</span><span class="p">:</span> <span class="n">ArrayLike</span><span class="p">,</span>
+                        <span class="n">end_coords</span><span class="p">:</span> <span class="n">ArrayLike</span><span class="p">,</span>
+                        <span class="n">n_samples</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+                        <span class="n">md</span><span class="p">:</span> <span class="n">ModuleType</span> <span class="o">=</span> <span class="n">np</span><span class="p">,</span>
+                        <span class="n">unit</span><span class="p">:</span> <span class="n">units</span><span class="o">.</span><span class="n">Unit</span> <span class="o">=</span> <span class="n">units</span><span class="o">.</span><span class="n">mas</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Create a point collection as a cartesian grid.</span>
+
+<span class="sd">        **Arguments:**</span>
+
+<span class="sd">        * ``start_coords`` : The (a,b) array of the starting point.</span>
+<span class="sd">          (typically alpha, beta)</span>
+<span class="sd">        * ``end_coords`` : The (a,b) array of the ending point.</span>
+<span class="sd">          (typically alpha, beta)</span>
+<span class="sd">        * n_sameples     : The number of samples along the line.</span>
+
+<span class="sd">        **Handles:**</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">aa</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">start_coords</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">end_coords</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">n_samples</span><span class="p">)</span>
+        <span class="n">bb</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">start_coords</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">end_coords</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">n_samples</span><span class="p">)</span>
+        <span class="n">original_shape</span> <span class="o">=</span> <span class="n">aa</span><span class="o">.</span><span class="n">shape</span>
+        <span class="n">aa</span> <span class="o">=</span> <span class="n">aa</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+        <span class="n">bb</span> <span class="o">=</span> <span class="n">bb</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+        <span class="n">myobj</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">(</span><span class="n">aa</span><span class="o">=</span><span class="n">aa</span><span class="p">,</span> <span class="n">bb</span><span class="o">=</span><span class="n">bb</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">myobj</span></div>
+
+
+<div class="viewcode-block" id="PointCollection.from_centered_square_grid">
+<a class="viewcode-back" href="../../../nifits.backend.html#nifits.backend.backend.PointCollection.from_centered_square_grid">[docs]</a>
+    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">from_centered_square_grid</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">radius</span><span class="p">,</span> <span class="n">resolution</span><span class="p">,</span>
                             <span class="n">md</span><span class="p">:</span> <span class="n">ModuleType</span> <span class="o">=</span> <span class="n">np</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -224,6 +264,7 @@
                             <span class="n">b_coords</span><span class="o">=</span><span class="n">b_coords</span><span class="p">,</span>
                             <span class="n">md</span><span class="o">=</span><span class="n">md</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">myobj</span></div>
+
         
 
     <span class="nd">@property</span>
@@ -250,10 +291,62 @@
         <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;orig_shape&quot;</span><span class="p">):</span>
             <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">aa</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">orig_shape</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">bb</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">orig_shape</span><span class="p">))</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s2">&quot;Did not have an original shape&quot;</span><span class="p">)</span></div>
+            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s2">&quot;Did not have an original shape&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Add together two collection of points.</span>
+
+<span class="sd">        The result inerits properties of the first argument.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">copy</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;md&quot;</span><span class="p">):</span>
+            <span class="n">md</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">md</span>
+        <span class="k">elif</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="s2">&quot;md&quot;</span><span class="p">):</span>
+            <span class="n">md</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">md</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">md</span> <span class="o">=</span> <span class="n">np</span>
+        <span class="n">new</span> <span class="o">=</span> <span class="n">copy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">new</span><span class="o">.</span><span class="n">aa</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">new</span><span class="o">.</span><span class="n">aa</span><span class="p">,</span> <span class="n">other</span><span class="o">.</span><span class="n">aa</span><span class="o">*</span><span class="n">other</span><span class="o">.</span><span class="n">unit</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">unit</span><span class="p">)))</span>
+        <span class="n">new</span><span class="o">.</span><span class="n">bb</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">new</span><span class="o">.</span><span class="n">bb</span><span class="p">,</span> <span class="n">other</span><span class="o">.</span><span class="n">bb</span><span class="o">*</span><span class="n">other</span><span class="o">.</span><span class="n">unit</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">unit</span><span class="p">)))</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;cc&quot;</span><span class="p">):</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="s2">&quot;cc&quot;</span><span class="p">):</span>
+                <span class="n">other</span><span class="o">.</span><span class="n">cc</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">aa</span><span class="p">)</span>
+            <span class="n">new</span><span class="o">.</span><span class="n">cc</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">new</span><span class="o">.</span><span class="n">cc</span><span class="p">,</span> <span class="n">other</span><span class="o">.</span><span class="n">cc</span><span class="o">*</span><span class="n">other</span><span class="o">.</span><span class="n">unit</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">unit</span><span class="p">)))</span>
+
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">new</span><span class="p">,</span> <span class="s2">&quot;extent&quot;</span><span class="p">):</span>
+            <span class="k">del</span> <span class="n">new</span><span class="o">.</span><span class="n">extent</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">new</span><span class="p">,</span> <span class="s2">&quot;ds&quot;</span><span class="p">):</span>
+            <span class="k">del</span> <span class="n">new</span><span class="o">.</span><span class="n">ds</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">new</span><span class="p">,</span> <span class="s2">&quot;orig_shape&quot;</span><span class="p">):</span>
+            <span class="k">del</span> <span class="n">new</span><span class="o">.</span><span class="n">orig_shape</span>
+        <span class="k">return</span> <span class="n">new</span>
+<div class="viewcode-block" id="PointCollection.transform">
+<a class="viewcode-back" href="../../../nifits.backend.html#nifits.backend.backend.PointCollection.transform">[docs]</a>
+    <span class="k">def</span> <span class="nf">transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">matrix</span><span class="p">,</span> <span class="n">md</span><span class="o">=</span><span class="n">np</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Produce a linear transform of the coordinates.</span>
+
+<span class="sd">        **Arguments:**</span>
+
+<span class="sd">        * ``matrix``: A transformation matrix (3D)</span>
+<span class="sd">        * ``md``    : A module to do the operation</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;cc&quot;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cc</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">aa</span><span class="p">)</span>
+        <span class="n">vectors</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">vstack</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">aa</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">bb</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cc</span><span class="p">))</span>
+        <span class="n">transformed</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">vectors</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">aa</span> <span class="o">=</span> <span class="n">transformed</span><span class="p">[</span><span class="mi">0</span><span class="p">,:]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bb</span> <span class="o">=</span> <span class="n">transformed</span><span class="p">[</span><span class="mi">1</span><span class="p">,:]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cc</span> <span class="o">=</span> <span class="n">transformed</span><span class="p">[</span><span class="mi">2</span><span class="p">,:]</span></div>
+</div>
+
+        
 
 
-<div class="viewcode-block" id="NI_Backend"><a class="viewcode-back" href="../../../nifits.backend.html#nifits.backend.backend.NI_Backend">[docs]</a><span class="k">class</span> <span class="nc">NI_Backend</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="viewcode-block" id="NI_Backend">
+<a class="viewcode-back" href="../../../nifits.backend.html#nifits.backend.backend.NI_Backend">[docs]</a>
+<span class="k">class</span> <span class="nc">NI_Backend</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A class to produce calculations based on the NIFITS standard.</span>
 
@@ -275,7 +368,9 @@
 <span class="sd">        * ``module``    : A backend module for advanced math.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
-<div class="viewcode-block" id="NI_Backend.add_instrument_definition"><a class="viewcode-back" href="../../../nifits.backend.html#nifits.backend.backend.NI_Backend.add_instrument_definition">[docs]</a>    <span class="k">def</span> <span class="nf">add_instrument_definition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nifits_instrument</span><span class="p">:</span> <span class="n">NIFITSClass</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<div class="viewcode-block" id="NI_Backend.add_instrument_definition">
+<a class="viewcode-back" href="../../../nifits.backend.html#nifits.backend.backend.NI_Backend.add_instrument_definition">[docs]</a>
+    <span class="k">def</span> <span class="nf">add_instrument_definition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nifits_instrument</span><span class="p">:</span> <span class="n">NIFITSClass</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                                     <span class="n">force</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
                                     <span class="n">verbose</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -302,8 +397,11 @@
                             <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Local nifits, already has </span><span class="si">{</span><span class="n">anext</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
                     <span class="k">else</span><span class="p">:</span>
                         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Could not find </span><span class="si">{</span><span class="n">anext</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
+
     
-<div class="viewcode-block" id="NI_Backend.add_observation_data"><a class="viewcode-back" href="../../../nifits.backend.html#nifits.backend.backend.NI_Backend.add_observation_data">[docs]</a>    <span class="k">def</span> <span class="nf">add_observation_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nifits_data</span><span class="p">:</span> <span class="n">NIFITSClass</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<div class="viewcode-block" id="NI_Backend.add_observation_data">
+<a class="viewcode-back" href="../../../nifits.backend.html#nifits.backend.backend.NI_Backend.add_observation_data">[docs]</a>
+    <span class="k">def</span> <span class="nf">add_observation_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nifits_data</span><span class="p">:</span> <span class="n">NIFITSClass</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                                     <span class="n">force</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
                                     <span class="n">verbose</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -331,7 +429,10 @@
                     <span class="k">else</span><span class="p">:</span>
                         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Could not find </span><span class="si">{</span><span class="n">anext</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="NI_Backend.create_fov_function_all"><a class="viewcode-back" href="../../../nifits.backend.html#nifits.backend.backend.NI_Backend.create_fov_function_all">[docs]</a>    <span class="k">def</span> <span class="nf">create_fov_function_all</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">md</span><span class="o">=</span><span class="n">np</span><span class="p">):</span>
+
+<div class="viewcode-block" id="NI_Backend.create_fov_function_all">
+<a class="viewcode-back" href="../../../nifits.backend.html#nifits.backend.backend.NI_Backend.create_fov_function_all">[docs]</a>
+    <span class="k">def</span> <span class="nf">create_fov_function_all</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">md</span><span class="o">=</span><span class="n">np</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Constructs the method to get the chromatic phasor</span>
 <span class="sd">        given by injection for all the time series.</span>
@@ -360,7 +461,10 @@
             <span class="k">return</span> <span class="n">phasor</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">complex</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_fov</span><span class="o">.</span><span class="n">xy2phasor</span> <span class="o">=</span> <span class="n">xy2phasor</span></div>
 
-<div class="viewcode-block" id="NI_Backend.get_modulation_phasor"><a class="viewcode-back" href="../../../nifits.backend.html#nifits.backend.backend.NI_Backend.get_modulation_phasor">[docs]</a>    <span class="k">def</span> <span class="nf">get_modulation_phasor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">md</span><span class="o">=</span><span class="n">np</span><span class="p">):</span>
+
+<div class="viewcode-block" id="NI_Backend.get_modulation_phasor">
+<a class="viewcode-back" href="../../../nifits.backend.html#nifits.backend.backend.NI_Backend.get_modulation_phasor">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_modulation_phasor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">md</span><span class="o">=</span><span class="n">np</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Computes and returns the modulation phasor [n_wl, n_input]</span>
 
@@ -374,7 +478,10 @@
         <span class="n">col_area</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_mod</span><span class="o">.</span><span class="n">arrcol</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">mods</span><span class="o">*</span><span class="n">md</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">col_area</span><span class="p">)[:,</span><span class="kc">None</span><span class="p">,:]</span></div>
 
-<div class="viewcode-block" id="NI_Backend.geometric_phasor"><a class="viewcode-back" href="../../../nifits.backend.html#nifits.backend.backend.NI_Backend.geometric_phasor">[docs]</a>    <span class="k">def</span> <span class="nf">geometric_phasor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">include_mod</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+
+<div class="viewcode-block" id="NI_Backend.geometric_phasor">
+<a class="viewcode-back" href="../../../nifits.backend.html#nifits.backend.backend.NI_Backend.geometric_phasor">[docs]</a>
+    <span class="k">def</span> <span class="nf">geometric_phasor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">include_mod</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                             <span class="n">md</span><span class="o">=</span><span class="n">np</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the complex phasor corresponding to the locations</span>
@@ -404,8 +511,11 @@
             <span class="n">b</span> <span class="o">*=</span> <span class="n">mods</span><span class="p">[:,:,</span><span class="kc">None</span><span class="p">]</span>
         <span class="c1"># print(b.shape)</span>
         <span class="k">return</span> <span class="n">b</span><span class="o">.</span><span class="n">transpose</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span></div>
+
         
-<div class="viewcode-block" id="NI_Backend.get_Is"><a class="viewcode-back" href="../../../nifits.backend.html#nifits.backend.backend.NI_Backend.get_Is">[docs]</a>    <span class="k">def</span> <span class="nf">get_Is</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xs</span><span class="p">,</span> <span class="n">md</span><span class="o">=</span><span class="n">np</span><span class="p">):</span>
+<div class="viewcode-block" id="NI_Backend.get_Is">
+<a class="viewcode-back" href="../../../nifits.backend.html#nifits.backend.backend.NI_Backend.get_Is">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_Is</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xs</span><span class="p">,</span> <span class="n">md</span><span class="o">=</span><span class="n">np</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get intensity from an array of sources.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -413,7 +523,10 @@
         <span class="n">I</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">E</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
         <span class="k">return</span> <span class="n">I</span></div>
 
-<div class="viewcode-block" id="NI_Backend.get_KIs"><a class="viewcode-back" href="../../../nifits.backend.html#nifits.backend.backend.NI_Backend.get_KIs">[docs]</a>    <span class="k">def</span> <span class="nf">get_KIs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Iarray</span><span class="p">:</span><span class="n">ArrayLike</span><span class="p">,</span> <span class="n">md</span><span class="p">:</span><span class="n">ModuleType</span><span class="o">=</span><span class="n">np</span><span class="p">):</span>
+
+<div class="viewcode-block" id="NI_Backend.get_KIs">
+<a class="viewcode-back" href="../../../nifits.backend.html#nifits.backend.backend.NI_Backend.get_KIs">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_KIs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Iarray</span><span class="p">:</span><span class="n">ArrayLike</span><span class="p">,</span> <span class="n">md</span><span class="p">:</span><span class="n">ModuleType</span><span class="o">=</span><span class="n">np</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get the prost-processed observable from an array of output intensities. The</span>
 <span class="sd">        post-processing matrix K is taken from ``self.nifits.ni_kmat.K``</span>
@@ -428,8 +541,11 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">KI</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s2">&quot;k o, t w o m -&gt; t w k m&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_kmat</span><span class="o">.</span><span class="n">K</span><span class="p">[:,:],</span> <span class="n">Iarray</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">KI</span></div>
+
         
-<div class="viewcode-block" id="NI_Backend.get_all_outs"><a class="viewcode-back" href="../../../nifits.backend.html#nifits.backend.backend.NI_Backend.get_all_outs">[docs]</a>    <span class="k">def</span> <span class="nf">get_all_outs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">alphas</span><span class="p">,</span> <span class="n">betas</span><span class="p">,</span> <span class="n">kernels</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="NI_Backend.get_all_outs">
+<a class="viewcode-back" href="../../../nifits.backend.html#nifits.backend.backend.NI_Backend.get_all_outs">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_all_outs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">alphas</span><span class="p">,</span> <span class="n">betas</span><span class="p">,</span> <span class="n">kernels</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Compute the transmission map for an array of coordinates. The map can be seen</span>
 <span class="sd">        as equivalent collecting power expressed in [m^2] for each point sampled so as</span>
@@ -468,7 +584,9 @@
             <span class="n">KIs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_KIs</span><span class="p">(</span><span class="n">Is</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">KIs</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">Is</span></div></div>
+            <span class="k">return</span> <span class="n">Is</span></div>
+</div>
+
     
         
     

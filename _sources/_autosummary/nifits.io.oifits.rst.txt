@@ -34,7 +34,6 @@
       NI_KCOV
       NI_KIOUT
       NI_KMAT
-      NI_KOUT
       NI_MOD
       NI_OUT
       OI_ARRAY

@@ -14,9 +14,9 @@
   
         <script src="../../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js?v=65a4545c"></script>
-        <script src="../../../_static/doctools.js?v=888ff710"></script>
-        <script src="../../../_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="../../../_static/documentation_options.js?v=47de8214"></script>
+        <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
@@ -132,7 +132,9 @@
 
 
 
-<div class="viewcode-block" id="OI_STATION"><a class="viewcode-back" href="../../../nifits.io.html#nifits.io.oifits.OI_STATION">[docs]</a><span class="k">class</span> <span class="nc">OI_STATION</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="viewcode-block" id="OI_STATION">
+<a class="viewcode-back" href="../../../nifits.io.html#nifits.io.oifits.OI_STATION">[docs]</a>
+<span class="k">class</span> <span class="nc">OI_STATION</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; This class corresponds to a single row (i.e. single</span>
 <span class="sd">    station/telescope) of an OI_ARRAY table.&quot;&quot;&quot;</span>
 
@@ -177,6 +179,7 @@
             <span class="k">return</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">/</span><span class="si">%s</span><span class="s1"> (</span><span class="si">%g</span><span class="s1"> m)&#39;</span><span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sta_name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">tel_name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">diameter</span><span class="p">)</span></div>
 
 
+
         
 
 <span class="kn">import</span> <span class="nn">sys</span>
@@ -219,8 +222,11 @@
     <span class="c1"># TODO add a check method</span>
 
 
-<div class="viewcode-block" id="nulfunc"><a class="viewcode-back" href="../../../nifits.io.html#nifits.io.oifits.nulfunc">[docs]</a><span class="k">def</span> <span class="nf">nulfunc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="nulfunc">
+<a class="viewcode-back" href="../../../nifits.io.html#nifits.io.oifits.nulfunc">[docs]</a>
+<span class="k">def</span> <span class="nf">nulfunc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
     <span class="k">raise</span> <span class="ne">TypeError</span></div>
+
 
 
 <span class="n">NI_OUT_DEFAULT_HEADER</span> <span class="o">=</span> <span class="n">fits</span><span class="o">.</span><span class="n">Header</span><span class="p">(</span><span class="n">cards</span><span class="o">=</span><span class="p">[(</span><span class="s2">&quot;UNITS&quot;</span><span class="p">,</span> <span class="s2">&quot;ADU&quot;</span><span class="p">,</span> <span class="s2">&quot;The units for output values&quot;</span><span class="p">)])</span>
@@ -239,7 +245,9 @@
 
     
 
-<div class="viewcode-block" id="NI_EXTENSION"><a class="viewcode-back" href="../../../nifits.io.html#nifits.io.oifits.NI_EXTENSION">[docs]</a><span class="nd">@dataclass</span>
+<div class="viewcode-block" id="NI_EXTENSION">
+<a class="viewcode-back" href="../../../nifits.io.html#nifits.io.oifits.NI_EXTENSION">[docs]</a>
+<span class="nd">@dataclass</span>
 <span class="k">class</span> <span class="nc">NI_EXTENSION</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    ``NI_EXTENSION`` Generic class for NIFITS extensions</span>
@@ -255,7 +263,9 @@
     <span class="c1"># fits.Header type hint... We can if we have a None, we can catch it with </span>
     <span class="c1"># a __post_init__ method. TODO this will help cleanup the signature in the doc.</span>
 
-<div class="viewcode-block" id="NI_EXTENSION.from_hdu"><a class="viewcode-back" href="../../../nifits.io.html#nifits.io.oifits.NI_EXTENSION.from_hdu">[docs]</a>    <span class="nd">@classmethod</span>
+<div class="viewcode-block" id="NI_EXTENSION.from_hdu">
+<a class="viewcode-back" href="../../../nifits.io.html#nifits.io.oifits.NI_EXTENSION.from_hdu">[docs]</a>
+    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">from_hdu</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">hdu</span><span class="p">:</span> <span class="nb">type</span><span class="p">(</span><span class="n">fits</span><span class="o">.</span><span class="n">hdu</span><span class="o">.</span><span class="n">TableHDU</span><span class="p">)):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Create the data object from the HDU extension of an opened fits file.</span>
@@ -267,7 +277,10 @@
         <span class="n">header</span> <span class="o">=</span> <span class="n">hdu</span><span class="o">.</span><span class="n">header</span>
         <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">data_table</span><span class="o">=</span><span class="n">data_table</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="n">header</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="NI_EXTENSION.to_hdu"><a class="viewcode-back" href="../../../nifits.io.html#nifits.io.oifits.NI_EXTENSION.to_hdu">[docs]</a>    <span class="k">def</span> <span class="nf">to_hdu</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="NI_EXTENSION.to_hdu">
+<a class="viewcode-back" href="../../../nifits.io.html#nifits.io.oifits.NI_EXTENSION.to_hdu">[docs]</a>
+    <span class="k">def</span> <span class="nf">to_hdu</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns and hdu object to save into fits</span>
 <span class="sd">        </span>
@@ -283,10 +296,14 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">header</span> <span class="o">=</span> <span class="n">myhdu</span><span class="o">.</span><span class="n">header</span>
         <span class="k">return</span> <span class="n">myhdu</span></div>
 
+
     <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data_table</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="NI_EXTENSION_ARRAY"><a class="viewcode-back" href="../../../nifits.io.html#nifits.io.oifits.NI_EXTENSION_ARRAY">[docs]</a><span class="nd">@dataclass</span>
+
+<div class="viewcode-block" id="NI_EXTENSION_ARRAY">
+<a class="viewcode-back" href="../../../nifits.io.html#nifits.io.oifits.NI_EXTENSION_ARRAY">[docs]</a>
+<span class="nd">@dataclass</span>
 <span class="k">class</span> <span class="nc">NI_EXTENSION_ARRAY</span><span class="p">(</span><span class="n">NI_EXTENSION</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Generic class for NIFITS array extensions</span>
@@ -294,7 +311,9 @@
     <span class="n">data_array</span><span class="p">:</span> <span class="n">ArrayLike</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">)</span>
     <span class="n">header</span><span class="p">:</span> <span class="n">fits</span><span class="o">.</span><span class="n">Header</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="n">fits</span><span class="o">.</span><span class="n">Header</span><span class="p">)</span>
 
-<div class="viewcode-block" id="NI_EXTENSION_ARRAY.from_hdu"><a class="viewcode-back" href="../../../nifits.io.html#nifits.io.oifits.NI_EXTENSION_ARRAY.from_hdu">[docs]</a>    <span class="nd">@classmethod</span>
+<div class="viewcode-block" id="NI_EXTENSION_ARRAY.from_hdu">
+<a class="viewcode-back" href="../../../nifits.io.html#nifits.io.oifits.NI_EXTENSION_ARRAY.from_hdu">[docs]</a>
+    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">from_hdu</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">hdu</span><span class="p">:</span> <span class="nb">type</span><span class="p">(</span><span class="n">fits</span><span class="o">.</span><span class="n">hdu</span><span class="o">.</span><span class="n">ImageHDU</span><span class="p">)):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Create the data object from the HDU extension of an opened fits file.</span>
@@ -302,8 +321,11 @@
         <span class="n">data_array</span> <span class="o">=</span> <span class="n">hdu</span><span class="o">.</span><span class="n">data</span>
         <span class="n">header</span> <span class="o">=</span> <span class="n">hdu</span><span class="o">.</span><span class="n">header</span>
         <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">data_array</span><span class="o">=</span><span class="n">data_array</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="n">header</span><span class="p">)</span></div>
+
     
-<div class="viewcode-block" id="NI_EXTENSION_ARRAY.to_hdu"><a class="viewcode-back" href="../../../nifits.io.html#nifits.io.oifits.NI_EXTENSION_ARRAY.to_hdu">[docs]</a>    <span class="k">def</span> <span class="nf">to_hdu</span><span class="p">(</span><span class="bp">self</span><span class="p">,):</span>
+<div class="viewcode-block" id="NI_EXTENSION_ARRAY.to_hdu">
+<a class="viewcode-back" href="../../../nifits.io.html#nifits.io.oifits.NI_EXTENSION_ARRAY.to_hdu">[docs]</a>
+    <span class="k">def</span> <span class="nf">to_hdu</span><span class="p">(</span><span class="bp">self</span><span class="p">,):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns and hdu object to save into fits</span>
 <span class="sd">        </span>
@@ -314,10 +336,14 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">header</span> <span class="o">=</span> <span class="n">myhdu</span><span class="o">.</span><span class="n">header</span>
         <span class="k">return</span> <span class="n">myhdu</span></div>
 
+
     <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">pass</span></div>
 
-<div class="viewcode-block" id="NI_EXTENSION_CPX_ARRAY"><a class="viewcode-back" href="../../../nifits.io.html#nifits.io.oifits.NI_EXTENSION_CPX_ARRAY">[docs]</a><span class="nd">@dataclass</span>
+
+<div class="viewcode-block" id="NI_EXTENSION_CPX_ARRAY">
+<a class="viewcode-back" href="../../../nifits.io.html#nifits.io.oifits.NI_EXTENSION_CPX_ARRAY">[docs]</a>
+<span class="nd">@dataclass</span>
 <span class="k">class</span> <span class="nc">NI_EXTENSION_CPX_ARRAY</span><span class="p">(</span><span class="n">NI_EXTENSION</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Generic class for NIFITS array extensions.</span>
@@ -329,7 +355,9 @@
     <span class="n">data_array</span><span class="p">:</span> <span class="n">ArrayLike</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">)</span>
     <span class="n">header</span><span class="p">:</span> <span class="n">fits</span><span class="o">.</span><span class="n">Header</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="n">fits</span><span class="o">.</span><span class="n">Header</span><span class="p">)</span>
 
-<div class="viewcode-block" id="NI_EXTENSION_CPX_ARRAY.from_hdu"><a class="viewcode-back" href="../../../nifits.io.html#nifits.io.oifits.NI_EXTENSION_CPX_ARRAY.from_hdu">[docs]</a>    <span class="nd">@classmethod</span>
+<div class="viewcode-block" id="NI_EXTENSION_CPX_ARRAY.from_hdu">
+<a class="viewcode-back" href="../../../nifits.io.html#nifits.io.oifits.NI_EXTENSION_CPX_ARRAY.from_hdu">[docs]</a>
+    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">from_hdu</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">hdu</span><span class="p">:</span> <span class="nb">type</span><span class="p">(</span><span class="n">fits</span><span class="o">.</span><span class="n">hdu</span><span class="o">.</span><span class="n">ImageHDU</span><span class="p">)):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Create the data object from the HDU extension of an opened fits file.</span>
@@ -339,8 +367,11 @@
         <span class="n">data_array</span> <span class="o">=</span> <span class="n">hdu</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">hdu</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
         <span class="n">header</span> <span class="o">=</span> <span class="n">hdu</span><span class="o">.</span><span class="n">header</span>
         <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">data_array</span><span class="o">=</span><span class="n">data_array</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="n">header</span><span class="p">)</span></div>
+
     
-<div class="viewcode-block" id="NI_EXTENSION_CPX_ARRAY.to_hdu"><a class="viewcode-back" href="../../../nifits.io.html#nifits.io.oifits.NI_EXTENSION_CPX_ARRAY.to_hdu">[docs]</a>    <span class="k">def</span> <span class="nf">to_hdu</span><span class="p">(</span><span class="bp">self</span><span class="p">,):</span>
+<div class="viewcode-block" id="NI_EXTENSION_CPX_ARRAY.to_hdu">
+<a class="viewcode-back" href="../../../nifits.io.html#nifits.io.oifits.NI_EXTENSION_CPX_ARRAY.to_hdu">[docs]</a>
+    <span class="k">def</span> <span class="nf">to_hdu</span><span class="p">(</span><span class="bp">self</span><span class="p">,):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns and hdu object to save into fits</span>
 <span class="sd">        </span>
@@ -353,18 +384,25 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">header</span> <span class="o">=</span> <span class="n">myhdu</span><span class="o">.</span><span class="n">header</span>
         <span class="k">return</span> <span class="n">myhdu</span></div>
 
+
     <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">pass</span></div>
 
-<div class="viewcode-block" id="OI_ARRAY"><a class="viewcode-back" href="../../../nifits.io.html#nifits.io.oifits.OI_ARRAY">[docs]</a><span class="k">class</span> <span class="nc">OI_ARRAY</span><span class="p">(</span><span class="n">NI_EXTENSION</span><span class="p">):</span>
+
+<div class="viewcode-block" id="OI_ARRAY">
+<a class="viewcode-back" href="../../../nifits.io.html#nifits.io.oifits.OI_ARRAY">[docs]</a>
+<span class="k">class</span> <span class="nc">OI_ARRAY</span><span class="p">(</span><span class="n">NI_EXTENSION</span><span class="p">):</span>
     <span class="vm">__doc__</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
 <span class="s2">    ``OI_ARRAY`` definition</span>
 <span class="s2">    &quot;&quot;&quot;</span> <span class="o">+</span> <span class="n">NI_EXTENSION</span><span class="o">.</span><span class="vm">__doc__</span>
     <span class="n">name</span><span class="o">=</span><span class="s2">&quot;OI_ARRAY&quot;</span></div>
 
+
 <span class="kn">from</span> <span class="nn">astropy.constants</span> <span class="kn">import</span> <span class="n">c</span> <span class="k">as</span> <span class="n">cst_c</span>
 
-<div class="viewcode-block" id="OI_WAVELENGTH"><a class="viewcode-back" href="../../../nifits.io.html#nifits.io.oifits.OI_WAVELENGTH">[docs]</a><span class="k">class</span> <span class="nc">OI_WAVELENGTH</span><span class="p">(</span><span class="n">NI_EXTENSION</span><span class="p">):</span>
+<div class="viewcode-block" id="OI_WAVELENGTH">
+<a class="viewcode-back" href="../../../nifits.io.html#nifits.io.oifits.OI_WAVELENGTH">[docs]</a>
+<span class="k">class</span> <span class="nc">OI_WAVELENGTH</span><span class="p">(</span><span class="n">NI_EXTENSION</span><span class="p">):</span>
     <span class="n">__doc_</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
 <span class="s2">    An object storing the OI_WAVELENGTH information, in compatibility with OIFITS practices.</span>
 
@@ -391,13 +429,16 @@
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">dnus</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">cst_c</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">dlambs</span></div>
+
         
 
 <span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">field</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
 
 
-<div class="viewcode-block" id="OI_TARGET"><a class="viewcode-back" href="../../../nifits.io.html#nifits.io.oifits.OI_TARGET">[docs]</a><span class="nd">@dataclass</span>
+<div class="viewcode-block" id="OI_TARGET">
+<a class="viewcode-back" href="../../../nifits.io.html#nifits.io.oifits.OI_TARGET">[docs]</a>
+<span class="nd">@dataclass</span>
 <span class="k">class</span> <span class="nc">OI_TARGET</span><span class="p">(</span><span class="n">NI_EXTENSION</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    ``OI_TARGET`` definition.</span>
@@ -406,7 +447,9 @@
     <span class="c1"># raep0: float = 0.</span>
     <span class="c1"># decep0: float = 0.</span>
     <span class="n">name</span><span class="o">=</span><span class="s2">&quot;OI_TARGET&quot;</span>
-<div class="viewcode-block" id="OI_TARGET.from_scratch"><a class="viewcode-back" href="../../../nifits.io.html#nifits.io.oifits.OI_TARGET.from_scratch">[docs]</a>    <span class="nd">@classmethod</span>
+<div class="viewcode-block" id="OI_TARGET.from_scratch">
+<a class="viewcode-back" href="../../../nifits.io.html#nifits.io.oifits.OI_TARGET.from_scratch">[docs]</a>
+    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">from_scratch</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Creates the OI_TARGET object with an empty table.</span>
@@ -428,7 +471,10 @@
                                     <span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> 
                                     <span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">str</span> <span class="p">],)</span>
         <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">data_table</span><span class="o">=</span><span class="n">data_table</span><span class="p">)</span></div>
-<div class="viewcode-block" id="OI_TARGET.add_target"><a class="viewcode-back" href="../../../nifits.io.html#nifits.io.oifits.OI_TARGET.add_target">[docs]</a>    <span class="k">def</span> <span class="nf">add_target</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target_id</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="s2">&quot;MyTarget&quot;</span><span class="p">,</span> <span class="n">raep0</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span> <span class="n">decep0</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span>
+
+<div class="viewcode-block" id="OI_TARGET.add_target">
+<a class="viewcode-back" href="../../../nifits.io.html#nifits.io.oifits.OI_TARGET.add_target">[docs]</a>
+    <span class="k">def</span> <span class="nf">add_target</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target_id</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="s2">&quot;MyTarget&quot;</span><span class="p">,</span> <span class="n">raep0</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span> <span class="n">decep0</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span>
                         <span class="n">equinox</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span> <span class="n">ra_err</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span> <span class="n">dec_err</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span>
                         <span class="n">sysvel</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span> <span class="n">veltyp</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">veldef</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
                         <span class="n">pmra</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span> <span class="n">pmdec</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span> <span class="n">pmra_err</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span> <span class="n">pmdec_err</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span> 
@@ -461,11 +507,15 @@
                                     <span class="n">equinox</span><span class="p">,</span> <span class="n">ra_err</span><span class="p">,</span> <span class="n">dec_err</span><span class="p">,</span>
                                     <span class="n">sysvel</span><span class="p">,</span> <span class="n">veltyp</span><span class="p">,</span> <span class="n">veldef</span><span class="p">,</span>
                                     <span class="n">pmra</span><span class="p">,</span> <span class="n">pmdec</span><span class="p">,</span> <span class="n">pmra_err</span><span class="p">,</span> <span class="n">pmdec_err</span><span class="p">,</span> 
-                                    <span class="n">parallax</span><span class="p">,</span> <span class="n">para_err</span><span class="p">,</span> <span class="n">spectyp</span><span class="p">,</span> <span class="n">category</span> <span class="p">])</span></div></div>
+                                    <span class="n">parallax</span><span class="p">,</span> <span class="n">para_err</span><span class="p">,</span> <span class="n">spectyp</span><span class="p">,</span> <span class="n">category</span> <span class="p">])</span></div>
+</div>
+
 
         
     
-<div class="viewcode-block" id="NI_OUT"><a class="viewcode-back" href="../../../nifits.io.html#nifits.io.oifits.NI_OUT">[docs]</a><span class="nd">@dataclass</span>
+<div class="viewcode-block" id="NI_OUT">
+<a class="viewcode-back" href="../../../nifits.io.html#nifits.io.oifits.NI_OUT">[docs]</a>
+<span class="nd">@dataclass</span>
 <span class="k">class</span> <span class="nc">NI_OUT</span><span class="p">(</span><span class="n">NI_EXTENSION</span><span class="p">):</span>
     <span class="vm">__doc__</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;Contains measured intensities of the outputs of the instrument. </span>
 <span class="s2">    Dimensions are (n_ch, n_out).&quot;&quot;&quot;</span> <span class="o">+</span> <span class="n">NI_EXTENSION</span><span class="o">.</span><span class="vm">__doc__</span>
@@ -477,7 +527,9 @@
     <span class="k">def</span> <span class="nf">asarray</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">module</span><span class="o">=</span><span class="n">np</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">module</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">table_value</span><span class="p">[</span><span class="s2">&quot;u&quot;</span><span class="p">])</span>
 
-<div class="viewcode-block" id="NI_OUT.check_against_catm"><a class="viewcode-back" href="../../../nifits.io.html#nifits.io.oifits.NI_OUT.check_against_catm">[docs]</a>    <span class="k">def</span> <span class="nf">check_against_catm</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">catm</span><span class="p">:</span> <span class="n">NI_CATM</span><span class="p">):</span>
+<div class="viewcode-block" id="NI_OUT.check_against_catm">
+<a class="viewcode-back" href="../../../nifits.io.html#nifits.io.oifits.NI_OUT.check_against_catm">[docs]</a>
+    <span class="k">def</span> <span class="nf">check_against_catm</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">catm</span><span class="p">:</span> <span class="n">NI_CATM</span><span class="p">):</span>
         <span class="n">n_wl</span> <span class="o">=</span> <span class="n">catm</span><span class="o">.</span><span class="n">Mcatm</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
         <span class="c1"># n_inputs = catm.Mcatm.shape[2] # Not needed</span>
         <span class="n">n_outputs</span> <span class="o">=</span> <span class="n">catm</span><span class="o">.</span><span class="n">Mcatm</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
@@ -486,9 +538,13 @@
                             <span class="sa">f</span><span class="s2">&quot;Inconsistent wavelength number in table </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span>
             <span class="k">assert</span> <span class="n">arow</span><span class="p">[</span><span class="s2">&quot;u&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">n_outputs</span><span class="p">,</span>\
                             <span class="sa">f</span><span class="s2">&quot;Inconsistent outputs number in table at row </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span>
-        <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">value_output</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="n">n_outputs</span><span class="p">,</span> <span class="s2">&quot;Inconsistent output number in array&quot;</span></div></div>
+        <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">value_output</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="n">n_outputs</span><span class="p">,</span> <span class="s2">&quot;Inconsistent output number in array&quot;</span></div>
+</div>
 
-<div class="viewcode-block" id="NI_CATM"><a class="viewcode-back" href="../../../nifits.io.html#nifits.io.oifits.NI_CATM">[docs]</a><span class="nd">@dataclass</span>
+
+<div class="viewcode-block" id="NI_CATM">
+<a class="viewcode-back" href="../../../nifits.io.html#nifits.io.oifits.NI_CATM">[docs]</a>
+<span class="nd">@dataclass</span>
 <span class="k">class</span> <span class="nc">NI_CATM</span><span class="p">(</span><span class="n">NI_EXTENSION_CPX_ARRAY</span><span class="p">):</span>
     <span class="vm">__doc__</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
 <span class="s2">    The complex amplitude transfre function</span>
@@ -498,25 +554,46 @@
     <span class="k">def</span> <span class="nf">M</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_array</span></div>
 
-<div class="viewcode-block" id="NI_IOUT"><a class="viewcode-back" href="../../../nifits.io.html#nifits.io.oifits.NI_IOUT">[docs]</a><span class="k">class</span> <span class="nc">NI_IOUT</span><span class="p">(</span><span class="n">NI_EXTENSION</span><span class="p">):</span>
+
+<div class="viewcode-block" id="NI_IOUT">
+<a class="viewcode-back" href="../../../nifits.io.html#nifits.io.oifits.NI_IOUT">[docs]</a>
+<span class="k">class</span> <span class="nc">NI_IOUT</span><span class="p">(</span><span class="n">NI_EXTENSION</span><span class="p">):</span>
     <span class="vm">__doc__</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
 <span class="s2">    ``NI_IOUT`` : a recording of the output values, given in intensity,</span>
 <span class="s2">    flux, counts or arbitrary units.</span>
-<span class="s2">    &quot;&quot;&quot;</span> <span class="o">+</span> <span class="n">NI_EXTENSION</span><span class="o">.</span><span class="vm">__doc__</span></div>
+<span class="s2">    &quot;&quot;&quot;</span> <span class="o">+</span> <span class="n">NI_EXTENSION</span><span class="o">.</span><span class="vm">__doc__</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;NI_IOUT&quot;</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">iout</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_table</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">data</span></div>
 
-<div class="viewcode-block" id="NI_KIOUT"><a class="viewcode-back" href="../../../nifits.io.html#nifits.io.oifits.NI_KIOUT">[docs]</a><span class="k">class</span> <span class="nc">NI_KIOUT</span><span class="p">(</span><span class="n">NI_EXTENSION</span><span class="p">):</span>
+
+<div class="viewcode-block" id="NI_KIOUT">
+<a class="viewcode-back" href="../../../nifits.io.html#nifits.io.oifits.NI_KIOUT">[docs]</a>
+<span class="k">class</span> <span class="nc">NI_KIOUT</span><span class="p">(</span><span class="n">NI_EXTENSION</span><span class="p">):</span>
     <span class="vm">__doc__</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
 <span class="s2">    ``NI_KIOUT`` : a recording of the processed output values using the</span>
 <span class="s2">    the post-processing matrix given by ``NI_KMAT``. Typically differential</span>
 <span class="s2">    null or kernel-null.</span>
-<span class="s2">    &quot;&quot;&quot;</span> <span class="o">+</span> <span class="n">NI_EXTENSION</span><span class="o">.</span><span class="vm">__doc__</span></div>
+<span class="s2">    &quot;&quot;&quot;</span> <span class="o">+</span> <span class="n">NI_EXTENSION</span><span class="o">.</span><span class="vm">__doc__</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;NI_KIOUT&quot;</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">kiout</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_table</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">data</span></div>
 
-<div class="viewcode-block" id="NI_KCOV"><a class="viewcode-back" href="../../../nifits.io.html#nifits.io.oifits.NI_KCOV">[docs]</a><span class="k">class</span> <span class="nc">NI_KCOV</span><span class="p">(</span><span class="n">NI_EXTENSION_ARRAY</span><span class="p">):</span>
+
+<span class="k">class</span> <span class="nc">NI_KCOV</span><span class="p">(</span><span class="n">NI_EXTENSION_ARRAY</span><span class="p">):</span>
     <span class="vm">__doc__</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
 <span class="s2">    The covariance matrix for the processed data contained in KIOUT.</span>
-<span class="s2">    &quot;&quot;&quot;</span> <span class="o">+</span> <span class="n">NI_EXTENSION_ARRAY</span><span class="o">.</span><span class="vm">__doc__</span></div>
+<span class="s2">    &quot;&quot;&quot;</span> <span class="o">+</span> <span class="n">NI_EXTENSION_ARRAY</span><span class="o">.</span><span class="vm">__doc__</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;NI_KCOV&quot;</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">kcov</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_array</span>
     
-<div class="viewcode-block" id="NI_KMAT"><a class="viewcode-back" href="../../../nifits.io.html#nifits.io.oifits.NI_KMAT">[docs]</a><span class="nd">@dataclass</span>
+<div class="viewcode-block" id="NI_KMAT">
+<a class="viewcode-back" href="../../../nifits.io.html#nifits.io.oifits.NI_KMAT">[docs]</a>
+<span class="nd">@dataclass</span>
 <span class="k">class</span> <span class="nc">NI_KMAT</span><span class="p">(</span><span class="n">NI_EXTENSION_ARRAY</span><span class="p">):</span>
     <span class="vm">__doc__</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
 <span class="s2">    The kernel matrix that defines the post-processing operation between outputs.</span>
@@ -527,14 +604,11 @@
     <span class="k">def</span> <span class="nf">K</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_array</span></div>
 
-<div class="viewcode-block" id="NI_KOUT"><a class="viewcode-back" href="../../../nifits.io.html#nifits.io.oifits.NI_KOUT">[docs]</a><span class="nd">@dataclass</span>
-<span class="k">class</span> <span class="nc">NI_KOUT</span><span class="p">(</span><span class="n">NI_EXTENSION</span><span class="p">):</span>
-    <span class="vm">__doc__</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
-<span class="s2">    Differential output observations</span>
-<span class="s2">    &quot;&quot;&quot;</span> <span class="o">+</span> <span class="n">NI_EXTENSION</span><span class="o">.</span><span class="vm">__doc__</span>
-    <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;NI_KOUT&quot;</span></div>
 
-<div class="viewcode-block" id="NI_MOD"><a class="viewcode-back" href="../../../nifits.io.html#nifits.io.oifits.NI_MOD">[docs]</a><span class="nd">@dataclass</span>
+
+<div class="viewcode-block" id="NI_MOD">
+<a class="viewcode-back" href="../../../nifits.io.html#nifits.io.oifits.NI_MOD">[docs]</a>
+<span class="nd">@dataclass</span>
 <span class="k">class</span> <span class="nc">NI_MOD</span><span class="p">(</span><span class="n">NI_EXTENSION</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Contains input modulation vector for the given observation. The format</span>
@@ -595,7 +669,6 @@
 <span class="sd">       +---------------+----------------------------+------------------+-------------------+</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-
     <span class="n">data_table</span><span class="p">:</span> <span class="n">Table</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="n">Table</span><span class="p">)</span>
     <span class="n">header</span><span class="p">:</span> <span class="n">fits</span><span class="o">.</span><span class="n">Header</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="n">fits</span><span class="o">.</span><span class="n">Header</span><span class="p">)</span>
     <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;NI_MOD&quot;</span>
@@ -631,10 +704,13 @@
 <span class="sd">        Conveniently retrieve the integration time.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_table</span><span class="p">[</span><span class="s2">&quot;INT_TIME&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">data</span></div>
+
         
         
         
-<div class="viewcode-block" id="create_basic_fov_data"><a class="viewcode-back" href="../../../nifits.io.html#nifits.io.oifits.create_basic_fov_data">[docs]</a><span class="k">def</span> <span class="nf">create_basic_fov_data</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="n">offset</span><span class="p">,</span> <span class="n">lamb</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+<div class="viewcode-block" id="create_basic_fov_data">
+<a class="viewcode-back" href="../../../nifits.io.html#nifits.io.oifits.create_basic_fov_data">[docs]</a>
+<span class="k">def</span> <span class="nf">create_basic_fov_data</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="n">offset</span><span class="p">,</span> <span class="n">lamb</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A convenience function to help define the FOV function and data model</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -649,7 +725,18 @@
                     <span class="n">data</span><span class="o">=</span><span class="p">[</span><span class="n">indices</span><span class="p">,</span> <span class="n">all_offsets</span><span class="p">])</span>
     <span class="k">return</span> <span class="n">mytable</span><span class="p">,</span> <span class="n">xy2phasor</span></div>
 
-<div class="viewcode-block" id="NI_FOV"><a class="viewcode-back" href="../../../nifits.io.html#nifits.io.oifits.NI_FOV">[docs]</a><span class="k">class</span> <span class="nc">NI_FOV</span><span class="p">(</span><span class="n">NI_EXTENSION</span><span class="p">):</span>
+
+<div class="viewcode-block" id="NI_KCOV">
+<a class="viewcode-back" href="../../../nifits.io.html#nifits.io.oifits.NI_KCOV">[docs]</a>
+<span class="k">class</span> <span class="nc">NI_KCOV</span><span class="p">(</span><span class="n">NI_EXTENSION_ARRAY</span><span class="p">):</span>
+    <span class="vm">__doc__</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    Storing the covariance of the data.</span>
+<span class="s2">    &quot;&quot;&quot;</span> <span class="o">+</span> <span class="n">NI_EXTENSION_ARRAY</span><span class="o">.</span><span class="vm">__doc__</span></div>
+
+
+<div class="viewcode-block" id="NI_FOV">
+<a class="viewcode-back" href="../../../nifits.io.html#nifits.io.oifits.NI_FOV">[docs]</a>
+<span class="k">class</span> <span class="nc">NI_FOV</span><span class="p">(</span><span class="n">NI_EXTENSION</span><span class="p">):</span>
     <span class="vm">__doc__</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;&quot;&quot;</span>
 <span class="s2">    The ``NI_FOV`` data containing information of the field of view (vigneting)</span>
 <span class="s2">    function as a function of wavelength.</span>
@@ -664,7 +751,9 @@
 <span class="s2">    * More options will come.</span>
 <span class="s2">    &quot;&quot;&quot;</span> <span class="o">+</span> <span class="n">NI_EXTENSION</span><span class="o">.</span><span class="vm">__doc__</span>
     <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;NI_FOV&quot;</span>
-<div class="viewcode-block" id="NI_FOV.simple_from_header"><a class="viewcode-back" href="../../../nifits.io.html#nifits.io.oifits.NI_FOV.simple_from_header">[docs]</a>    <span class="nd">@classmethod</span>
+<div class="viewcode-block" id="NI_FOV.simple_from_header">
+<a class="viewcode-back" href="../../../nifits.io.html#nifits.io.oifits.NI_FOV.simple_from_header">[docs]</a>
+    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">simple_from_header</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">lamb</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Constructor for a simple ``NI_FOV`` object with chromatic gaussian profile and </span>
@@ -686,7 +775,10 @@
 
 
 
-<div class="viewcode-block" id="NI_FOV.get_fov_function"><a class="viewcode-back" href="../../../nifits.io.html#nifits.io.oifits.NI_FOV.get_fov_function">[docs]</a>    <span class="k">def</span> <span class="nf">get_fov_function</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lamb</span><span class="p">:</span> <span class="n">ArrayLike</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+
+<div class="viewcode-block" id="NI_FOV.get_fov_function">
+<a class="viewcode-back" href="../../../nifits.io.html#nifits.io.oifits.NI_FOV.get_fov_function">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_fov_function</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lamb</span><span class="p">:</span> <span class="n">ArrayLike</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the function to get the chromatic phasor</span>
 <span class="sd">        given by injection for a the index n of the time series</span>
@@ -716,7 +808,9 @@
             <span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hypot</span><span class="p">(</span><span class="n">alpha</span><span class="p">[</span><span class="kc">None</span><span class="p">,:]</span><span class="o">-</span><span class="n">offset</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">beta</span><span class="p">[</span><span class="kc">None</span><span class="p">,:]</span><span class="o">-</span><span class="n">offset</span><span class="p">[:,</span><span class="mi">1</span><span class="p">])</span>
             <span class="n">phasor</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">r</span><span class="o">/</span><span class="n">r_0</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">phasor</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">complex</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">xy2phasor</span></div></div>
+        <span class="k">return</span> <span class="n">xy2phasor</span></div>
+</div>
+
 
 
 
@@ -754,8 +848,9 @@
                     <span class="s2">&quot;NI_FOV&quot;</span><span class="p">,</span>
                     <span class="s2">&quot;NI_KMAT&quot;</span><span class="p">,</span>
                     <span class="s2">&quot;NI_MOD&quot;</span><span class="p">,</span>
-                    <span class="s2">&quot;NI_OUT&quot;</span><span class="p">,</span>
-                    <span class="s2">&quot;NI_KOUT&quot;</span><span class="p">])</span>
+                    <span class="s2">&quot;NI_IOUT&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;NI_KIOUT&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;NI_KCOV&quot;</span><span class="p">])</span>
 
 <span class="n">NIFITS_KEYWORDS</span> <span class="o">=</span> <span class="p">[]</span>
 
@@ -766,12 +861,18 @@
                     <span class="kc">False</span><span class="p">,</span>
                     <span class="kc">False</span><span class="p">,</span>
                     <span class="kc">False</span><span class="p">,</span>
+                    <span class="kc">False</span><span class="p">,</span>
                     <span class="kc">False</span><span class="p">]</span>
 
-<div class="viewcode-block" id="getclass"><a class="viewcode-back" href="../../../nifits.io.html#nifits.io.oifits.getclass">[docs]</a><span class="k">def</span> <span class="nf">getclass</span><span class="p">(</span><span class="n">classname</span><span class="p">):</span>
+<div class="viewcode-block" id="getclass">
+<a class="viewcode-back" href="../../../nifits.io.html#nifits.io.oifits.getclass">[docs]</a>
+<span class="k">def</span> <span class="nf">getclass</span><span class="p">(</span><span class="n">classname</span><span class="p">):</span>
     <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">[</span><span class="vm">__name__</span><span class="p">],</span> <span class="n">classname</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="nifits"><a class="viewcode-back" href="../../../nifits.io.html#nifits.io.oifits.nifits">[docs]</a><span class="nd">@dataclass</span>
+
+<div class="viewcode-block" id="nifits">
+<a class="viewcode-back" href="../../../nifits.io.html#nifits.io.oifits.nifits">[docs]</a>
+<span class="nd">@dataclass</span>
 <span class="k">class</span> <span class="nc">nifits</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Class representation of the nifits object.&quot;&quot;&quot;</span>
     <span class="n">header</span><span class="p">:</span> <span class="n">fits</span><span class="o">.</span><span class="n">Header</span> <span class="o">=</span> <span class="kc">None</span>
@@ -783,10 +884,13 @@
     <span class="n">ni_mod</span><span class="p">:</span> <span class="n">NI_MOD</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="n">ni_iout</span><span class="p">:</span> <span class="n">NI_IOUT</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="n">ni_kiout</span><span class="p">:</span> <span class="n">NI_KIOUT</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">ni_kcov</span><span class="p">:</span> <span class="n">NI_KCOV</span> <span class="o">=</span> <span class="kc">None</span>
 
     
 
-<div class="viewcode-block" id="nifits.from_nifits"><a class="viewcode-back" href="../../../nifits.io.html#nifits.io.oifits.nifits.from_nifits">[docs]</a>    <span class="nd">@classmethod</span>
+<div class="viewcode-block" id="nifits.from_nifits">
+<a class="viewcode-back" href="../../../nifits.io.html#nifits.io.oifits.nifits.from_nifits">[docs]</a>
+    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">from_nifits</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Create the nifits object from the HDU extension of an opened fits file.</span>
@@ -810,7 +914,10 @@
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;contains_header:&quot;</span><span class="p">,</span> <span class="n">obj_dict</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s2">&quot;header&quot;</span><span class="p">))</span>
         <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="o">**</span><span class="n">obj_dict</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="nifits.to_nifits"><a class="viewcode-back" href="../../../nifits.io.html#nifits.io.oifits.nifits.to_nifits">[docs]</a>    <span class="k">def</span> <span class="nf">to_nifits</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">:</span><span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+
+<div class="viewcode-block" id="nifits.to_nifits">
+<a class="viewcode-back" href="../../../nifits.io.html#nifits.io.oifits.nifits.to_nifits">[docs]</a>
+    <span class="k">def</span> <span class="nf">to_nifits</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">:</span><span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
                         <span class="n">static_only</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
                         <span class="n">dynamic_only</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
                         <span class="n">static_hash</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
@@ -860,7 +967,9 @@
             <span class="n">hdulist</span><span class="o">.</span><span class="n">writeto</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="n">overwrite</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">hdulist</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">hdulist</span></div></div>
+            <span class="k">return</span> <span class="n">hdulist</span></div>
+</div>
+
 
 
 
