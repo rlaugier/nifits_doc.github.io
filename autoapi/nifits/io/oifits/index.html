@@ -1,0 +1,1551 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../../../../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../../../../genindex.html" /><link rel="search" title="Search" href="../../../../search.html" /><link rel="prev" title="nifits.io" href="../index.html" />
+
+    <!-- Generated with Sphinx 7.3.7 and Furo 2024.08.06 -->
+        <title>nifits.io.oifits - NIFITS 0.0.3 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=362ab14a" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/styles/furo.css?v=354aac6f" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=fd3f3429" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/styles/furo-extensions.css?v=302659d7" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../../../index.html"><div class="brand">NIFITS 0.0.3 documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../../../index.html">
+  
+  
+  <span class="sidebar-brand-text">NIFITS 0.0.3 documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul class="current">
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../../../index.html">API Reference</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of API Reference</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2 current has-children"><a class="reference internal" href="../../index.html">nifits</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of nifits</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../backend/index.html">nifits.backend</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of nifits.backend</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../backend/backend/index.html">nifits.backend.backend</a></li>
+</ul>
+</li>
+<li class="toctree-l3 current has-children"><a class="reference internal" href="../index.html">nifits.io</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of nifits.io</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l4 current current-page"><a class="current reference internal" href="#">nifits.io.oifits</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="../../../../_sources/autoapi/nifits/io/oifits/index.rst.txt" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div>
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="module-nifits.io.oifits">
+<span id="nifits-io-oifits"></span><h1>nifits.io.oifits<a class="headerlink" href="#module-nifits.io.oifits" title="Link to this heading">¶</a></h1>
+<p>A module for reading/writing NIFITS files and handling the data.</p>
+<p>To open an existing NIFITS file, use <code class="docutils literal notranslate"><span class="pre">nifits.from_nifits</span></code> constructor.</p>
+<p>To save an NIFITS object to a file, use <code class="docutils literal notranslate"><span class="pre">nifits.to_nifits</span></code> method.</p>
+<p>A summary of the information in the oifits object can be obtained by
+using the info() method:</p>
+<blockquote>
+<div><p>&gt; import oifits
+&gt; oifitsobj = oifits.open(‘foo.fits’)
+&gt; oifitsobj.info()</p>
+</div></blockquote>
+<p>For further information, contact R. Laugier</p>
+<section id="attributes">
+<h2>Attributes<a class="headerlink" href="#attributes" title="Link to this heading">¶</a></h2>
+<div class="table-wrapper autosummary longtable docutils container">
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nifits.io.oifits.Table" title="nifits.io.oifits.Table"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Table</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#nifits.io.oifits.ArrayLike" title="nifits.io.oifits.ArrayLike"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ArrayLike</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nifits.io.oifits._mjdzero" title="nifits.io.oifits._mjdzero"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_mjdzero</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#nifits.io.oifits.matchtargetbyname" title="nifits.io.oifits.matchtargetbyname"><code class="xref py py-obj docutils literal notranslate"><span class="pre">matchtargetbyname</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nifits.io.oifits.matchstationbyname" title="nifits.io.oifits.matchstationbyname"><code class="xref py py-obj docutils literal notranslate"><span class="pre">matchstationbyname</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#nifits.io.oifits.refdate" title="nifits.io.oifits.refdate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">refdate</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nifits.io.oifits.NI_OUT_DEFAULT_HEADER" title="nifits.io.oifits.NI_OUT_DEFAULT_HEADER"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NI_OUT_DEFAULT_HEADER</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#nifits.io.oifits.NI_MOD_DEFAULT_HEADER" title="nifits.io.oifits.NI_MOD_DEFAULT_HEADER"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NI_MOD_DEFAULT_HEADER</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nifits.io.oifits.NI_FOV_DEFAULT_HEADER" title="nifits.io.oifits.NI_FOV_DEFAULT_HEADER"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NI_FOV_DEFAULT_HEADER</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#nifits.io.oifits.TEST_BACKUP" title="nifits.io.oifits.TEST_BACKUP"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TEST_BACKUP</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nifits.io.oifits.NIFITS_EXTENSIONS" title="nifits.io.oifits.NIFITS_EXTENSIONS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NIFITS_EXTENSIONS</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#nifits.io.oifits.NIFITS_KEYWORDS" title="nifits.io.oifits.NIFITS_KEYWORDS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NIFITS_KEYWORDS</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nifits.io.oifits.STATIC_EXTENSIONS" title="nifits.io.oifits.STATIC_EXTENSIONS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">STATIC_EXTENSIONS</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="classes">
+<h2>Classes<a class="headerlink" href="#classes" title="Link to this heading">¶</a></h2>
+<div class="table-wrapper autosummary longtable docutils container">
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nifits.io.oifits.OI_STATION" title="nifits.io.oifits.OI_STATION"><code class="xref py py-obj docutils literal notranslate"><span class="pre">OI_STATION</span></code></a></p></td>
+<td><p>This class corresponds to a single row (i.e. single</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#id0" title="nifits.io.oifits.NI_CATM"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NI_CATM</span></code></a></p></td>
+<td><p>Generic class for NIFITS array extensions.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nifits.io.oifits.NI_EXTENSION" title="nifits.io.oifits.NI_EXTENSION"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NI_EXTENSION</span></code></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">NI_EXTENSION</span></code> Generic class for NIFITS extensions</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#nifits.io.oifits.NI_EXTENSION_ARRAY" title="nifits.io.oifits.NI_EXTENSION_ARRAY"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NI_EXTENSION_ARRAY</span></code></a></p></td>
+<td><p>Generic class for NIFITS array extensions</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nifits.io.oifits.NI_EXTENSION_CPX_ARRAY" title="nifits.io.oifits.NI_EXTENSION_CPX_ARRAY"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NI_EXTENSION_CPX_ARRAY</span></code></a></p></td>
+<td><p>Generic class for NIFITS array extensions.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#nifits.io.oifits.OI_ARRAY" title="nifits.io.oifits.OI_ARRAY"><code class="xref py py-obj docutils literal notranslate"><span class="pre">OI_ARRAY</span></code></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">NI_EXTENSION</span></code> Generic class for NIFITS extensions</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nifits.io.oifits.OI_WAVELENGTH" title="nifits.io.oifits.OI_WAVELENGTH"><code class="xref py py-obj docutils literal notranslate"><span class="pre">OI_WAVELENGTH</span></code></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">NI_EXTENSION</span></code> Generic class for NIFITS extensions</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#nifits.io.oifits.OI_TARGET" title="nifits.io.oifits.OI_TARGET"><code class="xref py py-obj docutils literal notranslate"><span class="pre">OI_TARGET</span></code></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">OI_TARGET</span></code> definition.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nifits.io.oifits.NI_OUT" title="nifits.io.oifits.NI_OUT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NI_OUT</span></code></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">NI_EXTENSION</span></code> Generic class for NIFITS extensions</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#id0" title="nifits.io.oifits.NI_CATM"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NI_CATM</span></code></a></p></td>
+<td><p>Generic class for NIFITS array extensions.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nifits.io.oifits.NI_IOUT" title="nifits.io.oifits.NI_IOUT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NI_IOUT</span></code></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">NI_EXTENSION</span></code> Generic class for NIFITS extensions</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#nifits.io.oifits.NI_KIOUT" title="nifits.io.oifits.NI_KIOUT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NI_KIOUT</span></code></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">NI_EXTENSION</span></code> Generic class for NIFITS extensions</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#id3" title="nifits.io.oifits.NI_KCOV"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NI_KCOV</span></code></a></p></td>
+<td><p>Generic class for NIFITS array extensions</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#nifits.io.oifits.NI_KMAT" title="nifits.io.oifits.NI_KMAT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NI_KMAT</span></code></a></p></td>
+<td><p>Generic class for NIFITS array extensions</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nifits.io.oifits.NI_MOD" title="nifits.io.oifits.NI_MOD"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NI_MOD</span></code></a></p></td>
+<td><p>Contains input modulation vector for the given observation. The format</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#id3" title="nifits.io.oifits.NI_KCOV"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NI_KCOV</span></code></a></p></td>
+<td><p>Generic class for NIFITS array extensions</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nifits.io.oifits.NI_FOV" title="nifits.io.oifits.NI_FOV"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NI_FOV</span></code></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">NI_EXTENSION</span></code> Generic class for NIFITS extensions</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#nifits.io.oifits.nifits" title="nifits.io.oifits.nifits"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nifits</span></code></a></p></td>
+<td><p>Class representation of the nifits object.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Link to this heading">¶</a></h2>
+<div class="table-wrapper autosummary longtable docutils container">
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nifits.io.oifits._plurals" title="nifits.io.oifits._plurals"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_plurals</span></code></a>(count)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#nifits.io.oifits.array_eq" title="nifits.io.oifits.array_eq"><code class="xref py py-obj docutils literal notranslate"><span class="pre">array_eq</span></code></a>(a, b)</p></td>
+<td><p>Test whether all the elements of two arrays are equal.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nifits.io.oifits._isnone" title="nifits.io.oifits._isnone"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_isnone</span></code></a>(x)</p></td>
+<td><p>Convenience hack for checking if x is none; needed because numpy</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#nifits.io.oifits._notnone" title="nifits.io.oifits._notnone"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_notnone</span></code></a>(x)</p></td>
+<td><p>Convenience hack for checking if x is not none; needed because numpy</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nifits.io.oifits.nulfunc" title="nifits.io.oifits.nulfunc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nulfunc</span></code></a>(self, *args, **kwargs)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#nifits.io.oifits.create_basic_fov_data" title="nifits.io.oifits.create_basic_fov_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_basic_fov_data</span></code></a>(D, offset, lamb, n)</p></td>
+<td><p>A convenience function to help define the FOV function and data model</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nifits.io.oifits.getclass" title="nifits.io.oifits.getclass"><code class="xref py py-obj docutils literal notranslate"><span class="pre">getclass</span></code></a>(classname)</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading">¶</a></h2>
+<dl class="py data">
+<dt class="sig sig-object py" id="nifits.io.oifits.Table">
+<span class="sig-prename descclassname"><span class="pre">nifits.io.oifits.</span></span><span class="sig-name descname"><span class="pre">Table</span></span><a class="reference internal" href="../../../../_modules/astropy/table/table.html#Table"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.io.oifits.Table" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="nifits.io.oifits.ArrayLike">
+<span class="sig-prename descclassname"><span class="pre">nifits.io.oifits.</span></span><span class="sig-name descname"><span class="pre">ArrayLike</span></span><a class="headerlink" href="#nifits.io.oifits.ArrayLike" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="nifits.io.oifits._mjdzero">
+<span class="sig-prename descclassname"><span class="pre">nifits.io.oifits.</span></span><span class="sig-name descname"><span class="pre">_mjdzero</span></span><a class="headerlink" href="#nifits.io.oifits._mjdzero" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="nifits.io.oifits.matchtargetbyname">
+<span class="sig-prename descclassname"><span class="pre">nifits.io.oifits.</span></span><span class="sig-name descname"><span class="pre">matchtargetbyname</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#nifits.io.oifits.matchtargetbyname" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="nifits.io.oifits.matchstationbyname">
+<span class="sig-prename descclassname"><span class="pre">nifits.io.oifits.</span></span><span class="sig-name descname"><span class="pre">matchstationbyname</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#nifits.io.oifits.matchstationbyname" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="nifits.io.oifits.refdate">
+<span class="sig-prename descclassname"><span class="pre">nifits.io.oifits.</span></span><span class="sig-name descname"><span class="pre">refdate</span></span><a class="headerlink" href="#nifits.io.oifits.refdate" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nifits.io.oifits._plurals">
+<span class="sig-prename descclassname"><span class="pre">nifits.io.oifits.</span></span><span class="sig-name descname"><span class="pre">_plurals</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">count</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/nifits/io/oifits.html#_plurals"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.io.oifits._plurals" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nifits.io.oifits.array_eq">
+<span class="sig-prename descclassname"><span class="pre">nifits.io.oifits.</span></span><span class="sig-name descname"><span class="pre">array_eq</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ArrayLike</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ArrayLike</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/nifits/io/oifits.html#array_eq"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.io.oifits.array_eq" title="Link to this definition">¶</a></dt>
+<dd><p>Test whether all the elements of two arrays are equal.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>a</strong> – one input.</p></li>
+<li><p><strong>b</strong> – another input.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nifits.io.oifits._isnone">
+<span class="sig-prename descclassname"><span class="pre">nifits.io.oifits.</span></span><span class="sig-name descname"><span class="pre">_isnone</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/nifits/io/oifits.html#_isnone"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.io.oifits._isnone" title="Link to this definition">¶</a></dt>
+<dd><p>Convenience hack for checking if x is none; needed because numpy
+arrays will, at some point, return arrays for x == None.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nifits.io.oifits._notnone">
+<span class="sig-prename descclassname"><span class="pre">nifits.io.oifits.</span></span><span class="sig-name descname"><span class="pre">_notnone</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/nifits/io/oifits.html#_notnone"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.io.oifits._notnone" title="Link to this definition">¶</a></dt>
+<dd><p>Convenience hack for checking if x is not none; needed because numpy
+arrays will, at some point, return arrays for x != None.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nifits.io.oifits.OI_STATION">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nifits.io.oifits.</span></span><span class="sig-name descname"><span class="pre">OI_STATION</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tel_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sta_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">diameter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">staxyz</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[None,</span> <span class="pre">None,</span> <span class="pre">None]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fov</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fovtype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">revision</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/nifits/io/oifits.html#OI_STATION"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.io.oifits.OI_STATION" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>This class corresponds to a single row (i.e. single
+station/telescope) of an OI_ARRAY table.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nifits.io.oifits.OI_STATION.revision">
+<span class="sig-name descname"><span class="pre">revision</span></span><a class="headerlink" href="#nifits.io.oifits.OI_STATION.revision" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nifits.io.oifits.OI_STATION.tel_name">
+<span class="sig-name descname"><span class="pre">tel_name</span></span><a class="headerlink" href="#nifits.io.oifits.OI_STATION.tel_name" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nifits.io.oifits.OI_STATION.sta_name">
+<span class="sig-name descname"><span class="pre">sta_name</span></span><a class="headerlink" href="#nifits.io.oifits.OI_STATION.sta_name" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nifits.io.oifits.OI_STATION.diameter">
+<span class="sig-name descname"><span class="pre">diameter</span></span><a class="headerlink" href="#nifits.io.oifits.OI_STATION.diameter" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nifits.io.oifits.OI_STATION.staxyz">
+<span class="sig-name descname"><span class="pre">staxyz</span></span><a class="headerlink" href="#nifits.io.oifits.OI_STATION.staxyz" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nifits.io.oifits.OI_STATION.__eq__">
+<span class="sig-name descname"><span class="pre">__eq__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/nifits/io/oifits.html#OI_STATION.__eq__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.io.oifits.OI_STATION.__eq__" title="Link to this definition">¶</a></dt>
+<dd><p>Return self==value.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nifits.io.oifits.OI_STATION.__ne__">
+<span class="sig-name descname"><span class="pre">__ne__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/nifits/io/oifits.html#OI_STATION.__ne__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.io.oifits.OI_STATION.__ne__" title="Link to this definition">¶</a></dt>
+<dd><p>Return self!=value.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nifits.io.oifits.OI_STATION.__repr__">
+<span class="sig-name descname"><span class="pre">__repr__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/nifits/io/oifits.html#OI_STATION.__repr__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.io.oifits.OI_STATION.__repr__" title="Link to this definition">¶</a></dt>
+<dd><p>Return repr(self).</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nifits.io.oifits.NI_CATM">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nifits.io.oifits.</span></span><span class="sig-name descname"><span class="pre">NI_CATM</span></span><a class="reference internal" href="../../../../_modules/nifits/io/oifits.html#NI_CATM"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.io.oifits.NI_CATM" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Contains the complex amplitude transfer matrix CATM of the instrument.
+The CATM is a complex matrix representing the transformation from the each
+of the complex amplitude of electric field from the inputs to the outputs
+of the instrument. The dimensions are (n_ch, n_out, n_in) where n_ch
+represents the spectral channels.</p>
+<p>It is expected that</p>
+<p><span class="math notranslate nohighlight">\(\textbf{n}_{out} = \textbf{M}_{CATM}.\textbf{m}_{mod} \circ \textbf{x}_{in}\)</span>
+with <span class="math notranslate nohighlight">\(\textbf{m}_{mod}\)</span> containded in NI_MOD.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nifits.io.oifits.NI_CATM.Mcatm">
+<span class="sig-name descname"><span class="pre">Mcatm</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ArrayLike</span></em><a class="headerlink" href="#nifits.io.oifits.NI_CATM.Mcatm" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nifits.io.oifits.NI_CATM.header">
+<span class="sig-name descname"><span class="pre">header</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">astropy.io.fits.Header</span></em><a class="headerlink" href="#nifits.io.oifits.NI_CATM.header" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nifits.io.oifits.NI_CATM.from_hdu">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_hdu</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hdu</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">type(fits.hdu.ImageHDU)</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/nifits/io/oifits.html#NI_CATM.from_hdu"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.io.oifits.NI_CATM.from_hdu" title="Link to this definition">¶</a></dt>
+<dd><p>Create the NI_CATM object from the HDU extension of an opened fits file.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nifits.io.oifits.NI_CATM.to_hdu">
+<span class="sig-name descname"><span class="pre">to_hdu</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/nifits/io/oifits.html#NI_CATM.to_hdu"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.io.oifits.NI_CATM.to_hdu" title="Link to this definition">¶</a></dt>
+<dd><p>Returns and hdu object to save into fits</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nifits.io.oifits.nulfunc">
+<span class="sig-prename descclassname"><span class="pre">nifits.io.oifits.</span></span><span class="sig-name descname"><span class="pre">nulfunc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/nifits/io/oifits.html#nulfunc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.io.oifits.nulfunc" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="nifits.io.oifits.NI_OUT_DEFAULT_HEADER">
+<span class="sig-prename descclassname"><span class="pre">nifits.io.oifits.</span></span><span class="sig-name descname"><span class="pre">NI_OUT_DEFAULT_HEADER</span></span><a class="headerlink" href="#nifits.io.oifits.NI_OUT_DEFAULT_HEADER" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="nifits.io.oifits.NI_MOD_DEFAULT_HEADER">
+<span class="sig-prename descclassname"><span class="pre">nifits.io.oifits.</span></span><span class="sig-name descname"><span class="pre">NI_MOD_DEFAULT_HEADER</span></span><a class="headerlink" href="#nifits.io.oifits.NI_MOD_DEFAULT_HEADER" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="nifits.io.oifits.NI_FOV_DEFAULT_HEADER">
+<span class="sig-prename descclassname"><span class="pre">nifits.io.oifits.</span></span><span class="sig-name descname"><span class="pre">NI_FOV_DEFAULT_HEADER</span></span><a class="headerlink" href="#nifits.io.oifits.NI_FOV_DEFAULT_HEADER" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nifits.io.oifits.NI_EXTENSION">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nifits.io.oifits.</span></span><span class="sig-name descname"><span class="pre">NI_EXTENSION</span></span><a class="reference internal" href="../../../../_modules/nifits/io/oifits.html#NI_EXTENSION"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.io.oifits.NI_EXTENSION" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">object</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">NI_EXTENSION</span></code> Generic class for NIFITS extensions</p>
+<p><strong>Inherited methods:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">from_hdu</span></code>: Creates the object from an <code class="docutils literal notranslate"><span class="pre">astropy.io.fits.TableHDU</span></code> object</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">to_hdu</span></code>  : Returns the <code class="docutils literal notranslate"><span class="pre">TableHDU</span></code> from itself.</p></li>
+</ul>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nifits.io.oifits.NI_EXTENSION.data_table">
+<span class="sig-name descname"><span class="pre">data_table</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Table</span></em><a class="headerlink" href="#nifits.io.oifits.NI_EXTENSION.data_table" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nifits.io.oifits.NI_EXTENSION.header">
+<span class="sig-name descname"><span class="pre">header</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">astropy.io.fits.Header</span></em><a class="headerlink" href="#nifits.io.oifits.NI_EXTENSION.header" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nifits.io.oifits.NI_EXTENSION.from_hdu">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_hdu</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hdu</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">type(fits.hdu.TableHDU)</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/nifits/io/oifits.html#NI_EXTENSION.from_hdu"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.io.oifits.NI_EXTENSION.from_hdu" title="Link to this definition">¶</a></dt>
+<dd><p>Create the data object from the HDU extension of an opened fits file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>hdu</strong> – TableHDU object containing the relevant data</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nifits.io.oifits.NI_EXTENSION.to_hdu">
+<span class="sig-name descname"><span class="pre">to_hdu</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/nifits/io/oifits.html#NI_EXTENSION.to_hdu"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.io.oifits.NI_EXTENSION.to_hdu" title="Link to this definition">¶</a></dt>
+<dd><p>Returns and hdu object to save into fits</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nifits.io.oifits.NI_EXTENSION.__len__">
+<span class="sig-name descname"><span class="pre">__len__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/nifits/io/oifits.html#NI_EXTENSION.__len__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.io.oifits.NI_EXTENSION.__len__" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nifits.io.oifits.NI_EXTENSION_ARRAY">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nifits.io.oifits.</span></span><span class="sig-name descname"><span class="pre">NI_EXTENSION_ARRAY</span></span><a class="reference internal" href="../../../../_modules/nifits/io/oifits.html#NI_EXTENSION_ARRAY"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.io.oifits.NI_EXTENSION_ARRAY" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#nifits.io.oifits.NI_EXTENSION" title="nifits.io.oifits.NI_EXTENSION"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NI_EXTENSION</span></code></a></p>
+<p>Generic class for NIFITS array extensions</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nifits.io.oifits.NI_EXTENSION_ARRAY.data_array">
+<span class="sig-name descname"><span class="pre">data_array</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ArrayLike</span></em><a class="headerlink" href="#nifits.io.oifits.NI_EXTENSION_ARRAY.data_array" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nifits.io.oifits.NI_EXTENSION_ARRAY.header">
+<span class="sig-name descname"><span class="pre">header</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">astropy.io.fits.Header</span></em><a class="headerlink" href="#nifits.io.oifits.NI_EXTENSION_ARRAY.header" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nifits.io.oifits.NI_EXTENSION_ARRAY.from_hdu">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_hdu</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hdu</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">type(fits.hdu.ImageHDU)</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/nifits/io/oifits.html#NI_EXTENSION_ARRAY.from_hdu"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.io.oifits.NI_EXTENSION_ARRAY.from_hdu" title="Link to this definition">¶</a></dt>
+<dd><p>Create the data object from the HDU extension of an opened fits file.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nifits.io.oifits.NI_EXTENSION_ARRAY.to_hdu">
+<span class="sig-name descname"><span class="pre">to_hdu</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/nifits/io/oifits.html#NI_EXTENSION_ARRAY.to_hdu"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.io.oifits.NI_EXTENSION_ARRAY.to_hdu" title="Link to this definition">¶</a></dt>
+<dd><p>Returns and hdu object to save into fits</p>
+<div class="admonition-note admonition">
+<p class="admonition-title">Note</p>
+<p>This also updates the header if dimension changes</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nifits.io.oifits.NI_EXTENSION_ARRAY.__len__">
+<span class="sig-name descname"><span class="pre">__len__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/nifits/io/oifits.html#NI_EXTENSION_ARRAY.__len__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.io.oifits.NI_EXTENSION_ARRAY.__len__" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nifits.io.oifits.NI_EXTENSION_CPX_ARRAY">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nifits.io.oifits.</span></span><span class="sig-name descname"><span class="pre">NI_EXTENSION_CPX_ARRAY</span></span><a class="reference internal" href="../../../../_modules/nifits/io/oifits.html#NI_EXTENSION_CPX_ARRAY"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.io.oifits.NI_EXTENSION_CPX_ARRAY" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#nifits.io.oifits.NI_EXTENSION" title="nifits.io.oifits.NI_EXTENSION"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NI_EXTENSION</span></code></a></p>
+<p>Generic class for NIFITS array extensions.</p>
+<p>The array is kept locally as complex valued, but it is
+stored to and loaded from a real-valued array with an
+extra first dimension of length 2 for (real, imaginary) parts.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nifits.io.oifits.NI_EXTENSION_CPX_ARRAY.data_array">
+<span class="sig-name descname"><span class="pre">data_array</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ArrayLike</span></em><a class="headerlink" href="#nifits.io.oifits.NI_EXTENSION_CPX_ARRAY.data_array" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nifits.io.oifits.NI_EXTENSION_CPX_ARRAY.header">
+<span class="sig-name descname"><span class="pre">header</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">astropy.io.fits.Header</span></em><a class="headerlink" href="#nifits.io.oifits.NI_EXTENSION_CPX_ARRAY.header" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nifits.io.oifits.NI_EXTENSION_CPX_ARRAY.from_hdu">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_hdu</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hdu</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">type(fits.hdu.ImageHDU)</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/nifits/io/oifits.html#NI_EXTENSION_CPX_ARRAY.from_hdu"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.io.oifits.NI_EXTENSION_CPX_ARRAY.from_hdu" title="Link to this definition">¶</a></dt>
+<dd><p>Create the data object from the HDU extension of an opened fits file.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nifits.io.oifits.NI_EXTENSION_CPX_ARRAY.to_hdu">
+<span class="sig-name descname"><span class="pre">to_hdu</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/nifits/io/oifits.html#NI_EXTENSION_CPX_ARRAY.to_hdu"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.io.oifits.NI_EXTENSION_CPX_ARRAY.to_hdu" title="Link to this definition">¶</a></dt>
+<dd><p>Returns and hdu object to save into fits</p>
+<div class="admonition-note admonition">
+<p class="admonition-title">Note</p>
+<p>This also updates the header if dimension changes</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nifits.io.oifits.NI_EXTENSION_CPX_ARRAY.__len__">
+<span class="sig-name descname"><span class="pre">__len__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/nifits/io/oifits.html#NI_EXTENSION_CPX_ARRAY.__len__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.io.oifits.NI_EXTENSION_CPX_ARRAY.__len__" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nifits.io.oifits.OI_ARRAY">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nifits.io.oifits.</span></span><span class="sig-name descname"><span class="pre">OI_ARRAY</span></span><a class="reference internal" href="../../../../_modules/nifits/io/oifits.html#OI_ARRAY"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.io.oifits.OI_ARRAY" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#nifits.io.oifits.NI_EXTENSION" title="nifits.io.oifits.NI_EXTENSION"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NI_EXTENSION</span></code></a></p>
+<p><code class="docutils literal notranslate"><span class="pre">NI_EXTENSION</span></code> Generic class for NIFITS extensions</p>
+<p><strong>Inherited methods:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">from_hdu</span></code>: Creates the object from an <code class="docutils literal notranslate"><span class="pre">astropy.io.fits.TableHDU</span></code> object</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">to_hdu</span></code>  : Returns the <code class="docutils literal notranslate"><span class="pre">TableHDU</span></code> from itself.</p></li>
+</ul>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nifits.io.oifits.OI_ARRAY.__doc__">
+<span class="sig-name descname"><span class="pre">__doc__</span></span><a class="headerlink" href="#nifits.io.oifits.OI_ARRAY.__doc__" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nifits.io.oifits.OI_ARRAY.name">
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'OI_ARRAY'</span></em><a class="headerlink" href="#nifits.io.oifits.OI_ARRAY.name" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nifits.io.oifits.OI_WAVELENGTH">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nifits.io.oifits.</span></span><span class="sig-name descname"><span class="pre">OI_WAVELENGTH</span></span><a class="reference internal" href="../../../../_modules/nifits/io/oifits.html#OI_WAVELENGTH"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.io.oifits.OI_WAVELENGTH" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#nifits.io.oifits.NI_EXTENSION" title="nifits.io.oifits.NI_EXTENSION"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NI_EXTENSION</span></code></a></p>
+<p><code class="docutils literal notranslate"><span class="pre">NI_EXTENSION</span></code> Generic class for NIFITS extensions</p>
+<p><strong>Inherited methods:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">from_hdu</span></code>: Creates the object from an <code class="docutils literal notranslate"><span class="pre">astropy.io.fits.TableHDU</span></code> object</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">to_hdu</span></code>  : Returns the <code class="docutils literal notranslate"><span class="pre">TableHDU</span></code> from itself.</p></li>
+</ul>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nifits.io.oifits.OI_WAVELENGTH.__doc__">
+<span class="sig-name descname"><span class="pre">__doc__</span></span><a class="headerlink" href="#nifits.io.oifits.OI_WAVELENGTH.__doc__" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nifits.io.oifits.OI_WAVELENGTH.name">
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'OI_WAVELENGTH'</span></em><a class="headerlink" href="#nifits.io.oifits.OI_WAVELENGTH.name" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="nifits.io.oifits.OI_WAVELENGTH.lambs">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">lambs</span></span><a class="headerlink" href="#nifits.io.oifits.OI_WAVELENGTH.lambs" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="nifits.io.oifits.OI_WAVELENGTH.dlambs">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dlambs</span></span><a class="headerlink" href="#nifits.io.oifits.OI_WAVELENGTH.dlambs" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="nifits.io.oifits.OI_WAVELENGTH.nus">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">nus</span></span><a class="headerlink" href="#nifits.io.oifits.OI_WAVELENGTH.nus" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="nifits.io.oifits.OI_WAVELENGTH.dnus">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dnus</span></span><a class="headerlink" href="#nifits.io.oifits.OI_WAVELENGTH.dnus" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nifits.io.oifits.OI_TARGET">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nifits.io.oifits.</span></span><span class="sig-name descname"><span class="pre">OI_TARGET</span></span><a class="reference internal" href="../../../../_modules/nifits/io/oifits.html#OI_TARGET"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.io.oifits.OI_TARGET" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#nifits.io.oifits.NI_EXTENSION" title="nifits.io.oifits.NI_EXTENSION"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NI_EXTENSION</span></code></a></p>
+<p><code class="docutils literal notranslate"><span class="pre">OI_TARGET</span></code> definition.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nifits.io.oifits.OI_TARGET.name">
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'OI_TARGET'</span></em><a class="headerlink" href="#nifits.io.oifits.OI_TARGET.name" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nifits.io.oifits.OI_TARGET.from_scratch">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_scratch</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/nifits/io/oifits.html#OI_TARGET.from_scratch"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.io.oifits.OI_TARGET.from_scratch" title="Link to this definition">¶</a></dt>
+<dd><p>Creates the OI_TARGET object with an empty table.</p>
+<dl class="simple">
+<dt><a href="#id1"><span class="problematic" id="id2">**</span></a>Returns:</dt><dd><p>OI_TARGET: object with an empty table.</p>
+</dd>
+</dl>
+<p>Use <code class="docutils literal notranslate"><span class="pre">add_target()</span></code> to finish the job.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nifits.io.oifits.OI_TARGET.add_target">
+<span class="sig-name descname"><span class="pre">add_target</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'MyTarget'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raep0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">decep0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">equinox</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ra_err</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dec_err</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sysvel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">veltyp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">veldef</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pmra</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pmdec</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pmra_err</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pmdec_err</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parallax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">para_err</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spectyp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">category</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/nifits/io/oifits.html#OI_TARGET.add_target"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.io.oifits.OI_TARGET.add_target" title="Link to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Use this method to add a row to the table of targets</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>target_id</strong> (<em>param</em>) – (default: 0)</p></li>
+<li><p><strong>target</strong> – (default: “MyTarget”)</p></li>
+<li><p><strong>raep0</strong> – (default: 0.)</p></li>
+<li><p><strong>decep0</strong> – (default: 0.)</p></li>
+<li><p><strong>equinox</strong> – (default: 0.)</p></li>
+<li><p><strong>ra_err</strong> – (default: 0.)</p></li>
+<li><p><strong>dec_err</strong> – (default: 0.)</p></li>
+<li><p><strong>sysvel</strong> – (default: 0.)</p></li>
+<li><p><strong>veltyp</strong> – (default: “”)</p></li>
+<li><p><strong>veldef</strong> – (default: “”)</p></li>
+<li><p><strong>pmra</strong> – (default: 0.)</p></li>
+<li><p><strong>pmdec</strong> – (default: 0.)</p></li>
+<li><p><strong>pmra_err</strong> – (default: 0.)</p></li>
+<li><p><strong>pmdec_err</strong> – (default: 0.)</p></li>
+<li><p><strong>parallax</strong> – (default: 0.)</p></li>
+<li><p><strong>para_err</strong> – (default: 0.)</p></li>
+<li><p><strong>spectyp</strong> – (default: “”)</p></li>
+<li><p><strong>category</strong> – (default: “”)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nifits.io.oifits.NI_OUT">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nifits.io.oifits.</span></span><span class="sig-name descname"><span class="pre">NI_OUT</span></span><a class="reference internal" href="../../../../_modules/nifits/io/oifits.html#NI_OUT"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.io.oifits.NI_OUT" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#nifits.io.oifits.NI_EXTENSION" title="nifits.io.oifits.NI_EXTENSION"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NI_EXTENSION</span></code></a></p>
+<p><code class="docutils literal notranslate"><span class="pre">NI_EXTENSION</span></code> Generic class for NIFITS extensions</p>
+<p><strong>Inherited methods:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">from_hdu</span></code>: Creates the object from an <code class="docutils literal notranslate"><span class="pre">astropy.io.fits.TableHDU</span></code> object</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">to_hdu</span></code>  : Returns the <code class="docutils literal notranslate"><span class="pre">TableHDU</span></code> from itself.</p></li>
+</ul>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nifits.io.oifits.NI_OUT.__doc__">
+<span class="sig-name descname"><span class="pre">__doc__</span></span><a class="headerlink" href="#nifits.io.oifits.NI_OUT.__doc__" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nifits.io.oifits.NI_OUT.value_out">
+<span class="sig-name descname"><span class="pre">value_out</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Table</span></em><a class="headerlink" href="#nifits.io.oifits.NI_OUT.value_out" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nifits.io.oifits.NI_OUT.header">
+<span class="sig-name descname"><span class="pre">header</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span></em><a class="headerlink" href="#nifits.io.oifits.NI_OUT.header" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nifits.io.oifits.NI_OUT.name">
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'NI_OUT'</span></em><a class="headerlink" href="#nifits.io.oifits.NI_OUT.name" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="nifits.io.oifits.NI_OUT.asarray">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">asarray</span></span><a class="headerlink" href="#nifits.io.oifits.NI_OUT.asarray" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nifits.io.oifits.NI_OUT.check_against_catm">
+<span class="sig-name descname"><span class="pre">check_against_catm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">catm</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#id0" title="nifits.io.oifits.NI_CATM"><span class="pre">NI_CATM</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/nifits/io/oifits.html#NI_OUT.check_against_catm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.io.oifits.NI_OUT.check_against_catm" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="id0">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nifits.io.oifits.</span></span><span class="sig-name descname"><span class="pre">NI_CATM</span></span><a class="reference internal" href="../../../../_modules/nifits/io/oifits.html#NI_CATM"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id0" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#nifits.io.oifits.NI_EXTENSION_CPX_ARRAY" title="nifits.io.oifits.NI_EXTENSION_CPX_ARRAY"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NI_EXTENSION_CPX_ARRAY</span></code></a></p>
+<p>Generic class for NIFITS array extensions.</p>
+<p>The array is kept locally as complex valued, but it is
+stored to and loaded from a real-valued array with an
+extra first dimension of length 2 for (real, imaginary) parts.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nifits.io.oifits.NI_CATM.__doc__">
+<span class="sig-name descname"><span class="pre">__doc__</span></span><a class="headerlink" href="#nifits.io.oifits.NI_CATM.__doc__" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nifits.io.oifits.NI_CATM.name">
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'NI_CATM'</span></em><a class="headerlink" href="#nifits.io.oifits.NI_CATM.name" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="nifits.io.oifits.NI_CATM.M">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">M</span></span><a class="headerlink" href="#nifits.io.oifits.NI_CATM.M" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nifits.io.oifits.NI_IOUT">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nifits.io.oifits.</span></span><span class="sig-name descname"><span class="pre">NI_IOUT</span></span><a class="reference internal" href="../../../../_modules/nifits/io/oifits.html#NI_IOUT"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.io.oifits.NI_IOUT" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#nifits.io.oifits.NI_EXTENSION" title="nifits.io.oifits.NI_EXTENSION"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NI_EXTENSION</span></code></a></p>
+<p><code class="docutils literal notranslate"><span class="pre">NI_EXTENSION</span></code> Generic class for NIFITS extensions</p>
+<p><strong>Inherited methods:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">from_hdu</span></code>: Creates the object from an <code class="docutils literal notranslate"><span class="pre">astropy.io.fits.TableHDU</span></code> object</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">to_hdu</span></code>  : Returns the <code class="docutils literal notranslate"><span class="pre">TableHDU</span></code> from itself.</p></li>
+</ul>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nifits.io.oifits.NI_IOUT.__doc__">
+<span class="sig-name descname"><span class="pre">__doc__</span></span><a class="headerlink" href="#nifits.io.oifits.NI_IOUT.__doc__" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nifits.io.oifits.NI_IOUT.name">
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'NI_IOUT'</span></em><a class="headerlink" href="#nifits.io.oifits.NI_IOUT.name" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="nifits.io.oifits.NI_IOUT.iout">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">iout</span></span><a class="headerlink" href="#nifits.io.oifits.NI_IOUT.iout" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nifits.io.oifits.NI_KIOUT">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nifits.io.oifits.</span></span><span class="sig-name descname"><span class="pre">NI_KIOUT</span></span><a class="reference internal" href="../../../../_modules/nifits/io/oifits.html#NI_KIOUT"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.io.oifits.NI_KIOUT" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#nifits.io.oifits.NI_EXTENSION" title="nifits.io.oifits.NI_EXTENSION"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NI_EXTENSION</span></code></a></p>
+<p><code class="docutils literal notranslate"><span class="pre">NI_EXTENSION</span></code> Generic class for NIFITS extensions</p>
+<p><strong>Inherited methods:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">from_hdu</span></code>: Creates the object from an <code class="docutils literal notranslate"><span class="pre">astropy.io.fits.TableHDU</span></code> object</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">to_hdu</span></code>  : Returns the <code class="docutils literal notranslate"><span class="pre">TableHDU</span></code> from itself.</p></li>
+</ul>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nifits.io.oifits.NI_KIOUT.__doc__">
+<span class="sig-name descname"><span class="pre">__doc__</span></span><a class="headerlink" href="#nifits.io.oifits.NI_KIOUT.__doc__" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nifits.io.oifits.NI_KIOUT.name">
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'NI_KIOUT'</span></em><a class="headerlink" href="#nifits.io.oifits.NI_KIOUT.name" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="nifits.io.oifits.NI_KIOUT.kiout">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">kiout</span></span><a class="headerlink" href="#nifits.io.oifits.NI_KIOUT.kiout" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nifits.io.oifits.NI_KCOV">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nifits.io.oifits.</span></span><span class="sig-name descname"><span class="pre">NI_KCOV</span></span><a class="reference internal" href="../../../../_modules/nifits/io/oifits.html#NI_KCOV"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.io.oifits.NI_KCOV" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#nifits.io.oifits.NI_EXTENSION_ARRAY" title="nifits.io.oifits.NI_EXTENSION_ARRAY"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NI_EXTENSION_ARRAY</span></code></a></p>
+<p>Generic class for NIFITS array extensions</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nifits.io.oifits.NI_KCOV.__doc__">
+<span class="sig-name descname"><span class="pre">__doc__</span></span><a class="headerlink" href="#nifits.io.oifits.NI_KCOV.__doc__" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nifits.io.oifits.NI_KCOV.name">
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'NI_KCOV'</span></em><a class="headerlink" href="#nifits.io.oifits.NI_KCOV.name" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="nifits.io.oifits.NI_KCOV.kcov">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">kcov</span></span><a class="headerlink" href="#nifits.io.oifits.NI_KCOV.kcov" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nifits.io.oifits.NI_KMAT">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nifits.io.oifits.</span></span><span class="sig-name descname"><span class="pre">NI_KMAT</span></span><a class="reference internal" href="../../../../_modules/nifits/io/oifits.html#NI_KMAT"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.io.oifits.NI_KMAT" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#nifits.io.oifits.NI_EXTENSION_ARRAY" title="nifits.io.oifits.NI_EXTENSION_ARRAY"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NI_EXTENSION_ARRAY</span></code></a></p>
+<p>Generic class for NIFITS array extensions</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nifits.io.oifits.NI_KMAT.__doc__">
+<span class="sig-name descname"><span class="pre">__doc__</span></span><a class="headerlink" href="#nifits.io.oifits.NI_KMAT.__doc__" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nifits.io.oifits.NI_KMAT.name">
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'NI_KMAT'</span></em><a class="headerlink" href="#nifits.io.oifits.NI_KMAT.name" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="nifits.io.oifits.NI_KMAT.K">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">K</span></span><a class="headerlink" href="#nifits.io.oifits.NI_KMAT.K" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nifits.io.oifits.NI_MOD">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nifits.io.oifits.</span></span><span class="sig-name descname"><span class="pre">NI_MOD</span></span><a class="reference internal" href="../../../../_modules/nifits/io/oifits.html#NI_MOD"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.io.oifits.NI_MOD" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#nifits.io.oifits.NI_EXTENSION" title="nifits.io.oifits.NI_EXTENSION"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NI_EXTENSION</span></code></a></p>
+<p>Contains input modulation vector for the given observation. The format
+is a complex phasor representing the alteration applied by the instrument
+to the light at its inputs. Either an intended modulation, or an estimated
+instrumental error. the dimenstions are (n_ch, n_in)</p>
+<p>The effects modeled in NI_MOD must cumulate with some that may be modeled
+in NI_CATM. It is recommended to include in CATM the static effects and in
+NI_MOD any affect that may vary throughout the observµng run.</p>
+<p><span class="math notranslate nohighlight">\(n_a \times \lambda\)</span></p>
+<p>information.</p>
+<blockquote>
+<div><div class="table-wrapper docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Item</p></th>
+<th class="head"><p>format</p></th>
+<th class="head"><p>unit</p></th>
+<th class="head"><p>comment</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">APP_INDEX</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">int</span></code></p></td>
+<td><p>NA</p></td>
+<td><p>Indices of
+subaperture
+(starts at 0)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">TARGET_ID</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">int</span></code></p></td>
+<td><p>d</p></td>
+<td><p>Index of target
+in <code class="docutils literal notranslate"><span class="pre">OI_TARGET</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">TIME</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">float</span></code></p></td>
+<td><p>s</p></td>
+<td><p>Backwards
+compatibility</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">MJD</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">float</span></code></p></td>
+<td><p>day</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">INT_TIME</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">float</span></code></p></td>
+<td><p>s</p></td>
+<td><p>Exposure time</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">MOD_PHAS</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">n_{wl},n_a</span></code> <code class="docutils literal notranslate"><span class="pre">float</span></code></p></td>
+<td></td>
+<td><p>Complex phasor of
+modulation for
+all collectors</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">APPXY</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">n_a,2</span></code> <code class="docutils literal notranslate"><span class="pre">float</span></code></p></td>
+<td><p>m</p></td>
+<td><p>Projected
+location of
+subapertures in
+the plane
+orthogonal to the
+line of sight and
+oriented as
+<code class="docutils literal notranslate"><span class="pre">(</span>
+<span class="pre">\alpha,</span> <span class="pre">\delta)</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ARRCOL</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">n_a</span></code> <code class="docutils literal notranslate"><span class="pre">float</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">\mathrm{m}^2</span></code></p></td>
+<td><p>Collecting area
+of the
+subaperture</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">FOV_INDEX</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">n_a</span></code> <code class="docutils literal notranslate"><span class="pre">int</span></code></p></td>
+<td><p>NA</p></td>
+<td><p>The entry of the
+<code class="docutils literal notranslate"><span class="pre">NI_FOV</span></code> to use
+for this
+subaperture.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div></blockquote>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nifits.io.oifits.NI_MOD.data_table">
+<span class="sig-name descname"><span class="pre">data_table</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Table</span></em><a class="headerlink" href="#nifits.io.oifits.NI_MOD.data_table" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nifits.io.oifits.NI_MOD.header">
+<span class="sig-name descname"><span class="pre">header</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">astropy.io.fits.Header</span></em><a class="headerlink" href="#nifits.io.oifits.NI_MOD.header" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nifits.io.oifits.NI_MOD.name">
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'NI_MOD'</span></em><a class="headerlink" href="#nifits.io.oifits.NI_MOD.name" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="nifits.io.oifits.NI_MOD.n_series">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">n_series</span></span><a class="headerlink" href="#nifits.io.oifits.NI_MOD.n_series" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="nifits.io.oifits.NI_MOD.all_phasors">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">all_phasors</span></span><a class="headerlink" href="#nifits.io.oifits.NI_MOD.all_phasors" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="nifits.io.oifits.NI_MOD.appxy">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">appxy</span></span><a class="headerlink" href="#nifits.io.oifits.NI_MOD.appxy" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">Shape</span> <span class="pre">n_frames</span> <span class="pre">x</span> <span class="pre">n_a</span> <span class="pre">x</span> <span class="pre">2</span></span></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="nifits.io.oifits.NI_MOD.dateobs">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dateobs</span></span><a class="headerlink" href="#nifits.io.oifits.NI_MOD.dateobs" title="Link to this definition">¶</a></dt>
+<dd><p>Get the dateobs from the weighted mean of the observation time
+from each of the observation times given in the rows of <code class="docutils literal notranslate"><span class="pre">NI_MOD</span></code>
+table.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="nifits.io.oifits.NI_MOD.arrcol">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">arrcol</span></span><a class="headerlink" href="#nifits.io.oifits.NI_MOD.arrcol" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">The</span> <span class="pre">collecting</span> <span class="pre">area</span> <span class="pre">of</span> <span class="pre">the</span> <span class="pre">telescopes</span></span></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="nifits.io.oifits.NI_MOD.int_time">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">int_time</span></span><a class="headerlink" href="#nifits.io.oifits.NI_MOD.int_time" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">Conveniently</span> <span class="pre">retrieve</span> <span class="pre">the</span> <span class="pre">integration</span> <span class="pre">time.</span></span></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nifits.io.oifits.create_basic_fov_data">
+<span class="sig-prename descclassname"><span class="pre">nifits.io.oifits.</span></span><span class="sig-name descname"><span class="pre">create_basic_fov_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">D</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">offset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lamb</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/nifits/io/oifits.html#create_basic_fov_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.io.oifits.create_basic_fov_data" title="Link to this definition">¶</a></dt>
+<dd><p>A convenience function to help define the FOV function and data model</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="id3">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nifits.io.oifits.</span></span><span class="sig-name descname"><span class="pre">NI_KCOV</span></span><a class="reference internal" href="../../../../_modules/nifits/io/oifits.html#NI_KCOV"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id3" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#nifits.io.oifits.NI_EXTENSION_ARRAY" title="nifits.io.oifits.NI_EXTENSION_ARRAY"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NI_EXTENSION_ARRAY</span></code></a></p>
+<p>Generic class for NIFITS array extensions</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id4">
+<span class="sig-name descname"><span class="pre">__doc__</span></span><a class="headerlink" href="#id4" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nifits.io.oifits.NI_FOV">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nifits.io.oifits.</span></span><span class="sig-name descname"><span class="pre">NI_FOV</span></span><a class="reference internal" href="../../../../_modules/nifits/io/oifits.html#NI_FOV"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.io.oifits.NI_FOV" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#nifits.io.oifits.NI_EXTENSION" title="nifits.io.oifits.NI_EXTENSION"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NI_EXTENSION</span></code></a></p>
+<p><code class="docutils literal notranslate"><span class="pre">NI_EXTENSION</span></code> Generic class for NIFITS extensions</p>
+<p><strong>Inherited methods:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">from_hdu</span></code>: Creates the object from an <code class="docutils literal notranslate"><span class="pre">astropy.io.fits.TableHDU</span></code> object</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">to_hdu</span></code>  : Returns the <code class="docutils literal notranslate"><span class="pre">TableHDU</span></code> from itself.</p></li>
+</ul>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nifits.io.oifits.NI_FOV.__doc__">
+<span class="sig-name descname"><span class="pre">__doc__</span></span><a class="headerlink" href="#nifits.io.oifits.NI_FOV.__doc__" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nifits.io.oifits.NI_FOV.name">
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'NI_FOV'</span></em><a class="headerlink" href="#nifits.io.oifits.NI_FOV.name" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nifits.io.oifits.NI_FOV.simple_from_header">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">simple_from_header</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">header</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lamb</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/nifits/io/oifits.html#NI_FOV.simple_from_header"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.io.oifits.NI_FOV.simple_from_header" title="Link to this definition">¶</a></dt>
+<dd><p>Constructor for a simple <code class="docutils literal notranslate"><span class="pre">NI_FOV</span></code> object with chromatic gaussian profile and
+no offset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>header</strong> – (astropy.io.fits.Header) Header containing the required information
+such as <code class="docutils literal notranslate"><span class="pre">FOV_TELDIAM</span></code> and <code class="docutils literal notranslate"><span class="pre">FOV_TELDIAM_UNIT</span></code> which are used to
+create the gaussian profiles of radius <span class="math notranslate nohighlight">\(\lambda/D\)</span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nifits.io.oifits.NI_FOV.get_fov_function">
+<span class="sig-name descname"><span class="pre">get_fov_function</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lamb</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ArrayLike</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/nifits/io/oifits.html#NI_FOV.get_fov_function"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.io.oifits.NI_FOV.get_fov_function" title="Link to this definition">¶</a></dt>
+<dd><p>Returns the function to get the chromatic phasor
+given by injection for a the index n of the time series</p>
+<p><strong>This method will move to the backend</strong></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>lamb</strong> – The array of wavelength bins [m]</p></li>
+<li><p><strong>n</strong> – The index of the time series to compute for</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="nifits.io.oifits.TEST_BACKUP">
+<span class="sig-prename descclassname"><span class="pre">nifits.io.oifits.</span></span><span class="sig-name descname"><span class="pre">TEST_BACKUP</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#nifits.io.oifits.TEST_BACKUP" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="nifits.io.oifits.NIFITS_EXTENSIONS">
+<span class="sig-prename descclassname"><span class="pre">nifits.io.oifits.</span></span><span class="sig-name descname"><span class="pre">NIFITS_EXTENSIONS</span></span><a class="headerlink" href="#nifits.io.oifits.NIFITS_EXTENSIONS" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="nifits.io.oifits.NIFITS_KEYWORDS">
+<span class="sig-prename descclassname"><span class="pre">nifits.io.oifits.</span></span><span class="sig-name descname"><span class="pre">NIFITS_KEYWORDS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[]</span></em><a class="headerlink" href="#nifits.io.oifits.NIFITS_KEYWORDS" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="nifits.io.oifits.STATIC_EXTENSIONS">
+<span class="sig-prename descclassname"><span class="pre">nifits.io.oifits.</span></span><span class="sig-name descname"><span class="pre">STATIC_EXTENSIONS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[True,</span> <span class="pre">True,</span> <span class="pre">True,</span> <span class="pre">True,</span> <span class="pre">False,</span> <span class="pre">False,</span> <span class="pre">False,</span> <span class="pre">False,</span> <span class="pre">False]</span></em><a class="headerlink" href="#nifits.io.oifits.STATIC_EXTENSIONS" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nifits.io.oifits.getclass">
+<span class="sig-prename descclassname"><span class="pre">nifits.io.oifits.</span></span><span class="sig-name descname"><span class="pre">getclass</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">classname</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/nifits/io/oifits.html#getclass"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.io.oifits.getclass" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nifits.io.oifits.nifits">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nifits.io.oifits.</span></span><span class="sig-name descname"><span class="pre">nifits</span></span><a class="reference internal" href="../../../../_modules/nifits/io/oifits.html#nifits"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.io.oifits.nifits" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Class representation of the nifits object.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nifits.io.oifits.nifits.header">
+<span class="sig-name descname"><span class="pre">header</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">astropy.io.fits.Header</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#nifits.io.oifits.nifits.header" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nifits.io.oifits.nifits.ni_catm">
+<span class="sig-name descname"><span class="pre">ni_catm</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#id0" title="nifits.io.oifits.NI_CATM"><span class="pre">NI_CATM</span></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#nifits.io.oifits.nifits.ni_catm" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nifits.io.oifits.nifits.ni_fov">
+<span class="sig-name descname"><span class="pre">ni_fov</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#nifits.io.oifits.NI_FOV" title="nifits.io.oifits.NI_FOV"><span class="pre">NI_FOV</span></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#nifits.io.oifits.nifits.ni_fov" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nifits.io.oifits.nifits.ni_kmat">
+<span class="sig-name descname"><span class="pre">ni_kmat</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#nifits.io.oifits.NI_KMAT" title="nifits.io.oifits.NI_KMAT"><span class="pre">NI_KMAT</span></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#nifits.io.oifits.nifits.ni_kmat" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nifits.io.oifits.nifits.oi_wavelength">
+<span class="sig-name descname"><span class="pre">oi_wavelength</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#nifits.io.oifits.OI_WAVELENGTH" title="nifits.io.oifits.OI_WAVELENGTH"><span class="pre">OI_WAVELENGTH</span></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#nifits.io.oifits.nifits.oi_wavelength" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nifits.io.oifits.nifits.oi_target">
+<span class="sig-name descname"><span class="pre">oi_target</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#nifits.io.oifits.OI_TARGET" title="nifits.io.oifits.OI_TARGET"><span class="pre">OI_TARGET</span></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#nifits.io.oifits.nifits.oi_target" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nifits.io.oifits.nifits.ni_mod">
+<span class="sig-name descname"><span class="pre">ni_mod</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#nifits.io.oifits.NI_MOD" title="nifits.io.oifits.NI_MOD"><span class="pre">NI_MOD</span></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#nifits.io.oifits.nifits.ni_mod" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nifits.io.oifits.nifits.ni_iout">
+<span class="sig-name descname"><span class="pre">ni_iout</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#nifits.io.oifits.NI_IOUT" title="nifits.io.oifits.NI_IOUT"><span class="pre">NI_IOUT</span></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#nifits.io.oifits.nifits.ni_iout" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nifits.io.oifits.nifits.ni_kiout">
+<span class="sig-name descname"><span class="pre">ni_kiout</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#nifits.io.oifits.NI_KIOUT" title="nifits.io.oifits.NI_KIOUT"><span class="pre">NI_KIOUT</span></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#nifits.io.oifits.nifits.ni_kiout" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nifits.io.oifits.nifits.ni_kcov">
+<span class="sig-name descname"><span class="pre">ni_kcov</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#id3" title="nifits.io.oifits.NI_KCOV"><span class="pre">NI_KCOV</span></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#nifits.io.oifits.nifits.ni_kcov" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nifits.io.oifits.nifits.from_nifits">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_nifits</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/nifits/io/oifits.html#nifits.from_nifits"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.io.oifits.nifits.from_nifits" title="Link to this definition">¶</a></dt>
+<dd><p>Create the nifits object from the HDU extension of an opened fits file.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nifits.io.oifits.nifits.to_nifits">
+<span class="sig-name descname"><span class="pre">to_nifits</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">static_only</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dynamic_only</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">static_hash</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">writefile</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/nifits/io/oifits.html#nifits.to_nifits"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.io.oifits.nifits.to_nifits" title="Link to this definition">¶</a></dt>
+<dd><p>Write the extension objects to a nifits file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>static_only</strong> – (bool) only save the extensions corresponding
+to static parameters of the model (NI_CATM and NI_FOV).
+Default: False</p></li>
+<li><p><strong>dynamic_only</strong> – (bool) only save the dynamic extensions. If true,
+the hash of the static file should be passed as <cite>static_hash</cite>.
+Defaultult: False</p></li>
+<li><p><strong>static_hash</strong> – (str) The hash of the static file.
+Default: “”</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          <a class="prev-page" href="../index.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">nifits.io</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2024, R. Laugier
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">nifits.io.oifits</a><ul>
+<li><a class="reference internal" href="#attributes">Attributes</a></li>
+<li><a class="reference internal" href="#classes">Classes</a></li>
+<li><a class="reference internal" href="#functions">Functions</a></li>
+<li><a class="reference internal" href="#module-contents">Module Contents</a><ul>
+<li><a class="reference internal" href="#nifits.io.oifits.Table"><code class="docutils literal notranslate"><span class="pre">Table</span></code></a></li>
+<li><a class="reference internal" href="#nifits.io.oifits.ArrayLike"><code class="docutils literal notranslate"><span class="pre">ArrayLike</span></code></a></li>
+<li><a class="reference internal" href="#nifits.io.oifits._mjdzero"><code class="docutils literal notranslate"><span class="pre">_mjdzero</span></code></a></li>
+<li><a class="reference internal" href="#nifits.io.oifits.matchtargetbyname"><code class="docutils literal notranslate"><span class="pre">matchtargetbyname</span></code></a></li>
+<li><a class="reference internal" href="#nifits.io.oifits.matchstationbyname"><code class="docutils literal notranslate"><span class="pre">matchstationbyname</span></code></a></li>
+<li><a class="reference internal" href="#nifits.io.oifits.refdate"><code class="docutils literal notranslate"><span class="pre">refdate</span></code></a></li>
+<li><a class="reference internal" href="#nifits.io.oifits._plurals"><code class="docutils literal notranslate"><span class="pre">_plurals()</span></code></a></li>
+<li><a class="reference internal" href="#nifits.io.oifits.array_eq"><code class="docutils literal notranslate"><span class="pre">array_eq()</span></code></a></li>
+<li><a class="reference internal" href="#nifits.io.oifits._isnone"><code class="docutils literal notranslate"><span class="pre">_isnone()</span></code></a></li>
+<li><a class="reference internal" href="#nifits.io.oifits._notnone"><code class="docutils literal notranslate"><span class="pre">_notnone()</span></code></a></li>
+<li><a class="reference internal" href="#nifits.io.oifits.OI_STATION"><code class="docutils literal notranslate"><span class="pre">OI_STATION</span></code></a><ul>
+<li><a class="reference internal" href="#nifits.io.oifits.OI_STATION.revision"><code class="docutils literal notranslate"><span class="pre">OI_STATION.revision</span></code></a></li>
+<li><a class="reference internal" href="#nifits.io.oifits.OI_STATION.tel_name"><code class="docutils literal notranslate"><span class="pre">OI_STATION.tel_name</span></code></a></li>
+<li><a class="reference internal" href="#nifits.io.oifits.OI_STATION.sta_name"><code class="docutils literal notranslate"><span class="pre">OI_STATION.sta_name</span></code></a></li>
+<li><a class="reference internal" href="#nifits.io.oifits.OI_STATION.diameter"><code class="docutils literal notranslate"><span class="pre">OI_STATION.diameter</span></code></a></li>
+<li><a class="reference internal" href="#nifits.io.oifits.OI_STATION.staxyz"><code class="docutils literal notranslate"><span class="pre">OI_STATION.staxyz</span></code></a></li>
+<li><a class="reference internal" href="#nifits.io.oifits.OI_STATION.__eq__"><code class="docutils literal notranslate"><span class="pre">OI_STATION.__eq__()</span></code></a></li>
+<li><a class="reference internal" href="#nifits.io.oifits.OI_STATION.__ne__"><code class="docutils literal notranslate"><span class="pre">OI_STATION.__ne__()</span></code></a></li>
+<li><a class="reference internal" href="#nifits.io.oifits.OI_STATION.__repr__"><code class="docutils literal notranslate"><span class="pre">OI_STATION.__repr__()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#nifits.io.oifits.NI_CATM"><code class="docutils literal notranslate"><span class="pre">NI_CATM</span></code></a><ul>
+<li><a class="reference internal" href="#nifits.io.oifits.NI_CATM.Mcatm"><code class="docutils literal notranslate"><span class="pre">NI_CATM.Mcatm</span></code></a></li>
+<li><a class="reference internal" href="#nifits.io.oifits.NI_CATM.header"><code class="docutils literal notranslate"><span class="pre">NI_CATM.header</span></code></a></li>
+<li><a class="reference internal" href="#nifits.io.oifits.NI_CATM.from_hdu"><code class="docutils literal notranslate"><span class="pre">NI_CATM.from_hdu()</span></code></a></li>
+<li><a class="reference internal" href="#nifits.io.oifits.NI_CATM.to_hdu"><code class="docutils literal notranslate"><span class="pre">NI_CATM.to_hdu()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#nifits.io.oifits.nulfunc"><code class="docutils literal notranslate"><span class="pre">nulfunc()</span></code></a></li>
+<li><a class="reference internal" href="#nifits.io.oifits.NI_OUT_DEFAULT_HEADER"><code class="docutils literal notranslate"><span class="pre">NI_OUT_DEFAULT_HEADER</span></code></a></li>
+<li><a class="reference internal" href="#nifits.io.oifits.NI_MOD_DEFAULT_HEADER"><code class="docutils literal notranslate"><span class="pre">NI_MOD_DEFAULT_HEADER</span></code></a></li>
+<li><a class="reference internal" href="#nifits.io.oifits.NI_FOV_DEFAULT_HEADER"><code class="docutils literal notranslate"><span class="pre">NI_FOV_DEFAULT_HEADER</span></code></a></li>
+<li><a class="reference internal" href="#nifits.io.oifits.NI_EXTENSION"><code class="docutils literal notranslate"><span class="pre">NI_EXTENSION</span></code></a><ul>
+<li><a class="reference internal" href="#nifits.io.oifits.NI_EXTENSION.data_table"><code class="docutils literal notranslate"><span class="pre">NI_EXTENSION.data_table</span></code></a></li>
+<li><a class="reference internal" href="#nifits.io.oifits.NI_EXTENSION.header"><code class="docutils literal notranslate"><span class="pre">NI_EXTENSION.header</span></code></a></li>
+<li><a class="reference internal" href="#nifits.io.oifits.NI_EXTENSION.from_hdu"><code class="docutils literal notranslate"><span class="pre">NI_EXTENSION.from_hdu()</span></code></a></li>
+<li><a class="reference internal" href="#nifits.io.oifits.NI_EXTENSION.to_hdu"><code class="docutils literal notranslate"><span class="pre">NI_EXTENSION.to_hdu()</span></code></a></li>
+<li><a class="reference internal" href="#nifits.io.oifits.NI_EXTENSION.__len__"><code class="docutils literal notranslate"><span class="pre">NI_EXTENSION.__len__()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#nifits.io.oifits.NI_EXTENSION_ARRAY"><code class="docutils literal notranslate"><span class="pre">NI_EXTENSION_ARRAY</span></code></a><ul>
+<li><a class="reference internal" href="#nifits.io.oifits.NI_EXTENSION_ARRAY.data_array"><code class="docutils literal notranslate"><span class="pre">NI_EXTENSION_ARRAY.data_array</span></code></a></li>
+<li><a class="reference internal" href="#nifits.io.oifits.NI_EXTENSION_ARRAY.header"><code class="docutils literal notranslate"><span class="pre">NI_EXTENSION_ARRAY.header</span></code></a></li>
+<li><a class="reference internal" href="#nifits.io.oifits.NI_EXTENSION_ARRAY.from_hdu"><code class="docutils literal notranslate"><span class="pre">NI_EXTENSION_ARRAY.from_hdu()</span></code></a></li>
+<li><a class="reference internal" href="#nifits.io.oifits.NI_EXTENSION_ARRAY.to_hdu"><code class="docutils literal notranslate"><span class="pre">NI_EXTENSION_ARRAY.to_hdu()</span></code></a></li>
+<li><a class="reference internal" href="#nifits.io.oifits.NI_EXTENSION_ARRAY.__len__"><code class="docutils literal notranslate"><span class="pre">NI_EXTENSION_ARRAY.__len__()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#nifits.io.oifits.NI_EXTENSION_CPX_ARRAY"><code class="docutils literal notranslate"><span class="pre">NI_EXTENSION_CPX_ARRAY</span></code></a><ul>
+<li><a class="reference internal" href="#nifits.io.oifits.NI_EXTENSION_CPX_ARRAY.data_array"><code class="docutils literal notranslate"><span class="pre">NI_EXTENSION_CPX_ARRAY.data_array</span></code></a></li>
+<li><a class="reference internal" href="#nifits.io.oifits.NI_EXTENSION_CPX_ARRAY.header"><code class="docutils literal notranslate"><span class="pre">NI_EXTENSION_CPX_ARRAY.header</span></code></a></li>
+<li><a class="reference internal" href="#nifits.io.oifits.NI_EXTENSION_CPX_ARRAY.from_hdu"><code class="docutils literal notranslate"><span class="pre">NI_EXTENSION_CPX_ARRAY.from_hdu()</span></code></a></li>
+<li><a class="reference internal" href="#nifits.io.oifits.NI_EXTENSION_CPX_ARRAY.to_hdu"><code class="docutils literal notranslate"><span class="pre">NI_EXTENSION_CPX_ARRAY.to_hdu()</span></code></a></li>
+<li><a class="reference internal" href="#nifits.io.oifits.NI_EXTENSION_CPX_ARRAY.__len__"><code class="docutils literal notranslate"><span class="pre">NI_EXTENSION_CPX_ARRAY.__len__()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#nifits.io.oifits.OI_ARRAY"><code class="docutils literal notranslate"><span class="pre">OI_ARRAY</span></code></a><ul>
+<li><a class="reference internal" href="#nifits.io.oifits.OI_ARRAY.__doc__"><code class="docutils literal notranslate"><span class="pre">OI_ARRAY.__doc__</span></code></a></li>
+<li><a class="reference internal" href="#nifits.io.oifits.OI_ARRAY.name"><code class="docutils literal notranslate"><span class="pre">OI_ARRAY.name</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#nifits.io.oifits.OI_WAVELENGTH"><code class="docutils literal notranslate"><span class="pre">OI_WAVELENGTH</span></code></a><ul>
+<li><a class="reference internal" href="#nifits.io.oifits.OI_WAVELENGTH.__doc__"><code class="docutils literal notranslate"><span class="pre">OI_WAVELENGTH.__doc__</span></code></a></li>
+<li><a class="reference internal" href="#nifits.io.oifits.OI_WAVELENGTH.name"><code class="docutils literal notranslate"><span class="pre">OI_WAVELENGTH.name</span></code></a></li>
+<li><a class="reference internal" href="#nifits.io.oifits.OI_WAVELENGTH.lambs"><code class="docutils literal notranslate"><span class="pre">OI_WAVELENGTH.lambs</span></code></a></li>
+<li><a class="reference internal" href="#nifits.io.oifits.OI_WAVELENGTH.dlambs"><code class="docutils literal notranslate"><span class="pre">OI_WAVELENGTH.dlambs</span></code></a></li>
+<li><a class="reference internal" href="#nifits.io.oifits.OI_WAVELENGTH.nus"><code class="docutils literal notranslate"><span class="pre">OI_WAVELENGTH.nus</span></code></a></li>
+<li><a class="reference internal" href="#nifits.io.oifits.OI_WAVELENGTH.dnus"><code class="docutils literal notranslate"><span class="pre">OI_WAVELENGTH.dnus</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#nifits.io.oifits.OI_TARGET"><code class="docutils literal notranslate"><span class="pre">OI_TARGET</span></code></a><ul>
+<li><a class="reference internal" href="#nifits.io.oifits.OI_TARGET.name"><code class="docutils literal notranslate"><span class="pre">OI_TARGET.name</span></code></a></li>
+<li><a class="reference internal" href="#nifits.io.oifits.OI_TARGET.from_scratch"><code class="docutils literal notranslate"><span class="pre">OI_TARGET.from_scratch()</span></code></a></li>
+<li><a class="reference internal" href="#nifits.io.oifits.OI_TARGET.add_target"><code class="docutils literal notranslate"><span class="pre">OI_TARGET.add_target()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#nifits.io.oifits.NI_OUT"><code class="docutils literal notranslate"><span class="pre">NI_OUT</span></code></a><ul>
+<li><a class="reference internal" href="#nifits.io.oifits.NI_OUT.__doc__"><code class="docutils literal notranslate"><span class="pre">NI_OUT.__doc__</span></code></a></li>
+<li><a class="reference internal" href="#nifits.io.oifits.NI_OUT.value_out"><code class="docutils literal notranslate"><span class="pre">NI_OUT.value_out</span></code></a></li>
+<li><a class="reference internal" href="#nifits.io.oifits.NI_OUT.header"><code class="docutils literal notranslate"><span class="pre">NI_OUT.header</span></code></a></li>
+<li><a class="reference internal" href="#nifits.io.oifits.NI_OUT.name"><code class="docutils literal notranslate"><span class="pre">NI_OUT.name</span></code></a></li>
+<li><a class="reference internal" href="#nifits.io.oifits.NI_OUT.asarray"><code class="docutils literal notranslate"><span class="pre">NI_OUT.asarray</span></code></a></li>
+<li><a class="reference internal" href="#nifits.io.oifits.NI_OUT.check_against_catm"><code class="docutils literal notranslate"><span class="pre">NI_OUT.check_against_catm()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id0"><code class="docutils literal notranslate"><span class="pre">NI_CATM</span></code></a><ul>
+<li><a class="reference internal" href="#nifits.io.oifits.NI_CATM.__doc__"><code class="docutils literal notranslate"><span class="pre">NI_CATM.__doc__</span></code></a></li>
+<li><a class="reference internal" href="#nifits.io.oifits.NI_CATM.name"><code class="docutils literal notranslate"><span class="pre">NI_CATM.name</span></code></a></li>
+<li><a class="reference internal" href="#nifits.io.oifits.NI_CATM.M"><code class="docutils literal notranslate"><span class="pre">NI_CATM.M</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#nifits.io.oifits.NI_IOUT"><code class="docutils literal notranslate"><span class="pre">NI_IOUT</span></code></a><ul>
+<li><a class="reference internal" href="#nifits.io.oifits.NI_IOUT.__doc__"><code class="docutils literal notranslate"><span class="pre">NI_IOUT.__doc__</span></code></a></li>
+<li><a class="reference internal" href="#nifits.io.oifits.NI_IOUT.name"><code class="docutils literal notranslate"><span class="pre">NI_IOUT.name</span></code></a></li>
+<li><a class="reference internal" href="#nifits.io.oifits.NI_IOUT.iout"><code class="docutils literal notranslate"><span class="pre">NI_IOUT.iout</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#nifits.io.oifits.NI_KIOUT"><code class="docutils literal notranslate"><span class="pre">NI_KIOUT</span></code></a><ul>
+<li><a class="reference internal" href="#nifits.io.oifits.NI_KIOUT.__doc__"><code class="docutils literal notranslate"><span class="pre">NI_KIOUT.__doc__</span></code></a></li>
+<li><a class="reference internal" href="#nifits.io.oifits.NI_KIOUT.name"><code class="docutils literal notranslate"><span class="pre">NI_KIOUT.name</span></code></a></li>
+<li><a class="reference internal" href="#nifits.io.oifits.NI_KIOUT.kiout"><code class="docutils literal notranslate"><span class="pre">NI_KIOUT.kiout</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#nifits.io.oifits.NI_KCOV"><code class="docutils literal notranslate"><span class="pre">NI_KCOV</span></code></a><ul>
+<li><a class="reference internal" href="#nifits.io.oifits.NI_KCOV.__doc__"><code class="docutils literal notranslate"><span class="pre">NI_KCOV.__doc__</span></code></a></li>
+<li><a class="reference internal" href="#nifits.io.oifits.NI_KCOV.name"><code class="docutils literal notranslate"><span class="pre">NI_KCOV.name</span></code></a></li>
+<li><a class="reference internal" href="#nifits.io.oifits.NI_KCOV.kcov"><code class="docutils literal notranslate"><span class="pre">NI_KCOV.kcov</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#nifits.io.oifits.NI_KMAT"><code class="docutils literal notranslate"><span class="pre">NI_KMAT</span></code></a><ul>
+<li><a class="reference internal" href="#nifits.io.oifits.NI_KMAT.__doc__"><code class="docutils literal notranslate"><span class="pre">NI_KMAT.__doc__</span></code></a></li>
+<li><a class="reference internal" href="#nifits.io.oifits.NI_KMAT.name"><code class="docutils literal notranslate"><span class="pre">NI_KMAT.name</span></code></a></li>
+<li><a class="reference internal" href="#nifits.io.oifits.NI_KMAT.K"><code class="docutils literal notranslate"><span class="pre">NI_KMAT.K</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#nifits.io.oifits.NI_MOD"><code class="docutils literal notranslate"><span class="pre">NI_MOD</span></code></a><ul>
+<li><a class="reference internal" href="#nifits.io.oifits.NI_MOD.data_table"><code class="docutils literal notranslate"><span class="pre">NI_MOD.data_table</span></code></a></li>
+<li><a class="reference internal" href="#nifits.io.oifits.NI_MOD.header"><code class="docutils literal notranslate"><span class="pre">NI_MOD.header</span></code></a></li>
+<li><a class="reference internal" href="#nifits.io.oifits.NI_MOD.name"><code class="docutils literal notranslate"><span class="pre">NI_MOD.name</span></code></a></li>
+<li><a class="reference internal" href="#nifits.io.oifits.NI_MOD.n_series"><code class="docutils literal notranslate"><span class="pre">NI_MOD.n_series</span></code></a></li>
+<li><a class="reference internal" href="#nifits.io.oifits.NI_MOD.all_phasors"><code class="docutils literal notranslate"><span class="pre">NI_MOD.all_phasors</span></code></a></li>
+<li><a class="reference internal" href="#nifits.io.oifits.NI_MOD.appxy"><code class="docutils literal notranslate"><span class="pre">NI_MOD.appxy</span></code></a></li>
+<li><a class="reference internal" href="#nifits.io.oifits.NI_MOD.dateobs"><code class="docutils literal notranslate"><span class="pre">NI_MOD.dateobs</span></code></a></li>
+<li><a class="reference internal" href="#nifits.io.oifits.NI_MOD.arrcol"><code class="docutils literal notranslate"><span class="pre">NI_MOD.arrcol</span></code></a></li>
+<li><a class="reference internal" href="#nifits.io.oifits.NI_MOD.int_time"><code class="docutils literal notranslate"><span class="pre">NI_MOD.int_time</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#nifits.io.oifits.create_basic_fov_data"><code class="docutils literal notranslate"><span class="pre">create_basic_fov_data()</span></code></a></li>
+<li><a class="reference internal" href="#id3"><code class="docutils literal notranslate"><span class="pre">NI_KCOV</span></code></a><ul>
+<li><a class="reference internal" href="#id4"><code class="docutils literal notranslate"><span class="pre">NI_KCOV.__doc__</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#nifits.io.oifits.NI_FOV"><code class="docutils literal notranslate"><span class="pre">NI_FOV</span></code></a><ul>
+<li><a class="reference internal" href="#nifits.io.oifits.NI_FOV.__doc__"><code class="docutils literal notranslate"><span class="pre">NI_FOV.__doc__</span></code></a></li>
+<li><a class="reference internal" href="#nifits.io.oifits.NI_FOV.name"><code class="docutils literal notranslate"><span class="pre">NI_FOV.name</span></code></a></li>
+<li><a class="reference internal" href="#nifits.io.oifits.NI_FOV.simple_from_header"><code class="docutils literal notranslate"><span class="pre">NI_FOV.simple_from_header()</span></code></a></li>
+<li><a class="reference internal" href="#nifits.io.oifits.NI_FOV.get_fov_function"><code class="docutils literal notranslate"><span class="pre">NI_FOV.get_fov_function()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#nifits.io.oifits.TEST_BACKUP"><code class="docutils literal notranslate"><span class="pre">TEST_BACKUP</span></code></a></li>
+<li><a class="reference internal" href="#nifits.io.oifits.NIFITS_EXTENSIONS"><code class="docutils literal notranslate"><span class="pre">NIFITS_EXTENSIONS</span></code></a></li>
+<li><a class="reference internal" href="#nifits.io.oifits.NIFITS_KEYWORDS"><code class="docutils literal notranslate"><span class="pre">NIFITS_KEYWORDS</span></code></a></li>
+<li><a class="reference internal" href="#nifits.io.oifits.STATIC_EXTENSIONS"><code class="docutils literal notranslate"><span class="pre">STATIC_EXTENSIONS</span></code></a></li>
+<li><a class="reference internal" href="#nifits.io.oifits.getclass"><code class="docutils literal notranslate"><span class="pre">getclass()</span></code></a></li>
+<li><a class="reference internal" href="#nifits.io.oifits.nifits"><code class="docutils literal notranslate"><span class="pre">nifits</span></code></a><ul>
+<li><a class="reference internal" href="#nifits.io.oifits.nifits.header"><code class="docutils literal notranslate"><span class="pre">nifits.header</span></code></a></li>
+<li><a class="reference internal" href="#nifits.io.oifits.nifits.ni_catm"><code class="docutils literal notranslate"><span class="pre">nifits.ni_catm</span></code></a></li>
+<li><a class="reference internal" href="#nifits.io.oifits.nifits.ni_fov"><code class="docutils literal notranslate"><span class="pre">nifits.ni_fov</span></code></a></li>
+<li><a class="reference internal" href="#nifits.io.oifits.nifits.ni_kmat"><code class="docutils literal notranslate"><span class="pre">nifits.ni_kmat</span></code></a></li>
+<li><a class="reference internal" href="#nifits.io.oifits.nifits.oi_wavelength"><code class="docutils literal notranslate"><span class="pre">nifits.oi_wavelength</span></code></a></li>
+<li><a class="reference internal" href="#nifits.io.oifits.nifits.oi_target"><code class="docutils literal notranslate"><span class="pre">nifits.oi_target</span></code></a></li>
+<li><a class="reference internal" href="#nifits.io.oifits.nifits.ni_mod"><code class="docutils literal notranslate"><span class="pre">nifits.ni_mod</span></code></a></li>
+<li><a class="reference internal" href="#nifits.io.oifits.nifits.ni_iout"><code class="docutils literal notranslate"><span class="pre">nifits.ni_iout</span></code></a></li>
+<li><a class="reference internal" href="#nifits.io.oifits.nifits.ni_kiout"><code class="docutils literal notranslate"><span class="pre">nifits.ni_kiout</span></code></a></li>
+<li><a class="reference internal" href="#nifits.io.oifits.nifits.ni_kcov"><code class="docutils literal notranslate"><span class="pre">nifits.ni_kcov</span></code></a></li>
+<li><a class="reference internal" href="#nifits.io.oifits.nifits.from_nifits"><code class="docutils literal notranslate"><span class="pre">nifits.from_nifits()</span></code></a></li>
+<li><a class="reference internal" href="#nifits.io.oifits.nifits.to_nifits"><code class="docutils literal notranslate"><span class="pre">nifits.to_nifits()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../../../../_static/documentation_options.js?v=47de8214"></script>
+    <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../_static/scripts/furo.js?v=5fa4622c"></script>
+    <script src="../../../../_static/design-tabs.js?v=36754332"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    </body>
+</html>

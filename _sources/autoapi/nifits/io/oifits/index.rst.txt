@@ -1,0 +1,856 @@
+nifits.io.oifits
+================
+
+.. py:module:: nifits.io.oifits
+
+.. autoapi-nested-parse::
+
+   A module for reading/writing NIFITS files and handling the data.
+
+   To open an existing NIFITS file, use ``nifits.from_nifits`` constructor.
+
+   To save an NIFITS object to a file, use ``nifits.to_nifits`` method.
+
+   A summary of the information in the oifits object can be obtained by
+   using the info() method:
+
+      > import oifits
+      > oifitsobj = oifits.open('foo.fits')
+      > oifitsobj.info()
+
+   For further information, contact R. Laugier
+
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   nifits.io.oifits.Table
+   nifits.io.oifits.ArrayLike
+   nifits.io.oifits._mjdzero
+   nifits.io.oifits.matchtargetbyname
+   nifits.io.oifits.matchstationbyname
+   nifits.io.oifits.refdate
+   nifits.io.oifits.NI_OUT_DEFAULT_HEADER
+   nifits.io.oifits.NI_MOD_DEFAULT_HEADER
+   nifits.io.oifits.NI_FOV_DEFAULT_HEADER
+   nifits.io.oifits.TEST_BACKUP
+   nifits.io.oifits.NIFITS_EXTENSIONS
+   nifits.io.oifits.NIFITS_KEYWORDS
+   nifits.io.oifits.STATIC_EXTENSIONS
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   nifits.io.oifits.OI_STATION
+   nifits.io.oifits.NI_CATM
+   nifits.io.oifits.NI_EXTENSION
+   nifits.io.oifits.NI_EXTENSION_ARRAY
+   nifits.io.oifits.NI_EXTENSION_CPX_ARRAY
+   nifits.io.oifits.OI_ARRAY
+   nifits.io.oifits.OI_WAVELENGTH
+   nifits.io.oifits.OI_TARGET
+   nifits.io.oifits.NI_OUT
+   nifits.io.oifits.NI_CATM
+   nifits.io.oifits.NI_IOUT
+   nifits.io.oifits.NI_KIOUT
+   nifits.io.oifits.NI_KCOV
+   nifits.io.oifits.NI_KMAT
+   nifits.io.oifits.NI_MOD
+   nifits.io.oifits.NI_KCOV
+   nifits.io.oifits.NI_FOV
+   nifits.io.oifits.nifits
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   nifits.io.oifits._plurals
+   nifits.io.oifits.array_eq
+   nifits.io.oifits._isnone
+   nifits.io.oifits._notnone
+   nifits.io.oifits.nulfunc
+   nifits.io.oifits.create_basic_fov_data
+   nifits.io.oifits.getclass
+
+
+Module Contents
+---------------
+
+.. py:data:: Table
+
+.. py:data:: ArrayLike
+
+.. py:data:: _mjdzero
+
+.. py:data:: matchtargetbyname
+   :value: False
+
+
+.. py:data:: matchstationbyname
+   :value: False
+
+
+.. py:data:: refdate
+
+.. py:function:: _plurals(count)
+
+.. py:function:: array_eq(a: ArrayLike, b: ArrayLike)
+
+   Test whether all the elements of two arrays are equal.
+
+   :param a: one input.
+   :param b: another input.
+
+
+.. py:function:: _isnone(x)
+
+   Convenience hack for checking if x is none; needed because numpy
+   arrays will, at some point, return arrays for x == None.
+
+
+.. py:function:: _notnone(x)
+
+   Convenience hack for checking if x is not none; needed because numpy
+   arrays will, at some point, return arrays for x != None.
+
+
+.. py:class:: OI_STATION(tel_name=None, sta_name=None, diameter=None, staxyz=[None, None, None], fov=None, fovtype=None, revision=1)
+
+   Bases: :py:obj:`object`
+
+
+   This class corresponds to a single row (i.e. single
+   station/telescope) of an OI_ARRAY table.
+
+
+   .. py:attribute:: revision
+
+
+   .. py:attribute:: tel_name
+
+
+   .. py:attribute:: sta_name
+
+
+   .. py:attribute:: diameter
+
+
+   .. py:attribute:: staxyz
+
+
+   .. py:method:: __eq__(other)
+
+      Return self==value.
+
+
+
+   .. py:method:: __ne__(other)
+
+      Return self!=value.
+
+
+
+   .. py:method:: __repr__()
+
+      Return repr(self).
+
+
+
+.. py:class:: NI_CATM
+
+   Bases: :py:obj:`object`
+
+
+   Contains the complex amplitude transfer matrix CATM of the instrument.
+   The CATM is a complex matrix representing the transformation from the each
+   of the complex amplitude of electric field from the inputs to the outputs
+   of the instrument. The dimensions are (n_ch, n_out, n_in) where n_ch
+   represents the spectral channels.
+
+   It is expected that
+
+   :math:`\textbf{n}_{out} = \textbf{M}_{CATM}.\textbf{m}_{mod} \circ \textbf{x}_{in}`
+   with :math:`\textbf{m}_{mod}` containded in NI_MOD.
+
+
+
+   .. py:attribute:: Mcatm
+      :type:  ArrayLike
+
+
+   .. py:attribute:: header
+      :type:  astropy.io.fits.Header
+
+
+   .. py:method:: from_hdu(hdu: type(fits.hdu.ImageHDU))
+      :classmethod:
+
+
+      Create the NI_CATM object from the HDU extension of an opened fits file.
+
+
+
+   .. py:method:: to_hdu()
+
+      Returns and hdu object to save into fits
+
+
+
+.. py:function:: nulfunc(self, *args, **kwargs)
+
+.. py:data:: NI_OUT_DEFAULT_HEADER
+
+.. py:data:: NI_MOD_DEFAULT_HEADER
+
+.. py:data:: NI_FOV_DEFAULT_HEADER
+
+.. py:class:: NI_EXTENSION
+
+   Bases: :py:obj:`object`
+
+
+   ``NI_EXTENSION`` Generic class for NIFITS extensions
+
+   **Inherited methods:**
+
+   * ``from_hdu``: Creates the object from an ``astropy.io.fits.TableHDU`` object
+   * ``to_hdu``  : Returns the ``TableHDU`` from itself.
+
+
+   .. py:attribute:: data_table
+      :type:  Table
+
+
+   .. py:attribute:: header
+      :type:  astropy.io.fits.Header
+
+
+   .. py:method:: from_hdu(hdu: type(fits.hdu.TableHDU))
+      :classmethod:
+
+
+      Create the data object from the HDU extension of an opened fits file.
+
+      :param hdu: TableHDU object containing the relevant data
+
+
+
+   .. py:method:: to_hdu()
+
+      Returns and hdu object to save into fits
+
+      .. admonition::
+
+          This also updates the header if dimension changes
+
+
+
+   .. py:method:: __len__()
+
+
+.. py:class:: NI_EXTENSION_ARRAY
+
+   Bases: :py:obj:`NI_EXTENSION`
+
+
+   Generic class for NIFITS array extensions
+
+
+   .. py:attribute:: data_array
+      :type:  ArrayLike
+
+
+   .. py:attribute:: header
+      :type:  astropy.io.fits.Header
+
+
+   .. py:method:: from_hdu(hdu: type(fits.hdu.ImageHDU))
+      :classmethod:
+
+
+      Create the data object from the HDU extension of an opened fits file.
+
+
+
+   .. py:method:: to_hdu()
+
+      Returns and hdu object to save into fits
+
+      .. admonition:: Note
+
+          This also updates the header if dimension changes
+
+
+
+   .. py:method:: __len__()
+
+
+.. py:class:: NI_EXTENSION_CPX_ARRAY
+
+   Bases: :py:obj:`NI_EXTENSION`
+
+
+   Generic class for NIFITS array extensions.
+
+   The array is kept locally as complex valued, but it is
+   stored to and loaded from a real-valued array with an
+   extra first dimension of length 2 for (real, imaginary) parts.
+
+
+   .. py:attribute:: data_array
+      :type:  ArrayLike
+
+
+   .. py:attribute:: header
+      :type:  astropy.io.fits.Header
+
+
+   .. py:method:: from_hdu(hdu: type(fits.hdu.ImageHDU))
+      :classmethod:
+
+
+      Create the data object from the HDU extension of an opened fits file.
+
+
+
+   .. py:method:: to_hdu()
+
+      Returns and hdu object to save into fits
+
+      .. admonition:: Note
+
+          This also updates the header if dimension changes
+
+
+
+   .. py:method:: __len__()
+
+
+.. py:class:: OI_ARRAY
+
+   Bases: :py:obj:`NI_EXTENSION`
+
+
+   ``NI_EXTENSION`` Generic class for NIFITS extensions
+
+   **Inherited methods:**
+
+   * ``from_hdu``: Creates the object from an ``astropy.io.fits.TableHDU`` object
+   * ``to_hdu``  : Returns the ``TableHDU`` from itself.
+
+
+   .. py:attribute:: __doc__
+
+
+   .. py:attribute:: name
+      :value: 'OI_ARRAY'
+
+
+
+.. py:class:: OI_WAVELENGTH
+
+   Bases: :py:obj:`NI_EXTENSION`
+
+
+   ``NI_EXTENSION`` Generic class for NIFITS extensions
+
+   **Inherited methods:**
+
+   * ``from_hdu``: Creates the object from an ``astropy.io.fits.TableHDU`` object
+   * ``to_hdu``  : Returns the ``TableHDU`` from itself.
+
+
+   .. py:attribute:: __doc__
+
+
+   .. py:attribute:: name
+      :value: 'OI_WAVELENGTH'
+
+
+
+   .. py:property:: lambs
+
+
+   .. py:property:: dlambs
+
+
+   .. py:property:: nus
+
+
+   .. py:property:: dnus
+
+
+.. py:class:: OI_TARGET
+
+   Bases: :py:obj:`NI_EXTENSION`
+
+
+   ``OI_TARGET`` definition.
+
+
+   .. py:attribute:: name
+      :value: 'OI_TARGET'
+
+
+
+   .. py:method:: from_scratch()
+      :classmethod:
+
+
+      Creates the OI_TARGET object with an empty table.
+
+      **Returns:
+          OI_TARGET: object with an empty table.
+
+      Use ``add_target()`` to finish the job.
+
+
+
+   .. py:method:: add_target(target_id=0, target='MyTarget', raep0=0.0, decep0=0.0, equinox=0.0, ra_err=0.0, dec_err=0.0, sysvel=0.0, veltyp='', veldef='', pmra=0.0, pmdec=0.0, pmra_err=0.0, pmdec_err=0.0, parallax=0.0, para_err=0.0, spectyp='', category='')
+
+          Use this method to add a row to the table of targets
+      :param param target_id: (default: 0)
+      :param target: (default: "MyTarget")
+      :param raep0: (default: 0.)
+      :param decep0: (default: 0.)
+      :param equinox: (default: 0.)
+      :param ra_err: (default: 0.)
+      :param dec_err: (default: 0.)
+      :param sysvel: (default: 0.)
+      :param veltyp: (default: "")
+      :param veldef: (default: "")
+      :param pmra: (default: 0.)
+      :param pmdec: (default: 0.)
+      :param pmra_err: (default: 0.)
+      :param pmdec_err: (default: 0.)
+      :param parallax: (default: 0.)
+      :param para_err: (default: 0.)
+      :param spectyp: (default: "")
+      :param category: (default: "")
+
+
+
+.. py:class:: NI_OUT
+
+   Bases: :py:obj:`NI_EXTENSION`
+
+
+   ``NI_EXTENSION`` Generic class for NIFITS extensions
+
+   **Inherited methods:**
+
+   * ``from_hdu``: Creates the object from an ``astropy.io.fits.TableHDU`` object
+   * ``to_hdu``  : Returns the ``TableHDU`` from itself.
+
+
+   .. py:attribute:: __doc__
+
+
+   .. py:attribute:: value_out
+      :type:  Table
+
+
+   .. py:attribute:: header
+      :type:  dict
+
+
+   .. py:attribute:: name
+      :value: 'NI_OUT'
+
+
+
+   .. py:property:: asarray
+
+
+   .. py:method:: check_against_catm(catm: NI_CATM)
+
+
+.. py:class:: NI_CATM
+
+   Bases: :py:obj:`NI_EXTENSION_CPX_ARRAY`
+
+
+   Generic class for NIFITS array extensions.
+
+   The array is kept locally as complex valued, but it is
+   stored to and loaded from a real-valued array with an
+   extra first dimension of length 2 for (real, imaginary) parts.
+
+
+   .. py:attribute:: __doc__
+
+
+   .. py:attribute:: name
+      :value: 'NI_CATM'
+
+
+
+   .. py:property:: M
+
+
+.. py:class:: NI_IOUT
+
+   Bases: :py:obj:`NI_EXTENSION`
+
+
+   ``NI_EXTENSION`` Generic class for NIFITS extensions
+
+   **Inherited methods:**
+
+   * ``from_hdu``: Creates the object from an ``astropy.io.fits.TableHDU`` object
+   * ``to_hdu``  : Returns the ``TableHDU`` from itself.
+
+
+   .. py:attribute:: __doc__
+
+
+   .. py:attribute:: name
+      :value: 'NI_IOUT'
+
+
+
+   .. py:property:: iout
+
+
+.. py:class:: NI_KIOUT
+
+   Bases: :py:obj:`NI_EXTENSION`
+
+
+   ``NI_EXTENSION`` Generic class for NIFITS extensions
+
+   **Inherited methods:**
+
+   * ``from_hdu``: Creates the object from an ``astropy.io.fits.TableHDU`` object
+   * ``to_hdu``  : Returns the ``TableHDU`` from itself.
+
+
+   .. py:attribute:: __doc__
+
+
+   .. py:attribute:: name
+      :value: 'NI_KIOUT'
+
+
+
+   .. py:property:: kiout
+
+
+.. py:class:: NI_KCOV
+
+   Bases: :py:obj:`NI_EXTENSION_ARRAY`
+
+
+   Generic class for NIFITS array extensions
+
+
+   .. py:attribute:: __doc__
+
+
+   .. py:attribute:: name
+      :value: 'NI_KCOV'
+
+
+
+   .. py:property:: kcov
+
+
+.. py:class:: NI_KMAT
+
+   Bases: :py:obj:`NI_EXTENSION_ARRAY`
+
+
+   Generic class for NIFITS array extensions
+
+
+   .. py:attribute:: __doc__
+
+
+   .. py:attribute:: name
+      :value: 'NI_KMAT'
+
+
+
+   .. py:property:: K
+
+
+.. py:class:: NI_MOD
+
+   Bases: :py:obj:`NI_EXTENSION`
+
+
+   Contains input modulation vector for the given observation. The format
+   is a complex phasor representing the alteration applied by the instrument
+   to the light at its inputs. Either an intended modulation, or an estimated
+   instrumental error. the dimenstions are (n_ch, n_in)
+
+   The effects modeled in NI_MOD must cumulate with some that may be modeled
+   in NI_CATM. It is recommended to include in CATM the static effects and in
+   NI_MOD any affect that may vary throughout the observµng run.
+
+
+   :math:`n_a \times \lambda`
+
+
+   .. table:: ``NI_MOD``: The table of time-dependent collectorwise
+   information.
+
+      +---------------+----------------------------+------------------+-------------------+
+      | Item          | format                     | unit             | comment           |
+      +===============+============================+==================+===================+
+      | ``APP_INDEX`` |  ``int``                   | NA               | Indices of        |
+      |               |                            |                  | subaperture       |
+      |               |                            |                  | (starts at 0)     |
+      +---------------+----------------------------+------------------+-------------------+
+      | ``TARGET_ID`` |  ``int``                   | d                | Index of target   |
+      |               |                            |                  | in ``OI_TARGET``  |
+      +---------------+----------------------------+------------------+-------------------+
+      | ``TIME``      | ``float``                  | s                | Backwards         |
+      |               |                            |                  | compatibility     |
+      +---------------+----------------------------+------------------+-------------------+
+      | ``MJD``       | ``float``                  | day              |                   |
+      +---------------+----------------------------+------------------+-------------------+
+      | ``INT_TIME``  | ``float``                  | s                | Exposure time     |
+      +---------------+----------------------------+------------------+-------------------+
+      | ``MOD_PHAS``  | ``n_{wl},n_a`` ``float``   |                  | Complex phasor of |
+      |               |                            |                  | modulation for    |
+      |               |                            |                  | all collectors    |
+      +---------------+----------------------------+------------------+-------------------+
+      | ``APPXY``     | ``n_a,2`` ``float``        | m                | Projected         |
+      |               |                            |                  | location of       |
+      |               |                            |                  | subapertures in   |
+      |               |                            |                  | the plane         |
+      |               |                            |                  | orthogonal to the |
+      |               |                            |                  | line of sight and |
+      |               |                            |                  | oriented as       |
+      |               |                            |                  | ``(               |
+      |               |                            |                  | \alpha, \delta)`` |
+      +---------------+----------------------------+------------------+-------------------+
+      | ``ARRCOL``    | ``n_a`` ``float``          | ``\mathrm{m}^2`` | Collecting area   |
+      |               |                            |                  | of the            |
+      |               |                            |                  | subaperture       |
+      +---------------+----------------------------+------------------+-------------------+
+      | ``FOV_INDEX`` | ``n_a`` ``int``            | NA               | The entry of the  |
+      |               |                            |                  | ``NI_FOV`` to use |
+      |               |                            |                  | for this          |
+      |               |                            |                  | subaperture.      |
+      +---------------+----------------------------+------------------+-------------------+
+
+
+
+   .. py:attribute:: data_table
+      :type:  Table
+
+
+   .. py:attribute:: header
+      :type:  astropy.io.fits.Header
+
+
+   .. py:attribute:: name
+      :value: 'NI_MOD'
+
+
+
+   .. py:property:: n_series
+
+
+   .. py:property:: all_phasors
+
+
+   .. py:property:: appxy
+      Shape n_frames x n_a x 2
+
+
+   .. py:property:: dateobs
+      :abstractmethod:
+
+      Get the dateobs from the weighted mean of the observation time
+      from each of the observation times given in the rows of ``NI_MOD``
+      table.
+
+
+   .. py:property:: arrcol
+      The collecting area of the telescopes
+
+
+   .. py:property:: int_time
+      Conveniently retrieve the integration time.
+
+
+.. py:function:: create_basic_fov_data(D, offset, lamb, n)
+
+   A convenience function to help define the FOV function and data model
+
+
+.. py:class:: NI_KCOV
+
+   Bases: :py:obj:`NI_EXTENSION_ARRAY`
+
+
+   Generic class for NIFITS array extensions
+
+
+   .. py:attribute:: __doc__
+
+
+.. py:class:: NI_FOV
+
+   Bases: :py:obj:`NI_EXTENSION`
+
+
+   ``NI_EXTENSION`` Generic class for NIFITS extensions
+
+   **Inherited methods:**
+
+   * ``from_hdu``: Creates the object from an ``astropy.io.fits.TableHDU`` object
+   * ``to_hdu``  : Returns the ``TableHDU`` from itself.
+
+
+   .. py:attribute:: __doc__
+
+
+   .. py:attribute:: name
+      :value: 'NI_FOV'
+
+
+
+   .. py:method:: simple_from_header(header=None, lamb=None, n=0)
+      :classmethod:
+
+
+      Constructor for a simple ``NI_FOV`` object with chromatic gaussian profile and
+      no offset.
+
+      :param header: (astropy.io.fits.Header) Header containing the required information
+                     such as ``FOV_TELDIAM`` and ``FOV_TELDIAM_UNIT`` which are used to
+                     create the gaussian profiles of radius :math:`\lambda/D`
+
+
+
+   .. py:method:: get_fov_function(lamb: ArrayLike, n: int)
+
+      Returns the function to get the chromatic phasor
+      given by injection for a the index n of the time series
+
+      **This method will move to the backend**
+
+      :param lamb: The array of wavelength bins [m]
+      :param n: The index of the time series to compute for
+
+
+
+.. py:data:: TEST_BACKUP
+   :value: True
+
+
+.. py:data:: NIFITS_EXTENSIONS
+
+.. py:data:: NIFITS_KEYWORDS
+   :value: []
+
+
+.. py:data:: STATIC_EXTENSIONS
+   :value: [True, True, True, True, False, False, False, False, False]
+
+
+.. py:function:: getclass(classname)
+
+.. py:class:: nifits
+
+   Bases: :py:obj:`object`
+
+
+   Class representation of the nifits object.
+
+
+   .. py:attribute:: header
+      :type:  astropy.io.fits.Header
+      :value: None
+
+
+
+   .. py:attribute:: ni_catm
+      :type:  NI_CATM
+      :value: None
+
+
+
+   .. py:attribute:: ni_fov
+      :type:  NI_FOV
+      :value: None
+
+
+
+   .. py:attribute:: ni_kmat
+      :type:  NI_KMAT
+      :value: None
+
+
+
+   .. py:attribute:: oi_wavelength
+      :type:  OI_WAVELENGTH
+      :value: None
+
+
+
+   .. py:attribute:: oi_target
+      :type:  OI_TARGET
+      :value: None
+
+
+
+   .. py:attribute:: ni_mod
+      :type:  NI_MOD
+      :value: None
+
+
+
+   .. py:attribute:: ni_iout
+      :type:  NI_IOUT
+      :value: None
+
+
+
+   .. py:attribute:: ni_kiout
+      :type:  NI_KIOUT
+      :value: None
+
+
+
+   .. py:attribute:: ni_kcov
+      :type:  NI_KCOV
+      :value: None
+
+
+
+   .. py:method:: from_nifits(filename: str)
+      :classmethod:
+
+
+      Create the nifits object from the HDU extension of an opened fits file.
+
+
+
+   .. py:method:: to_nifits(filename: str = '', static_only: bool = False, dynamic_only: bool = False, static_hash: str = '', writefile: bool = True, overwrite: bool = False)
+
+      Write the extension objects to a nifits file.
+
+      :param static_only: (bool) only save the extensions corresponding
+                          to static parameters of the model (NI_CATM and NI_FOV).
+                          Default: False
+      :param dynamic_only: (bool) only save the dynamic extensions. If true,
+                           the hash of the static file should be passed as `static_hash`.
+                           Defaultult: False
+      :param static_hash: (str) The hash of the static file.
+                          Default: ""
+
+
+

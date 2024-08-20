@@ -1,0 +1,15 @@
+nifits.io
+=========
+
+.. py:module:: nifits.io
+
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   /autoapi/nifits/io/oifits/index
+
+

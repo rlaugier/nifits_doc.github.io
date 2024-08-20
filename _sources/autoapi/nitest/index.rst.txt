@@ -1,0 +1,15 @@
+nitest
+======
+
+.. py:module:: nitest
+
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   /autoapi/nitest/nicool/index
+
+

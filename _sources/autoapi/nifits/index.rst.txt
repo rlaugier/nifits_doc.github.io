@@ -1,0 +1,31 @@
+nifits
+======
+
+.. py:module:: nifits
+
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+   /autoapi/nifits/backend/index
+   /autoapi/nifits/io/index
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   nifits.__version__
+
+
+Package Contents
+----------------
+
+.. py:data:: __version__
+   :value: '0.0.3'
+
+

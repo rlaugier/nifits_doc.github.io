@@ -13,6 +13,7 @@
 
    .. autosummary::
    
+      array_eq
       create_basic_fov_data
       getclass
       nulfunc
