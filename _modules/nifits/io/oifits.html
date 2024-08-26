@@ -201,8 +201,19 @@
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <ul>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../../autoapi/index.html">API Reference</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of API Reference</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../../autoapi/nitest/index.html">nitest</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of nitest</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../../autoapi/nitest/nicool/index.html">nitest.nicool</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../autoapi/nifits/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">nifits</span></code></a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of nifits</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../autoapi/nifits/backend/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">nifits.backend</span></code></a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of nifits.backend</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/nifits/backend/backend/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">nifits.backend.backend</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../autoapi/nifits/extra/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">nifits.extra</span></code></a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of nifits.extra</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/nifits/extra/extra/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">nifits.extra.extra</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../autoapi/nifits/io/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">nifits.io</span></code></a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of nifits.io</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/nifits/io/oifits/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">nifits.io.oifits</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -263,7 +274,8 @@
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">astropy.io</span> <span class="kn">import</span> <span class="n">fits</span>
 <span class="kn">import</span> <span class="nn">astropy.units</span> <span class="k">as</span> <span class="nn">u</span>
-<span class="kn">from</span> <span class="nn">astropy.table</span> <span class="kn">import</span> <span class="n">Table</span>
+<span class="kn">import</span> <span class="nn">astropy.table</span>
+<span class="n">Table</span> <span class="o">=</span> <span class="n">astropy</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">Table</span>
 <span class="kn">from</span> <span class="nn">astropy.coordinates</span> <span class="kn">import</span> <span class="n">EarthLocation</span>
 <span class="kn">import</span> <span class="nn">datetime</span>
 <span class="kn">import</span> <span class="nn">warnings</span>
@@ -272,10 +284,9 @@
 <span class="kn">import</span> <span class="nn">sys</span>
 <span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span><span class="p">,</span> <span class="n">field</span>
 <span class="c1"># from numpy.typing import ArrayLike</span>
-<span class="n">ArrayLike</span> <span class="o">=</span> <span class="nb">int</span>
-
-<span class="c1"># from types import ModuleType</span>
-<span class="n">ModuleType</span> <span class="o">=</span> <span class="nb">str</span>
+<span class="c1"># A hack to fix the documentation of type hinting</span>
+<span class="kn">import</span> <span class="nn">numpy.typing</span>
+<span class="n">ArrayLike</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">typing</span><span class="o">.</span><span class="n">ArrayLike</span>
 
 <span class="n">_mjdzero</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">1858</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">17</span><span class="p">)</span>
 
@@ -283,9 +294,12 @@
 <span class="n">matchstationbyname</span> <span class="o">=</span> <span class="kc">False</span>
 <span class="n">refdate</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2000</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 
+<div class="viewcode-block" id="_plurals">
+<a class="viewcode-back" href="../../../autoapi/nifits/io/oifits/index.html#nifits.io.oifits._plurals">[docs]</a>
 <span class="k">def</span> <span class="nf">_plurals</span><span class="p">(</span><span class="n">count</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">count</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span> <span class="k">return</span> <span class="s1">&#39;s&#39;</span>
-    <span class="k">return</span> <span class="s1">&#39;&#39;</span>
+    <span class="k">return</span> <span class="s1">&#39;&#39;</span></div>
+
 
 <div class="viewcode-block" id="array_eq">
 <a class="viewcode-back" href="../../../nifits.io.html#nifits.io.oifits.array_eq">[docs]</a>
@@ -309,17 +323,23 @@
 
 
 
+<div class="viewcode-block" id="_isnone">
+<a class="viewcode-back" href="../../../autoapi/nifits/io/oifits/index.html#nifits.io.oifits._isnone">[docs]</a>
 <span class="k">def</span> <span class="nf">_isnone</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Convenience hack for checking if x is none; needed because numpy</span>
 <span class="sd">    arrays will, at some point, return arrays for x == None.&quot;&quot;&quot;</span>
 
-    <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">==</span> <span class="nb">type</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">==</span> <span class="nb">type</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span></div>
 
+
+<div class="viewcode-block" id="_notnone">
+<a class="viewcode-back" href="../../../autoapi/nifits/io/oifits/index.html#nifits.io.oifits._notnone">[docs]</a>
 <span class="k">def</span> <span class="nf">_notnone</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Convenience hack for checking if x is not none; needed because numpy</span>
 <span class="sd">    arrays will, at some point, return arrays for x != None.&quot;&quot;&quot;</span>
 
-    <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">type</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">type</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span></div>
+
 
 
 
@@ -347,6 +367,8 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">fov</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fovtype</span> <span class="o">=</span> <span class="kc">None</span>
 
+<div class="viewcode-block" id="OI_STATION.__eq__">
+<a class="viewcode-back" href="../../../autoapi/nifits/io/oifits/index.html#nifits.io.oifits.OI_STATION.__eq__">[docs]</a>
     <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
 
         <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">type</span><span class="p">(</span><span class="n">other</span><span class="p">):</span> <span class="k">return</span> <span class="kc">False</span>
@@ -358,17 +380,24 @@
             <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">diameter</span> <span class="o">!=</span> <span class="n">other</span><span class="o">.</span><span class="n">diameter</span><span class="p">)</span> <span class="ow">or</span>
             <span class="p">(</span><span class="ow">not</span> <span class="n">_array_eq</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">staxyz</span><span class="p">,</span> <span class="n">other</span><span class="o">.</span><span class="n">staxyz</span><span class="p">))</span> <span class="ow">or</span>
             <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fov</span> <span class="o">!=</span> <span class="n">other</span><span class="o">.</span><span class="n">fov</span><span class="p">)</span> <span class="ow">or</span>
-            <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fovtype</span> <span class="o">!=</span> <span class="n">other</span><span class="o">.</span><span class="n">fovtype</span><span class="p">))</span>
+            <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fovtype</span> <span class="o">!=</span> <span class="n">other</span><span class="o">.</span><span class="n">fovtype</span><span class="p">))</span></div>
 
+
+<div class="viewcode-block" id="OI_STATION.__ne__">
+<a class="viewcode-back" href="../../../autoapi/nifits/io/oifits/index.html#nifits.io.oifits.OI_STATION.__ne__">[docs]</a>
     <span class="k">def</span> <span class="fm">__ne__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="k">return</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__eq__</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+        <span class="k">return</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__eq__</span><span class="p">(</span><span class="n">other</span><span class="p">)</span></div>
 
+
+<div class="viewcode-block" id="OI_STATION.__repr__">
+<a class="viewcode-back" href="../../../autoapi/nifits/io/oifits/index.html#nifits.io.oifits.OI_STATION.__repr__">[docs]</a>
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">revision</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">:</span>
             <span class="k">return</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">/</span><span class="si">%s</span><span class="s1"> (</span><span class="si">%g</span><span class="s1"> m, fov </span><span class="si">%g</span><span class="s1"> arcsec (</span><span class="si">%s</span><span class="s1">))&#39;</span><span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sta_name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">tel_name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">diameter</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">fov</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">fovtype</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">/</span><span class="si">%s</span><span class="s1"> (</span><span class="si">%g</span><span class="s1"> m)&#39;</span><span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sta_name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">tel_name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">diameter</span><span class="p">)</span></div>
+</div>
 
 
 
@@ -385,13 +414,15 @@
 <span class="sd">    </span>
 <span class="sd">    It is expected that</span>
 <span class="sd">    </span>
-<span class="sd">    :math:`$\textbf{n}_{out} = \textbf{M}_{CATM}.\textbf{m}_{mod} \circ \textbf{x}_{in}$`</span>
-<span class="sd">    with :math:`$\textbf{m}_{mod}$` containded in NI_MOD.</span>
+<span class="sd">    :math:`\\textbf{n}_{out} = \\textbf{M}_{CATM}.\\textbf{m}_{mod} \circ \\textbf{x}_{in}`</span>
+<span class="sd">    with :math:`\\textbf{m}_{mod}` containded in NI_MOD.</span>
 <span class="sd">    </span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">Mcatm</span><span class="p">:</span> <span class="n">ArrayLike</span>
     <span class="n">header</span><span class="p">:</span> <span class="n">fits</span><span class="o">.</span><span class="n">Header</span>
 
+<div class="viewcode-block" id="NI_CATM.from_hdu">
+<a class="viewcode-back" href="../../../autoapi/nifits/io/oifits/index.html#nifits.io.oifits.NI_CATM.from_hdu">[docs]</a>
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">from_hdu</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">hdu</span><span class="p">:</span> <span class="nb">type</span><span class="p">(</span><span class="n">fits</span><span class="o">.</span><span class="n">hdu</span><span class="o">.</span><span class="n">ImageHDU</span><span class="p">)):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -400,15 +431,19 @@
         <span class="n">Mcatm</span> <span class="o">=</span> <span class="n">hdu</span><span class="o">.</span><span class="n">data</span>
         <span class="n">header</span> <span class="o">=</span> <span class="n">hdu</span><span class="o">.</span><span class="n">header</span>
         <span class="n">myobj</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">(</span><span class="n">Mcatm</span><span class="p">,</span> <span class="n">header</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">myobj</span>
+        <span class="k">return</span> <span class="n">myobj</span></div>
 
+
+<div class="viewcode-block" id="NI_CATM.to_hdu">
+<a class="viewcode-back" href="../../../autoapi/nifits/io/oifits/index.html#nifits.io.oifits.NI_CATM.to_hdu">[docs]</a>
     <span class="k">def</span> <span class="nf">to_hdu</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns and hdu object to save into fits</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">myhdu</span> <span class="o">=</span> <span class="n">fits</span><span class="o">.</span><span class="n">hdu</span><span class="o">.</span><span class="n">ImageHDU</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">Mcatm</span><span class="p">)</span>
         <span class="n">myhdu</span><span class="o">.</span><span class="n">header</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">header</span>
-        <span class="k">return</span> <span class="n">myhdu</span>
+        <span class="k">return</span> <span class="n">myhdu</span></div>
+
     <span class="c1"># TODO add a check method</span>
 
 
@@ -460,8 +495,8 @@
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Create the data object from the HDU extension of an opened fits file.</span>
 <span class="sd">        </span>
-<span class="sd">        **Arguments:**</span>
-<span class="sd">        * hdu   : TableHDU object containing the relevant data</span>
+<span class="sd">        Args:</span>
+<span class="sd">            hdu : TableHDU object containing the relevant data</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">data_table</span> <span class="o">=</span> <span class="n">Table</span><span class="p">(</span><span class="n">hdu</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
         <span class="n">header</span> <span class="o">=</span> <span class="n">hdu</span><span class="o">.</span><span class="n">header</span>
@@ -474,7 +509,9 @@
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns and hdu object to save into fits</span>
 <span class="sd">        </span>
-<span class="sd">        **Note**: this also updates the header if dimension changes</span>
+<span class="sd">        .. admonition::</span>
+<span class="sd">        </span>
+<span class="sd">            This also updates the header if dimension changes</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># TODO this looks like a bug in astropy.fits: the header should update on its own.</span>
         <span class="n">myhdu</span> <span class="o">=</span> <span class="n">fits</span><span class="o">.</span><span class="n">hdu</span><span class="o">.</span><span class="n">BinTableHDU</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">data_table</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">header</span><span class="p">)</span>
@@ -487,8 +524,11 @@
         <span class="k">return</span> <span class="n">myhdu</span></div>
 
 
+<div class="viewcode-block" id="NI_EXTENSION.__len__">
+<a class="viewcode-back" href="../../../autoapi/nifits/io/oifits/index.html#nifits.io.oifits.NI_EXTENSION.__len__">[docs]</a>
     <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data_table</span><span class="p">)</span></div>
+</div>
 
 
 <div class="viewcode-block" id="NI_EXTENSION_ARRAY">
@@ -519,7 +559,9 @@
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns and hdu object to save into fits</span>
 <span class="sd">        </span>
-<span class="sd">        **Note**: this also updates the header if dimension changes</span>
+<span class="sd">        .. admonition:: Note</span>
+<span class="sd">        </span>
+<span class="sd">            This also updates the header if dimension changes</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">myhdu</span> <span class="o">=</span> <span class="n">fits</span><span class="o">.</span><span class="n">hdu</span><span class="o">.</span><span class="n">ImageHDU</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span><span class="n">data</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">data_array</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">header</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Updating header:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">fits</span><span class="o">.</span><span class="n">HeaderDiff</span><span class="p">(</span><span class="n">myhdu</span><span class="o">.</span><span class="n">header</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">header</span><span class="p">))</span>
@@ -527,8 +569,15 @@
         <span class="k">return</span> <span class="n">myhdu</span></div>
 
 
+<div class="viewcode-block" id="NI_EXTENSION_ARRAY.__len__">
+<a class="viewcode-back" href="../../../autoapi/nifits/io/oifits/index.html#nifits.io.oifits.NI_EXTENSION_ARRAY.__len__">[docs]</a>
     <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">pass</span></div>
+
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">shape</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_array</span><span class="o">.</span><span class="n">shape</span></div>
 
 
 <div class="viewcode-block" id="NI_EXTENSION_CPX_ARRAY">
@@ -565,7 +614,9 @@
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns and hdu object to save into fits</span>
 <span class="sd">        </span>
-<span class="sd">        **Note**: this also updates the header if dimension changes</span>
+<span class="sd">        .. admonition:: Note</span>
+<span class="sd">        </span>
+<span class="sd">            This also updates the header if dimension changes</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">real_valued_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">data_array</span><span class="o">.</span><span class="n">real</span><span class="p">,</span>
                                     <span class="bp">self</span><span class="o">.</span><span class="n">data_array</span><span class="o">.</span><span class="n">imag</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
@@ -575,8 +626,15 @@
         <span class="k">return</span> <span class="n">myhdu</span></div>
 
 
+<div class="viewcode-block" id="NI_EXTENSION_CPX_ARRAY.__len__">
+<a class="viewcode-back" href="../../../autoapi/nifits/io/oifits/index.html#nifits.io.oifits.NI_EXTENSION_CPX_ARRAY.__len__">[docs]</a>
     <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">pass</span></div>
+
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">shape</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_array</span><span class="o">.</span><span class="n">shape</span></div>
 
 
 
@@ -658,9 +716,8 @@
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Creates the OI_TARGET object with an empty table.</span>
 
-<span class="sd">        **Returns:**</span>
-<span class="sd">        </span>
-<span class="sd">        * ``OI_TARGET`` object with an empty table.</span>
+<span class="sd">        **Returns:        </span>
+<span class="sd">            OI_TARGET: object with an empty table.</span>
 
 <span class="sd">        Use ``add_target()`` to finish the job.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -685,26 +742,25 @@
                         <span class="n">parallax</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span> <span class="n">para_err</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span> <span class="n">spectyp</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="s2">&quot;&quot;</span> <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">            Use this method to add a row to the table of targets</span>
-<span class="sd">        **Arguments:**</span>
-<span class="sd">        </span>
-<span class="sd">        * param target_id  : (default: 0)</span>
-<span class="sd">        * ``target``     : (default: &quot;MyTarget&quot;)</span>
-<span class="sd">        * ``raep0``      : (default: 0.)</span>
-<span class="sd">        * ``decep0``     : (default: 0.)</span>
-<span class="sd">        * ``equinox``    : (default: 0.)</span>
-<span class="sd">        * ``ra_err``     : (default: 0.)</span>
-<span class="sd">        * ``dec_err``    : (default: 0.)</span>
-<span class="sd">        * ``sysvel``     : (default: 0.)</span>
-<span class="sd">        * ``veltyp``     : (default: &quot;&quot;)</span>
-<span class="sd">        * ``veldef``     : (default: &quot;&quot;)</span>
-<span class="sd">        * ``pmra``       : (default: 0.)</span>
-<span class="sd">        * ``pmdec``      : (default: 0.)</span>
-<span class="sd">        * ``pmra_err``   : (default: 0.)</span>
-<span class="sd">        * ``pmdec_err``  : (default: 0.)</span>
-<span class="sd">        * ``parallax``   : (default: 0.)</span>
-<span class="sd">        * ``para_err``   : (default: 0.)</span>
-<span class="sd">        * ``spectyp``    : (default: &quot;&quot;)</span>
-<span class="sd">        * ``category``   : (default: &quot;&quot;)</span>
+<span class="sd">        Args:</span>
+<span class="sd">            param target_id  : (default: 0)</span>
+<span class="sd">            target     : (default: &quot;MyTarget&quot;)</span>
+<span class="sd">            raep0      : (default: 0.)</span>
+<span class="sd">            decep0     : (default: 0.)</span>
+<span class="sd">            equinox    : (default: 0.)</span>
+<span class="sd">            ra_err     : (default: 0.)</span>
+<span class="sd">            dec_err    : (default: 0.)</span>
+<span class="sd">            sysvel     : (default: 0.)</span>
+<span class="sd">            veltyp     : (default: &quot;&quot;)</span>
+<span class="sd">            veldef     : (default: &quot;&quot;)</span>
+<span class="sd">            pmra       : (default: 0.)</span>
+<span class="sd">            pmdec      : (default: 0.)</span>
+<span class="sd">            pmra_err   : (default: 0.)</span>
+<span class="sd">            pmdec_err  : (default: 0.)</span>
+<span class="sd">            parallax   : (default: 0.)</span>
+<span class="sd">            para_err   : (default: 0.)</span>
+<span class="sd">            spectyp    : (default: &quot;&quot;)</span>
+<span class="sd">            category   : (default: &quot;&quot;)</span>
 <span class="sd">            </span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">data_table</span><span class="o">.</span><span class="n">add_row</span><span class="p">(</span><span class="n">vals</span><span class="o">=</span><span class="p">[</span><span class="n">target_id</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">raep0</span><span class="p">,</span> <span class="n">decep0</span><span class="p">,</span>
@@ -785,7 +841,10 @@
     <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;NI_KIOUT&quot;</span>
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">kiout</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_table</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">data</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_table</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">data</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">shape</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_table</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span></div>
 
 
 
@@ -972,11 +1031,10 @@
 <span class="sd">        Constructor for a simple ``NI_FOV`` object with chromatic gaussian profile and </span>
 <span class="sd">        no offset.</span>
 
-<span class="sd">        **Arguments:**</span>
-
-<span class="sd">        * header    : (astropy.io.fits.Header) Header containing the required information</span>
-<span class="sd">          such as ``FOV_TELDIAM`` and ``FOV_TELDIAM_UNIT`` which are used to create the</span>
-<span class="sd">          gaussian profiles of radius :math:`\lambda/D`</span>
+<span class="sd">        Args:</span>
+<span class="sd">            header : (astropy.io.fits.Header) Header containing the required information</span>
+<span class="sd">                      such as ``FOV_TELDIAM`` and ``FOV_TELDIAM_UNIT`` which are used to</span>
+<span class="sd">                      create the gaussian profiles of radius :math:`\lambda/D`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">offset</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
         <span class="n">telescope_diameter_q</span> <span class="o">=</span> <span class="n">header</span><span class="p">[</span><span class="s2">&quot;FOV_TELDIAM&quot;</span><span class="p">]</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">Unit</span><span class="p">(</span><span class="n">header</span><span class="p">[</span><span class="s2">&quot;FOV_TELDIAM_UNIT&quot;</span><span class="p">])</span>
@@ -998,10 +1056,9 @@
 
 <span class="sd">        **This method will move to the backend**</span>
 
-<span class="sd">        **Arguments:**</span>
-
-<span class="sd">        * ``lamb`` : ArrayLike the array of wavelength bins</span>
-<span class="sd">        * ``n``    : int the index of the time series to compute for</span>
+<span class="sd">        Args:</span>
+<span class="sd">            lamb : The array of wavelength bins [m]</span>
+<span class="sd">            n    : The index of the time series to compute for</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">header</span><span class="p">[</span><span class="s2">&quot;FOV_MODE&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;diameter_gaussian_radial&quot;</span>
         <span class="n">D</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">header</span><span class="p">[</span><span class="s2">&quot;&quot;</span><span class="p">]</span>
@@ -1011,12 +1068,12 @@
 <span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">            Returns the phasor for a given position of the field of view</span>
 
-<span class="sd">            **Arguments:**</span>
+<span class="sd">            Args:</span>
+<span class="sd">                alpha : Position in RA</span>
+<span class="sd">                beta  : Position in Dec</span>
 
-<span class="sd">            * ``alpha`` : Position in RA</span>
-<span class="sd">            * ``beta``  : Position in Dec</span>
-
-<span class="sd">            **Returns:** The complex phasor</span>
+<span class="sd">            Returns:</span>
+<span class="sd">                The complex phasor</span>
 <span class="sd">            &quot;&quot;&quot;</span>
             <span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hypot</span><span class="p">(</span><span class="n">alpha</span><span class="p">[</span><span class="kc">None</span><span class="p">,:]</span><span class="o">-</span><span class="n">offset</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">beta</span><span class="p">[</span><span class="kc">None</span><span class="p">,:]</span><span class="o">-</span><span class="n">offset</span><span class="p">[:,</span><span class="mi">1</span><span class="p">])</span>
             <span class="n">phasor</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">r</span><span class="o">/</span><span class="n">r_0</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
@@ -1141,16 +1198,15 @@
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Write the extension objects to a nifits file.</span>
 
-<span class="sd">        **Arguments**: </span>
-
-<span class="sd">        * `static_only` :  (bool) only save the extensions corresponding</span>
-<span class="sd">          to static parameters of the model (NI_CATM and NI_FOV). </span>
-<span class="sd">          Default: False</span>
-<span class="sd">        * `dynamic` only : (bool) only save the dynamic extensions. If true,</span>
-<span class="sd">          the hash of the static file should be passed as `static_hash`.</span>
-<span class="sd">          Default: False</span>
-<span class="sd">        * `static_hash` : (str) The hash of the static file.</span>
-<span class="sd">          Default: &quot;&quot;</span>
+<span class="sd">        Args: </span>
+<span class="sd">            static_only :  (bool) only save the extensions corresponding</span>
+<span class="sd">                          to static parameters of the model (NI_CATM and NI_FOV). </span>
+<span class="sd">                          Default: False</span>
+<span class="sd">            dynamic_only : (bool) only save the dynamic extensions. If true,</span>
+<span class="sd">                          the hash of the static file should be passed as `static_hash`.</span>
+<span class="sd">                          Defaultult: False</span>
+<span class="sd">            static_hash : (str) The hash of the static file.</span>
+<span class="sd">                        Default: &quot;&quot;</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># TODO: Possibly, the static_hash should be a dictionary with</span>

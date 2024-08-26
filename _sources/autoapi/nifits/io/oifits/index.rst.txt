@@ -1,5 +1,5 @@
-nifits.io.oifits
-================
+:py:mod:`nifits.io.oifits`
+==========================
 
 .. py:module:: nifits.io.oifits
 
@@ -22,28 +22,11 @@ nifits.io.oifits
 
 
 
-Attributes
-----------
-
-.. autoapisummary::
-
-   nifits.io.oifits.Table
-   nifits.io.oifits.ArrayLike
-   nifits.io.oifits._mjdzero
-   nifits.io.oifits.matchtargetbyname
-   nifits.io.oifits.matchstationbyname
-   nifits.io.oifits.refdate
-   nifits.io.oifits.NI_OUT_DEFAULT_HEADER
-   nifits.io.oifits.NI_MOD_DEFAULT_HEADER
-   nifits.io.oifits.NI_FOV_DEFAULT_HEADER
-   nifits.io.oifits.TEST_BACKUP
-   nifits.io.oifits.NIFITS_EXTENSIONS
-   nifits.io.oifits.NIFITS_KEYWORDS
-   nifits.io.oifits.STATIC_EXTENSIONS
-
+Module Contents
+---------------
 
 Classes
--------
+~~~~~~~
 
 .. autoapisummary::
 
@@ -67,8 +50,9 @@ Classes
    nifits.io.oifits.nifits
 
 
+
 Functions
----------
+~~~~~~~~~
 
 .. autoapisummary::
 
@@ -81,26 +65,55 @@ Functions
    nifits.io.oifits.getclass
 
 
-Module Contents
----------------
+
+Attributes
+~~~~~~~~~~
+
+.. autoapisummary::
+
+   nifits.io.oifits.Table
+   nifits.io.oifits.ArrayLike
+   nifits.io.oifits._mjdzero
+   nifits.io.oifits.matchtargetbyname
+   nifits.io.oifits.matchstationbyname
+   nifits.io.oifits.refdate
+   nifits.io.oifits.NI_OUT_DEFAULT_HEADER
+   nifits.io.oifits.NI_MOD_DEFAULT_HEADER
+   nifits.io.oifits.NI_FOV_DEFAULT_HEADER
+   nifits.io.oifits.TEST_BACKUP
+   nifits.io.oifits.NIFITS_EXTENSIONS
+   nifits.io.oifits.NIFITS_KEYWORDS
+   nifits.io.oifits.STATIC_EXTENSIONS
+
 
 .. py:data:: Table
 
+   
+
 .. py:data:: ArrayLike
 
+   
+
 .. py:data:: _mjdzero
+
+   
 
 .. py:data:: matchtargetbyname
    :value: False
 
+   
 
 .. py:data:: matchstationbyname
    :value: False
 
+   
 
 .. py:data:: refdate
 
+   
+
 .. py:function:: _plurals(count)
+
 
 .. py:function:: array_eq(a: ArrayLike, b: ArrayLike)
 
@@ -124,38 +137,20 @@ Module Contents
 
 .. py:class:: OI_STATION(tel_name=None, sta_name=None, diameter=None, staxyz=[None, None, None], fov=None, fovtype=None, revision=1)
 
-   Bases: :py:obj:`object`
 
+   Bases: :py:obj:`object`
 
    This class corresponds to a single row (i.e. single
    station/telescope) of an OI_ARRAY table.
-
-
-   .. py:attribute:: revision
-
-
-   .. py:attribute:: tel_name
-
-
-   .. py:attribute:: sta_name
-
-
-   .. py:attribute:: diameter
-
-
-   .. py:attribute:: staxyz
-
 
    .. py:method:: __eq__(other)
 
       Return self==value.
 
 
-
    .. py:method:: __ne__(other)
 
       Return self!=value.
-
 
 
    .. py:method:: __repr__()
@@ -166,8 +161,8 @@ Module Contents
 
 .. py:class:: NI_CATM
 
-   Bases: :py:obj:`object`
 
+   Bases: :py:obj:`object`
 
    Contains the complex amplitude transfer matrix CATM of the instrument.
    The CATM is a complex matrix representing the transformation from the each
@@ -181,21 +176,20 @@ Module Contents
    with :math:`\textbf{m}_{mod}` containded in NI_MOD.
 
 
-
    .. py:attribute:: Mcatm
-      :type:  ArrayLike
+      :type: ArrayLike
 
+      
 
    .. py:attribute:: header
-      :type:  astropy.io.fits.Header
+      :type: astropy.io.fits.Header
 
+      
 
    .. py:method:: from_hdu(hdu: type(fits.hdu.ImageHDU))
       :classmethod:
 
-
       Create the NI_CATM object from the HDU extension of an opened fits file.
-
 
 
    .. py:method:: to_hdu()
@@ -206,16 +200,23 @@ Module Contents
 
 .. py:function:: nulfunc(self, *args, **kwargs)
 
+
 .. py:data:: NI_OUT_DEFAULT_HEADER
+
+   
 
 .. py:data:: NI_MOD_DEFAULT_HEADER
 
+   
+
 .. py:data:: NI_FOV_DEFAULT_HEADER
+
+   
 
 .. py:class:: NI_EXTENSION
 
-   Bases: :py:obj:`object`
 
+   Bases: :py:obj:`object`
 
    ``NI_EXTENSION`` Generic class for NIFITS extensions
 
@@ -224,23 +225,22 @@ Module Contents
    * ``from_hdu``: Creates the object from an ``astropy.io.fits.TableHDU`` object
    * ``to_hdu``  : Returns the ``TableHDU`` from itself.
 
-
    .. py:attribute:: data_table
-      :type:  Table
+      :type: Table
 
+      
 
    .. py:attribute:: header
-      :type:  astropy.io.fits.Header
+      :type: astropy.io.fits.Header
 
+      
 
    .. py:method:: from_hdu(hdu: type(fits.hdu.TableHDU))
       :classmethod:
 
-
       Create the data object from the HDU extension of an opened fits file.
 
       :param hdu: TableHDU object containing the relevant data
-
 
 
    .. py:method:: to_hdu()
@@ -252,32 +252,34 @@ Module Contents
           This also updates the header if dimension changes
 
 
-
    .. py:method:: __len__()
+
 
 
 .. py:class:: NI_EXTENSION_ARRAY
 
-   Bases: :py:obj:`NI_EXTENSION`
 
+   Bases: :py:obj:`NI_EXTENSION`
 
    Generic class for NIFITS array extensions
 
+   .. py:property:: shape
+
 
    .. py:attribute:: data_array
-      :type:  ArrayLike
+      :type: ArrayLike
 
+      
 
    .. py:attribute:: header
-      :type:  astropy.io.fits.Header
+      :type: astropy.io.fits.Header
 
+      
 
    .. py:method:: from_hdu(hdu: type(fits.hdu.ImageHDU))
       :classmethod:
 
-
       Create the data object from the HDU extension of an opened fits file.
-
 
 
    .. py:method:: to_hdu()
@@ -289,14 +291,14 @@ Module Contents
           This also updates the header if dimension changes
 
 
-
    .. py:method:: __len__()
+
 
 
 .. py:class:: NI_EXTENSION_CPX_ARRAY
 
-   Bases: :py:obj:`NI_EXTENSION`
 
+   Bases: :py:obj:`NI_EXTENSION`
 
    Generic class for NIFITS array extensions.
 
@@ -304,21 +306,23 @@ Module Contents
    stored to and loaded from a real-valued array with an
    extra first dimension of length 2 for (real, imaginary) parts.
 
+   .. py:property:: shape
+
 
    .. py:attribute:: data_array
-      :type:  ArrayLike
+      :type: ArrayLike
 
+      
 
    .. py:attribute:: header
-      :type:  astropy.io.fits.Header
+      :type: astropy.io.fits.Header
 
+      
 
    .. py:method:: from_hdu(hdu: type(fits.hdu.ImageHDU))
       :classmethod:
 
-
       Create the data object from the HDU extension of an opened fits file.
-
 
 
    .. py:method:: to_hdu()
@@ -330,14 +334,14 @@ Module Contents
           This also updates the header if dimension changes
 
 
-
    .. py:method:: __len__()
+
 
 
 .. py:class:: OI_ARRAY
 
-   Bases: :py:obj:`NI_EXTENSION`
 
+   Bases: :py:obj:`NI_EXTENSION`
 
    ``NI_EXTENSION`` Generic class for NIFITS extensions
 
@@ -346,19 +350,20 @@ Module Contents
    * ``from_hdu``: Creates the object from an ``astropy.io.fits.TableHDU`` object
    * ``to_hdu``  : Returns the ``TableHDU`` from itself.
 
-
    .. py:attribute:: __doc__
 
+      
 
    .. py:attribute:: name
       :value: 'OI_ARRAY'
 
+      
 
 
 .. py:class:: OI_WAVELENGTH
 
-   Bases: :py:obj:`NI_EXTENSION`
 
+   Bases: :py:obj:`NI_EXTENSION`
 
    ``NI_EXTENSION`` Generic class for NIFITS extensions
 
@@ -366,15 +371,6 @@ Module Contents
 
    * ``from_hdu``: Creates the object from an ``astropy.io.fits.TableHDU`` object
    * ``to_hdu``  : Returns the ``TableHDU`` from itself.
-
-
-   .. py:attribute:: __doc__
-
-
-   .. py:attribute:: name
-      :value: 'OI_WAVELENGTH'
-
-
 
    .. py:property:: lambs
 
@@ -388,22 +384,30 @@ Module Contents
    .. py:property:: dnus
 
 
+   .. py:attribute:: __doc__
+
+      
+
+   .. py:attribute:: name
+      :value: 'OI_WAVELENGTH'
+
+      
+
+
 .. py:class:: OI_TARGET
+
 
    Bases: :py:obj:`NI_EXTENSION`
 
-
    ``OI_TARGET`` definition.
-
 
    .. py:attribute:: name
       :value: 'OI_TARGET'
 
-
+      
 
    .. py:method:: from_scratch()
       :classmethod:
-
 
       Creates the OI_TARGET object with an empty table.
 
@@ -411,7 +415,6 @@ Module Contents
           OI_TARGET: object with an empty table.
 
       Use ``add_target()`` to finish the job.
-
 
 
    .. py:method:: add_target(target_id=0, target='MyTarget', raep0=0.0, decep0=0.0, equinox=0.0, ra_err=0.0, dec_err=0.0, sysvel=0.0, veltyp='', veldef='', pmra=0.0, pmdec=0.0, pmra_err=0.0, pmdec_err=0.0, parallax=0.0, para_err=0.0, spectyp='', category='')
@@ -440,8 +443,8 @@ Module Contents
 
 .. py:class:: NI_OUT
 
-   Bases: :py:obj:`NI_EXTENSION`
 
+   Bases: :py:obj:`NI_EXTENSION`
 
    ``NI_EXTENSION`` Generic class for NIFITS extensions
 
@@ -450,33 +453,36 @@ Module Contents
    * ``from_hdu``: Creates the object from an ``astropy.io.fits.TableHDU`` object
    * ``to_hdu``  : Returns the ``TableHDU`` from itself.
 
+   .. py:property:: asarray
+
 
    .. py:attribute:: __doc__
 
+      
 
    .. py:attribute:: value_out
-      :type:  Table
+      :type: Table
 
+      
 
    .. py:attribute:: header
-      :type:  dict
+      :type: dict
 
+      
 
    .. py:attribute:: name
       :value: 'NI_OUT'
 
-
-
-   .. py:property:: asarray
-
+      
 
    .. py:method:: check_against_catm(catm: NI_CATM)
 
 
+
 .. py:class:: NI_CATM
 
-   Bases: :py:obj:`NI_EXTENSION_CPX_ARRAY`
 
+   Bases: :py:obj:`NI_EXTENSION_CPX_ARRAY`
 
    Generic class for NIFITS array extensions.
 
@@ -484,22 +490,23 @@ Module Contents
    stored to and loaded from a real-valued array with an
    extra first dimension of length 2 for (real, imaginary) parts.
 
+   .. py:property:: M
+
 
    .. py:attribute:: __doc__
 
+      
 
    .. py:attribute:: name
       :value: 'NI_CATM'
 
-
-
-   .. py:property:: M
+      
 
 
 .. py:class:: NI_IOUT
 
-   Bases: :py:obj:`NI_EXTENSION`
 
+   Bases: :py:obj:`NI_EXTENSION`
 
    ``NI_EXTENSION`` Generic class for NIFITS extensions
 
@@ -507,23 +514,24 @@ Module Contents
 
    * ``from_hdu``: Creates the object from an ``astropy.io.fits.TableHDU`` object
    * ``to_hdu``  : Returns the ``TableHDU`` from itself.
-
-
-   .. py:attribute:: __doc__
-
-
-   .. py:attribute:: name
-      :value: 'NI_IOUT'
-
-
 
    .. py:property:: iout
 
 
+   .. py:attribute:: __doc__
+
+      
+
+   .. py:attribute:: name
+      :value: 'NI_IOUT'
+
+      
+
+
 .. py:class:: NI_KIOUT
 
-   Bases: :py:obj:`NI_EXTENSION`
 
+   Bases: :py:obj:`NI_EXTENSION`
 
    ``NI_EXTENSION`` Generic class for NIFITS extensions
 
@@ -532,60 +540,66 @@ Module Contents
    * ``from_hdu``: Creates the object from an ``astropy.io.fits.TableHDU`` object
    * ``to_hdu``  : Returns the ``TableHDU`` from itself.
 
+   .. py:property:: kiout
+
+
+   .. py:property:: shape
+
 
    .. py:attribute:: __doc__
 
+      
 
    .. py:attribute:: name
       :value: 'NI_KIOUT'
 
-
-
-   .. py:property:: kiout
+      
 
 
 .. py:class:: NI_KCOV
 
+
    Bases: :py:obj:`NI_EXTENSION_ARRAY`
 
-
    Generic class for NIFITS array extensions
-
-
-   .. py:attribute:: __doc__
-
-
-   .. py:attribute:: name
-      :value: 'NI_KCOV'
-
-
 
    .. py:property:: kcov
 
 
+   .. py:attribute:: __doc__
+
+      
+
+   .. py:attribute:: name
+      :value: 'NI_KCOV'
+
+      
+
+
 .. py:class:: NI_KMAT
+
 
    Bases: :py:obj:`NI_EXTENSION_ARRAY`
 
-
    Generic class for NIFITS array extensions
-
-
-   .. py:attribute:: __doc__
-
-
-   .. py:attribute:: name
-      :value: 'NI_KMAT'
-
-
 
    .. py:property:: K
 
 
+   .. py:attribute:: __doc__
+
+      
+
+   .. py:attribute:: name
+      :value: 'NI_KMAT'
+
+      
+
+
 .. py:class:: NI_MOD
 
-   Bases: :py:obj:`NI_EXTENSION`
 
+   Bases: :py:obj:`NI_EXTENSION`
 
    Contains input modulation vector for the given observation. The format
    is a complex phasor representing the alteration applied by the instrument
@@ -645,20 +659,6 @@ Module Contents
       +---------------+----------------------------+------------------+-------------------+
 
 
-
-   .. py:attribute:: data_table
-      :type:  Table
-
-
-   .. py:attribute:: header
-      :type:  astropy.io.fits.Header
-
-
-   .. py:attribute:: name
-      :value: 'NI_MOD'
-
-
-
    .. py:property:: n_series
 
 
@@ -666,8 +666,8 @@ Module Contents
 
 
    .. py:property:: appxy
-      Shape n_frames x n_a x 2
 
+      Shape n_frames x n_a x 2
 
    .. py:property:: dateobs
       :abstractmethod:
@@ -676,13 +676,28 @@ Module Contents
       from each of the observation times given in the rows of ``NI_MOD``
       table.
 
-
    .. py:property:: arrcol
+
       The collecting area of the telescopes
 
-
    .. py:property:: int_time
+
       Conveniently retrieve the integration time.
+
+   .. py:attribute:: data_table
+      :type: Table
+
+      
+
+   .. py:attribute:: header
+      :type: astropy.io.fits.Header
+
+      
+
+   .. py:attribute:: name
+      :value: 'NI_MOD'
+
+      
 
 
 .. py:function:: create_basic_fov_data(D, offset, lamb, n)
@@ -692,19 +707,20 @@ Module Contents
 
 .. py:class:: NI_KCOV
 
-   Bases: :py:obj:`NI_EXTENSION_ARRAY`
 
+   Bases: :py:obj:`NI_EXTENSION_ARRAY`
 
    Generic class for NIFITS array extensions
 
-
    .. py:attribute:: __doc__
+
+      
 
 
 .. py:class:: NI_FOV
 
-   Bases: :py:obj:`NI_EXTENSION`
 
+   Bases: :py:obj:`NI_EXTENSION`
 
    ``NI_EXTENSION`` Generic class for NIFITS extensions
 
@@ -713,18 +729,17 @@ Module Contents
    * ``from_hdu``: Creates the object from an ``astropy.io.fits.TableHDU`` object
    * ``to_hdu``  : Returns the ``TableHDU`` from itself.
 
-
    .. py:attribute:: __doc__
 
+      
 
    .. py:attribute:: name
       :value: 'NI_FOV'
 
-
+      
 
    .. py:method:: simple_from_header(header=None, lamb=None, n=0)
       :classmethod:
-
 
       Constructor for a simple ``NI_FOV`` object with chromatic gaussian profile and
       no offset.
@@ -732,7 +747,6 @@ Module Contents
       :param header: (astropy.io.fits.Header) Header containing the required information
                      such as ``FOV_TELDIAM`` and ``FOV_TELDIAM_UNIT`` which are used to
                      create the gaussian profiles of radius :math:`\lambda/D`
-
 
 
    .. py:method:: get_fov_function(lamb: ArrayLike, n: int)
@@ -750,93 +764,86 @@ Module Contents
 .. py:data:: TEST_BACKUP
    :value: True
 
+   
 
 .. py:data:: NIFITS_EXTENSIONS
+
+   
 
 .. py:data:: NIFITS_KEYWORDS
    :value: []
 
+   
 
 .. py:data:: STATIC_EXTENSIONS
    :value: [True, True, True, True, False, False, False, False, False]
 
+   
 
 .. py:function:: getclass(classname)
 
+
 .. py:class:: nifits
+
 
    Bases: :py:obj:`object`
 
-
    Class representation of the nifits object.
 
-
    .. py:attribute:: header
-      :type:  astropy.io.fits.Header
-      :value: None
+      :type: astropy.io.fits.Header
 
-
+      
 
    .. py:attribute:: ni_catm
-      :type:  NI_CATM
-      :value: None
+      :type: NI_CATM
 
-
+      
 
    .. py:attribute:: ni_fov
-      :type:  NI_FOV
-      :value: None
+      :type: NI_FOV
 
-
+      
 
    .. py:attribute:: ni_kmat
-      :type:  NI_KMAT
-      :value: None
+      :type: NI_KMAT
 
-
+      
 
    .. py:attribute:: oi_wavelength
-      :type:  OI_WAVELENGTH
-      :value: None
+      :type: OI_WAVELENGTH
 
-
+      
 
    .. py:attribute:: oi_target
-      :type:  OI_TARGET
-      :value: None
+      :type: OI_TARGET
 
-
+      
 
    .. py:attribute:: ni_mod
-      :type:  NI_MOD
-      :value: None
+      :type: NI_MOD
 
-
+      
 
    .. py:attribute:: ni_iout
-      :type:  NI_IOUT
-      :value: None
+      :type: NI_IOUT
 
-
+      
 
    .. py:attribute:: ni_kiout
-      :type:  NI_KIOUT
-      :value: None
+      :type: NI_KIOUT
 
-
+      
 
    .. py:attribute:: ni_kcov
-      :type:  NI_KCOV
-      :value: None
+      :type: NI_KCOV
 
-
+      
 
    .. py:method:: from_nifits(filename: str)
       :classmethod:
 
-
       Create the nifits object from the HDU extension of an opened fits file.
-
 
 
    .. py:method:: to_nifits(filename: str = '', static_only: bool = False, dynamic_only: bool = False, static_hash: str = '', writefile: bool = True, overwrite: bool = False)

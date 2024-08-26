@@ -1,25 +1,18 @@
-nifits
-======
+:py:mod:`nifits`
+================
 
 .. py:module:: nifits
 
 
 Subpackages
 -----------
-
 .. toctree::
-   :maxdepth: 1
+   :titlesonly:
+   :maxdepth: 3
 
-   /autoapi/nifits/backend/index
-   /autoapi/nifits/io/index
-
-
-Attributes
-----------
-
-.. autoapisummary::
-
-   nifits.__version__
+   backend/index.rst
+   extra/index.rst
+   io/index.rst
 
 
 Package Contents
@@ -28,4 +21,5 @@ Package Contents
 .. py:data:: __version__
    :value: '0.0.3'
 
+   
 

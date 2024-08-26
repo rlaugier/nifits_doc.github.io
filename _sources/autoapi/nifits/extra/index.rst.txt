@@ -1,0 +1,182 @@
+:py:mod:`nifits.extra`
+======================
+
+.. py:module:: nifits.extra
+
+
+Submodules
+----------
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+
+   extra/index.rst
+
+
+Package Contents
+----------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   nifits.extra.NIFITSClass
+   nifits.extra.Post
+
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   nifits.extra.whitened_kiout
+
+
+
+Attributes
+~~~~~~~~~~
+
+.. autoapisummary::
+
+   nifits.extra.NIFITS_EXTENSIONS
+   nifits.extra.STATIC_EXTENSIONS
+   nifits.extra.NIFITS_EXTENSIONS
+   nifits.extra.STATIC_EXTENSIONS
+
+
+.. py:data:: NIFITS_EXTENSIONS
+
+   
+
+.. py:data:: STATIC_EXTENSIONS
+   :value: [True, True, True, True, False, False, False, False, False]
+
+   
+
+.. py:data:: NIFITS_EXTENSIONS
+
+   
+
+.. py:data:: STATIC_EXTENSIONS
+   :value: [True, True, True, True, False, False, False, False, False]
+
+   
+
+.. py:class:: NIFITSClass
+
+
+   Bases: :py:obj:`object`
+
+   Class representation of the nifits object.
+
+   .. py:attribute:: header
+      :type: astropy.io.fits.Header
+
+      
+
+   .. py:attribute:: ni_catm
+      :type: NI_CATM
+
+      
+
+   .. py:attribute:: ni_fov
+      :type: NI_FOV
+
+      
+
+   .. py:attribute:: ni_kmat
+      :type: NI_KMAT
+
+      
+
+   .. py:attribute:: oi_wavelength
+      :type: OI_WAVELENGTH
+
+      
+
+   .. py:attribute:: oi_target
+      :type: OI_TARGET
+
+      
+
+   .. py:attribute:: ni_mod
+      :type: NI_MOD
+
+      
+
+   .. py:attribute:: ni_iout
+      :type: NI_IOUT
+
+      
+
+   .. py:attribute:: ni_kiout
+      :type: NI_KIOUT
+
+      
+
+   .. py:attribute:: ni_kcov
+      :type: NI_KCOV
+
+      
+
+   .. py:method:: from_nifits(filename: str)
+      :classmethod:
+
+      Create the nifits object from the HDU extension of an opened fits file.
+
+
+   .. py:method:: to_nifits(filename: str = '', static_only: bool = False, dynamic_only: bool = False, static_hash: str = '', writefile: bool = True, overwrite: bool = False)
+
+      Write the extension objects to a nifits file.
+
+      :param static_only: (bool) only save the extensions corresponding
+                          to static parameters of the model (NI_CATM and NI_FOV).
+                          Default: False
+      :param dynamic_only: (bool) only save the dynamic extensions. If true,
+                           the hash of the static file should be passed as `static_hash`.
+                           Defaultult: False
+      :param static_hash: (str) The hash of the static file.
+                          Default: ""
+
+
+
+.. py:class:: Post(nifits: nifits.io.oifits.nifits = None, module=np)
+
+
+   Bases: :py:obj:`nifits.backend.NI_Backend`
+
+   This variant of the backend class offers a statistically whitened alternate
+   forward model with directly whitened observables by calling ``w_`` prefixed
+   methods. (Ceau et al. 2019, Laugier et al. 2023)
+
+   After normal construction, use ``create_whitening_matrix()`` to update the
+   whitening matrix based on the ``NI_KCOV`` data.
+
+   Use ``w_get_all_outs`` and ``get_moving_outs`` in the same way, but they
+   return whitened observables. Compare it to ``self.nifits.ni_kiout.w_kiout``
+   instead of ``self.nifits.ni_kiout.kiout``.
+
+
+   .. py:method:: create_whitening_matrix(replace: bool = False, md: types.ModuleType = np)
+
+          Updates the whitening matrix:
+
+      :param replace: If true, the forward model methods are replaced by the
+                      whitened ones. The old ones get a ``old_`` prefix.
+      :param md: A numpy-like backend module.
+
+      The pile of whitening matrices is stored as ``self.Ws`` (one for
+      each frame).
+
+
+   .. py:method:: whitened_outputs(func)
+
+      A decorator methods that transform a forward model method into
+
+
+
+.. py:function:: whitened_kiout(self)
+
+

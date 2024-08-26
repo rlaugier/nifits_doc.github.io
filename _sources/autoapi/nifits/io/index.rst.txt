@@ -1,15 +1,15 @@
-nifits.io
-=========
+:py:mod:`nifits.io`
+===================
 
 .. py:module:: nifits.io
 
 
 Submodules
 ----------
-
 .. toctree::
+   :titlesonly:
    :maxdepth: 1
 
-   /autoapi/nifits/io/oifits/index
+   oifits/index.rst
 
 

@@ -1,0 +1,90 @@
+:py:mod:`nifits.extra.extra`
+============================
+
+.. py:module:: nifits.extra.extra
+
+.. autoapi-nested-parse::
+
+   NIFITS Extra
+   -------------
+
+   The NIFITS extra contains some additional tools to go somewhat **beyond** the
+   a simple implementation of the NIFITS standard, and facilitate the usage of
+   common powerful techniques of nulling interferometry data reduction and
+   interpretation.
+
+   This includes:
+
+   * statistical whitening of observables (Ceau et al. 2019, Laugier et al. 2023)
+   * Correlation maps (coming soon)
+   * Various plotting macros (coming soon)
+
+   At present, this is done through a new class Post that inherits from Backend
+   offering dirctly whitened forward models prfixed with ``w_``, and ``NI_KIOUT``
+
+   The extra module is currently considered unstable. Please contact us if you make
+   use of its feature: we can give you warnings and help when our updates are at
+   risk of breaking your code. It is likely that the installation of the extra
+   module becomes optional.
+
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   nifits.extra.extra.Post
+
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   nifits.extra.extra.whitened_kiout
+
+
+
+.. py:class:: Post(nifits: nifits.io.oifits.nifits = None, module=np)
+
+
+   Bases: :py:obj:`nifits.backend.NI_Backend`
+
+   This variant of the backend class offers a statistically whitened alternate
+   forward model with directly whitened observables by calling ``w_`` prefixed
+   methods. (Ceau et al. 2019, Laugier et al. 2023)
+
+   After normal construction, use ``create_whitening_matrix()`` to update the
+   whitening matrix based on the ``NI_KCOV`` data.
+
+   Use ``w_get_all_outs`` and ``get_moving_outs`` in the same way, but they
+   return whitened observables. Compare it to ``self.nifits.ni_kiout.w_kiout``
+   instead of ``self.nifits.ni_kiout.kiout``.
+
+
+   .. py:method:: create_whitening_matrix(replace: bool = False, md: types.ModuleType = np)
+
+          Updates the whitening matrix:
+
+      :param replace: If true, the forward model methods are replaced by the
+                      whitened ones. The old ones get a ``old_`` prefix.
+      :param md: A numpy-like backend module.
+
+      The pile of whitening matrices is stored as ``self.Ws`` (one for
+      each frame).
+
+
+   .. py:method:: whitened_outputs(func)
+
+      A decorator methods that transform a forward model method into
+
+
+
+.. py:function:: whitened_kiout(self)
+
+
