@@ -16,7 +16,8 @@
    This includes:
 
    * statistical whitening of observables (Ceau et al. 2019, Laugier et al. 2023)
-   * Correlation maps (coming soon)
+   * Correlation maps (work in progress)
+   * Test statistics Te and Tnp from (Ceau et al. 2019, Laugier et al. 2023)
    * Monte-Carlo simulation of instrumental noise (coming soon)
    * Various plotting macros (coming soon)
 
@@ -47,8 +48,20 @@ Functions
 
 .. autoapisummary::
 
+   nifits.extra.extra.e2ph
+   nifits.extra.extra.ph2e
    nifits.extra.extra.whitened_kiout
+   nifits.extra.extra.residual_pdet_Te
 
+
+
+Attributes
+~~~~~~~~~~
+
+.. autoapisummary::
+
+   nifits.extra.extra.massq2sr
+   nifits.extra.extra.sr2massq
 
 
 .. py:class:: Post(nifits: nifits.io.oifits.nifits = None, module=np)
@@ -80,12 +93,146 @@ Functions
       each frame).
 
 
+   .. py:method:: whiten_signal(signal)
+
+      Whitens a signal so that error covariance
+      is identity in the new axis.
+
+      :param signal: The direct signal to whiten (differential observable
+                     a.k.a kernel-null)
+
+      :returns:
+
+                the whitened signal ($\mathbf{W}\cdot \mathbf{s}$)
+                    in the new basis.
+      :rtype: wout_full
+
+
    .. py:method:: whitened_outputs(func)
 
-      A decorator methods that transform a forward model method into
+      A decorator methods that gives applies statistical whitening
+      to the output of the function. The whitening relies on
+      `self.W` which is computed as by `create_whitening_matrix`.
+      :param func: The function to decorate.
 
+      :returns: The decorated function
+      :rtype: inner
+
+
+   .. py:method:: add_blackbody(temperature)
+
+          Initializes the blackbody for a given temperature
+      :param temperature: units.Quantity
+
+
+   .. py:method:: get_pfa_Te(signal=None, md=np)
+
+          Compute the Pfa for the energy detector test.
+      :param signal: The raw signal (non-whitened)
+
+      :returns:
+
+                pfa the false alarm probability (p-value) associated
+                    to the given signal.
+
+
+   .. py:method:: get_pfa_Tnp(alphas, betas, signal=None, model_signal=None, md=np)
+
+      Compute the Pfa for the Neyman-Pearson test.
+
+
+   .. py:method:: get_blackbody_native()
+
+      :returns:
+
+                in units consistent with the native
+                    units of the file $[a.sr^{-1}.m^{-2}]$ (where [a] is typically [ph/s]).
+      :rtype: blackbody_spectrum
+
+
+   .. py:method:: get_blackbody_collected(alphas, betas, kernels=True, whiten=True, to_si=True)
+
+          Obtain the output spectra of a blackbody at the given blackbody temperature
+      :param alphas: ArrayLike: Relative position in rad
+      :param betas: ArrayLike: Relative position in rad
+      :param kernels: Bool (True) Whether to work in the kernel postprocessing space
+                      (False is not implemented yet)
+      :param whiten: Bool (True) whether to use whitening post-processing (False
+                     is not implemented yet)
+      :param to_si: Bool (True) convert to SI units
+
+
+   .. py:method:: get_Te()
+
+          Computes the Te test statistic of the current file. This test statistic
+      is supposed to be distributed as a chi^2 under H_0.
+      :returns: x.T.dot(x) where x is the whitened signal.
+      :rtype: Te
+
+
+   .. py:method:: get_pdet_te(alphas, betas, solid_angle, kernels=True, pfa=0.046, whiten=True, temperature=None)
+
+      pfa:
+      * 1 sigma: 0.32
+      * 2 sigma: 0.046
+      * 3 sigma: 0.0027
+
+
+   .. py:method:: get_sensitivity_te(alphas, betas, kernels=True, temperature=None, pfa=0.046, pdet=0.9, distance=None, radius_unit=units.Rjup, md=np)
+
+      .. code-block:: python
+
+          from scipy.stats import ncx2
+          xs = np.linspace(-10, 10, 100)
+          ys = np.linspace(1e-6, 0.999, 100)
+          u = 1 - ncx2.cdf(xs, df=10, nc=0)
+          v = ncx2.ppf(1 - ys, df=10, nc=0)
+
+          plt.figure()
+          plt.plot(xs, u)
+          plt.show()
+
+          plt.figure()
+          plt.plot(ys, v)
+          plt.plot(u, xs)
+          plt.show()
+
+
+   .. py:method:: get_pdet_tnp(transmission_map, pfa=0.046, pdet=0.9)
+
+
+   .. py:method:: get_sensitivity_tnp(transmission_map, pfa=0.046, pdet=0.9)
+
+
+
+.. py:data:: massq2sr
+
+   
+
+.. py:data:: sr2massq
+
+   
+
+.. py:function:: e2ph(energy, wl)
+
+
+.. py:function:: ph2e(nphot, wl)
 
 
 .. py:function:: whitened_kiout(self)
+
+
+.. py:function:: residual_pdet_Te(lamb, xsi, rank, targ)
+
+   Computes the residual of Pdet
+
+   **Arguments:**
+
+   * lamb     : The noncentrality parameter representing the feature
+   * targ     : The target Pdet to converge to
+   * xsi      : The location of threshold
+   * rank     : The rank of observable
+
+   **Returns** the Pdet difference. See *Ceau et al. 2019* for more information
 
 

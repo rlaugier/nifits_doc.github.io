@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" />
 
     <!-- Generated with Sphinx 7.3.7 and Furo 2024.08.06 -->
-        <title>nifits.extra.extra - NIFITS 0.0.3 documentation</title>
+        <title>nifits.extra.extra - NIFITS 0.0.4 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=362ab14a" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?v=354aac6f" />
     <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=fd3f3429" />
@@ -167,7 +167,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../../../index.html"><div class="brand">NIFITS 0.0.3 documentation</div></a>
+      <a href="../../../index.html"><div class="brand">NIFITS 0.0.4 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -191,7 +191,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../../../index.html">
   
   
-  <span class="sidebar-brand-text">NIFITS 0.0.3 documentation</span>
+  <span class="sidebar-brand-text">NIFITS 0.0.4 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="../../../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -265,7 +265,9 @@
 <span class="sd">This includes:</span>
 
 <span class="sd">* statistical whitening of observables (Ceau et al. 2019, Laugier et al. 2023)</span>
-<span class="sd">* Correlation maps (coming soon)</span>
+<span class="sd">* Correlation maps (work in progress)</span>
+<span class="sd">* Test statistics Te and Tnp from (Ceau et al. 2019, Laugier et al. 2023)</span>
+<span class="sd">* Monte-Carlo simulation of instrumental noise (coming soon)</span>
 <span class="sd">* Various plotting macros (coming soon)</span>
 
 <span class="sd">At present, this is done through a new class Post that inherits from Backend</span>
@@ -291,7 +293,9 @@
 <span class="kn">import</span> <span class="nn">types</span>
 <span class="kn">from</span> <span class="nn">einops</span> <span class="kn">import</span> <span class="n">rearrange</span>
 <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">copy</span>
-
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">ncx2</span> <span class="k">as</span> <span class="n">ncx2</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span> <span class="k">as</span> <span class="n">norm</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">chi2</span> <span class="k">as</span> <span class="n">chi2</span>
 
 
 <div class="viewcode-block" id="Post">
@@ -336,9 +340,11 @@
         <span class="k">for</span> <span class="n">amat</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_kcov</span><span class="o">.</span><span class="n">data_array</span><span class="p">:</span>
             <span class="n">Ws</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">sqrtm</span><span class="p">(</span><span class="n">amat</span><span class="p">)))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">Ws</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">Ws</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">W_unit</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_kcov</span><span class="o">.</span><span class="n">unit</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="p">,</span> <span class="s2">&quot;ni_kiout&quot;</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">datashape</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_kiout</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> 
-        <span class="bp">self</span><span class="o">.</span><span class="n">flatshape</span> <span class="o">=</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_mod</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_kcov</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">flatshape</span> <span class="o">=</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_mod</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_kcov</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fullyflatshape</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">flatshape</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">replace</span><span class="p">:</span>
             <span class="c1"># Backup the forward model mehtods, then decorate them</span>
@@ -358,26 +364,283 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_kiout</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="n">w_kiout</span> <span class="o">=</span> <span class="n">whitened_kiout</span></div>
 
 
+<div class="viewcode-block" id="Post.whiten_signal">
+<a class="viewcode-back" href="../../../autoapi/nifits/extra/index.html#nifits.extra.extra.Post.whiten_signal">[docs]</a>
+    <span class="k">def</span> <span class="nf">whiten_signal</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">signal</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Whitens a signal so that error covariance</span>
+<span class="sd">        is identity in the new axis.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            signal: The direct signal to whiten (differential observable</span>
+<span class="sd">                a.k.a kernel-null)</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            wout_full: the whitened signal ($\mathbf{W}\cdot \mathbf{s}$)</span>
+<span class="sd">                in the new basis.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">full_shape</span> <span class="o">=</span> <span class="n">signal</span><span class="o">.</span><span class="n">shape</span>
+        <span class="c1"># Flatten the spectral and output dimension</span>
+        <span class="n">flat_full_shape</span> <span class="o">=</span> <span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">flatshape</span><span class="p">,</span> <span class="n">full_shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">flat_out</span> <span class="o">=</span> <span class="n">rearrange</span><span class="p">(</span><span class="n">signal</span><span class="p">,</span> <span class="s2">&quot;frame wavelength output source -&gt; frame (wavelength output) source&quot;</span><span class="p">)</span>
+        <span class="n">wout</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">md</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s2">&quot;f o i , f i m -&gt; f o m&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">Ws</span><span class="p">,</span> <span class="n">flat_out</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">wout</span></div>
+
+
 
 <div class="viewcode-block" id="Post.whitened_outputs">
 <a class="viewcode-back" href="../../../autoapi/nifits/extra/index.html#nifits.extra.extra.Post.whitened_outputs">[docs]</a>
     <span class="k">def</span> <span class="nf">whitened_outputs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        A decorator methods that transform a forward model method into </span>
+<span class="sd">        A decorator methods that gives applies statistical whitening</span>
+<span class="sd">        to the output of the function. The whitening relies on </span>
+<span class="sd">        `self.W` which is computed as by `create_whitening_matrix`.</span>
+<span class="sd">        Args:</span>
+<span class="sd">            func: The function to decorate.</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            inner: The decorated function</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
             <span class="n">output</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-            <span class="n">full_shape</span> <span class="o">=</span> <span class="n">output</span><span class="o">.</span><span class="n">shape</span>
-            <span class="n">flat_full_shape</span> <span class="o">=</span> <span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">flatshape</span><span class="p">,</span> <span class="n">full_shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
-            <span class="n">flat_out</span> <span class="o">=</span> <span class="n">rearrange</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="s2">&quot;frame wavelength output source -&gt; frame (wavelength output) source&quot;</span><span class="p">)</span>
-            <span class="n">wout</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">md</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s2">&quot;f o i , f i m -&gt; f o m&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">Ws</span><span class="p">,</span> <span class="n">flat_out</span><span class="p">)</span>
-            <span class="n">wout_full</span> <span class="o">=</span> <span class="n">wout</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="n">full_shape</span><span class="p">))</span>
+            <span class="n">wout_full</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">whiten_signal</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">wout_full</span>
-        <span class="n">inner</span><span class="o">.</span><span class="vm">__doc__</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;**Modified to whiten the observables**</span><span class="se">\n\n</span><span class="s2">&quot;&quot;&quot;</span>\
+        <span class="n">inner</span><span class="o">.</span><span class="vm">__doc__</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;**Modified to whiten the observables</span>
+<span class="s2">                            (output and wavelength dimensions are fused)**</span><span class="se">\n\n</span><span class="s2">&quot;&quot;&quot;</span>\
                     <span class="o">+</span> <span class="n">func</span><span class="o">.</span><span class="vm">__doc__</span>
         <span class="k">return</span> <span class="n">inner</span></div>
+
+
+<div class="viewcode-block" id="Post.add_blackbody">
+<a class="viewcode-back" href="../../../autoapi/nifits/extra/index.html#nifits.extra.extra.Post.add_blackbody">[docs]</a>
+    <span class="k">def</span> <span class="nf">add_blackbody</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">temperature</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Initializes the blackbody for a given temperature</span>
+<span class="sd">        Args:</span>
+<span class="sd">            temperature: units.Quantity</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bb</span> <span class="o">=</span> <span class="n">BB</span><span class="p">(</span><span class="n">temperature</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Post.get_pfa_Te">
+<a class="viewcode-back" href="../../../autoapi/nifits/extra/index.html#nifits.extra.extra.Post.get_pfa_Te">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_pfa_Te</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">signal</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                        <span class="n">md</span><span class="o">=</span><span class="n">np</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Compute the Pfa for the energy detector test.</span>
+<span class="sd">        Args:</span>
+<span class="sd">            signal: The raw signal (non-whitened)</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            pfa the false alarm probability (p-value) associated</span>
+<span class="sd">                to the given signal.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">w_signal</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">whiten_signal</span><span class="p">(</span><span class="n">signal</span><span class="p">)</span>
+        <span class="n">wf_signal</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">flatten</span><span class="p">(</span><span class="n">w_signal</span><span class="p">)</span>
+        <span class="n">pfa</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">ncx2</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">wf_signal</span><span class="p">,</span> <span class="n">df</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">fullyflatshape</span><span class="p">,</span> <span class="n">nc</span><span class="o">=</span><span class="mf">0.</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">pfa</span></div>
+
+
+<div class="viewcode-block" id="Post.get_pfa_Tnp">
+<a class="viewcode-back" href="../../../autoapi/nifits/extra/index.html#nifits.extra.extra.Post.get_pfa_Tnp">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_pfa_Tnp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">alphas</span><span class="p">,</span> <span class="n">betas</span><span class="p">,</span>
+                    <span class="n">signal</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                    <span class="n">model_signal</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                        <span class="n">md</span><span class="o">=</span><span class="n">np</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Compute the Pfa for the Neyman-Pearson test.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+
+
+<div class="viewcode-block" id="Post.get_blackbody_native">
+<a class="viewcode-back" href="../../../autoapi/nifits/extra/index.html#nifits.extra.extra.Post.get_blackbody_native">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_blackbody_native</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            blackbody_spectrum: in units consistent with the native</span>
+<span class="sd">                units of the file $[a.sr^{-1}.m^{-2}]$ (where [a] is typically [ph/s]).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Typically given there in erg/Hz/s/sr/cm^2</span>
+        <span class="n">myspectral_density</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bb</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">oi_wavelength</span><span class="o">.</span><span class="n">lambs</span> <span class="o">*</span> <span class="n">units</span><span class="o">.</span><span class="n">m</span><span class="p">)</span>
+        <span class="c1"># Photon_energies in J/ph</span>
+        <span class="n">photon_energies</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">oi_wavelength</span><span class="o">.</span><span class="n">lambs</span><span class="o">*</span><span class="n">units</span><span class="o">.</span><span class="n">m</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span>
+                            <span class="n">units</span><span class="o">.</span><span class="n">J</span><span class="p">,</span> <span class="n">equivalencies</span><span class="o">=</span><span class="n">units</span><span class="o">.</span><span class="n">equivalencies</span><span class="o">.</span><span class="n">spectral</span><span class="p">())</span>\
+                                <span class="o">/</span> <span class="n">units</span><span class="o">.</span><span class="n">photon</span>
+        <span class="n">dnus</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">oi_wavelength</span><span class="o">.</span><span class="n">dnus</span> <span class="o">*</span> <span class="p">(</span><span class="n">units</span><span class="o">.</span><span class="n">Hz</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">((</span><span class="n">myspectral_density</span> <span class="o">*</span> <span class="n">dnus</span> <span class="o">/</span> <span class="n">photon_energies</span><span class="p">)</span><span class="o">.</span><span class="n">unit</span><span class="p">)</span>
+        <span class="n">blackbody_spectrum</span> <span class="o">=</span> <span class="p">(</span><span class="n">myspectral_density</span> <span class="o">*</span> <span class="n">dnus</span> <span class="o">/</span> <span class="n">photon_energies</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span>
+                                 <span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_iout</span><span class="o">.</span><span class="n">unit</span> <span class="o">/</span> <span class="n">units</span><span class="o">.</span><span class="n">sr</span> <span class="o">/</span> <span class="p">(</span><span class="n">units</span><span class="o">.</span><span class="n">m</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">blackbody_spectrum</span></div>
+
+
+
+<div class="viewcode-block" id="Post.get_blackbody_collected">
+<a class="viewcode-back" href="../../../autoapi/nifits/extra/index.html#nifits.extra.extra.Post.get_blackbody_collected">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_blackbody_collected</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">alphas</span><span class="p">,</span> <span class="n">betas</span><span class="p">,</span>
+                        <span class="n">kernels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">whiten</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                            <span class="n">to_si</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Obtain the output spectra of a blackbody at the given blackbody temperature</span>
+<span class="sd">        Args:</span>
+<span class="sd">            alphas: ArrayLike: Relative position in rad</span>
+<span class="sd">            betas:  ArrayLike: Relative position in rad</span>
+<span class="sd">            kernels: Bool (True) Whether to work in the kernel postprocessing space</span>
+<span class="sd">                (False is not implemented yet)</span>
+<span class="sd">            whiten: Bool (True) whether to use whitening post-processing (False</span>
+<span class="sd">                is not implemented yet)</span>
+<span class="sd">            to_si: Bool (True) convert to SI units</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">collecting_map_q</span> <span class="o">=</span> <span class="n">units</span><span class="o">.</span><span class="n">m</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_all_outs</span><span class="p">(</span><span class="n">alphas</span><span class="p">,</span> <span class="n">betas</span><span class="p">,</span> <span class="n">kernels</span><span class="o">=</span><span class="n">kernels</span><span class="p">)</span>
+        <span class="n">blackbody_spectrum</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_blackbody_native</span><span class="p">()</span>
+        <span class="n">collected_flux</span> <span class="o">=</span> <span class="n">blackbody_spectrum</span><span class="p">[</span><span class="kc">None</span><span class="p">,:,</span><span class="kc">None</span><span class="p">,</span><span class="kc">None</span><span class="p">]</span> \
+                                <span class="o">*</span> <span class="n">collecting_map_q</span><span class="p">[:,:,:,:]</span>
+        <span class="k">if</span> <span class="n">whiten</span><span class="p">:</span>
+            <span class="n">blackbody_signal</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">W_unit</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">whiten_signal</span><span class="p">(</span><span class="n">collected_flux</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">blackbody_signal</span> <span class="o">=</span> <span class="n">collected_flux</span>
+        <span class="c1"># collected_flux is in equivalent W / rad^2 </span>
+        <span class="c1"># That is a power per solid angle of source</span>
+        
+        <span class="k">if</span> <span class="n">to_si</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">blackbody_signal</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">blackbody_signal</span><span class="o">.</span><span class="n">unit</span><span class="o">.</span><span class="n">to_system</span><span class="p">(</span><span class="n">units</span><span class="o">.</span><span class="n">si</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">blackbody_signal</span></div>
+
+<div class="viewcode-block" id="Post.get_Te">
+<a class="viewcode-back" href="../../../autoapi/nifits/extra/index.html#nifits.extra.extra.Post.get_Te">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_Te</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Computes the Te test statistic of the current file. This test statistic</span>
+<span class="sd">        is supposed to be distributed as a chi^2 under H_0.</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            Te : x.T.dot(x) where x is the whitened signal.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="p">,</span> <span class="s2">&quot;ni_kiout&quot;</span><span class="p">):</span>
+            <span class="n">kappa</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">whiten_signal</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_kiout</span><span class="o">.</span><span class="n">kiout</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Needs a NI_KIOUT extension&quot;</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">kappa</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">x</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">x</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Post.get_pdet_te">
+<a class="viewcode-back" href="../../../autoapi/nifits/extra/index.html#nifits.extra.extra.Post.get_pdet_te">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_pdet_te</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">alphas</span><span class="p">,</span> <span class="n">betas</span><span class="p">,</span>
+                    <span class="n">solid_angle</span><span class="p">,</span>
+                    <span class="n">kernels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">pfa</span><span class="o">=</span><span class="mf">0.046</span><span class="p">,</span>
+                    <span class="n">whiten</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                    <span class="n">temperature</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        pfa:</span>
+<span class="sd">        * 1 sigma: 0.32</span>
+<span class="sd">        * 2 sigma: 0.046</span>
+<span class="sd">        * 3 sigma: 0.0027</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">temperature</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">add_blackbody</span><span class="p">(</span><span class="n">temperature</span><span class="p">)</span>
+        <span class="n">ref_spectrum</span> <span class="o">=</span> <span class="n">solid_angle</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_blackbody_collected</span><span class="p">(</span><span class="n">alphas</span><span class="p">,</span> <span class="n">betas</span><span class="p">,</span>
+                                                    <span class="n">kernels</span><span class="o">=</span><span class="n">kernels</span><span class="p">,</span>
+                                                    <span class="n">whiten</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                                    <span class="n">to_si</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">ref_spectrum</span><span class="o">.</span><span class="n">unit</span><span class="p">)</span>
+        <span class="n">threshold</span> <span class="o">=</span> <span class="n">ncx2</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">pfa</span><span class="p">,</span> <span class="n">df</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">fullyflatshape</span><span class="p">,</span> <span class="n">nc</span><span class="o">=</span><span class="mf">0.</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">ref_spectrum</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+        <span class="n">xTx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s2">&quot;o m , o m -&gt; m&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+        <span class="n">pdet_Pfa</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">ncx2</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">threshold</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">fullyflatshape</span><span class="p">,</span> <span class="n">xTx</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">pdet_Pfa</span></div>
+
+
+<div class="viewcode-block" id="Post.get_sensitivity_te">
+<a class="viewcode-back" href="../../../autoapi/nifits/extra/index.html#nifits.extra.extra.Post.get_sensitivity_te">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_sensitivity_te</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">alphas</span><span class="p">,</span> <span class="n">betas</span><span class="p">,</span>
+                    <span class="n">kernels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                    <span class="n">temperature</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">pfa</span><span class="o">=</span><span class="mf">0.046</span><span class="p">,</span> <span class="n">pdet</span><span class="o">=</span><span class="mf">0.90</span><span class="p">,</span>
+                    <span class="n">distance</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">radius_unit</span><span class="o">=</span><span class="n">units</span><span class="o">.</span><span class="n">Rjup</span><span class="p">,</span>
+                    <span class="n">md</span><span class="o">=</span><span class="n">np</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        .. code-block:: python</span>
+
+<span class="sd">            from scipy.stats import ncx2</span>
+<span class="sd">            xs = np.linspace(-10, 10, 100)</span>
+<span class="sd">            ys = np.linspace(1e-6, 0.999, 100)</span>
+<span class="sd">            u = 1 - ncx2.cdf(xs, df=10, nc=0)</span>
+<span class="sd">            v = ncx2.ppf(1 - ys, df=10, nc=0)</span>
+
+<span class="sd">            plt.figure()</span>
+<span class="sd">            plt.plot(xs, u)</span>
+<span class="sd">            plt.show()</span>
+
+<span class="sd">            plt.figure()</span>
+<span class="sd">            plt.plot(ys, v)</span>
+<span class="sd">            plt.plot(u, xs)</span>
+<span class="sd">            plt.show()</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">leastsq</span>
+        <span class="k">if</span> <span class="n">temperature</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">add_blackbody</span><span class="p">(</span><span class="n">temperature</span><span class="p">)</span>
+        <span class="n">ref_spectrum</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_blackbody_collected</span><span class="p">(</span><span class="n">alphas</span><span class="o">=</span><span class="n">alphas</span><span class="p">,</span><span class="n">betas</span><span class="o">=</span><span class="n">betas</span><span class="p">,</span>
+                                                    <span class="n">kernels</span><span class="o">=</span><span class="n">kernels</span><span class="p">,</span> <span class="n">whiten</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                                    <span class="n">to_si</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Ref spectrum unit: &quot;</span><span class="p">,</span> <span class="n">ref_spectrum</span><span class="o">.</span><span class="n">unit</span><span class="p">)</span>
+        <span class="n">threshold</span> <span class="o">=</span> <span class="n">ncx2</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">pfa</span><span class="p">,</span> <span class="n">df</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">fullyflatshape</span><span class="p">,</span> <span class="n">nc</span><span class="o">=</span><span class="mf">0.</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="n">ref_spectrum</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">ref_spectrum</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Ref signal (x) unit: &quot;</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">unit</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Ref signal (x) shape: &quot;</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+        <span class="n">xtx</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s2">&quot;m i, i m -&gt; m&quot;</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+        <span class="n">lambda0</span> <span class="o">=</span> <span class="mf">1.0e-3</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">fullyflatshape</span>
+        <span class="c1"># The solution lambda is the x^T.x value satisfying Pdet and Pfa</span>
+        <span class="n">sol</span> <span class="o">=</span> <span class="n">leastsq</span><span class="p">(</span><span class="n">residual_pdet_Te</span><span class="p">,</span> <span class="n">lambda0</span><span class="p">,</span> 
+                        <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">threshold</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">fullyflatshape</span><span class="p">,</span> <span class="n">pdet</span><span class="p">))</span><span class="c1"># AKA lambda</span>
+        <span class="n">lamb</span> <span class="o">=</span> <span class="n">sol</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+        <span class="c1"># Concatenate the wavelengths</span>
+        <span class="n">lim_solid_angle</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">lamb</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">xtx</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">distance</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">lim_solid_angle</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">distance</span><span class="p">,</span> <span class="n">units</span><span class="o">.</span><span class="n">Quantity</span><span class="p">):</span>
+            <span class="n">dist_converted</span> <span class="o">=</span> <span class="n">distance</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">radius_unit</span><span class="p">)</span>
+            <span class="n">lim_radius</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">dist_converted</span><span class="o">*</span><span class="n">md</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">lim_solid_angle</span><span class="o">/</span><span class="n">md</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">lim_radius</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">radius_unit</span><span class="p">,</span> <span class="n">equivalencies</span><span class="o">=</span><span class="n">units</span><span class="o">.</span><span class="n">equivalencies</span><span class="o">.</span><span class="n">dimensionless_angles</span><span class="p">())</span></div>
+
+
+<div class="viewcode-block" id="Post.get_pdet_tnp">
+<a class="viewcode-back" href="../../../autoapi/nifits/extra/index.html#nifits.extra.extra.Post.get_pdet_tnp">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_pdet_tnp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">transmission_map</span><span class="p">,</span> <span class="n">pfa</span><span class="o">=</span><span class="mf">0.046</span><span class="p">,</span> <span class="n">pdet</span><span class="o">=</span><span class="mf">0.90</span><span class="p">):</span>
+        <span class="k">pass</span></div>
+
+    
+<div class="viewcode-block" id="Post.get_sensitivity_tnp">
+<a class="viewcode-back" href="../../../autoapi/nifits/extra/index.html#nifits.extra.extra.Post.get_sensitivity_tnp">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_sensitivity_tnp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">transmission_map</span><span class="p">,</span> <span class="n">pfa</span><span class="o">=</span><span class="mf">0.046</span><span class="p">,</span> <span class="n">pdet</span><span class="o">=</span><span class="mf">0.90</span><span class="p">):</span>
+        <span class="k">pass</span></div>
 </div>
 
+
+
+<span class="n">massq2sr</span> <span class="o">=</span> <span class="p">(</span><span class="n">units</span><span class="o">.</span><span class="n">mas</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">units</span><span class="o">.</span><span class="n">sr</span><span class="p">)</span>
+<span class="n">sr2massq</span> <span class="o">=</span> <span class="p">(</span><span class="n">units</span><span class="o">.</span><span class="n">sr</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">units</span><span class="o">.</span><span class="n">mas</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">astropy.modeling.models</span> <span class="kn">import</span> <span class="n">BlackBody</span> <span class="k">as</span> <span class="n">BB</span>
+<span class="kn">import</span> <span class="nn">astropy.constants</span> <span class="k">as</span> <span class="nn">cst</span>
+
+<div class="viewcode-block" id="e2ph">
+<a class="viewcode-back" href="../../../autoapi/nifits/extra/index.html#nifits.extra.extra.e2ph">[docs]</a>
+<span class="k">def</span> <span class="nf">e2ph</span><span class="p">(</span><span class="n">energy</span><span class="p">,</span> <span class="n">wl</span><span class="p">):</span>
+    <span class="n">nu</span> <span class="o">=</span> <span class="n">cst</span><span class="o">.</span><span class="n">c</span> <span class="o">/</span> <span class="p">(</span><span class="n">wl</span> <span class="o">*</span> <span class="n">units</span><span class="o">.</span><span class="n">m</span><span class="p">)</span>
+    <span class="n">ephot</span> <span class="o">=</span> <span class="n">cst</span><span class="o">.</span><span class="n">h</span> <span class="o">*</span> <span class="n">nu</span>
+    <span class="n">nphot</span> <span class="o">=</span> <span class="n">energy</span><span class="o">/</span><span class="n">ephot</span>
+    <span class="k">return</span> <span class="n">nphot</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">nphot</span><span class="o">.</span><span class="n">unit</span><span class="o">.</span><span class="n">to_system</span><span class="p">(</span><span class="n">units</span><span class="o">.</span><span class="n">si</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span></div>
+
+
+<div class="viewcode-block" id="ph2e">
+<a class="viewcode-back" href="../../../autoapi/nifits/extra/index.html#nifits.extra.extra.ph2e">[docs]</a>
+<span class="k">def</span> <span class="nf">ph2e</span><span class="p">(</span><span class="n">nphot</span><span class="p">,</span> <span class="n">wl</span><span class="p">):</span>
+    <span class="n">nu</span> <span class="o">=</span> <span class="n">cst</span><span class="o">.</span><span class="n">c</span> <span class="o">/</span> <span class="p">(</span><span class="n">wl</span> <span class="o">*</span> <span class="n">units</span><span class="o">.</span><span class="n">m</span><span class="p">)</span>
+    <span class="n">ephot</span> <span class="o">=</span> <span class="n">cst</span><span class="o">.</span><span class="n">h</span> <span class="o">*</span> <span class="n">nu</span>
+    <span class="n">energy</span> <span class="o">=</span> <span class="n">nphot</span> <span class="o">*</span> <span class="n">ephot</span>
+    <span class="k">return</span> <span class="n">energy</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">energy</span><span class="o">.</span><span class="n">unit</span><span class="o">.</span><span class="n">to_system</span><span class="p">(</span><span class="n">units</span><span class="o">.</span><span class="n">si</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span></div>
 
 
 <div class="viewcode-block" id="whitened_kiout">
@@ -391,6 +654,35 @@
     <span class="n">wout_full</span> <span class="o">=</span> <span class="n">wout</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="n">full_shape</span><span class="p">))</span>
     <span class="k">return</span> <span class="n">wout_full</span></div>
 
+
+<span class="c1"># def whitening_transform(self, input):</span>
+<span class="c1">#     &quot;&quot;&quot;</span>
+<span class="c1">#         Currently unused</span>
+<span class="c1">#     &quot;&quot;&quot;</span>
+    
+<span class="c1">#     full_shape = data.shape</span>
+<span class="c1">#     flat_full_shape = (full_shape[0], full_shape[1]*full_shape[2])</span>
+<span class="c1">#     flat_out = rearrange(data, &quot;frame wavelength output -&gt; frame (wavelength output)&quot;)</span>
+<span class="c1">#     output = self.md.einsum(&quot;f o i , f i -&gt; f o&quot;, self.Ws, flat_out)</span>
+<span class="c1">#     return output</span>
+
+<div class="viewcode-block" id="residual_pdet_Te">
+<a class="viewcode-back" href="../../../autoapi/nifits/extra/index.html#nifits.extra.extra.residual_pdet_Te">[docs]</a>
+<span class="k">def</span> <span class="nf">residual_pdet_Te</span><span class="p">(</span><span class="n">lamb</span><span class="p">,</span> <span class="n">xsi</span><span class="p">,</span> <span class="n">rank</span><span class="p">,</span> <span class="n">targ</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Computes the residual of Pdet</span>
+<span class="sd">    </span>
+<span class="sd">    **Arguments:**</span>
+<span class="sd">    </span>
+<span class="sd">    * lamb     : The noncentrality parameter representing the feature</span>
+<span class="sd">    * targ     : The target Pdet to converge to</span>
+<span class="sd">    * xsi      : The location of threshold</span>
+<span class="sd">    * rank     : The rank of observable</span>
+<span class="sd">    </span>
+<span class="sd">    **Returns** the Pdet difference. See *Ceau et al. 2019* for more information</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">respdet</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">ncx2</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">xsi</span><span class="p">,</span><span class="n">rank</span><span class="p">,</span><span class="n">lamb</span><span class="p">)</span> <span class="o">-</span> <span class="n">targ</span>
+    <span class="k">return</span> <span class="n">respdet</span></div>
 
 
 
@@ -428,7 +720,7 @@
       
     </aside>
   </div>
-</div><script src="../../../_static/documentation_options.js?v=47de8214"></script>
+</div><script src="../../../_static/documentation_options.js?v=8c5712d9"></script>
     <script src="../../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/scripts/furo.js?v=5fa4622c"></script>

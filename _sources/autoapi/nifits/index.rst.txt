@@ -19,7 +19,10 @@ Package Contents
 ----------------
 
 .. py:data:: __version__
-   :value: '0.0.3'
+
+   
+
+.. py:data:: __standard_version__
 
    
 

@@ -139,6 +139,14 @@ Attributes
                           Default: ""
 
 
+   .. py:method:: check_unit_coherence()
+
+          Check the coherence of the units of and prints the result
+      NI_IOUT, NI_KCOV, and NI_KIOUT if they exist.
+
+      Otherwise, does nothing.
+
+
 
 .. py:data:: ModuleType
 

@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" />
 
     <!-- Generated with Sphinx 7.3.7 and Furo 2024.08.06 -->
-        <title>nifits.io.oifits - NIFITS 0.0.3 documentation</title>
+        <title>nifits.io.oifits - NIFITS 0.0.4 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=362ab14a" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?v=354aac6f" />
     <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=fd3f3429" />
@@ -167,7 +167,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../../../index.html"><div class="brand">NIFITS 0.0.3 documentation</div></a>
+      <a href="../../../index.html"><div class="brand">NIFITS 0.0.4 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -191,7 +191,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../../../index.html">
   
   
-  <span class="sidebar-brand-text">NIFITS 0.0.3 documentation</span>
+  <span class="sidebar-brand-text">NIFITS 0.0.4 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="../../../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -287,6 +287,10 @@
 <span class="c1"># A hack to fix the documentation of type hinting</span>
 <span class="kn">import</span> <span class="nn">numpy.typing</span>
 <span class="n">ArrayLike</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">typing</span><span class="o">.</span><span class="n">ArrayLike</span>
+
+
+<span class="n">__version__</span> <span class="o">=</span> <span class="s2">&quot;0.0.4&quot;</span>
+<span class="n">__standard_version__</span> <span class="o">=</span> <span class="s2">&quot;0.2&quot;</span>
 
 <span class="n">_mjdzero</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">1858</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">17</span><span class="p">)</span>
 
@@ -481,9 +485,18 @@
 
 <span class="sd">    * ``from_hdu``: Creates the object from an ``astropy.io.fits.TableHDU`` object</span>
 <span class="sd">    * ``to_hdu``  : Returns the ``TableHDU`` from itself.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        data_table: [ArrayLike] The data to stored </span>
+<span class="sd">        header: [fits.Header] A fits header (optional)</span>
+<span class="sd">        unit: [astropy.units.Unit] Units of the data stored</span>
+<span class="sd">            (mandatory of NI_IOUT, NI_KIOUT and NI_KCOV)</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">data_table</span><span class="p">:</span> <span class="n">Table</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="n">Table</span><span class="p">)</span>
     <span class="n">header</span><span class="p">:</span> <span class="n">fits</span><span class="o">.</span><span class="n">Header</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="n">fits</span><span class="o">.</span><span class="n">Header</span><span class="p">)</span>
+    <span class="n">unit</span><span class="p">:</span> <span class="n">u</span><span class="o">.</span><span class="n">Unit</span> <span class="o">=</span> <span class="kc">None</span>
+
     <span class="c1"># TODO: Potentially, this should be a None by default, while still being a </span>
     <span class="c1"># fits.Header type hint... We can if we have a None, we can catch it with </span>
     <span class="c1"># a __post_init__ method. TODO this will help cleanup the signature in the doc.</span>
@@ -500,7 +513,10 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">data_table</span> <span class="o">=</span> <span class="n">Table</span><span class="p">(</span><span class="n">hdu</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
         <span class="n">header</span> <span class="o">=</span> <span class="n">hdu</span><span class="o">.</span><span class="n">header</span>
-        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">data_table</span><span class="o">=</span><span class="n">data_table</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="n">header</span><span class="p">)</span></div>
+        <span class="k">if</span> <span class="s2">&quot;IUNIT&quot;</span> <span class="ow">in</span> <span class="n">header</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">data_table</span><span class="o">=</span><span class="n">data_table</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="n">header</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">Unit</span><span class="p">(</span><span class="n">header</span><span class="p">[</span><span class="s2">&quot;IUNIT&quot;</span><span class="p">]))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">data_table</span><span class="o">=</span><span class="n">data_table</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="n">header</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="NI_EXTENSION.to_hdu">
@@ -513,6 +529,9 @@
 <span class="sd">        </span>
 <span class="sd">            This also updates the header if dimension changes</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">):</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">unit</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">header</span><span class="p">[</span><span class="s2">&quot;IUNIT&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">unit</span><span class="o">.</span><span class="n">to_string</span><span class="p">(),</span> <span class="s2">&quot;Unit for the content&quot;</span><span class="p">)</span>
         <span class="c1"># TODO this looks like a bug in astropy.fits: the header should update on its own.</span>
         <span class="n">myhdu</span> <span class="o">=</span> <span class="n">fits</span><span class="o">.</span><span class="n">hdu</span><span class="o">.</span><span class="n">BinTableHDU</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">data_table</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">header</span><span class="p">)</span>
         <span class="c1"># myhdu = fits.hdu.BinTableHDU(name=self.name, data=self.data_table)</span>
@@ -537,9 +556,16 @@
 <span class="k">class</span> <span class="nc">NI_EXTENSION_ARRAY</span><span class="p">(</span><span class="n">NI_EXTENSION</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Generic class for NIFITS array extensions</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        data_array: [ArrayLike] The data to stored </span>
+<span class="sd">        header: [fits.Header] A fits header (optional)</span>
+<span class="sd">        unit: [astropy.units.Unit] Units of the data stored</span>
+<span class="sd">            (mandatory of NI_IOUT, NI_KIOUT and NI_KCOV)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">data_array</span><span class="p">:</span> <span class="n">ArrayLike</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">)</span>
     <span class="n">header</span><span class="p">:</span> <span class="n">fits</span><span class="o">.</span><span class="n">Header</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="n">fits</span><span class="o">.</span><span class="n">Header</span><span class="p">)</span>
+    <span class="n">unit</span><span class="p">:</span> <span class="n">u</span><span class="o">.</span><span class="n">Unit</span> <span class="o">=</span> <span class="kc">None</span>
 
 <div class="viewcode-block" id="NI_EXTENSION_ARRAY.from_hdu">
 <a class="viewcode-back" href="../../../nifits.io.html#nifits.io.oifits.NI_EXTENSION_ARRAY.from_hdu">[docs]</a>
@@ -550,7 +576,10 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">data_array</span> <span class="o">=</span> <span class="n">hdu</span><span class="o">.</span><span class="n">data</span>
         <span class="n">header</span> <span class="o">=</span> <span class="n">hdu</span><span class="o">.</span><span class="n">header</span>
-        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">data_array</span><span class="o">=</span><span class="n">data_array</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="n">header</span><span class="p">)</span></div>
+        <span class="k">if</span> <span class="s2">&quot;IUNIT&quot;</span> <span class="ow">in</span> <span class="n">header</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">data_array</span><span class="o">=</span><span class="n">data_array</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="n">header</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">Unit</span><span class="p">(</span><span class="n">header</span><span class="p">[</span><span class="s2">&quot;IUNIT&quot;</span><span class="p">]))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">data_array</span><span class="o">=</span><span class="n">data_array</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="n">header</span><span class="p">)</span></div>
 
     
 <div class="viewcode-block" id="NI_EXTENSION_ARRAY.to_hdu">
@@ -563,6 +592,9 @@
 <span class="sd">        </span>
 <span class="sd">            This also updates the header if dimension changes</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">):</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">unit</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">header</span><span class="p">[</span><span class="s2">&quot;IUNIT&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">unit</span><span class="o">.</span><span class="n">to_string</span><span class="p">(),</span> <span class="s2">&quot;Unit for the content&quot;</span><span class="p">)</span>
         <span class="n">myhdu</span> <span class="o">=</span> <span class="n">fits</span><span class="o">.</span><span class="n">hdu</span><span class="o">.</span><span class="n">ImageHDU</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span><span class="n">data</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">data_array</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">header</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Updating header:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">fits</span><span class="o">.</span><span class="n">HeaderDiff</span><span class="p">(</span><span class="n">myhdu</span><span class="o">.</span><span class="n">header</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">header</span><span class="p">))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">header</span> <span class="o">=</span> <span class="n">myhdu</span><span class="o">.</span><span class="n">header</span>
@@ -687,10 +719,10 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_table</span><span class="p">[</span><span class="s2">&quot;EFF_BAND&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">data</span>
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">nus</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">cst_c</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">lambs</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">cst_c</span><span class="o">/</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lambs</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">m</span><span class="p">))</span><span class="o">.</span><span class="n">value</span>
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">dnus</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">cst_c</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">dlambs</span></div>
+        <span class="k">return</span> <span class="p">(</span><span class="n">cst_c</span><span class="o">/</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dlambs</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">m</span><span class="p">))</span><span class="o">.</span><span class="n">value</span></div>
 
         
 
@@ -821,12 +853,21 @@
 <span class="k">class</span> <span class="nc">NI_IOUT</span><span class="p">(</span><span class="n">NI_EXTENSION</span><span class="p">):</span>
     <span class="vm">__doc__</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
 <span class="s2">    ``NI_IOUT`` : a recording of the output values, given in intensity,</span>
-<span class="s2">    flux, counts or arbitrary units.</span>
+<span class="s2">    flux, counts or arbitrary units. Providing unit is mandatory since 0.2.</span>
+<span class="s2">        </span>
 <span class="s2">    &quot;&quot;&quot;</span> <span class="o">+</span> <span class="n">NI_EXTENSION</span><span class="o">.</span><span class="vm">__doc__</span>
+    <span class="c1"># TODO: resume here proper IO for units</span>
     <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;NI_IOUT&quot;</span>
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">iout</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_table</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">data</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_table</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">data</span>
+<div class="viewcode-block" id="NI_IOUT.set_unit">
+<a class="viewcode-back" href="../../../nifits.io.html#nifits.io.oifits.NI_IOUT.set_unit">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_unit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new_unit</span><span class="p">,</span> <span class="n">comment</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">comment</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">comment</span> <span class="o">=</span> <span class="s2">&quot;The unit of the raw output flux.&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">header</span><span class="p">[</span><span class="s2">&quot;IUNIT&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">new_unit</span><span class="o">.</span><span class="n">to_string</span><span class="p">(),</span> <span class="n">comment</span><span class="p">)</span></div>
+</div>
 
 
 
@@ -836,26 +877,48 @@
     <span class="vm">__doc__</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
 <span class="s2">    ``NI_KIOUT`` : a recording of the processed output values using the</span>
 <span class="s2">    the post-processing matrix given by ``NI_KMAT``. Typically differential</span>
-<span class="s2">    null or kernel-null.</span>
-<span class="s2">    &quot;&quot;&quot;</span> <span class="o">+</span> <span class="n">NI_EXTENSION</span><span class="o">.</span><span class="vm">__doc__</span>
+<span class="s2">    null or kernel-null. Providing unit is mandatory since 0.2. The unit should</span>
+<span class="s2">    match NI_IOUT.</span>
+<span class="s2">    &quot;&quot;&quot;</span> <span class="o">+</span> <span class="n">NI_EXTENSION_ARRAY</span><span class="o">.</span><span class="vm">__doc__</span>
+    <span class="n">unit</span><span class="p">:</span> <span class="n">u</span><span class="o">.</span><span class="n">Unit</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">photon</span><span class="o">/</span><span class="n">u</span><span class="o">.</span><span class="n">s</span>
     <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;NI_KIOUT&quot;</span>
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">kiout</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_table</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">data</span>
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">shape</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_table</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_table</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span>
+<div class="viewcode-block" id="NI_KIOUT.set_unit">
+<a class="viewcode-back" href="../../../nifits.io.html#nifits.io.oifits.NI_KIOUT.set_unit">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_unit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new_unit</span><span class="p">,</span> <span class="n">comment</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">comment</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">comment</span> <span class="o">=</span> <span class="s2">&quot;The unit of the processed flux.&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">header</span><span class="p">[</span><span class="s2">&quot;IUNIT&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">new_unit</span><span class="o">.</span><span class="n">to_string</span><span class="p">(),</span> <span class="n">comment</span><span class="p">)</span></div>
+</div>
 
 
 
+<div class="viewcode-block" id="NI_KCOV">
+<a class="viewcode-back" href="../../../nifits.io.html#nifits.io.oifits.NI_KCOV">[docs]</a>
 <span class="k">class</span> <span class="nc">NI_KCOV</span><span class="p">(</span><span class="n">NI_EXTENSION_ARRAY</span><span class="p">):</span>
     <span class="vm">__doc__</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
 <span class="s2">    The covariance matrix for the processed data contained in KIOUT.</span>
+<span class="s2">     Providing unit is mandatory since 0.2. The unit should be</span>
+<span class="s2">    the unit of NI_KIOUT ^2.</span>
 <span class="s2">    &quot;&quot;&quot;</span> <span class="o">+</span> <span class="n">NI_EXTENSION_ARRAY</span><span class="o">.</span><span class="vm">__doc__</span>
+    <span class="n">unit</span><span class="p">:</span> <span class="n">u</span><span class="o">.</span><span class="n">Unit</span> <span class="o">=</span> <span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">photon</span><span class="o">/</span><span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
     <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;NI_KCOV&quot;</span>
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">kcov</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_array</span>
+<div class="viewcode-block" id="NI_KCOV.set_unit">
+<a class="viewcode-back" href="../../../nifits.io.html#nifits.io.oifits.NI_KCOV.set_unit">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_unit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new_unit</span><span class="p">,</span> <span class="n">comment</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">comment</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">comment</span> <span class="o">=</span> <span class="s2">&quot;The unit of the covariance matrix.&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">header</span><span class="p">[</span><span class="s2">&quot;IUNIT&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">new_unit</span><span class="o">.</span><span class="n">to_string</span><span class="p">(),</span> <span class="n">comment</span><span class="p">)</span></div>
+</div>
+
 
 
 <div class="viewcode-block" id="NI_KMAT">
@@ -997,13 +1060,6 @@
                     <span class="n">data</span><span class="o">=</span><span class="p">[</span><span class="n">indices</span><span class="p">,</span> <span class="n">all_offsets</span><span class="p">])</span>
     <span class="k">return</span> <span class="n">mytable</span><span class="p">,</span> <span class="n">xy2phasor</span></div>
 
-
-<div class="viewcode-block" id="NI_KCOV">
-<a class="viewcode-back" href="../../../nifits.io.html#nifits.io.oifits.NI_KCOV">[docs]</a>
-<span class="k">class</span> <span class="nc">NI_KCOV</span><span class="p">(</span><span class="n">NI_EXTENSION_ARRAY</span><span class="p">):</span>
-    <span class="vm">__doc__</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
-<span class="s2">    Storing the covariance of the data.</span>
-<span class="s2">    &quot;&quot;&quot;</span> <span class="o">+</span> <span class="n">NI_EXTENSION_ARRAY</span><span class="o">.</span><span class="vm">__doc__</span></div>
 
 
 <div class="viewcode-block" id="NI_FOV">
@@ -1211,6 +1267,9 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># TODO: Possibly, the static_hash should be a dictionary with</span>
         <span class="c1"># a hash for each extension</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">header</span><span class="p">[</span><span class="s2">&quot;VERSION&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">__standard_version__</span><span class="p">,</span>
+                            <span class="sa">f</span><span class="s2">&quot;Writen with rlaugier/nifits v</span><span class="si">{</span><span class="n">__version__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        
         <span class="n">hdulist</span> <span class="o">=</span> <span class="n">fits</span><span class="o">.</span><span class="n">HDUList</span><span class="p">()</span>
         <span class="n">hdu</span> <span class="o">=</span> <span class="n">fits</span><span class="o">.</span><span class="n">PrimaryHDU</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">static_only</span><span class="p">:</span>
@@ -1239,9 +1298,37 @@
             <span class="k">return</span> <span class="n">hdulist</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">hdulist</span></div>
+
+
+<div class="viewcode-block" id="nifits.check_unit_coherence">
+<a class="viewcode-back" href="../../../nifits.io.html#nifits.io.oifits.nifits.check_unit_coherence">[docs]</a>
+    <span class="k">def</span> <span class="nf">check_unit_coherence</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Check the coherence of the units of and prints the result</span>
+<span class="sd">        NI_IOUT, NI_KCOV, and NI_KIOUT if they exist.</span>
+
+<span class="sd">        Otherwise, does nothing.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;ni_iout&quot;</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;NI_IOUT&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ni_iout</span><span class="o">.</span><span class="n">unit</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;No NI_IOUT&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;ni_kiout&quot;</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;NI_KIOUT&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ni_kiout</span><span class="o">.</span><span class="n">unit</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;No NI_KIOUT&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;ni_kcov&quot;</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;NI_KCOV&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ni_kcov</span><span class="o">.</span><span class="n">unit</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;No NI_KCOV&quot;</span><span class="p">)</span>
+            
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;ni_iout&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;ni_kiout&quot;</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ni_iout</span><span class="o">.</span><span class="n">unit</span><span class="o">.</span><span class="n">is_equivalent</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ni_kiout</span><span class="o">.</span><span class="n">unit</span><span class="p">))</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;ni_kcov&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;ni_kiout&quot;</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ni_kcov</span><span class="o">.</span><span class="n">unit</span><span class="p">)</span><span class="o">.</span><span class="n">is_equivalent</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ni_kiout</span><span class="o">.</span><span class="n">unit</span><span class="p">))</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;ni_kcov&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;ni_iout&quot;</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ni_kcov</span><span class="o">.</span><span class="n">unit</span><span class="p">)</span><span class="o">.</span><span class="n">is_equivalent</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ni_iout</span><span class="o">.</span><span class="n">unit</span><span class="p">))</span></div>
 </div>
-
-
 
 
 
@@ -1285,7 +1372,7 @@
       
     </aside>
   </div>
-</div><script src="../../../_static/documentation_options.js?v=47de8214"></script>
+</div><script src="../../../_static/documentation_options.js?v=8c5712d9"></script>
     <script src="../../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/scripts/furo.js?v=5fa4622c"></script>

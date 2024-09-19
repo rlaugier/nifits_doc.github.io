@@ -45,7 +45,6 @@ Classes
    nifits.io.oifits.NI_KCOV
    nifits.io.oifits.NI_KMAT
    nifits.io.oifits.NI_MOD
-   nifits.io.oifits.NI_KCOV
    nifits.io.oifits.NI_FOV
    nifits.io.oifits.nifits
 
@@ -73,6 +72,8 @@ Attributes
 
    nifits.io.oifits.Table
    nifits.io.oifits.ArrayLike
+   nifits.io.oifits.__version__
+   nifits.io.oifits.__standard_version__
    nifits.io.oifits._mjdzero
    nifits.io.oifits.matchtargetbyname
    nifits.io.oifits.matchstationbyname
@@ -91,6 +92,16 @@ Attributes
    
 
 .. py:data:: ArrayLike
+
+   
+
+.. py:data:: __version__
+   :value: '0.0.4'
+
+   
+
+.. py:data:: __standard_version__
+   :value: '0.2'
 
    
 
@@ -225,6 +236,11 @@ Attributes
    * ``from_hdu``: Creates the object from an ``astropy.io.fits.TableHDU`` object
    * ``to_hdu``  : Returns the ``TableHDU`` from itself.
 
+   :param data_table: [ArrayLike] The data to stored
+   :param header: [fits.Header] A fits header (optional)
+   :param unit: [astropy.units.Unit] Units of the data stored
+                (mandatory of NI_IOUT, NI_KIOUT and NI_KCOV)
+
    .. py:attribute:: data_table
       :type: Table
 
@@ -232,6 +248,11 @@ Attributes
 
    .. py:attribute:: header
       :type: astropy.io.fits.Header
+
+      
+
+   .. py:attribute:: unit
+      :type: astropy.units.Unit
 
       
 
@@ -263,6 +284,11 @@ Attributes
 
    Generic class for NIFITS array extensions
 
+   :param data_array: [ArrayLike] The data to stored
+   :param header: [fits.Header] A fits header (optional)
+   :param unit: [astropy.units.Unit] Units of the data stored
+                (mandatory of NI_IOUT, NI_KIOUT and NI_KCOV)
+
    .. py:property:: shape
 
 
@@ -273,6 +299,11 @@ Attributes
 
    .. py:attribute:: header
       :type: astropy.io.fits.Header
+
+      
+
+   .. py:attribute:: unit
+      :type: astropy.units.Unit
 
       
 
@@ -350,6 +381,11 @@ Attributes
    * ``from_hdu``: Creates the object from an ``astropy.io.fits.TableHDU`` object
    * ``to_hdu``  : Returns the ``TableHDU`` from itself.
 
+   :param data_table: [ArrayLike] The data to stored
+   :param header: [fits.Header] A fits header (optional)
+   :param unit: [astropy.units.Unit] Units of the data stored
+                (mandatory of NI_IOUT, NI_KIOUT and NI_KCOV)
+
    .. py:attribute:: __doc__
 
       
@@ -371,6 +407,11 @@ Attributes
 
    * ``from_hdu``: Creates the object from an ``astropy.io.fits.TableHDU`` object
    * ``to_hdu``  : Returns the ``TableHDU`` from itself.
+
+   :param data_table: [ArrayLike] The data to stored
+   :param header: [fits.Header] A fits header (optional)
+   :param unit: [astropy.units.Unit] Units of the data stored
+                (mandatory of NI_IOUT, NI_KIOUT and NI_KCOV)
 
    .. py:property:: lambs
 
@@ -453,6 +494,11 @@ Attributes
    * ``from_hdu``: Creates the object from an ``astropy.io.fits.TableHDU`` object
    * ``to_hdu``  : Returns the ``TableHDU`` from itself.
 
+   :param data_table: [ArrayLike] The data to stored
+   :param header: [fits.Header] A fits header (optional)
+   :param unit: [astropy.units.Unit] Units of the data stored
+                (mandatory of NI_IOUT, NI_KIOUT and NI_KCOV)
+
    .. py:property:: asarray
 
 
@@ -515,6 +561,11 @@ Attributes
    * ``from_hdu``: Creates the object from an ``astropy.io.fits.TableHDU`` object
    * ``to_hdu``  : Returns the ``TableHDU`` from itself.
 
+   :param data_table: [ArrayLike] The data to stored
+   :param header: [fits.Header] A fits header (optional)
+   :param unit: [astropy.units.Unit] Units of the data stored
+                (mandatory of NI_IOUT, NI_KIOUT and NI_KCOV)
+
    .. py:property:: iout
 
 
@@ -526,6 +577,9 @@ Attributes
       :value: 'NI_IOUT'
 
       
+
+   .. py:method:: set_unit(new_unit, comment=None)
+
 
 
 .. py:class:: NI_KIOUT
@@ -540,6 +594,11 @@ Attributes
    * ``from_hdu``: Creates the object from an ``astropy.io.fits.TableHDU`` object
    * ``to_hdu``  : Returns the ``TableHDU`` from itself.
 
+   :param data_table: [ArrayLike] The data to stored
+   :param header: [fits.Header] A fits header (optional)
+   :param unit: [astropy.units.Unit] Units of the data stored
+                (mandatory of NI_IOUT, NI_KIOUT and NI_KCOV)
+
    .. py:property:: kiout
 
 
@@ -550,10 +609,18 @@ Attributes
 
       
 
+   .. py:attribute:: unit
+      :type: astropy.units.Unit
+
+      
+
    .. py:attribute:: name
       :value: 'NI_KIOUT'
 
       
+
+   .. py:method:: set_unit(new_unit, comment=None)
+
 
 
 .. py:class:: NI_KCOV
@@ -563,10 +630,20 @@ Attributes
 
    Generic class for NIFITS array extensions
 
+   :param data_array: [ArrayLike] The data to stored
+   :param header: [fits.Header] A fits header (optional)
+   :param unit: [astropy.units.Unit] Units of the data stored
+                (mandatory of NI_IOUT, NI_KIOUT and NI_KCOV)
+
    .. py:property:: kcov
 
 
    .. py:attribute:: __doc__
+
+      
+
+   .. py:attribute:: unit
+      :type: astropy.units.Unit
 
       
 
@@ -575,6 +652,9 @@ Attributes
 
       
 
+   .. py:method:: set_unit(new_unit, comment=None)
+
+
 
 .. py:class:: NI_KMAT
 
@@ -582,6 +662,11 @@ Attributes
    Bases: :py:obj:`NI_EXTENSION_ARRAY`
 
    Generic class for NIFITS array extensions
+
+   :param data_array: [ArrayLike] The data to stored
+   :param header: [fits.Header] A fits header (optional)
+   :param unit: [astropy.units.Unit] Units of the data stored
+                (mandatory of NI_IOUT, NI_KIOUT and NI_KCOV)
 
    .. py:property:: K
 
@@ -705,18 +790,6 @@ Attributes
    A convenience function to help define the FOV function and data model
 
 
-.. py:class:: NI_KCOV
-
-
-   Bases: :py:obj:`NI_EXTENSION_ARRAY`
-
-   Generic class for NIFITS array extensions
-
-   .. py:attribute:: __doc__
-
-      
-
-
 .. py:class:: NI_FOV
 
 
@@ -728,6 +801,11 @@ Attributes
 
    * ``from_hdu``: Creates the object from an ``astropy.io.fits.TableHDU`` object
    * ``to_hdu``  : Returns the ``TableHDU`` from itself.
+
+   :param data_table: [ArrayLike] The data to stored
+   :param header: [fits.Header] A fits header (optional)
+   :param unit: [astropy.units.Unit] Units of the data stored
+                (mandatory of NI_IOUT, NI_KIOUT and NI_KCOV)
 
    .. py:attribute:: __doc__
 
@@ -858,6 +936,14 @@ Attributes
                            Defaultult: False
       :param static_hash: (str) The hash of the static file.
                           Default: ""
+
+
+   .. py:method:: check_unit_coherence()
+
+          Check the coherence of the units of and prints the result
+      NI_IOUT, NI_KCOV, and NI_KIOUT if they exist.
+
+      Otherwise, does nothing.
 
 
 
