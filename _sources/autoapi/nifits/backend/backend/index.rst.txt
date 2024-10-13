@@ -126,17 +126,18 @@ Attributes
    .. py:method:: __post_init__()
 
 
-   .. py:method:: from_uniform_disk(radius=None, n: int = 10, phi_0: float = 0.0, offset: ArrayLike = np.array((0.0, 0.0)), md: ModuleType = np, unit: astropy.units.Unit = units.mas)
+   .. py:method:: from_uniform_disk(radius: float = None, n: int = 10, phi_0: float = 0.0, offset: ArrayLike = np.array((0.0, 0.0)), md: ModuleType = np, unit: astropy.units.Unit = units.mas)
       :classmethod:
 
           Create a point collection as a uniformly sampled disk.
 
-      :param a_coords: The array of samples along the first axis
-                       (typically alpha)
-      :param b_coords: The array of samples along the second axis
-                       (typically beta, the second dimension)
-
-      **Handles:**
+      :param radius: [mas] The angular radius of the disk to model
+      :param n: The total number of points to create
+      :param phi_0: [rad] Arbitrary angle to initialiaze pattern
+      :param offset: [mas] An offset of the disk location with respect
+                     to the center of the field of view
+      :param md: The numerical module to use as backend
+      :param unit: The unit to use for interactions
 
 
    .. py:method:: from_grid(a_coords: ArrayLike, b_coords: ArrayLike, md: ModuleType = np, unit: astropy.units.Unit = units.mas)

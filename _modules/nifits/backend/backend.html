@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" />
 
     <!-- Generated with Sphinx 7.3.7 and Furo 2024.08.06 -->
-        <title>nifits.backend.backend - NIFITS 0.0.3 documentation</title>
+        <title>nifits.backend.backend - NIFITS 0.0.4 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=362ab14a" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?v=354aac6f" />
     <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=fd3f3429" />
@@ -167,7 +167,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../../../index.html"><div class="brand">NIFITS 0.0.3 documentation</div></a>
+      <a href="../../../index.html"><div class="brand">NIFITS 0.0.4 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -191,7 +191,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../../../index.html">
   
   
-  <span class="sidebar-brand-text">NIFITS 0.0.3 documentation</span>
+  <span class="sidebar-brand-text">NIFITS 0.0.4 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="../../../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -355,7 +355,7 @@
 <div class="viewcode-block" id="PointCollection.from_uniform_disk">
 <a class="viewcode-back" href="../../../nifits.backend.html#nifits.backend.backend.PointCollection.from_uniform_disk">[docs]</a>
     <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">from_uniform_disk</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="k">def</span> <span class="nf">from_uniform_disk</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">radius</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                         <span class="n">n</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
                         <span class="n">phi_0</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.</span><span class="p">,</span>
                         <span class="n">offset</span><span class="p">:</span> <span class="n">ArrayLike</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">((</span><span class="mf">0.</span><span class="p">,</span><span class="mf">0.</span><span class="p">)),</span>
@@ -365,12 +365,14 @@
 <span class="sd">            Create a point collection as a uniformly sampled disk.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            a_coords : The array of samples along the first axis</span>
-<span class="sd">                  (typically alpha)</span>
-<span class="sd">            b_coords : The array of samples along the second axis</span>
-<span class="sd">                  (typically beta, the second dimension)</span>
+<span class="sd">            radius :   [mas] The angular radius of the disk to model</span>
+<span class="sd">            n      :   The total number of points to create</span>
+<span class="sd">            phi_0  :   [rad] Arbitrary angle to initialiaze pattern</span>
+<span class="sd">            offset :   [mas] An offset of the disk location with respect</span>
+<span class="sd">                to the center of the field of view</span>
+<span class="sd">            md     :   The numerical module to use as backend</span>
+<span class="sd">            unit   :   The unit to use for interactions</span>
 
-<span class="sd">        **Handles:**</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">alpha</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="p">(</span><span class="mi">3</span> <span class="o">-</span> <span class="n">md</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>    <span class="c1"># the &quot;golden angle&quot;</span>
         <span class="n">points</span> <span class="o">=</span> <span class="p">[]</span>
@@ -386,7 +388,7 @@
 <div class="viewcode-block" id="PointCollection.from_grid">
 <a class="viewcode-back" href="../../../nifits.backend.html#nifits.backend.backend.PointCollection.from_grid">[docs]</a>
     <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">from_grid</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">a_coords</span><span class="p">:</span> <span class="n">ArrayLike</span><span class="p">,</span> <span class="n">b_coords</span><span class="p">:</span> <span class="s2">&quot;ArrayLike&quot;</span><span class="p">,</span>
+    <span class="k">def</span> <span class="nf">from_grid</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">a_coords</span><span class="p">:</span> <span class="n">ArrayLike</span><span class="p">,</span> <span class="n">b_coords</span><span class="p">:</span> <span class="n">ArrayLike</span><span class="p">,</span>
                         <span class="n">md</span><span class="p">:</span> <span class="n">ModuleType</span> <span class="o">=</span> <span class="n">np</span><span class="p">,</span>
                         <span class="n">unit</span><span class="p">:</span> <span class="n">units</span><span class="o">.</span><span class="n">Unit</span> <span class="o">=</span> <span class="n">units</span><span class="o">.</span><span class="n">mas</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -865,7 +867,7 @@
 <span class="sd">        **Returns** : A vector of complex phasors</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">xy_array</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_mod</span><span class="o">.</span><span class="n">appxy</span>
+        <span class="n">xy_array</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_mod</span><span class="o">.</span><span class="n">appxy</span><span class="p">)</span>
         <span class="n">lambs</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">oi_wavelength</span><span class="o">.</span><span class="n">lambs</span><span class="p">)</span>
         <span class="n">k</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">md</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="n">lambs</span>
         <span class="n">a</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">array</span><span class="p">((</span><span class="n">alphas</span><span class="p">,</span> <span class="n">betas</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">md</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
@@ -956,7 +958,7 @@
       
     </aside>
   </div>
-</div><script src="../../../_static/documentation_options.js?v=47de8214"></script>
+</div><script src="../../../_static/documentation_options.js?v=8c5712d9"></script>
     <script src="../../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/scripts/furo.js?v=5fa4622c"></script>
