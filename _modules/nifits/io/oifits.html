@@ -1285,11 +1285,15 @@
             <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">anext</span><span class="o">.</span><span class="n">lower</span><span class="p">()):</span>
                 <span class="nb">print</span><span class="p">(</span><span class="n">anext</span><span class="o">.</span><span class="n">lower</span><span class="p">(),</span> <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
                 <span class="n">theobj</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">anext</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
-                <span class="n">thehdu</span> <span class="o">=</span> <span class="n">theobj</span><span class="o">.</span><span class="n">to_hdu</span><span class="p">()</span>
-                <span class="n">hdulist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">thehdu</span><span class="p">)</span>
-                <span class="n">hdu</span><span class="o">.</span><span class="n">header</span><span class="p">[</span><span class="n">anext</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Included&quot;</span>
-                <span class="c1"># TODO Possibly we need to do this differently:</span>
-                <span class="c1"># TODO Maybe pass the header to the `to_hdu` method?</span>
+                <span class="k">if</span> <span class="n">theobj</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">thehdu</span> <span class="o">=</span> <span class="n">theobj</span><span class="o">.</span><span class="n">to_hdu</span><span class="p">()</span>
+                    <span class="n">hdulist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">thehdu</span><span class="p">)</span>
+                    <span class="n">hdu</span><span class="o">.</span><span class="n">header</span><span class="p">[</span><span class="n">anext</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Included&quot;</span>
+                    <span class="c1"># TODO Possibly we need to do this differently:</span>
+                    <span class="c1"># TODO Maybe pass the header to the `to_hdu` method?</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">hdu</span><span class="o">.</span><span class="n">header</span><span class="p">[</span><span class="n">anext</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Not included (None)&quot;</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Warning: </span><span class="si">{</span><span class="n">anext</span><span class="si">}</span><span class="s2"> was present but empty&quot;</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">hdu</span><span class="o">.</span><span class="n">header</span><span class="p">[</span><span class="n">anext</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Not included&quot;</span>
                 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Warning: Could not find the </span><span class="si">{</span><span class="n">anext</span><span class="si">}</span><span class="s2"> object&quot;</span><span class="p">)</span>

@@ -283,6 +283,9 @@ Attributes
       :param resolution: The number of pixels across the width.
 
 
+   .. py:method:: plot_frame(z=None, frame_index=0, wl_index=0, out_index=0, mycmap=None, marksize_increase=1.0, colorbar=True, xlabel=True, title=True)
+
+
    .. py:method:: __add__(other)
 
       Add together two collection of points.
