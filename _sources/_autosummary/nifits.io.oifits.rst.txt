@@ -5,6 +5,12 @@
 
    
    
+   .. rubric:: Module Attributes
+
+   .. autosummary::
+   
+      NI_FOV_DEFAULT_HEADER
+   
    
 
    
@@ -14,6 +20,7 @@
    .. autosummary::
    
       array_eq
+      check_item
       create_basic_fov_data
       getclass
       nulfunc
@@ -27,16 +34,18 @@
    .. autosummary::
    
       NI_CATM
+      NI_DSAMP
       NI_EXTENSION
       NI_EXTENSION_ARRAY
       NI_EXTENSION_CPX_ARRAY
       NI_FOV
+      NI_IOTAGS
       NI_IOUT
       NI_KCOV
       NI_KIOUT
       NI_KMAT
       NI_MOD
-      NI_OUT
+      NI_OSWAVELENGTH
       OI_ARRAY
       OI_STATION
       OI_TARGET

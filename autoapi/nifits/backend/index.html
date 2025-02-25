@@ -6,7 +6,7 @@
 <link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" /><link rel="next" title="nifits.backend.backend" href="backend/index.html" /><link rel="prev" title="nifits" href="../index.html" />
 
     <!-- Generated with Sphinx 7.3.7 and Furo 2024.08.06 -->
-        <title>nifits.backend - NIFITS 0.0.4 documentation</title>
+        <title>nifits.backend - NIFITS 0.0.6 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=362ab14a" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?v=354aac6f" />
     <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=fd3f3429" />
@@ -168,7 +168,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../../../index.html"><div class="brand">NIFITS 0.0.4 documentation</div></a>
+      <a href="../../../index.html"><div class="brand">NIFITS 0.0.6 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -192,7 +192,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../../../index.html">
   
   
-  <span class="sidebar-brand-text">NIFITS 0.0.4 documentation</span>
+  <span class="sidebar-brand-text">NIFITS 0.0.6 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="../../../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -292,6 +292,18 @@
 </table>
 </div>
 </section>
+<section id="functions">
+<h3>Functions<a class="headerlink" href="#functions" title="Link to this heading">¶</a></h3>
+<div class="table-wrapper autosummary longtable docutils container">
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nifits.backend.col_row_numbers" title="nifits.backend.col_row_numbers"><code class="xref py py-obj docutils literal notranslate"><span class="pre">col_row_numbers</span></code></a>(n[, col_ceiling])</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
 <section id="attributes">
 <h3>Attributes<a class="headerlink" href="#attributes" title="Link to this heading">¶</a></h3>
 <div class="table-wrapper autosummary longtable docutils container">
@@ -331,7 +343,7 @@
 
 <dl class="py data">
 <dt class="sig sig-object py" id="nifits.backend.STATIC_EXTENSIONS">
-<span class="sig-prename descclassname"><span class="pre">nifits.backend.</span></span><span class="sig-name descname"><span class="pre">STATIC_EXTENSIONS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[True,</span> <span class="pre">True,</span> <span class="pre">True,</span> <span class="pre">True,</span> <span class="pre">False,</span> <span class="pre">False,</span> <span class="pre">False,</span> <span class="pre">False,</span> <span class="pre">False]</span></em><a class="headerlink" href="#nifits.backend.STATIC_EXTENSIONS" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">nifits.backend.</span></span><span class="sig-name descname"><span class="pre">STATIC_EXTENSIONS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[True,</span> <span class="pre">True,</span> <span class="pre">True,</span> <span class="pre">True,</span> <span class="pre">False,</span> <span class="pre">False,</span> <span class="pre">False,</span> <span class="pre">False,</span> <span class="pre">False,</span> <span class="pre">True,</span> <span class="pre">True,</span> <span class="pre">False]</span></em><a class="headerlink" href="#nifits.backend.STATIC_EXTENSIONS" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py data">
@@ -341,7 +353,7 @@
 
 <dl class="py data">
 <dt class="sig sig-object py" id="id1">
-<span class="sig-prename descclassname"><span class="pre">nifits.backend.</span></span><span class="sig-name descname"><span class="pre">STATIC_EXTENSIONS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[True,</span> <span class="pre">True,</span> <span class="pre">True,</span> <span class="pre">True,</span> <span class="pre">False,</span> <span class="pre">False,</span> <span class="pre">False,</span> <span class="pre">False,</span> <span class="pre">False]</span></em><a class="headerlink" href="#id1" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">nifits.backend.</span></span><span class="sig-name descname"><span class="pre">STATIC_EXTENSIONS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[True,</span> <span class="pre">True,</span> <span class="pre">True,</span> <span class="pre">True,</span> <span class="pre">False,</span> <span class="pre">False,</span> <span class="pre">False,</span> <span class="pre">False,</span> <span class="pre">False,</span> <span class="pre">True,</span> <span class="pre">True,</span> <span class="pre">False]</span></em><a class="headerlink" href="#id1" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py class">
@@ -352,6 +364,11 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="nifits.backend.NIFITSClass.header">
 <span class="sig-name descname"><span class="pre">header</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">astropy.io.fits.Header</span></em><a class="headerlink" href="#nifits.backend.NIFITSClass.header" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nifits.backend.NIFITSClass.oi_array">
+<span class="sig-name descname"><span class="pre">oi_array</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="../../../nifits.io.html#nifits.io.oifits.OI_ARRAY" title="nifits.io.oifits.OI_ARRAY"><span class="pre">OI_ARRAY</span></a></em><a class="headerlink" href="#nifits.backend.NIFITSClass.oi_array" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -397,6 +414,21 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="nifits.backend.NIFITSClass.ni_kcov">
 <span class="sig-name descname"><span class="pre">ni_kcov</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="../../../nifits.io.html#nifits.io.oifits.NI_KCOV" title="nifits.io.oifits.NI_KCOV"><span class="pre">NI_KCOV</span></a></em><a class="headerlink" href="#nifits.backend.NIFITSClass.ni_kcov" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nifits.backend.NIFITSClass.ni_dsamp">
+<span class="sig-name descname"><span class="pre">ni_dsamp</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="../../../nifits.io.html#nifits.io.oifits.NI_DSAMP" title="nifits.io.oifits.NI_DSAMP"><span class="pre">NI_DSAMP</span></a></em><a class="headerlink" href="#nifits.backend.NIFITSClass.ni_dsamp" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nifits.backend.NIFITSClass.ni_oswavelength">
+<span class="sig-name descname"><span class="pre">ni_oswavelength</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="../../../nifits.io.html#nifits.io.oifits.NI_OSWAVELENGTH" title="nifits.io.oifits.NI_OSWAVELENGTH"><span class="pre">NI_OSWAVELENGTH</span></a></em><a class="headerlink" href="#nifits.backend.NIFITSClass.ni_oswavelength" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nifits.backend.NIFITSClass.ni_iotags">
+<span class="sig-name descname"><span class="pre">ni_iotags</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="../../../nifits.io.html#nifits.io.oifits.NI_IOTAGS" title="nifits.io.oifits.NI_IOTAGS"><span class="pre">NI_IOTAGS</span></a></em><a class="headerlink" href="#nifits.backend.NIFITSClass.ni_iotags" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -879,7 +911,40 @@ if <code class="docutils literal notranslate"><span class="pre">kernels</span></
 </div>
 </dd></dl>
 
+<dl class="py method">
+<dt class="sig sig-object py" id="nifits.backend.NI_Backend.downsample">
+<span class="sig-name descname"><span class="pre">downsample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Is</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nifits/backend/backend.html#NI_Backend.downsample"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.backend.NI_Backend.downsample" title="Link to this definition">¶</a></dt>
+<dd><p>Downsample flux from the NI_OSWAVELENGTH bins to
+OI_WAVELENGTH bins.
+Expected shape is : (n_frames, n_wl, n_outputs, n_points), the method
+simply applies the <code class="docutils literal notranslate"><span class="pre">NI_DSAMP</span></code> matrix along the second axis (1).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>Is</strong> – ArrayLike [flux] input the result computed with the
+oversampled wavelength channels.
+(n_frames, n_wlold, n_outputs, n_points)</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>ArrayLike [flux] (n_frames, n_wlnew, n_outputs, n_points)</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Ids</p>
+</dd>
+</dl>
+<p>Returns</p>
 </dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nifits.backend.NI_Backend.plot_recorded">
+<span class="sig-name descname"><span class="pre">plot_recorded</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cmap</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'viridis'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nrows_ncols</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">res_x</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">res_y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'nearest'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nifits/backend/backend.html#NI_Backend.plot_recorded"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.backend.NI_Backend.plot_recorded" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nifits.backend.col_row_numbers">
+<span class="sig-prename descclassname"><span class="pre">nifits.backend.</span></span><span class="sig-name descname"><span class="pre">col_row_numbers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col_ceiling</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nifits/backend/backend.html#col_row_numbers"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.backend.col_row_numbers" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
 
 </section>
 </section>
@@ -944,6 +1009,7 @@ if <code class="docutils literal notranslate"><span class="pre">kernels</span></
 <li><a class="reference internal" href="#submodules">Submodules</a></li>
 <li><a class="reference internal" href="#package-contents">Package Contents</a><ul>
 <li><a class="reference internal" href="#classes">Classes</a></li>
+<li><a class="reference internal" href="#functions">Functions</a></li>
 <li><a class="reference internal" href="#attributes">Attributes</a><ul>
 <li><a class="reference internal" href="#nifits.backend.NIFITS_EXTENSIONS"><code class="docutils literal notranslate"><span class="pre">NIFITS_EXTENSIONS</span></code></a></li>
 <li><a class="reference internal" href="#nifits.backend.STATIC_EXTENSIONS"><code class="docutils literal notranslate"><span class="pre">STATIC_EXTENSIONS</span></code></a></li>
@@ -951,6 +1017,7 @@ if <code class="docutils literal notranslate"><span class="pre">kernels</span></
 <li><a class="reference internal" href="#id1"><code class="docutils literal notranslate"><span class="pre">STATIC_EXTENSIONS</span></code></a></li>
 <li><a class="reference internal" href="#nifits.backend.NIFITSClass"><code class="docutils literal notranslate"><span class="pre">NIFITSClass</span></code></a><ul>
 <li><a class="reference internal" href="#nifits.backend.NIFITSClass.header"><code class="docutils literal notranslate"><span class="pre">NIFITSClass.header</span></code></a></li>
+<li><a class="reference internal" href="#nifits.backend.NIFITSClass.oi_array"><code class="docutils literal notranslate"><span class="pre">NIFITSClass.oi_array</span></code></a></li>
 <li><a class="reference internal" href="#nifits.backend.NIFITSClass.ni_catm"><code class="docutils literal notranslate"><span class="pre">NIFITSClass.ni_catm</span></code></a></li>
 <li><a class="reference internal" href="#nifits.backend.NIFITSClass.ni_fov"><code class="docutils literal notranslate"><span class="pre">NIFITSClass.ni_fov</span></code></a></li>
 <li><a class="reference internal" href="#nifits.backend.NIFITSClass.ni_kmat"><code class="docutils literal notranslate"><span class="pre">NIFITSClass.ni_kmat</span></code></a></li>
@@ -960,6 +1027,9 @@ if <code class="docutils literal notranslate"><span class="pre">kernels</span></
 <li><a class="reference internal" href="#nifits.backend.NIFITSClass.ni_iout"><code class="docutils literal notranslate"><span class="pre">NIFITSClass.ni_iout</span></code></a></li>
 <li><a class="reference internal" href="#nifits.backend.NIFITSClass.ni_kiout"><code class="docutils literal notranslate"><span class="pre">NIFITSClass.ni_kiout</span></code></a></li>
 <li><a class="reference internal" href="#nifits.backend.NIFITSClass.ni_kcov"><code class="docutils literal notranslate"><span class="pre">NIFITSClass.ni_kcov</span></code></a></li>
+<li><a class="reference internal" href="#nifits.backend.NIFITSClass.ni_dsamp"><code class="docutils literal notranslate"><span class="pre">NIFITSClass.ni_dsamp</span></code></a></li>
+<li><a class="reference internal" href="#nifits.backend.NIFITSClass.ni_oswavelength"><code class="docutils literal notranslate"><span class="pre">NIFITSClass.ni_oswavelength</span></code></a></li>
+<li><a class="reference internal" href="#nifits.backend.NIFITSClass.ni_iotags"><code class="docutils literal notranslate"><span class="pre">NIFITSClass.ni_iotags</span></code></a></li>
 <li><a class="reference internal" href="#nifits.backend.NIFITSClass.from_nifits"><code class="docutils literal notranslate"><span class="pre">NIFITSClass.from_nifits()</span></code></a></li>
 <li><a class="reference internal" href="#nifits.backend.NIFITSClass.to_nifits"><code class="docutils literal notranslate"><span class="pre">NIFITSClass.to_nifits()</span></code></a></li>
 <li><a class="reference internal" href="#nifits.backend.NIFITSClass.check_unit_coherence"><code class="docutils literal notranslate"><span class="pre">NIFITSClass.check_unit_coherence()</span></code></a></li>
@@ -1007,8 +1077,11 @@ if <code class="docutils literal notranslate"><span class="pre">kernels</span></
 <li><a class="reference internal" href="#nifits.backend.NI_Backend.get_all_outs"><code class="docutils literal notranslate"><span class="pre">NI_Backend.get_all_outs()</span></code></a></li>
 <li><a class="reference internal" href="#nifits.backend.NI_Backend.moving_geometric_phasor"><code class="docutils literal notranslate"><span class="pre">NI_Backend.moving_geometric_phasor()</span></code></a></li>
 <li><a class="reference internal" href="#nifits.backend.NI_Backend.get_moving_outs"><code class="docutils literal notranslate"><span class="pre">NI_Backend.get_moving_outs()</span></code></a></li>
+<li><a class="reference internal" href="#nifits.backend.NI_Backend.downsample"><code class="docutils literal notranslate"><span class="pre">NI_Backend.downsample()</span></code></a></li>
+<li><a class="reference internal" href="#nifits.backend.NI_Backend.plot_recorded"><code class="docutils literal notranslate"><span class="pre">NI_Backend.plot_recorded()</span></code></a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#nifits.backend.col_row_numbers"><code class="docutils literal notranslate"><span class="pre">col_row_numbers()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -1024,7 +1097,7 @@ if <code class="docutils literal notranslate"><span class="pre">kernels</span></
       
     </aside>
   </div>
-</div><script src="../../../_static/documentation_options.js?v=8c5712d9"></script>
+</div><script src="../../../_static/documentation_options.js?v=1fd71caa"></script>
     <script src="../../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/scripts/furo.js?v=5fa4622c"></script>

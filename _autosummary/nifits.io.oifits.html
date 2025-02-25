@@ -6,7 +6,7 @@
 <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" />
 
     <!-- Generated with Sphinx 7.3.7 and Furo 2024.08.06 -->
-        <title>nifits.io.oifits - NIFITS 0.0.4 documentation</title>
+        <title>nifits.io.oifits - NIFITS 0.0.6 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=362ab14a" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=354aac6f" />
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=fd3f3429" />
@@ -168,7 +168,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">NIFITS 0.0.4 documentation</div></a>
+      <a href="../index.html"><div class="brand">NIFITS 0.0.6 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -192,7 +192,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
   
   
-  <span class="sidebar-brand-text">NIFITS 0.0.4 documentation</span>
+  <span class="sidebar-brand-text">NIFITS 0.0.6 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -272,6 +272,16 @@ using the info() method:</p>
 &gt; oifitsobj.info()</p>
 </div></blockquote>
 <p>For further information, contact R. Laugier</p>
+<p class="rubric">Module Attributes</p>
+<div class="table-wrapper autosummary longtable docutils container">
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="../nifits.io.html#nifits.io.oifits.NI_FOV_DEFAULT_HEADER" title="nifits.io.oifits.NI_FOV_DEFAULT_HEADER"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NI_FOV_DEFAULT_HEADER</span></code></a></p></td>
+<td><p>Obtaining the goecentric location of observatories.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
 <p class="rubric">Functions</p>
 <div class="table-wrapper autosummary longtable docutils container">
 <table class="autosummary longtable docutils align-default">
@@ -279,13 +289,16 @@ using the info() method:</p>
 <tr class="row-odd"><td><p><a class="reference internal" href="../nifits.io.html#nifits.io.oifits.array_eq" title="nifits.io.oifits.array_eq"><code class="xref py py-obj docutils literal notranslate"><span class="pre">array_eq</span></code></a>(a, b)</p></td>
 <td><p>Test whether all the elements of two arrays are equal.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="../nifits.io.html#nifits.io.oifits.create_basic_fov_data" title="nifits.io.oifits.create_basic_fov_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_basic_fov_data</span></code></a>(D, offset, lamb, n)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../nifits.io.html#nifits.io.oifits.check_item" title="nifits.io.oifits.check_item"><code class="xref py py-obj docutils literal notranslate"><span class="pre">check_item</span></code></a>(func)</p></td>
+<td><p>A decorator for the <cite>fits.Header.__getitem__</cite>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../nifits.io.html#nifits.io.oifits.create_basic_fov_data" title="nifits.io.oifits.create_basic_fov_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_basic_fov_data</span></code></a>(D, offset, lamb, n)</p></td>
 <td><p>A convenience function to help define the FOV function and data model</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="../nifits.io.html#nifits.io.oifits.getclass" title="nifits.io.oifits.getclass"><code class="xref py py-obj docutils literal notranslate"><span class="pre">getclass</span></code></a>(classname)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../nifits.io.html#nifits.io.oifits.getclass" title="nifits.io.oifits.getclass"><code class="xref py py-obj docutils literal notranslate"><span class="pre">getclass</span></code></a>(classname)</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="../nifits.io.html#nifits.io.oifits.nulfunc" title="nifits.io.oifits.nulfunc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nulfunc</span></code></a>(self, *args, **kwargs)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../nifits.io.html#nifits.io.oifits.nulfunc" title="nifits.io.oifits.nulfunc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nulfunc</span></code></a>(self, *args, **kwargs)</p></td>
 <td><p></p></td>
 </tr>
 </tbody>
@@ -298,17 +311,23 @@ using the info() method:</p>
 <tr class="row-odd"><td><p><a class="reference internal" href="../nifits.io.html#nifits.io.oifits.NI_CATM" title="nifits.io.oifits.NI_CATM"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NI_CATM</span></code></a>([data_table, header, unit, data_array])</p></td>
 <td><p>The complex amplitude transfre function</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="../nifits.io.html#nifits.io.oifits.NI_EXTENSION" title="nifits.io.oifits.NI_EXTENSION"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NI_EXTENSION</span></code></a>([data_table, header, unit])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../nifits.io.html#nifits.io.oifits.NI_DSAMP" title="nifits.io.oifits.NI_DSAMP"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NI_DSAMP</span></code></a>([data_table, header, unit, data_array])</p></td>
+<td><p>The matrix that defines linear combinations of output wavelengths.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../nifits.io.html#nifits.io.oifits.NI_EXTENSION" title="nifits.io.oifits.NI_EXTENSION"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NI_EXTENSION</span></code></a>([data_table, header, unit])</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">NI_EXTENSION</span></code> Generic class for NIFITS extensions</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="../nifits.io.html#nifits.io.oifits.NI_EXTENSION_ARRAY" title="nifits.io.oifits.NI_EXTENSION_ARRAY"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NI_EXTENSION_ARRAY</span></code></a>([data_table, header, ...])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../nifits.io.html#nifits.io.oifits.NI_EXTENSION_ARRAY" title="nifits.io.oifits.NI_EXTENSION_ARRAY"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NI_EXTENSION_ARRAY</span></code></a>([data_table, header, ...])</p></td>
 <td><p>Generic class for NIFITS array extensions</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="../nifits.io.html#nifits.io.oifits.NI_EXTENSION_CPX_ARRAY" title="nifits.io.oifits.NI_EXTENSION_CPX_ARRAY"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NI_EXTENSION_CPX_ARRAY</span></code></a>([data_table, header, ...])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../nifits.io.html#nifits.io.oifits.NI_EXTENSION_CPX_ARRAY" title="nifits.io.oifits.NI_EXTENSION_CPX_ARRAY"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NI_EXTENSION_CPX_ARRAY</span></code></a>([data_table, header, ...])</p></td>
 <td><p>Generic class for NIFITS array extensions.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="../nifits.io.html#nifits.io.oifits.NI_FOV" title="nifits.io.oifits.NI_FOV"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NI_FOV</span></code></a>([data_table, header, unit])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../nifits.io.html#nifits.io.oifits.NI_FOV" title="nifits.io.oifits.NI_FOV"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NI_FOV</span></code></a>([data_table, header, unit])</p></td>
 <td><p>The <code class="docutils literal notranslate"><span class="pre">NI_FOV</span></code> data containing information of the field of view (vigneting) function as a function of wavelength.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../nifits.io.html#nifits.io.oifits.NI_IOTAGS" title="nifits.io.oifits.NI_IOTAGS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NI_IOTAGS</span></code></a>([data_table, header, unit])</p></td>
+<td><p>Contains information on the inputs and outputs.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="../nifits.io.html#nifits.io.oifits.NI_IOUT" title="nifits.io.oifits.NI_IOUT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NI_IOUT</span></code></a>([data_table, header, unit])</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">NI_IOUT</span></code> : a recording of the output values, given in intensity, flux, counts or arbitrary units.</p></td>
@@ -325,8 +344,8 @@ using the info() method:</p>
 <tr class="row-even"><td><p><a class="reference internal" href="../nifits.io.html#nifits.io.oifits.NI_MOD" title="nifits.io.oifits.NI_MOD"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NI_MOD</span></code></a>([data_table, header, unit])</p></td>
 <td><p>Contains input modulation vector for the given observation.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="../nifits.io.html#nifits.io.oifits.NI_OUT" title="nifits.io.oifits.NI_OUT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NI_OUT</span></code></a>([data_table, header, unit, value_out])</p></td>
-<td><p>Contains measured intensities of the outputs of the instrument.</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../nifits.io.html#nifits.io.oifits.NI_OSWAVELENGTH" title="nifits.io.oifits.NI_OSWAVELENGTH"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NI_OSWAVELENGTH</span></code></a>([data_table, header, unit])</p></td>
+<td><p>An object storing the wavelength before a downsampling.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="../nifits.io.html#nifits.io.oifits.OI_ARRAY" title="nifits.io.oifits.OI_ARRAY"><code class="xref py py-obj docutils literal notranslate"><span class="pre">OI_ARRAY</span></code></a>([data_table, header, unit])</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">OI_ARRAY</span></code> definition</p></td>
@@ -340,7 +359,7 @@ using the info() method:</p>
 <tr class="row-odd"><td><p><a class="reference internal" href="../nifits.io.html#nifits.io.oifits.OI_WAVELENGTH" title="nifits.io.oifits.OI_WAVELENGTH"><code class="xref py py-obj docutils literal notranslate"><span class="pre">OI_WAVELENGTH</span></code></a>([data_table, header, unit])</p></td>
 <td><p>An object storing the OI_WAVELENGTH information, in compatibility with OIFITS practices.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="../nifits.io.html#nifits.io.oifits.nifits" title="nifits.io.oifits.nifits"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nifits</span></code></a>([header, ni_catm, ni_fov, ni_kmat, ...])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../nifits.io.html#nifits.io.oifits.nifits" title="nifits.io.oifits.nifits"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nifits</span></code></a>([header, oi_array, ni_catm, ni_fov, ...])</p></td>
 <td><p>Class representation of the nifits object.</p></td>
 </tr>
 </tbody>
@@ -379,7 +398,7 @@ using the info() method:</p>
       
     </aside>
   </div>
-</div><script src="../_static/documentation_options.js?v=8c5712d9"></script>
+</div><script src="../_static/documentation_options.js?v=1fd71caa"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=5fa4622c"></script>

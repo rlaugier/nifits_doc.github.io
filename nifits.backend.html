@@ -6,7 +6,7 @@
 <link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" />
 
     <!-- Generated with Sphinx 7.3.7 and Furo 2024.08.06 -->
-        <title>nifits.backend package - NIFITS 0.0.4 documentation</title>
+        <title>nifits.backend package - NIFITS 0.0.6 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=362ab14a" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=354aac6f" />
     <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=fd3f3429" />
@@ -168,7 +168,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="index.html"><div class="brand">NIFITS 0.0.4 documentation</div></a>
+      <a href="index.html"><div class="brand">NIFITS 0.0.6 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -192,7 +192,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
   
   
-  <span class="sidebar-brand-text">NIFITS 0.0.4 documentation</span>
+  <span class="sidebar-brand-text">NIFITS 0.0.6 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -357,6 +357,29 @@ given by injection for all the time series.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="nifits.backend.backend.NI_Backend.downsample">
+<span class="sig-name descname"><span class="pre">downsample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Is</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nifits/backend/backend.html#NI_Backend.downsample"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.backend.backend.NI_Backend.downsample" title="Link to this definition">¶</a></dt>
+<dd><p>Downsample flux from the NI_OSWAVELENGTH bins to
+OI_WAVELENGTH bins.
+Expected shape is : (n_frames, n_wl, n_outputs, n_points), the method
+simply applies the <code class="docutils literal notranslate"><span class="pre">NI_DSAMP</span></code> matrix along the second axis (1).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>Is</strong> – ArrayLike [flux] input the result computed with the
+oversampled wavelength channels.
+(n_frames, n_wlold, n_outputs, n_points)</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>ArrayLike [flux] (n_frames, n_wlnew, n_outputs, n_points)</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Ids</p>
+</dd>
+</dl>
+<p>Returns</p>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="nifits.backend.backend.NI_Backend.geometric_phasor">
 <span class="sig-name descname"><span class="pre">geometric_phasor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">alpha</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">beta</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_mod=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">md=&lt;module</span> <span class="pre">'numpy'</span> <span class="pre">from</span> <span class="pre">'/lhome/romain/miniconda3/envs/aiitec-jax/lib/python3.12/site-packages/numpy/__init__.py'&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nifits/backend/backend.html#NI_Backend.geometric_phasor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.backend.backend.NI_Backend.geometric_phasor" title="Link to this definition">¶</a></dt>
 <dd><p>Returns the complex phasor corresponding to the locations
@@ -503,6 +526,11 @@ instrument information are added later with:</p>
 </dd>
 </dl>
 </dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nifits.backend.backend.NI_Backend.plot_recorded">
+<span class="sig-name descname"><span class="pre">plot_recorded</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cmap</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'viridis'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nrows_ncols</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">res_x</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">res_y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'nearest'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nifits/backend/backend.html#NI_Backend.plot_recorded"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.backend.backend.NI_Backend.plot_recorded" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
 
 </dd></dl>
 
@@ -686,6 +714,11 @@ to the center of the field of view</p></li>
 
 </dd></dl>
 
+<dl class="py function">
+<dt class="sig sig-object py" id="nifits.backend.backend.col_row_numbers">
+<span class="sig-prename descclassname"><span class="pre">nifits.backend.backend.</span></span><span class="sig-name descname"><span class="pre">col_row_numbers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col_ceiling</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nifits/backend/backend.html#col_row_numbers"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.backend.backend.col_row_numbers" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
 </section>
 <section id="module-nifits.backend">
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-nifits.backend" title="Link to this heading">¶</a></h2>
@@ -745,6 +778,7 @@ to the center of the field of view</p></li>
 <li><a class="reference internal" href="#nifits.backend.backend.NI_Backend.add_instrument_definition"><code class="docutils literal notranslate"><span class="pre">NI_Backend.add_instrument_definition()</span></code></a></li>
 <li><a class="reference internal" href="#nifits.backend.backend.NI_Backend.add_observation_data"><code class="docutils literal notranslate"><span class="pre">NI_Backend.add_observation_data()</span></code></a></li>
 <li><a class="reference internal" href="#nifits.backend.backend.NI_Backend.create_fov_function_all"><code class="docutils literal notranslate"><span class="pre">NI_Backend.create_fov_function_all()</span></code></a></li>
+<li><a class="reference internal" href="#nifits.backend.backend.NI_Backend.downsample"><code class="docutils literal notranslate"><span class="pre">NI_Backend.downsample()</span></code></a></li>
 <li><a class="reference internal" href="#nifits.backend.backend.NI_Backend.geometric_phasor"><code class="docutils literal notranslate"><span class="pre">NI_Backend.geometric_phasor()</span></code></a></li>
 <li><a class="reference internal" href="#nifits.backend.backend.NI_Backend.get_Is"><code class="docutils literal notranslate"><span class="pre">NI_Backend.get_Is()</span></code></a></li>
 <li><a class="reference internal" href="#nifits.backend.backend.NI_Backend.get_KIs"><code class="docutils literal notranslate"><span class="pre">NI_Backend.get_KIs()</span></code></a></li>
@@ -753,6 +787,7 @@ to the center of the field of view</p></li>
 <li><a class="reference internal" href="#nifits.backend.backend.NI_Backend.get_moving_outs"><code class="docutils literal notranslate"><span class="pre">NI_Backend.get_moving_outs()</span></code></a></li>
 <li><a class="reference internal" href="#nifits.backend.backend.NI_Backend.moving_geometric_phasor"><code class="docutils literal notranslate"><span class="pre">NI_Backend.moving_geometric_phasor()</span></code></a></li>
 <li><a class="reference internal" href="#nifits.backend.backend.NI_Backend.nifits"><code class="docutils literal notranslate"><span class="pre">NI_Backend.nifits</span></code></a></li>
+<li><a class="reference internal" href="#nifits.backend.backend.NI_Backend.plot_recorded"><code class="docutils literal notranslate"><span class="pre">NI_Backend.plot_recorded()</span></code></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#nifits.backend.backend.PointCollection"><code class="docutils literal notranslate"><span class="pre">PointCollection</span></code></a><ul>
@@ -771,6 +806,7 @@ to the center of the field of view</p></li>
 <li><a class="reference internal" href="#nifits.backend.backend.PointCollection.unit"><code class="docutils literal notranslate"><span class="pre">PointCollection.unit</span></code></a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#nifits.backend.backend.col_row_numbers"><code class="docutils literal notranslate"><span class="pre">col_row_numbers()</span></code></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#module-nifits.backend">Module contents</a></li>
@@ -785,7 +821,7 @@ to the center of the field of view</p></li>
       
     </aside>
   </div>
-</div><script src="_static/documentation_options.js?v=8c5712d9"></script>
+</div><script src="_static/documentation_options.js?v=1fd71caa"></script>
     <script src="_static/doctools.js?v=9a2dae69"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/scripts/furo.js?v=5fa4622c"></script>

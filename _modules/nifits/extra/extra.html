@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" />
 
     <!-- Generated with Sphinx 7.3.7 and Furo 2024.08.06 -->
-        <title>nifits.extra.extra - NIFITS 0.0.4 documentation</title>
+        <title>nifits.extra.extra - NIFITS 0.0.5 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=362ab14a" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?v=354aac6f" />
     <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=fd3f3429" />
@@ -167,7 +167,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../../../index.html"><div class="brand">NIFITS 0.0.4 documentation</div></a>
+      <a href="../../../index.html"><div class="brand">NIFITS 0.0.5 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -191,7 +191,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../../../index.html">
   
   
-  <span class="sidebar-brand-text">NIFITS 0.0.4 documentation</span>
+  <span class="sidebar-brand-text">NIFITS 0.0.5 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="../../../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -333,7 +333,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">md</span> <span class="o">=</span> <span class="n">md</span>
         <span class="c1"># Assertion: assert</span>
         <span class="k">assert</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="p">,</span> <span class="s2">&quot;ni_kcov&quot;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_kcov</span><span class="o">.</span><span class="n">header</span><span class="p">[</span><span class="s2">&quot;SHAPE&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;frame (wavelength output)&quot;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_kcov</span><span class="o">.</span><span class="n">header</span><span class="p">[</span><span class="s2">&quot;NIFITS SHAPE&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;frame (wavelength output)&quot;</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Covariance shape expected: frame (wavelength output)&quot;</span><span class="p">)</span>
 
         <span class="n">Ws</span> <span class="o">=</span> <span class="p">[]</span>
@@ -376,7 +376,7 @@
 <span class="sd">                a.k.a kernel-null)</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            wout_full: the whitened signal ($\mathbf{W}\cdot \mathbf{s}$)</span>
+<span class="sd">            wout_full: the whitened signal ($\\mathbf{W}\\cdot \\mathbf{s}$)</span>
 <span class="sd">                in the new basis.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -720,7 +720,7 @@
       
     </aside>
   </div>
-</div><script src="../../../_static/documentation_options.js?v=8c5712d9"></script>
+</div><script src="../../../_static/documentation_options.js?v=282f96c0"></script>
     <script src="../../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/scripts/furo.js?v=5fa4622c"></script>

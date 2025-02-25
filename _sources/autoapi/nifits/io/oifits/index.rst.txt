@@ -37,13 +37,15 @@ Classes
    nifits.io.oifits.NI_EXTENSION_CPX_ARRAY
    nifits.io.oifits.OI_ARRAY
    nifits.io.oifits.OI_WAVELENGTH
+   nifits.io.oifits.NI_OSWAVELENGTH
    nifits.io.oifits.OI_TARGET
-   nifits.io.oifits.NI_OUT
    nifits.io.oifits.NI_CATM
    nifits.io.oifits.NI_IOUT
    nifits.io.oifits.NI_KIOUT
    nifits.io.oifits.NI_KCOV
    nifits.io.oifits.NI_KMAT
+   nifits.io.oifits.NI_DSAMP
+   nifits.io.oifits.NI_IOTAGS
    nifits.io.oifits.NI_MOD
    nifits.io.oifits.NI_FOV
    nifits.io.oifits.nifits
@@ -55,6 +57,7 @@ Functions
 
 .. autoapisummary::
 
+   nifits.io.oifits.check_item
    nifits.io.oifits._plurals
    nifits.io.oifits.array_eq
    nifits.io.oifits._isnone
@@ -78,13 +81,16 @@ Attributes
    nifits.io.oifits.matchtargetbyname
    nifits.io.oifits.matchstationbyname
    nifits.io.oifits.refdate
-   nifits.io.oifits.NI_OUT_DEFAULT_HEADER
+   nifits.io.oifits.NI_OITAG_DEFAULT_HEADER
    nifits.io.oifits.NI_MOD_DEFAULT_HEADER
    nifits.io.oifits.NI_FOV_DEFAULT_HEADER
+   nifits.io.oifits.OI_ARRAY_DEFAULT_VLTI_HEADER
+   nifits.io.oifits.OI_ARRAY_DEFAULT_CHARA_HEADER
    nifits.io.oifits.TEST_BACKUP
    nifits.io.oifits.NIFITS_EXTENSIONS
    nifits.io.oifits.NIFITS_KEYWORDS
    nifits.io.oifits.STATIC_EXTENSIONS
+   nifits.io.oifits.H_PREFIX
 
 
 .. py:data:: Table
@@ -96,12 +102,12 @@ Attributes
    
 
 .. py:data:: __version__
-   :value: '0.0.4'
+   :value: '0.0.6'
 
    
 
 .. py:data:: __standard_version__
-   :value: '0.2'
+   :value: '0.4'
 
    
 
@@ -122,6 +128,13 @@ Attributes
 .. py:data:: refdate
 
    
+
+.. py:function:: check_item(func)
+
+   A decorator for the `fits.Header.__getitem__`.
+   This is here to save from compatibility issues with files of
+   standard version <= 0.2 while warning that that this version will
+
 
 .. py:function:: _plurals(count)
 
@@ -212,7 +225,7 @@ Attributes
 .. py:function:: nulfunc(self, *args, **kwargs)
 
 
-.. py:data:: NI_OUT_DEFAULT_HEADER
+.. py:data:: NI_OITAG_DEFAULT_HEADER
 
    
 
@@ -221,6 +234,22 @@ Attributes
    
 
 .. py:data:: NI_FOV_DEFAULT_HEADER
+
+   Obtaining the goecentric location of observatories. (unchecked)
+   ```python
+   from astroplan import Observer
+   import astropy.coordinates as coords
+   myobs = Observer.at_site("CHARA")
+   print([acoord.value for acoord in myobs.location.to_geocentric()])
+   ```
+   VLTI:     1946404.3410388362, -5467644.290798524, -2642728.2014442487
+   CHARA:    -2484228.6029109913, -4660044.467216573, 3567867.961141405
+
+.. py:data:: OI_ARRAY_DEFAULT_VLTI_HEADER
+
+   
+
+.. py:data:: OI_ARRAY_DEFAULT_CHARA_HEADER
 
    
 
@@ -435,6 +464,45 @@ Attributes
       
 
 
+.. py:class:: NI_OSWAVELENGTH
+
+
+   Bases: :py:obj:`NI_EXTENSION`
+
+   ``NI_EXTENSION`` Generic class for NIFITS extensions
+
+   **Inherited methods:**
+
+   * ``from_hdu``: Creates the object from an ``astropy.io.fits.TableHDU`` object
+   * ``to_hdu``  : Returns the ``TableHDU`` from itself.
+
+   :param data_table: [ArrayLike] The data to stored
+   :param header: [fits.Header] A fits header (optional)
+   :param unit: [astropy.units.Unit] Units of the data stored
+                (mandatory of NI_IOUT, NI_KIOUT and NI_KCOV)
+
+   .. py:property:: lambs
+
+
+   .. py:property:: dlambs
+
+
+   .. py:property:: nus
+
+
+   .. py:property:: dnus
+
+
+   .. py:attribute:: __doc__
+
+      
+
+   .. py:attribute:: name
+      :value: 'OI_WAVELENGTH'
+
+      
+
+
 .. py:class:: OI_TARGET
 
 
@@ -479,49 +547,6 @@ Attributes
       :param para_err: (default: 0.)
       :param spectyp: (default: "")
       :param category: (default: "")
-
-
-
-.. py:class:: NI_OUT
-
-
-   Bases: :py:obj:`NI_EXTENSION`
-
-   ``NI_EXTENSION`` Generic class for NIFITS extensions
-
-   **Inherited methods:**
-
-   * ``from_hdu``: Creates the object from an ``astropy.io.fits.TableHDU`` object
-   * ``to_hdu``  : Returns the ``TableHDU`` from itself.
-
-   :param data_table: [ArrayLike] The data to stored
-   :param header: [fits.Header] A fits header (optional)
-   :param unit: [astropy.units.Unit] Units of the data stored
-                (mandatory of NI_IOUT, NI_KIOUT and NI_KCOV)
-
-   .. py:property:: asarray
-
-
-   .. py:attribute:: __doc__
-
-      
-
-   .. py:attribute:: value_out
-      :type: Table
-
-      
-
-   .. py:attribute:: header
-      :type: dict
-
-      
-
-   .. py:attribute:: name
-      :value: 'NI_OUT'
-
-      
-
-   .. py:method:: check_against_catm(catm: NI_CATM)
 
 
 
@@ -681,6 +706,74 @@ Attributes
       
 
 
+.. py:class:: NI_DSAMP
+
+
+   Bases: :py:obj:`NI_EXTENSION_ARRAY`
+
+   Generic class for NIFITS array extensions
+
+   :param data_array: [ArrayLike] The data to stored
+   :param header: [fits.Header] A fits header (optional)
+   :param unit: [astropy.units.Unit] Units of the data stored
+                (mandatory of NI_IOUT, NI_KIOUT and NI_KCOV)
+
+   .. py:property:: D
+
+
+   .. py:attribute:: __doc__
+
+      
+
+   .. py:attribute:: name
+      :value: 'NI_DSAMP'
+
+      
+
+
+.. py:class:: NI_IOTAGS
+
+
+   Bases: :py:obj:`NI_EXTENSION`
+
+   Contains information on the inputs and outputs.
+
+   .. py:property:: outbright
+
+      The flags of bright outputs
+
+   .. py:property:: outdark
+
+      The flags of dark outputs
+
+   .. py:property:: outphot
+
+      The flags of photometric outputs
+
+   .. py:property:: outpola
+
+      The polarization of outputs.
+
+   .. py:property:: inpola
+
+      The polarization of inputs.
+
+   .. py:attribute:: data_table
+      :type: Table
+
+      
+
+   .. py:attribute:: header
+      :type: astropy.io.fits.Header
+
+      
+
+   .. py:attribute:: name
+      :value: 'NI_MOD'
+
+      
+
+
 .. py:class:: NI_MOD
 
 
@@ -819,11 +912,11 @@ Attributes
    .. py:method:: simple_from_header(header=None, lamb=None, n=0)
       :classmethod:
 
-      Constructor for a simple ``NI_FOV`` object with chromatic gaussian profile and
+      Constructor for a simple ``NIFITS NI_FOV`` object with chromatic gaussian profile and
       no offset.
 
       :param header: (astropy.io.fits.Header) Header containing the required information
-                     such as ``FOV_TELDIAM`` and ``FOV_TELDIAM_UNIT`` which are used to
+                     such as ``NIFITS FOV_TELDIAM`` and ``NIFITS FOV_TELDIAM_UNIT`` which are used to
                      create the gaussian profiles of radius :math:`\lambda/D`
 
 
@@ -854,12 +947,17 @@ Attributes
    
 
 .. py:data:: STATIC_EXTENSIONS
-   :value: [True, True, True, True, False, False, False, False, False]
+   :value: [True, True, True, True, False, False, False, False, False, True, True, False]
 
    
 
 .. py:function:: getclass(classname)
 
+
+.. py:data:: H_PREFIX
+   :value: 'HIERARCH NIFITS '
+
+   
 
 .. py:class:: nifits
 
@@ -870,6 +968,11 @@ Attributes
 
    .. py:attribute:: header
       :type: astropy.io.fits.Header
+
+      
+
+   .. py:attribute:: oi_array
+      :type: OI_ARRAY
 
       
 
@@ -915,6 +1018,21 @@ Attributes
 
    .. py:attribute:: ni_kcov
       :type: NI_KCOV
+
+      
+
+   .. py:attribute:: ni_dsamp
+      :type: NI_DSAMP
+
+      
+
+   .. py:attribute:: ni_oswavelength
+      :type: NI_OSWAVELENGTH
+
+      
+
+   .. py:attribute:: ni_iotags
+      :type: NI_IOTAGS
 
       
 

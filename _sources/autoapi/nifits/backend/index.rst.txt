@@ -28,6 +28,14 @@ Classes
 
 
 
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   nifits.backend.col_row_numbers
+
+
 
 Attributes
 ~~~~~~~~~~
@@ -49,7 +57,7 @@ Attributes
    
 
 .. py:data:: STATIC_EXTENSIONS
-   :value: [True, True, True, True, False, False, False, False, False]
+   :value: [True, True, True, True, False, False, False, False, False, True, True, False]
 
    
 
@@ -58,7 +66,7 @@ Attributes
    
 
 .. py:data:: STATIC_EXTENSIONS
-   :value: [True, True, True, True, False, False, False, False, False]
+   :value: [True, True, True, True, False, False, False, False, False, True, True, False]
 
    
 
@@ -71,6 +79,11 @@ Attributes
 
    .. py:attribute:: header
       :type: astropy.io.fits.Header
+
+      
+
+   .. py:attribute:: oi_array
+      :type: OI_ARRAY
 
       
 
@@ -116,6 +129,21 @@ Attributes
 
    .. py:attribute:: ni_kcov
       :type: NI_KCOV
+
+      
+
+   .. py:attribute:: ni_dsamp
+      :type: NI_DSAMP
+
+      
+
+   .. py:attribute:: ni_oswavelength
+      :type: NI_OSWAVELENGTH
+
+      
+
+   .. py:attribute:: ni_iotags
+      :type: NI_IOTAGS
 
       
 
@@ -472,5 +500,28 @@ Attributes
       .. hint:: **Shape:** (n_frames, n_wl, n_outputs, n_points)
 
 
+
+   .. py:method:: downsample(Is)
+
+      Downsample flux from the NI_OSWAVELENGTH bins to
+      OI_WAVELENGTH bins.
+      Expected shape is : (n_frames, n_wl, n_outputs, n_points), the method
+      simply applies the ``NI_DSAMP`` matrix along the second axis (1).
+
+      :param Is: ArrayLike [flux] input the result computed with the
+                 oversampled wavelength channels.
+                 (n_frames, n_wlold, n_outputs, n_points)
+
+      :returns: ArrayLike [flux] (n_frames, n_wlnew, n_outputs, n_points)
+      :rtype: Ids
+
+      Returns
+
+
+   .. py:method:: plot_recorded(cmap='viridis', outputs=None, nrows_ncols=None, res_x=1000, res_y=500, interp='nearest')
+
+
+
+.. py:function:: col_row_numbers(n, col_ceiling=4)
 
 
