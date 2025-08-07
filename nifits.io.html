@@ -553,7 +553,7 @@ create the gaussian profiles of radius <span class="math notranslate nohighlight
 
 <dl class="py data">
 <dt class="sig sig-object py" id="nifits.io.oifits.NI_FOV_DEFAULT_HEADER">
-<span class="sig-prename descclassname"><span class="pre">nifits.io.oifits.</span></span><span class="sig-name descname"><span class="pre">NI_FOV_DEFAULT_HEADER</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">HIERARCH</span> <span class="pre">NIFITS</span> <span class="pre">FOV_MODE</span> <span class="pre">=</span> <span class="pre">'diameter_gaussian_radial'</span> <span class="pre">/</span> <span class="pre">Type</span> <span class="pre">of</span> <span class="pre">FOV</span> <span class="pre">definition</span>&#160;&#160; <span class="pre">HIERARCH</span> <span class="pre">NIFITS</span> <span class="pre">FOV_offset</span> <span class="pre">=</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">HIERARCH</span> <span class="pre">NIFITS</span> <span class="pre">FOV_TELDIAM</span> <span class="pre">=</span> <span class="pre">8.0</span> <span class="pre">/</span> <span class="pre">diameter</span> <span class="pre">of</span> <span class="pre">a</span> <span class="pre">collecting</span> <span class="pre">aperture</span> <span class="pre">for</span> <span class="pre">FOV</span>&#160;&#160;&#160; <span class="pre">HIERARCH</span> <span class="pre">NIFITS</span> <span class="pre">FOV_TELDIAM_UNIT</span> <span class="pre">=</span> <span class="pre">'m</span>&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">'</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">HIERARCH</span> <span class="pre">NIFITS</span> <span class="pre">WL_SHIFT_MODE</span> <span class="pre">=</span> <span class="pre">''</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; </em><a class="headerlink" href="#nifits.io.oifits.NI_FOV_DEFAULT_HEADER" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">nifits.io.oifits.</span></span><span class="sig-name descname"><span class="pre">NI_FOV_DEFAULT_HEADER</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">HIERARCH</span> <span class="pre">NIFITS</span> <span class="pre">FOV_MODE</span> <span class="pre">=</span> <span class="pre">'diameter_gaussian_radial'</span> <span class="pre">/</span> <span class="pre">Type</span> <span class="pre">of</span> <span class="pre">FOV</span> <span class="pre">definition</span>&#160;&#160; <span class="pre">HIERARCH</span> <span class="pre">NIFITS</span> <span class="pre">FOV_offset</span> <span class="pre">=</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">HIERARCH</span> <span class="pre">NIFITS</span> <span class="pre">FOV_TELDIAM</span> <span class="pre">=</span> <span class="pre">8.0</span> <span class="pre">/</span> <span class="pre">diameter</span> <span class="pre">of</span> <span class="pre">a</span> <span class="pre">collecting</span> <span class="pre">aperture</span> <span class="pre">for</span> <span class="pre">FOV</span>&#160;&#160;&#160; <span class="pre">HIERARCH</span> <span class="pre">NIFITS</span> <span class="pre">FOV_TELDIAM_UNIT</span> <span class="pre">=</span> <span class="pre">'m</span>&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">'</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; </em><a class="headerlink" href="#nifits.io.oifits.NI_FOV_DEFAULT_HEADER" title="Link to this definition">¶</a></dt>
 <dd><p>Obtaining the goecentric location of observatories. (unchecked)
 <code class="docutils literal notranslate"><span class="pre">`python</span>
 <span class="pre">from</span> <span class="pre">astroplan</span> <span class="pre">import</span> <span class="pre">Observer</span>
@@ -575,6 +575,11 @@ CHARA:    -2484228.6029109913, -4660044.467216573, 3567867.961141405</p>
 <span class="sig-name descname"><span class="pre">data_table</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">Table</span></code></em><a class="headerlink" href="#nifits.io.oifits.NI_IOTAGS.data_table" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
+<dl class="py method">
+<dt class="sig sig-object py" id="nifits.io.oifits.NI_IOTAGS.from_arrays">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_arrays</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">outbright</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outdark</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outphot</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inpola</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outpola</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">header</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nifits/io/oifits.html#NI_IOTAGS.from_arrays"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.io.oifits.NI_IOTAGS.from_arrays" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="py attribute">
 <dt class="sig sig-object py" id="nifits.io.oifits.NI_IOTAGS.header">
 <span class="sig-name descname"><span class="pre">header</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">Header</span></code></em><a class="headerlink" href="#nifits.io.oifits.NI_IOTAGS.header" title="Link to this definition">¶</a></dt>
@@ -588,7 +593,7 @@ CHARA:    -2484228.6029109913, -4660044.467216573, 3567867.961141405</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="nifits.io.oifits.NI_IOTAGS.name">
-<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'NI_MOD'</span></em><a class="headerlink" href="#nifits.io.oifits.NI_IOTAGS.name" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'NI_IOTAGS'</span></em><a class="headerlink" href="#nifits.io.oifits.NI_IOTAGS.name" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py property">
@@ -613,6 +618,22 @@ CHARA:    -2484228.6029109913, -4660044.467216573, 3567867.961141405</p>
 <dt class="sig sig-object py" id="nifits.io.oifits.NI_IOTAGS.outpola">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">outpola</span></span><a class="headerlink" href="#nifits.io.oifits.NI_IOTAGS.outpola" title="Link to this definition">¶</a></dt>
 <dd><p>The polarization of outputs.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nifits.io.oifits.NI_IOTAGS.output_type">
+<span class="sig-name descname"><span class="pre">output_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frame_index</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nifits/io/oifits.html#NI_IOTAGS.output_type"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.io.oifits.NI_IOTAGS.output_type" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>index</strong> – The index of an output</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>(str) characterization of an output type</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>output_type</p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
@@ -972,7 +993,7 @@ widths.</p></li>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="nifits.io.oifits.NI_OSWAVELENGTH.name">
-<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'OI_WAVELENGTH'</span></em><a class="headerlink" href="#nifits.io.oifits.NI_OSWAVELENGTH.name" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'NI_OSWAVELENGTH'</span></em><a class="headerlink" href="#nifits.io.oifits.NI_OSWAVELENGTH.name" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py property">
@@ -1383,6 +1404,7 @@ Default: “”</p></li>
 <li><a class="reference internal" href="#nifits.io.oifits.NI_FOV_DEFAULT_HEADER"><code class="docutils literal notranslate"><span class="pre">NI_FOV_DEFAULT_HEADER</span></code></a></li>
 <li><a class="reference internal" href="#nifits.io.oifits.NI_IOTAGS"><code class="docutils literal notranslate"><span class="pre">NI_IOTAGS</span></code></a><ul>
 <li><a class="reference internal" href="#nifits.io.oifits.NI_IOTAGS.data_table"><code class="docutils literal notranslate"><span class="pre">NI_IOTAGS.data_table</span></code></a></li>
+<li><a class="reference internal" href="#nifits.io.oifits.NI_IOTAGS.from_arrays"><code class="docutils literal notranslate"><span class="pre">NI_IOTAGS.from_arrays()</span></code></a></li>
 <li><a class="reference internal" href="#nifits.io.oifits.NI_IOTAGS.header"><code class="docutils literal notranslate"><span class="pre">NI_IOTAGS.header</span></code></a></li>
 <li><a class="reference internal" href="#nifits.io.oifits.NI_IOTAGS.inpola"><code class="docutils literal notranslate"><span class="pre">NI_IOTAGS.inpola</span></code></a></li>
 <li><a class="reference internal" href="#nifits.io.oifits.NI_IOTAGS.name"><code class="docutils literal notranslate"><span class="pre">NI_IOTAGS.name</span></code></a></li>
@@ -1390,6 +1412,7 @@ Default: “”</p></li>
 <li><a class="reference internal" href="#nifits.io.oifits.NI_IOTAGS.outdark"><code class="docutils literal notranslate"><span class="pre">NI_IOTAGS.outdark</span></code></a></li>
 <li><a class="reference internal" href="#nifits.io.oifits.NI_IOTAGS.outphot"><code class="docutils literal notranslate"><span class="pre">NI_IOTAGS.outphot</span></code></a></li>
 <li><a class="reference internal" href="#nifits.io.oifits.NI_IOTAGS.outpola"><code class="docutils literal notranslate"><span class="pre">NI_IOTAGS.outpola</span></code></a></li>
+<li><a class="reference internal" href="#nifits.io.oifits.NI_IOTAGS.output_type"><code class="docutils literal notranslate"><span class="pre">NI_IOTAGS.output_type()</span></code></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#nifits.io.oifits.NI_IOUT"><code class="docutils literal notranslate"><span class="pre">NI_IOUT</span></code></a><ul>

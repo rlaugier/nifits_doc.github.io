@@ -305,6 +305,11 @@ Attributes
    .. py:method:: __len__()
 
 
+   .. py:method:: __info__()
+
+      Generic method to return information.
+
+
 
 .. py:class:: NI_EXTENSION_ARRAY
 
@@ -354,6 +359,11 @@ Attributes
    .. py:method:: __len__()
 
 
+   .. py:method:: __info__()
+
+      Generic method to return information.
+
+
 
 .. py:class:: NI_EXTENSION_CPX_ARRAY
 
@@ -395,6 +405,11 @@ Attributes
 
 
    .. py:method:: __len__()
+
+
+   .. py:method:: __info__()
+
+      Generic method to return information.
 
 
 
@@ -498,7 +513,7 @@ Attributes
       
 
    .. py:attribute:: name
-      :value: 'OI_WAVELENGTH'
+      :value: 'NI_OSWAVELENGTH'
 
       
 
@@ -769,9 +784,21 @@ Attributes
       
 
    .. py:attribute:: name
-      :value: 'NI_MOD'
+      :value: 'NI_IOTAGS'
 
       
+
+   .. py:method:: from_arrays(outbright, outdark, outphot=None, inpola=None, outpola=None, header=None)
+      :classmethod:
+
+
+   .. py:method:: output_type(index, frame_index=0)
+
+      :param index: The index of an output
+
+      :returns: (str) characterization of an output type
+      :rtype: output_type
+
 
 
 .. py:class:: NI_MOD
@@ -929,6 +956,11 @@ Attributes
 
       :param lamb: The array of wavelength bins [m]
       :param n: The index of the time series to compute for
+
+
+   .. py:method:: __info__()
+
+      Generic method to return information.
 
 
 

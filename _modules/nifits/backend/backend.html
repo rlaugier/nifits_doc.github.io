@@ -977,7 +977,6 @@
         <span class="n">Ids</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s2">&quot;l w, t w o m -&gt; t l o m&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_dsamp</span><span class="o">.</span><span class="n">D</span><span class="p">,</span> <span class="n">Is</span> <span class="p">)</span>
         <span class="k">return</span> <span class="n">Ids</span></div>
 
-        
 
 <div class="viewcode-block" id="NI_Backend.plot_recorded">
 <a class="viewcode-back" href="../../../nifits.backend.html#nifits.backend.backend.NI_Backend.plot_recorded">[docs]</a>
@@ -1034,6 +1033,90 @@
         <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;MJD&quot;</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Wavelength [m]&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">fig</span><span class="p">,</span> <span class="n">axarr</span></div>
+
+
+<div class="viewcode-block" id="NI_Backend.make_combiner_graph">
+<a class="viewcode-back" href="../../../nifits.backend.html#nifits.backend.backend.NI_Backend.make_combiner_graph">[docs]</a>
+    <span class="k">def</span> <span class="nf">make_combiner_graph</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">try</span> <span class="p">:</span>
+            <span class="kn">import</span> <span class="nn">graphviz</span>
+            <span class="kn">from</span> <span class="nn">graphviz</span> <span class="kn">import</span> <span class="n">Digraph</span>
+        <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Graphiviz is needed&quot;</span><span class="p">)</span>
+        <span class="n">ni_iotag</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_iotags</span>
+        <span class="k">if</span> <span class="n">ni_iotag</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Could not find an iotag object.&quot;</span><span class="p">)</span>
+            <span class="k">return</span>
+        <span class="n">mydot</span> <span class="o">=</span> <span class="n">graphviz</span><span class="o">.</span><span class="n">Digraph</span><span class="p">(</span><span class="n">comment</span><span class="o">=</span><span class="s1">&#39;The Round Table&#39;</span><span class="p">)</span>
+        <span class="n">mydot</span><span class="o">.</span><span class="n">attr</span><span class="p">(</span><span class="n">rankdir</span><span class="o">=</span><span class="s1">&#39;LR&#39;</span><span class="p">)</span>
+        <span class="n">mydot</span><span class="o">.</span><span class="n">attr</span><span class="p">(</span><span class="s2">&quot;node&quot;</span><span class="p">)</span>
+        <span class="n">mydot</span><span class="o">.</span><span class="n">node</span><span class="p">(</span><span class="s2">&quot;M&quot;</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="s2">&quot;rectangle&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="s2">&quot;22&quot;</span><span class="p">)</span>
+        <span class="n">mpw</span> <span class="o">=</span> <span class="s2">&quot;2&quot;</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">inpol</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">ni_iotag</span><span class="o">.</span><span class="n">inpola</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+            <span class="n">innodename</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Iutput </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="se">\n</span><span class="s2"> pola </span><span class="si">{</span><span class="n">inpol</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="n">mydot</span><span class="o">.</span><span class="n">node</span><span class="p">(</span><span class="n">innodename</span><span class="p">,</span> <span class="n">penwidth</span><span class="o">=</span><span class="n">mpw</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="s2">&quot;rectangle&quot;</span><span class="p">,</span> <span class="n">margin</span><span class="o">=</span><span class="s2">&quot;0.01&quot;</span><span class="p">)</span>
+            <span class="n">mydot</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="n">innodename</span><span class="p">,</span> <span class="s2">&quot;M&quot;</span><span class="p">,</span> <span class="n">penwidth</span><span class="o">=</span><span class="n">mpw</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="s2">&quot;rectangle&quot;</span><span class="p">,</span> <span class="n">margin</span><span class="o">=</span><span class="s2">&quot;0.01&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">aninput</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">ni_iotag</span><span class="o">.</span><span class="n">outdark</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+            <span class="n">typelist</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">outpol</span> <span class="o">=</span> <span class="n">ni_iotag</span><span class="o">.</span><span class="n">outpola</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">i</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">ni_iotag</span><span class="o">.</span><span class="n">outbright</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">i</span><span class="p">]:</span>
+                <span class="n">typelist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;Bright&quot;</span><span class="p">)</span>
+                <span class="n">outcolor</span> <span class="o">=</span> <span class="s2">&quot;orange&quot;</span>
+            <span class="k">if</span> <span class="n">ni_iotag</span><span class="o">.</span><span class="n">outphot</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">i</span><span class="p">]:</span>
+                <span class="n">typelist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;Photometric&quot;</span><span class="p">)</span>
+                <span class="n">outcolor</span> <span class="o">=</span> <span class="s2">&quot;purple&quot;</span>
+            <span class="k">if</span> <span class="n">ni_iotag</span><span class="o">.</span><span class="n">outdark</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">i</span><span class="p">]:</span>
+                <span class="n">typelist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;Dark&quot;</span><span class="p">)</span>
+                <span class="n">outcolor</span> <span class="o">=</span> <span class="s2">&quot;darkblue&quot;</span>
+            <span class="n">outnodename</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Output </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="se">\n</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">typelist</span><span class="p">)</span><span class="si">}</span><span class="s2"> pola </span><span class="si">{</span><span class="n">outpol</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="n">mydot</span><span class="o">.</span><span class="n">node</span><span class="p">(</span><span class="n">outnodename</span><span class="p">,</span> <span class="n">penwidth</span><span class="o">=</span><span class="n">mpw</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">outcolor</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="s2">&quot;rectangle&quot;</span><span class="p">,</span> <span class="n">margin</span><span class="o">=</span><span class="s2">&quot;0.01&quot;</span><span class="p">)</span>
+            <span class="n">mydot</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;M&quot;</span><span class="p">,</span> <span class="n">outnodename</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">outcolor</span><span class="p">,</span> <span class="n">penwidth</span><span class="o">=</span><span class="n">mpw</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">mydot</span></div>
+
+
+<div class="viewcode-block" id="NI_Backend.plot_barcode">
+<a class="viewcode-back" href="../../../nifits.backend.html#nifits.backend.backend.NI_Backend.plot_barcode">[docs]</a>
+    <span class="k">def</span> <span class="nf">plot_barcode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">outindex</span><span class="p">,</span> <span class="n">diffout</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">valminmax</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create a scatter plot of the recorded frames.</span>
+
+<span class="sd">        Arguments:</span>
+<span class="sd">            outindex: (int) The index of output to plot</span>
+<span class="sd">            diffout : (bool) The </span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+        <span class="k">if</span> <span class="n">cmap</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">diffout</span><span class="p">:</span>
+                <span class="n">cmap</span> <span class="o">=</span> <span class="s2">&quot;coolwarm&quot;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">cmap</span> <span class="o">=</span> <span class="s2">&quot;viridis&quot;</span>
+        <span class="n">xs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_mod</span><span class="o">.</span><span class="n">data_table</span><span class="p">[</span><span class="s2">&quot;MJD&quot;</span><span class="p">]</span>
+        <span class="n">title_string</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">diffout</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="p">,</span> <span class="s2">&quot;ni_iotags&quot;</span><span class="p">):</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_iotags</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">title_string</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_iotags</span><span class="o">.</span><span class="n">output_type</span><span class="p">(</span><span class="n">outindex</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">awl</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">oi_wavelength</span><span class="o">.</span><span class="n">lambs</span><span class="p">):</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">awl</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">xs</span><span class="p">),</span> <span class="n">c</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_iout</span><span class="o">.</span><span class="n">iout</span><span class="p">[:,</span><span class="n">i</span><span class="p">,</span><span class="n">outindex</span><span class="p">],</span>
+                            <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;s&quot;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cmap</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">valminmax</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">cmax</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmax</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_kiout</span><span class="o">.</span><span class="n">kiout</span><span class="p">[:,:,</span><span class="n">outindex</span><span class="p">]))</span>
+                <span class="n">cmin</span> <span class="o">=</span> <span class="o">-</span><span class="n">cmax</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">cmin</span> <span class="o">=</span> <span class="o">-</span><span class="n">valminmax</span>
+                <span class="n">cmax</span> <span class="o">=</span> <span class="n">valminmax</span>
+            <span class="n">title_string</span> <span class="o">+=</span> <span class="s2">&quot; differential&quot;</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">awl</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">oi_wavelength</span><span class="o">.</span><span class="n">lambs</span><span class="p">):</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">awl</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">xs</span><span class="p">),</span> <span class="n">c</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_kiout</span><span class="o">.</span><span class="n">kiout</span><span class="p">[:,</span><span class="n">i</span><span class="p">,</span><span class="n">outindex</span><span class="p">],</span>
+                       <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;s&quot;</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="n">cmin</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="n">cmax</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cmap</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">title_string</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;MJD [d]&quot;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Wavelength [m]&quot;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="s2">&quot;auto&quot;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Output </span><span class="si">{</span><span class="n">outindex</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">title_string</span><span class="si">}</span><span class="s2"> [</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_iout</span><span class="o">.</span><span class="n">unit</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span></div>
 </div>
 
         

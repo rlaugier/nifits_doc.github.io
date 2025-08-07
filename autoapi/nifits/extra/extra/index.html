@@ -300,17 +300,28 @@ module becomes optional.</p>
 <div class="table-wrapper autosummary longtable docutils container">
 <table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#nifits.extra.extra.e2ph" title="nifits.extra.extra.e2ph"><code class="xref py py-obj docutils literal notranslate"><span class="pre">e2ph</span></code></a>(energy, wl)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nifits.extra.extra.local_sqrtm" title="nifits.extra.extra.local_sqrtm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">local_sqrtm</span></code></a>(amatrix)</p></td>
+<td><p><dl class="field-list simple">
+<dt class="field-odd">param amatrix<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A square matrix</p>
+</dd>
+</dl>
+</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#nifits.extra.extra.e2ph" title="nifits.extra.extra.e2ph"><code class="xref py py-obj docutils literal notranslate"><span class="pre">e2ph</span></code></a>(energy, wl)</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#nifits.extra.extra.ph2e" title="nifits.extra.extra.ph2e"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ph2e</span></code></a>(nphot, wl)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nifits.extra.extra.ph2e" title="nifits.extra.extra.ph2e"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ph2e</span></code></a>(nphot, wl)</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#nifits.extra.extra.whitened_kiout" title="nifits.extra.extra.whitened_kiout"><code class="xref py py-obj docutils literal notranslate"><span class="pre">whitened_kiout</span></code></a>(self)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#nifits.extra.extra.whitened_kiout" title="nifits.extra.extra.whitened_kiout"><code class="xref py py-obj docutils literal notranslate"><span class="pre">whitened_kiout</span></code></a>(self)</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#nifits.extra.extra.residual_pdet_Te" title="nifits.extra.extra.residual_pdet_Te"><code class="xref py py-obj docutils literal notranslate"><span class="pre">residual_pdet_Te</span></code></a>(lamb, xsi, rank, targ)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nifits.extra.extra.residual_pdet_Te" title="nifits.extra.extra.residual_pdet_Te"><code class="xref py py-obj docutils literal notranslate"><span class="pre">residual_pdet_Te</span></code></a>(lamb, xsi, rank, targ)</p></td>
 <td><p>Computes the residual of Pdet</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#nifits.extra.extra.residual_pdet_Tnp" title="nifits.extra.extra.residual_pdet_Tnp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">residual_pdet_Tnp</span></code></a>(xTx, xsi, targ)</p></td>
+<td><p>Computes the residual of Pdet in a NP test.</p></td>
 </tr>
 </tbody>
 </table>
@@ -330,6 +341,20 @@ module becomes optional.</p>
 </tbody>
 </table>
 </div>
+<dl class="py function">
+<dt class="sig sig-object py" id="nifits.extra.extra.local_sqrtm">
+<span class="sig-prename descclassname"><span class="pre">nifits.extra.extra.</span></span><span class="sig-name descname"><span class="pre">local_sqrtm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">amatrix</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/nifits/extra/extra.html#local_sqrtm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.extra.extra.local_sqrtm" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>amatrix</strong> – A square matrix</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Retrurns:</dt><dd><p>sqrt_matrx : The square root of the input</p>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="py class">
 <dt class="sig sig-object py" id="nifits.extra.extra.Post">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nifits.extra.extra.</span></span><span class="sig-name descname"><span class="pre">Post</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nifits</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../../../../nifits.io.html#nifits.io.oifits.nifits" title="nifits.io.oifits.nifits"><span class="pre">nifits.io.oifits.nifits</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">module</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">np</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/nifits/extra/extra.html#Post"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.extra.extra.Post" title="Link to this definition">¶</a></dt>
@@ -344,7 +369,7 @@ return whitened observables. Compare it to <code class="docutils literal notrans
 instead of <code class="docutils literal notranslate"><span class="pre">self.nifits.ni_kiout.kiout</span></code>.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="nifits.extra.extra.Post.create_whitening_matrix">
-<span class="sig-name descname"><span class="pre">create_whitening_matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">replace</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">md</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">types.ModuleType</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">np</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/nifits/extra/extra.html#Post.create_whitening_matrix"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.extra.extra.Post.create_whitening_matrix" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">create_whitening_matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">replace</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">md</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">types.ModuleType</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">np</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">local</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/nifits/extra/extra.html#Post.create_whitening_matrix"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.extra.extra.Post.create_whitening_matrix" title="Link to this definition">¶</a></dt>
 <dd><blockquote>
 <div><p>Updates the whitening matrix:</p>
 </div></blockquote>
@@ -520,14 +545,68 @@ is not implemented yet)</p></li>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="nifits.extra.extra.Post.get_tnp">
+<span class="sig-name descname"><span class="pre">get_tnp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/nifits/extra/extra.html#Post.get_tnp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.extra.extra.Post.get_tnp" title="Link to this definition">¶</a></dt>
+<dd><p>Untested</p>
+<p>Computes the Tnp test statistic of the current file. This test statistic
+is supposed to be distributed as a chi^2 under H_0.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> – Known signature of the signal of interest.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>y.T.dot(x) where y is the whitened signal recorded
+and x is the target .</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Te</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="nifits.extra.extra.Post.get_pdet_tnp">
-<span class="sig-name descname"><span class="pre">get_pdet_tnp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">transmission_map</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pfa</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.046</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pdet</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.9</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/nifits/extra/extra.html#Post.get_pdet_tnp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.extra.extra.Post.get_pdet_tnp" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">get_pdet_tnp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">alphas</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">betas</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">solid_angle</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kernels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pfa</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.046</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">whiten</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temperature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/nifits/extra/extra.html#Post.get_pdet_tnp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.extra.extra.Post.get_pdet_tnp" title="Link to this definition">¶</a></dt>
+<dd><p>Untested:</p>
+<p>Computes the Pdet of the Tnp for a blackbody detection</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>alphas</strong> – Relative position ra [rad]</p></li>
+<li><p><strong>betas</strong> – Ralative position dec [rad]</p></li>
+<li><p><strong>solid_anle</strong> – []</p></li>
+<li><p><strong>whiten</strong> – (bool)</p></li>
+<li><p><strong>temperature</strong> – [K]</p></li>
+</ul>
+</dd>
+</dl>
+<p>pfa:
+* 1 sigma: 0.32
+* 2 sigma: 0.046
+* 3 sigma: 0.0027</p>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="nifits.extra.extra.Post.get_sensitivity_tnp">
-<span class="sig-name descname"><span class="pre">get_sensitivity_tnp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">transmission_map</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pfa</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.046</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pdet</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.9</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/nifits/extra/extra.html#Post.get_sensitivity_tnp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.extra.extra.Post.get_sensitivity_tnp" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">get_sensitivity_tnp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">alphas</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">betas</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kernels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temperature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pfa</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.046</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pdet</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.9</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">radius_unit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">units.Rjup</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">md</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">np</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/nifits/extra/extra.html#Post.get_sensitivity_tnp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.extra.extra.Post.get_sensitivity_tnp" title="Link to this definition">¶</a></dt>
+<dd><p>Untested</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">ncx2</span>
+<span class="n">xs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">ys</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">1e-6</span><span class="p">,</span> <span class="mf">0.999</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">u</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">ncx2</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">df</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">nc</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">v</span> <span class="o">=</span> <span class="n">ncx2</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">ys</span><span class="p">,</span> <span class="n">df</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">nc</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">u</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ys</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">xs</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd></dl>
 
 </dd></dl>
 
@@ -568,6 +647,24 @@ is not implemented yet)</p></li>
 <li><p>rank     : The rank of observable</p></li>
 </ul>
 <p><strong>Returns</strong> the Pdet difference. See <em>Ceau et al. 2019</em> for more information</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nifits.extra.extra.residual_pdet_Tnp">
+<span class="sig-prename descclassname"><span class="pre">nifits.extra.extra.</span></span><span class="sig-name descname"><span class="pre">residual_pdet_Tnp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xTx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xsi</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">targ</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/nifits/extra/extra.html#residual_pdet_Tnp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.extra.extra.residual_pdet_Tnp" title="Link to this definition">¶</a></dt>
+<dd><p>Computes the residual of Pdet in a NP test.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>xTx</strong> – The noncentrality parameter representing the feature</p></li>
+<li><p><strong>targ</strong> – The target Pdet to converge to</p></li>
+<li><p><strong>xsi</strong> – The location of threshold</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The Pdet difference.</p>
+</dd>
+</dl>
 </dd></dl>
 
 </section>
@@ -638,6 +735,7 @@ interpretation.</a></li>
 <li><a class="reference internal" href="#classes">Classes</a></li>
 <li><a class="reference internal" href="#functions">Functions</a></li>
 <li><a class="reference internal" href="#attributes">Attributes</a><ul>
+<li><a class="reference internal" href="#nifits.extra.extra.local_sqrtm"><code class="docutils literal notranslate"><span class="pre">local_sqrtm()</span></code></a></li>
 <li><a class="reference internal" href="#nifits.extra.extra.Post"><code class="docutils literal notranslate"><span class="pre">Post</span></code></a><ul>
 <li><a class="reference internal" href="#nifits.extra.extra.Post.create_whitening_matrix"><code class="docutils literal notranslate"><span class="pre">Post.create_whitening_matrix()</span></code></a></li>
 <li><a class="reference internal" href="#nifits.extra.extra.Post.whiten_signal"><code class="docutils literal notranslate"><span class="pre">Post.whiten_signal()</span></code></a></li>
@@ -650,6 +748,7 @@ interpretation.</a></li>
 <li><a class="reference internal" href="#nifits.extra.extra.Post.get_Te"><code class="docutils literal notranslate"><span class="pre">Post.get_Te()</span></code></a></li>
 <li><a class="reference internal" href="#nifits.extra.extra.Post.get_pdet_te"><code class="docutils literal notranslate"><span class="pre">Post.get_pdet_te()</span></code></a></li>
 <li><a class="reference internal" href="#nifits.extra.extra.Post.get_sensitivity_te"><code class="docutils literal notranslate"><span class="pre">Post.get_sensitivity_te()</span></code></a></li>
+<li><a class="reference internal" href="#nifits.extra.extra.Post.get_tnp"><code class="docutils literal notranslate"><span class="pre">Post.get_tnp()</span></code></a></li>
 <li><a class="reference internal" href="#nifits.extra.extra.Post.get_pdet_tnp"><code class="docutils literal notranslate"><span class="pre">Post.get_pdet_tnp()</span></code></a></li>
 <li><a class="reference internal" href="#nifits.extra.extra.Post.get_sensitivity_tnp"><code class="docutils literal notranslate"><span class="pre">Post.get_sensitivity_tnp()</span></code></a></li>
 </ul>
@@ -660,6 +759,7 @@ interpretation.</a></li>
 <li><a class="reference internal" href="#nifits.extra.extra.ph2e"><code class="docutils literal notranslate"><span class="pre">ph2e()</span></code></a></li>
 <li><a class="reference internal" href="#nifits.extra.extra.whitened_kiout"><code class="docutils literal notranslate"><span class="pre">whitened_kiout()</span></code></a></li>
 <li><a class="reference internal" href="#nifits.extra.extra.residual_pdet_Te"><code class="docutils literal notranslate"><span class="pre">residual_pdet_Te()</span></code></a></li>
+<li><a class="reference internal" href="#nifits.extra.extra.residual_pdet_Tnp"><code class="docutils literal notranslate"><span class="pre">residual_pdet_Tnp()</span></code></a></li>
 </ul>
 </li>
 </ul>

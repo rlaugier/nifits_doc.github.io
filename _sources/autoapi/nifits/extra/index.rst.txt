@@ -31,10 +31,12 @@ Functions
 
 .. autoapisummary::
 
+   nifits.extra.local_sqrtm
    nifits.extra.e2ph
    nifits.extra.ph2e
    nifits.extra.whitened_kiout
    nifits.extra.residual_pdet_Te
+   nifits.extra.residual_pdet_Tnp
 
 
 
@@ -175,6 +177,14 @@ Attributes
 
 
 
+.. py:function:: local_sqrtm(amatrix)
+
+   :param amatrix: A square matrix
+
+   Retrurns:
+       sqrt_matrx : The square root of the input
+
+
 .. py:class:: Post(nifits: nifits.io.oifits.nifits = None, module=np)
 
 
@@ -192,7 +202,7 @@ Attributes
    instead of ``self.nifits.ni_kiout.kiout``.
 
 
-   .. py:method:: create_whitening_matrix(replace: bool = False, md: types.ModuleType = np)
+   .. py:method:: create_whitening_matrix(replace: bool = False, md: types.ModuleType = np, local: bool = True)
 
           Updates the whitening matrix:
 
@@ -309,10 +319,58 @@ Attributes
           plt.show()
 
 
-   .. py:method:: get_pdet_tnp(transmission_map, pfa=0.046, pdet=0.9)
+   .. py:method:: get_tnp(x)
+
+      Untested
+
+      Computes the Tnp test statistic of the current file. This test statistic
+      is supposed to be distributed as a chi^2 under H_0.
+
+      :param x: Known signature of the signal of interest.
+
+      :returns: y.T.dot(x) where y is the whitened signal recorded
+                and x is the target .
+      :rtype: Te
 
 
-   .. py:method:: get_sensitivity_tnp(transmission_map, pfa=0.046, pdet=0.9)
+   .. py:method:: get_pdet_tnp(alphas, betas, solid_angle, kernels=True, pfa=0.046, whiten=True, temperature=None)
+
+      Untested:
+
+      Computes the Pdet of the Tnp for a blackbody detection
+
+      :param alphas: Relative position ra [rad]
+      :param betas: Ralative position dec [rad]
+      :param solid_anle: []
+      :param whiten: (bool)
+      :param temperature: [K]
+
+      pfa:
+      * 1 sigma: 0.32
+      * 2 sigma: 0.046
+      * 3 sigma: 0.0027
+
+
+   .. py:method:: get_sensitivity_tnp(alphas, betas, kernels=True, temperature=None, pfa=0.046, pdet=0.9, distance=None, radius_unit=units.Rjup, md=np)
+
+      Untested
+
+      .. code-block:: python
+
+          from scipy.stats import ncx2
+          xs = np.linspace(-10, 10, 100)
+          ys = np.linspace(1e-6, 0.999, 100)
+          u = 1 - ncx2.cdf(xs, df=10, nc=0)
+          v = ncx2.ppf(1 - ys, df=10, nc=0)
+
+          plt.figure()
+          plt.plot(xs, u)
+          plt.show()
+
+          plt.figure()
+          plt.plot(ys, v)
+          plt.plot(u, xs)
+          plt.show()
 
 
 
@@ -345,5 +403,16 @@ Attributes
    * rank     : The rank of observable
 
    **Returns** the Pdet difference. See *Ceau et al. 2019* for more information
+
+
+.. py:function:: residual_pdet_Tnp(xTx, xsi, targ)
+
+   Computes the residual of Pdet in a NP test.
+
+   :param xTx: The noncentrality parameter representing the feature
+   :param targ: The target Pdet to converge to
+   :param xsi: The location of threshold
+
+   :returns: The Pdet difference.
 
 

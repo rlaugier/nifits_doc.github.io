@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" />
 
     <!-- Generated with Sphinx 7.3.7 and Furo 2024.08.06 -->
-        <title>nifits.extra.extra - NIFITS 0.0.5 documentation</title>
+        <title>nifits.extra.extra - NIFITS 0.0.6 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=362ab14a" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?v=354aac6f" />
     <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=fd3f3429" />
@@ -167,7 +167,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../../../index.html"><div class="brand">NIFITS 0.0.5 documentation</div></a>
+      <a href="../../../index.html"><div class="brand">NIFITS 0.0.6 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -191,7 +191,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../../../index.html">
   
   
-  <span class="sidebar-brand-text">NIFITS 0.0.5 documentation</span>
+  <span class="sidebar-brand-text">NIFITS 0.0.6 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="../../../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -297,6 +297,23 @@
 <span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span> <span class="k">as</span> <span class="n">norm</span>
 <span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">chi2</span> <span class="k">as</span> <span class="n">chi2</span>
 
+<div class="viewcode-block" id="local_sqrtm">
+<a class="viewcode-back" href="../../../autoapi/nifits/extra/index.html#nifits.extra.extra.local_sqrtm">[docs]</a>
+<span class="k">def</span> <span class="nf">local_sqrtm</span><span class="p">(</span><span class="n">amatrix</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Arguments:</span>
+<span class="sd">        amatrix : A square matrix</span>
+
+<span class="sd">    Retrurns: </span>
+<span class="sd">        sqrt_matrx : The square root of the input</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Eigendecomposition</span>
+    <span class="n">evalues</span><span class="p">,</span> <span class="n">evectors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eig</span><span class="p">(</span><span class="n">amatrix</span><span class="p">)</span>
+    <span class="c1"># Checking for singularity</span>
+    <span class="k">assert</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">evalues</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">(),</span> <span class="s2">&quot;The matrix is singular (or too close to it)&quot;</span>
+    <span class="n">sqrt_matrix</span> <span class="o">=</span> <span class="n">evectors</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">evalues</span><span class="p">)</span> <span class="o">@</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">evectors</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">sqrt_matrix</span></div>
+
 
 <div class="viewcode-block" id="Post">
 <a class="viewcode-back" href="../../../autoapi/nifits/extra/index.html#nifits.extra.extra.Post">[docs]</a>
@@ -318,7 +335,8 @@
 <a class="viewcode-back" href="../../../autoapi/nifits/extra/index.html#nifits.extra.extra.Post.create_whitening_matrix">[docs]</a>
     <span class="k">def</span> <span class="nf">create_whitening_matrix</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                                 <span class="n">replace</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-                                <span class="n">md</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">ModuleType</span> <span class="o">=</span> <span class="n">np</span><span class="p">):</span>
+                                <span class="n">md</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">ModuleType</span> <span class="o">=</span> <span class="n">np</span><span class="p">,</span>
+                                <span class="n">local</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">            Updates the whitening matrix:</span>
 
@@ -338,7 +356,10 @@
 
         <span class="n">Ws</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">amat</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_kcov</span><span class="o">.</span><span class="n">data_array</span><span class="p">:</span>
-            <span class="n">Ws</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">sqrtm</span><span class="p">(</span><span class="n">amat</span><span class="p">)))</span>
+            <span class="k">if</span> <span class="n">local</span><span class="p">:</span>
+                <span class="n">Ws</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">local_sqrtm</span><span class="p">(</span><span class="n">amat</span><span class="p">)))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">Ws</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">sqrtm</span><span class="p">(</span><span class="n">amat</span><span class="p">)))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">Ws</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">Ws</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">W_unit</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_kcov</span><span class="o">.</span><span class="n">unit</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="p">,</span> <span class="s2">&quot;ni_kiout&quot;</span><span class="p">):</span>
@@ -509,6 +530,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">blackbody_signal</span></div>
 
+
 <div class="viewcode-block" id="Post.get_Te">
 <a class="viewcode-back" href="../../../autoapi/nifits/extra/index.html#nifits.extra.extra.Post.get_Te">[docs]</a>
     <span class="k">def</span> <span class="nf">get_Te</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -601,20 +623,133 @@
             <span class="k">return</span> <span class="n">lim_solid_angle</span>
         <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">distance</span><span class="p">,</span> <span class="n">units</span><span class="o">.</span><span class="n">Quantity</span><span class="p">):</span>
             <span class="n">dist_converted</span> <span class="o">=</span> <span class="n">distance</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">radius_unit</span><span class="p">)</span>
-            <span class="n">lim_radius</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">dist_converted</span><span class="o">*</span><span class="n">md</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">lim_solid_angle</span><span class="o">/</span><span class="n">md</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span>
+            <span class="n">lim_radius</span> <span class="o">=</span> <span class="n">dist_converted</span><span class="o">*</span><span class="n">md</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">lim_solid_angle</span><span class="o">/</span><span class="n">md</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">lim_radius</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">radius_unit</span><span class="p">,</span> <span class="n">equivalencies</span><span class="o">=</span><span class="n">units</span><span class="o">.</span><span class="n">equivalencies</span><span class="o">.</span><span class="n">dimensionless_angles</span><span class="p">())</span></div>
+
+
+
+<div class="viewcode-block" id="Post.get_tnp">
+<a class="viewcode-back" href="../../../autoapi/nifits/extra/index.html#nifits.extra.extra.Post.get_tnp">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_tnp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Untested</span>
+<span class="sd">        </span>
+<span class="sd">        Computes the Tnp test statistic of the current file. This test statistic</span>
+<span class="sd">        is supposed to be distributed as a chi^2 under H_0.</span>
+
+<span class="sd">        Arguments:</span>
+<span class="sd">            x : Known signature of the signal of interest.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            Te : y.T.dot(x) where y is the whitened signal recorded</span>
+<span class="sd">            and x is the target .</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="p">,</span> <span class="s2">&quot;ni_kiout&quot;</span><span class="p">):</span>
+            <span class="n">kappa</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">whiten_signal</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_kiout</span><span class="o">.</span><span class="n">kiout</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Needs a NI_KIOUT extension&quot;</span><span class="p">)</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">kappa</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">y</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">x</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="Post.get_pdet_tnp">
 <a class="viewcode-back" href="../../../autoapi/nifits/extra/index.html#nifits.extra.extra.Post.get_pdet_tnp">[docs]</a>
-    <span class="k">def</span> <span class="nf">get_pdet_tnp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">transmission_map</span><span class="p">,</span> <span class="n">pfa</span><span class="o">=</span><span class="mf">0.046</span><span class="p">,</span> <span class="n">pdet</span><span class="o">=</span><span class="mf">0.90</span><span class="p">):</span>
-        <span class="k">pass</span></div>
+    <span class="k">def</span> <span class="nf">get_pdet_tnp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">alphas</span><span class="p">,</span> <span class="n">betas</span><span class="p">,</span>
+                    <span class="n">solid_angle</span><span class="p">,</span>
+                    <span class="n">kernels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">pfa</span><span class="o">=</span><span class="mf">0.046</span><span class="p">,</span>
+                    <span class="n">whiten</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                    <span class="n">temperature</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Untested:</span>
+<span class="sd">        </span>
+<span class="sd">        Computes the Pdet of the Tnp for a blackbody detection</span>
 
-    
+<span class="sd">        Arguments:</span>
+<span class="sd">            alphas : Relative position ra [rad]</span>
+<span class="sd">            betas : Ralative position dec [rad]</span>
+<span class="sd">            solid_anle : []</span>
+<span class="sd">            whiten : (bool)</span>
+<span class="sd">            temperature : [K]</span>
+<span class="sd">        </span>
+<span class="sd">        pfa:</span>
+<span class="sd">        * 1 sigma: 0.32</span>
+<span class="sd">        * 2 sigma: 0.046</span>
+<span class="sd">        * 3 sigma: 0.0027</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">temperature</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">add_blackbody</span><span class="p">(</span><span class="n">temperature</span><span class="p">)</span>
+        <span class="n">ref_spectrum</span> <span class="o">=</span> <span class="n">solid_angle</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_blackbody_collected</span><span class="p">(</span><span class="n">alphas</span><span class="p">,</span> <span class="n">betas</span><span class="p">,</span>
+                                                    <span class="n">kernels</span><span class="o">=</span><span class="n">kernels</span><span class="p">,</span>
+                                                    <span class="n">whiten</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                                    <span class="n">to_si</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">ref_spectrum</span><span class="o">.</span><span class="n">unit</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">ref_spectrum</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+        <span class="n">xTx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s2">&quot;o m , o m -&gt; m&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+        <span class="n">threshold</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">xTx</span><span class="p">)</span><span class="o">*</span><span class="n">norm</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">pfa</span><span class="p">)</span>
+        <span class="c1"># threshold = ncx2.ppf(1-pfa, df=self.fullyflatshape, nc=0.)</span>
+        <span class="n">pdet_Pfa</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">((</span><span class="n">threshold</span> <span class="o">-</span> <span class="n">xTx</span><span class="p">)</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">xTx</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">pdet_Pfa</span></div>
+
+
 <div class="viewcode-block" id="Post.get_sensitivity_tnp">
 <a class="viewcode-back" href="../../../autoapi/nifits/extra/index.html#nifits.extra.extra.Post.get_sensitivity_tnp">[docs]</a>
-    <span class="k">def</span> <span class="nf">get_sensitivity_tnp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">transmission_map</span><span class="p">,</span> <span class="n">pfa</span><span class="o">=</span><span class="mf">0.046</span><span class="p">,</span> <span class="n">pdet</span><span class="o">=</span><span class="mf">0.90</span><span class="p">):</span>
-        <span class="k">pass</span></div>
+    <span class="k">def</span> <span class="nf">get_sensitivity_tnp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">alphas</span><span class="p">,</span> <span class="n">betas</span><span class="p">,</span>
+                    <span class="n">kernels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                    <span class="n">temperature</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">pfa</span><span class="o">=</span><span class="mf">0.046</span><span class="p">,</span> <span class="n">pdet</span><span class="o">=</span><span class="mf">0.90</span><span class="p">,</span>
+                    <span class="n">distance</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">radius_unit</span><span class="o">=</span><span class="n">units</span><span class="o">.</span><span class="n">Rjup</span><span class="p">,</span>
+                    <span class="n">md</span><span class="o">=</span><span class="n">np</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Untested</span>
+<span class="sd">        </span>
+<span class="sd">        .. code-block:: python</span>
+
+<span class="sd">            from scipy.stats import ncx2</span>
+<span class="sd">            xs = np.linspace(-10, 10, 100)</span>
+<span class="sd">            ys = np.linspace(1e-6, 0.999, 100)</span>
+<span class="sd">            u = 1 - ncx2.cdf(xs, df=10, nc=0)</span>
+<span class="sd">            v = ncx2.ppf(1 - ys, df=10, nc=0)</span>
+
+<span class="sd">            plt.figure()</span>
+<span class="sd">            plt.plot(xs, u)</span>
+<span class="sd">            plt.show()</span>
+
+<span class="sd">            plt.figure()</span>
+<span class="sd">            plt.plot(ys, v)</span>
+<span class="sd">            plt.plot(u, xs)</span>
+<span class="sd">            plt.show()</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">temperature</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">add_blackbody</span><span class="p">(</span><span class="n">temperature</span><span class="p">)</span>
+        <span class="n">ref_solid_angle</span> <span class="o">=</span> <span class="mf">1e-20</span><span class="o">*</span><span class="n">units</span><span class="o">.</span><span class="n">rad</span><span class="o">**</span><span class="mi">2</span>
+        <span class="n">ref_spectrum</span> <span class="o">=</span> <span class="n">ref_solid_angle</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_blackbody_collected</span><span class="p">(</span><span class="n">alphas</span><span class="o">=</span><span class="n">alphas</span><span class="p">,</span><span class="n">betas</span><span class="o">=</span><span class="n">betas</span><span class="p">,</span>
+                                                    <span class="n">kernels</span><span class="o">=</span><span class="n">kernels</span><span class="p">,</span> <span class="n">whiten</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                                    <span class="n">to_si</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Ref spectrum unit: &quot;</span><span class="p">,</span> <span class="n">ref_spectrum</span><span class="o">.</span><span class="n">unit</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="n">ref_spectrum</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">ref_spectrum</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Ref signal (x) unit: &quot;</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">unit</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Ref signal (x) shape: &quot;</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+        <span class="n">xTx</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s2">&quot;m i, i m -&gt; m&quot;</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+        <span class="n">threshold</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">xTx</span><span class="p">)</span><span class="o">*</span><span class="n">norm</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">pfa</span><span class="p">)</span>
+        <span class="c1"># threshold = ncx2.ppf(1-pfa, df=self.fullyflatshape, nc=0.)</span>
+        <span class="c1"># lambda0 = 1.0e-3 * self.fullyflatshape</span>
+        <span class="n">f_map</span> <span class="o">=</span> <span class="n">ref_solid_angle</span>\
+                <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">xTx</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span> <span class="n">norm</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">pfa</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="n">norm</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">pdet</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+
+        <span class="c1"># The solution lambda is the x^T.x value satisfying Pdet and Pfa</span>
+        <span class="c1"># sol = leastsq(residual_pdet_Tnp, lambda0,</span>
+        <span class="c1">#                 args=(threshold, self.fullyflatshape, pdet))# AKA lambda</span>
+        <span class="c1"># lamb = sol[0][0]</span>
+        <span class="c1"># Concatenate the wavelengths</span>
+
+        <span class="c1"># from pdb import set_trace</span>
+        <span class="c1"># set_trace()</span>
+        <span class="n">lim_solid_angle</span> <span class="o">=</span> <span class="n">f_map</span>
+        <span class="k">if</span> <span class="n">distance</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">lim_solid_angle</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">distance</span><span class="p">,</span> <span class="n">units</span><span class="o">.</span><span class="n">Quantity</span><span class="p">):</span>
+            <span class="n">dist_converted</span> <span class="o">=</span> <span class="n">distance</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">radius_unit</span><span class="p">)</span>
+            <span class="n">lim_radius</span> <span class="o">=</span> <span class="n">dist_converted</span><span class="o">*</span><span class="n">md</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">lim_solid_angle</span><span class="o">/</span><span class="n">md</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">lim_radius</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">radius_unit</span><span class="p">,</span> <span class="n">equivalencies</span><span class="o">=</span><span class="n">units</span><span class="o">.</span><span class="n">equivalencies</span><span class="o">.</span><span class="n">dimensionless_angles</span><span class="p">())</span></div>
 </div>
 
 
@@ -685,6 +820,25 @@
     <span class="k">return</span> <span class="n">respdet</span></div>
 
 
+<div class="viewcode-block" id="residual_pdet_Tnp">
+<a class="viewcode-back" href="../../../autoapi/nifits/extra/index.html#nifits.extra.extra.residual_pdet_Tnp">[docs]</a>
+<span class="k">def</span> <span class="nf">residual_pdet_Tnp</span><span class="p">(</span><span class="n">xTx</span><span class="p">,</span> <span class="n">xsi</span><span class="p">,</span> <span class="n">targ</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Computes the residual of Pdet in a NP test.</span>
+<span class="sd">    </span>
+<span class="sd">    Arguments:</span>
+<span class="sd">        xTx     : The noncentrality parameter representing the feature</span>
+<span class="sd">        targ     : The target Pdet to converge to</span>
+<span class="sd">        xsi      : The location of threshold</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        The Pdet difference.</span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="n">Pdet_Pfa</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">((</span><span class="n">xsi</span> <span class="o">-</span> <span class="n">xTx</span><span class="p">)</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">xTx</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">Pdet_Pfa</span> <span class="o">-</span> <span class="n">targ</span></div>
+
 
 
         
@@ -720,7 +874,7 @@
       
     </aside>
   </div>
-</div><script src="../../../_static/documentation_options.js?v=282f96c0"></script>
+</div><script src="../../../_static/documentation_options.js?v=1fd71caa"></script>
     <script src="../../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/scripts/furo.js?v=5fa4622c"></script>

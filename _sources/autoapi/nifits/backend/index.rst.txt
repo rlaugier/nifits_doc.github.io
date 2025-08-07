@@ -521,6 +521,17 @@ Attributes
    .. py:method:: plot_recorded(cmap='viridis', outputs=None, nrows_ncols=None, res_x=1000, res_y=500, interp='nearest')
 
 
+   .. py:method:: make_combiner_graph()
+
+
+   .. py:method:: plot_barcode(outindex, diffout=False, cmap=None, valminmax=None, **kwargs)
+
+      Create a scatter plot of the recorded frames.
+
+      :param outindex: (int) The index of output to plot
+      :param diffout: (bool) The
+
+
 
 .. py:function:: col_row_numbers(n, col_ceiling=4)
 
