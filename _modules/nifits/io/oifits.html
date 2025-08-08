@@ -1304,6 +1304,15 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">r_0</span> <span class="o">=</span> <span class="p">(</span><span class="n">lamb</span><span class="o">/</span><span class="n">D</span><span class="p">)</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">rad</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">mas</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">xy2phasor</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span> <span class="n">offset</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Returns the complex phasor corresponding to a point in the FOV</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            ``x`` : ``ArrayLike`` [rad] Position in the FoV along the alpha direction</span>
+<span class="sd">            ``y`` : ``ArrayLike`` [rad] Position in the FoV along the delta direction</span>
+<span class="sd">            ``offset`` : ``ArrayLike`` [rad] Chromatic offset of the injection function</span>
+<span class="sd">                        shape: (``n_{wl}``, ``n_{points}``).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hypot</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="kc">None</span><span class="p">,:]</span><span class="o">-</span><span class="n">offset</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="kc">None</span><span class="p">,:]</span><span class="o">-</span><span class="n">offset</span><span class="p">[:,</span><span class="mi">1</span><span class="p">])</span>
         <span class="n">phasor</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">r</span><span class="o">/</span><span class="n">r_0</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">phasor</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">complex</span><span class="p">)</span>

@@ -309,13 +309,13 @@ module becomes optional.</p>
 </p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#nifits.extra.extra.e2ph" title="nifits.extra.extra.e2ph"><code class="xref py py-obj docutils literal notranslate"><span class="pre">e2ph</span></code></a>(energy, wl)</p></td>
-<td><p></p></td>
+<td><p>Utility conversion from energy to photons:</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#nifits.extra.extra.ph2e" title="nifits.extra.extra.ph2e"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ph2e</span></code></a>(nphot, wl)</p></td>
-<td><p></p></td>
+<td><p>Utility conversion from photons to energy  (SI)</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#nifits.extra.extra.whitened_kiout" title="nifits.extra.extra.whitened_kiout"><code class="xref py py-obj docutils literal notranslate"><span class="pre">whitened_kiout</span></code></a>(self)</p></td>
-<td><p></p></td>
+<td><p>The function that is imported a method to produce a</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#nifits.extra.extra.residual_pdet_Te" title="nifits.extra.extra.residual_pdet_Te"><code class="xref py py-obj docutils literal notranslate"><span class="pre">residual_pdet_Te</span></code></a>(lamb, xsi, rank, targ)</p></td>
 <td><p>Computes the residual of Pdet</p></td>
@@ -414,14 +414,16 @@ a.k.a kernel-null)</p>
 <span class="sig-name descname"><span class="pre">whitened_outputs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/nifits/extra/extra.html#Post.whitened_outputs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.extra.extra.Post.whitened_outputs" title="Link to this definition">¶</a></dt>
 <dd><p>A decorator methods that gives applies statistical whitening
 to the output of the function. The whitening relies on
-<cite>self.W</cite> which is computed as by <cite>create_whitening_matrix</cite>.
-:param func: The function to decorate.</p>
+<code class="docutils literal notranslate"><span class="pre">self.W</span></code> which is computed as by <code class="docutils literal notranslate"><span class="pre">create_whitening_matrix</span></code>.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>The decorated function</p>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>func</strong> – The function to decorate.</p>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>inner</p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The decorated function</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>inner</p>
 </dd>
 </dl>
 </dd></dl>
@@ -437,6 +439,7 @@ to the output of the function. The whitening relies on
 <dd class="field-odd"><p><strong>temperature</strong> – units.Quantity</p>
 </dd>
 </dl>
+<p>The blackbody <code class="docutils literal notranslate"><span class="pre">BB</span></code> object is stored in <code class="docutils literal notranslate"><span class="pre">self.bb</span></code>.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -471,7 +474,7 @@ to the output of the function. The whitening relies on
 <dd><dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p><dl class="simple">
-<dt>in units consistent with the native</dt><dd><p>units of the file $[a.sr^{-1}.m^{-2}]$ (where [a] is typically [ph/s]).</p>
+<dt>in units consistent with the native</dt><dd><p>units of the file $[a.sr^{-1}.m^{-2}]$ (where [a] is the</p>
 </dd>
 </dl>
 </p>
@@ -480,6 +483,7 @@ to the output of the function. The whitening relies on
 <dd class="field-even"><p>blackbody_spectrum</p>
 </dd>
 </dl>
+<p>flux unit used in the file, typically [ph/s]).</p>
 </dd></dl>
 
 <dl class="py method">
@@ -517,7 +521,33 @@ is not implemented yet)</p></li>
 <dl class="py method">
 <dt class="sig sig-object py" id="nifits.extra.extra.Post.get_pdet_te">
 <span class="sig-name descname"><span class="pre">get_pdet_te</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">alphas</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">betas</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">solid_angle</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kernels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pfa</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.046</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">whiten</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temperature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/nifits/extra/extra.html#Post.get_pdet_te"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.extra.extra.Post.get_pdet_te" title="Link to this definition">¶</a></dt>
-<dd><p>pfa:
+<dd><blockquote>
+<div><p>Computes a detection probability of a point-source at a given</p>
+</div></blockquote>
+<p>position based on the energy detector defined in Ceau et al. 2019.
+This is a simple test of deviation from the expected distribution,
+entirely agnostic to the family of signal of interest. The spectrum
+of the source is a blackbody spectrum of fixed temperature.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>alpha</strong> – [rad] The coordinate matched to X in the array geometry</p></li>
+<li><p><strong>beta</strong> – [rad] The coordinate matched to Y in the array geometry</p></li>
+<li><p><strong>solid_angle</strong> – [sr] Solid angle of the source</p></li>
+<li><p><strong>temperature</strong> – [K] The temperature of the blackbody</p></li>
+<li><p><strong>whiten</strong> – Bool (True) Whether to use the whitening transform</p></li>
+<li><p><strong>kernels</strong> – Bool (True) Whether to use the K matrix to work in differential outputs</p></li>
+<li><p><strong>pfa</strong> – float The false-alarm rate (p-value) to consider</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>An array of the detection probability for all points.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pdet_pfa</p>
+</dd>
+</dl>
+<p>pfa:
 * 1 sigma: 0.32
 * 2 sigma: 0.046
 * 3 sigma: 0.0027</p>
@@ -568,15 +598,23 @@ and x is the target .</p>
 <dt class="sig sig-object py" id="nifits.extra.extra.Post.get_pdet_tnp">
 <span class="sig-name descname"><span class="pre">get_pdet_tnp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">alphas</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">betas</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">solid_angle</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kernels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pfa</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.046</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">whiten</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temperature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/nifits/extra/extra.html#Post.get_pdet_tnp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.extra.extra.Post.get_pdet_tnp" title="Link to this definition">¶</a></dt>
 <dd><p>Untested:</p>
-<p>Computes the Pdet of the Tnp for a blackbody detection</p>
+<blockquote>
+<div><p>Computes a detection probability of a point-source at a given</p>
+</div></blockquote>
+<p>position based on the energy detector defined in Ceau et al. 2019.
+This is a simple test of deviation from the expected distribution,
+entirely agnostic to the family of signal of interest. The spectrum
+of the source is a blackbody spectrum of fixed temperature.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>alphas</strong> – Relative position ra [rad]</p></li>
-<li><p><strong>betas</strong> – Ralative position dec [rad]</p></li>
-<li><p><strong>solid_anle</strong> – []</p></li>
-<li><p><strong>whiten</strong> – (bool)</p></li>
-<li><p><strong>temperature</strong> – [K]</p></li>
+<li><p><strong>alpha</strong> – [rad] The coordinate matched to X in the array geometry</p></li>
+<li><p><strong>beta</strong> – [rad] The coordinate matched to Y in the array geometry</p></li>
+<li><p><strong>solid_angle</strong> – [sr] Solid angle of the source</p></li>
+<li><p><strong>temperature</strong> – [K] The temperature of the blackbody</p></li>
+<li><p><strong>whiten</strong> – Bool (True) Whether to use the whitening transform</p></li>
+<li><p><strong>kernels</strong> – Bool (True) Whether to use the K matrix to work in differential outputs</p></li>
+<li><p><strong>pfa</strong> – float The false-alarm rate (p-value) to consider</p></li>
 </ul>
 </dd>
 </dl>
@@ -623,17 +661,68 @@ and x is the target .</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="nifits.extra.extra.e2ph">
 <span class="sig-prename descclassname"><span class="pre">nifits.extra.extra.</span></span><span class="sig-name descname"><span class="pre">e2ph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">energy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wl</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/nifits/extra/extra.html#e2ph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.extra.extra.e2ph" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><blockquote>
+<div><p>Utility conversion from energy to photons:</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>energy</strong> – Carried energy [J]</p></li>
+<li><p><strong>wl</strong> – Wavelength [m]</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>number of photons</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>nphot</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="nifits.extra.extra.ph2e">
 <span class="sig-prename descclassname"><span class="pre">nifits.extra.extra.</span></span><span class="sig-name descname"><span class="pre">ph2e</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nphot</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wl</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/nifits/extra/extra.html#ph2e"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.extra.extra.ph2e" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><blockquote>
+<div><p>Utility conversion from photons to energy  (SI)</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>nphot</strong> – A number of photons</p></li>
+<li><p><strong>wl</strong> – Wavelength [m]</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Converted to SI units</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Energy</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="nifits.extra.extra.whitened_kiout">
 <span class="sig-prename descclassname"><span class="pre">nifits.extra.extra.</span></span><span class="sig-name descname"><span class="pre">whitened_kiout</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/nifits/extra/extra.html#whitened_kiout"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.extra.extra.whitened_kiout" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><blockquote>
+<div><p>The function that is imported a method to produce a</p>
+</div></blockquote>
+<p>statistical whitening of observation. It is added to the
+object by <cite>create_whitening_matrix</cite></p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><dl class="simple">
+<dt>[ArrayLike] The resulting outputs with shape</dt><dd><p>(nframes, )</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>wout_full</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="nifits.extra.extra.residual_pdet_Te">

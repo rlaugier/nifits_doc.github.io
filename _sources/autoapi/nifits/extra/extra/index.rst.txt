@@ -122,7 +122,8 @@ Attributes
 
       A decorator methods that gives applies statistical whitening
       to the output of the function. The whitening relies on
-      `self.W` which is computed as by `create_whitening_matrix`.
+      ``self.W`` which is computed as by ``create_whitening_matrix``.
+
       :param func: The function to decorate.
 
       :returns: The decorated function
@@ -132,7 +133,10 @@ Attributes
    .. py:method:: add_blackbody(temperature)
 
           Initializes the blackbody for a given temperature
+
       :param temperature: units.Quantity
+
+      The blackbody ``BB`` object is stored in ``self.bb``.
 
 
    .. py:method:: get_pfa_Te(signal=None, md=np)
@@ -156,8 +160,10 @@ Attributes
       :returns:
 
                 in units consistent with the native
-                    units of the file $[a.sr^{-1}.m^{-2}]$ (where [a] is typically [ph/s]).
+                    units of the file $[a.sr^{-1}.m^{-2}]$ (where [a] is the
       :rtype: blackbody_spectrum
+
+      flux unit used in the file, typically [ph/s]).
 
 
    .. py:method:: get_blackbody_collected(alphas, betas, kernels=True, whiten=True, to_si=True)
@@ -181,6 +187,23 @@ Attributes
 
 
    .. py:method:: get_pdet_te(alphas, betas, solid_angle, kernels=True, pfa=0.046, whiten=True, temperature=None)
+
+          Computes a detection probability of a point-source at a given
+      position based on the energy detector defined in Ceau et al. 2019.
+      This is a simple test of deviation from the expected distribution,
+      entirely agnostic to the family of signal of interest. The spectrum
+      of the source is a blackbody spectrum of fixed temperature.
+
+      :param alpha: [rad] The coordinate matched to X in the array geometry
+      :param beta: [rad] The coordinate matched to Y in the array geometry
+      :param solid_angle: [sr] Solid angle of the source
+      :param temperature: [K] The temperature of the blackbody
+      :param whiten: Bool (True) Whether to use the whitening transform
+      :param kernels: Bool (True) Whether to use the K matrix to work in differential outputs
+      :param pfa: float The false-alarm rate (p-value) to consider
+
+      :returns: An array of the detection probability for all points.
+      :rtype: pdet_pfa
 
       pfa:
       * 1 sigma: 0.32
@@ -226,13 +249,19 @@ Attributes
 
       Untested:
 
-      Computes the Pdet of the Tnp for a blackbody detection
+          Computes a detection probability of a point-source at a given
+      position based on the energy detector defined in Ceau et al. 2019.
+      This is a simple test of deviation from the expected distribution,
+      entirely agnostic to the family of signal of interest. The spectrum
+      of the source is a blackbody spectrum of fixed temperature.
 
-      :param alphas: Relative position ra [rad]
-      :param betas: Ralative position dec [rad]
-      :param solid_anle: []
-      :param whiten: (bool)
-      :param temperature: [K]
+      :param alpha: [rad] The coordinate matched to X in the array geometry
+      :param beta: [rad] The coordinate matched to Y in the array geometry
+      :param solid_angle: [sr] Solid angle of the source
+      :param temperature: [K] The temperature of the blackbody
+      :param whiten: Bool (True) Whether to use the whitening transform
+      :param kernels: Bool (True) Whether to use the K matrix to work in differential outputs
+      :param pfa: float The false-alarm rate (p-value) to consider
 
       pfa:
       * 1 sigma: 0.32
@@ -273,11 +302,36 @@ Attributes
 
 .. py:function:: e2ph(energy, wl)
 
+       Utility conversion from energy to photons:
+
+   :param energy: Carried energy [J]
+   :param wl: Wavelength [m]
+
+   :returns: number of photons
+   :rtype: nphot
+
 
 .. py:function:: ph2e(nphot, wl)
 
+       Utility conversion from photons to energy  (SI)
+   :param nphot: A number of photons
+   :param wl: Wavelength [m]
+
+   :returns: Converted to SI units
+   :rtype: Energy
+
 
 .. py:function:: whitened_kiout(self)
+
+       The function that is imported a method to produce a
+   statistical whitening of observation. It is added to the
+   object by `create_whitening_matrix`
+
+   :returns:
+
+             [ArrayLike] The resulting outputs with shape
+                         (nframes, )
+   :rtype: wout_full
 
 
 .. py:function:: residual_pdet_Te(lamb, xsi, rank, targ)
