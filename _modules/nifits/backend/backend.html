@@ -253,9 +253,7 @@
         </div>
         <article role="main" id="furo-main-content">
           <h1>Source code for nifits.backend.backend</h1><div class="highlight"><pre>
-<span></span>
-
-<span class="sd">&quot;&quot;&quot;</span>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Backend module</span>
 <span class="sd">--------------</span>
 
@@ -267,28 +265,19 @@
 <span class="sd">that have a numpy-compatible API.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
+<span class="kn">import</span> <span class="nn">types</span>
 
+<span class="kn">import</span> <span class="nn">astropy.units</span> <span class="k">as</span> <span class="nn">units</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
-
-
-
-
-
-
-
-<span class="kn">import</span> <span class="nn">nifits.io</span> <span class="k">as</span> <span class="nn">io</span>
 <span class="kn">from</span> <span class="nn">nifits.io.oifits</span> <span class="kn">import</span> <span class="n">NIFITS_EXTENSIONS</span><span class="p">,</span> <span class="n">STATIC_EXTENSIONS</span>
 <span class="kn">from</span> <span class="nn">nifits.io.oifits</span> <span class="kn">import</span> <span class="n">nifits</span> <span class="k">as</span> <span class="n">NIFITSClass</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">numpy.typing</span>
-<span class="kn">import</span> <span class="nn">astropy.units</span> <span class="k">as</span> <span class="nn">units</span>
-<span class="kn">import</span> <span class="nn">types</span>
+
 <span class="n">ModuleType</span> <span class="o">=</span> <span class="n">types</span><span class="o">.</span><span class="n">ModuleType</span>
 
 <span class="c1"># from numpy.typing import ArrayLike</span>
 <span class="c1"># A hack to fix the documentation of type hinting</span>
 <span class="n">ArrayLike</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">typing</span><span class="o">.</span><span class="n">ArrayLike</span>
-
 
 <span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
 
@@ -296,7 +285,6 @@
 
 <span class="n">mas2rad</span> <span class="o">=</span> <span class="n">units</span><span class="o">.</span><span class="n">mas</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">units</span><span class="o">.</span><span class="n">rad</span><span class="p">)</span>
 <span class="n">rad2mas</span> <span class="o">=</span> <span class="n">units</span><span class="o">.</span><span class="n">rad</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">units</span><span class="o">.</span><span class="n">mas</span><span class="p">)</span>
-
 
 
 <span class="c1"># TODO Add methods to __add__ PointCollections for variable sampling</span>
@@ -341,6 +329,7 @@
     <span class="n">aa</span><span class="p">:</span> <span class="n">ArrayLike</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="n">bb</span><span class="p">:</span> <span class="n">ArrayLike</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="n">unit</span><span class="p">:</span> <span class="n">units</span><span class="o">.</span><span class="n">Unit</span> <span class="o">=</span> <span class="kc">None</span>
+
 <div class="viewcode-block" id="PointCollection.__post_init__">
 <a class="viewcode-back" href="../../../autoapi/nifits/backend/index.html#nifits.backend.backend.PointCollection.__post_init__">[docs]</a>
     <span class="k">def</span> <span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -355,11 +344,11 @@
 <a class="viewcode-back" href="../../../nifits.backend.html#nifits.backend.backend.PointCollection.from_uniform_disk">[docs]</a>
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">from_uniform_disk</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">radius</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                        <span class="n">n</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
-                        <span class="n">phi_0</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.</span><span class="p">,</span>
-                        <span class="n">offset</span><span class="p">:</span> <span class="n">ArrayLike</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">((</span><span class="mf">0.</span><span class="p">,</span><span class="mf">0.</span><span class="p">)),</span>
-                        <span class="n">md</span><span class="p">:</span> <span class="n">ModuleType</span> <span class="o">=</span> <span class="n">np</span><span class="p">,</span>
-                        <span class="n">unit</span><span class="p">:</span> <span class="n">units</span><span class="o">.</span><span class="n">Unit</span> <span class="o">=</span> <span class="n">units</span><span class="o">.</span><span class="n">mas</span><span class="p">):</span>
+                          <span class="n">n</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
+                          <span class="n">phi_0</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.</span><span class="p">,</span>
+                          <span class="n">offset</span><span class="p">:</span> <span class="n">ArrayLike</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">((</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">)),</span>
+                          <span class="n">md</span><span class="p">:</span> <span class="n">ModuleType</span> <span class="o">=</span> <span class="n">np</span><span class="p">,</span>
+                          <span class="n">unit</span><span class="p">:</span> <span class="n">units</span><span class="o">.</span><span class="n">Unit</span> <span class="o">=</span> <span class="n">units</span><span class="o">.</span><span class="n">mas</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">            Create a point collection as a uniformly sampled disk.</span>
 
@@ -373,13 +362,13 @@
 <span class="sd">            unit   :   The unit to use for interactions</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">alpha</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="p">(</span><span class="mi">3</span> <span class="o">-</span> <span class="n">md</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>    <span class="c1"># the &quot;golden angle&quot;</span>
+        <span class="n">alpha</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="p">(</span><span class="mi">3</span> <span class="o">-</span> <span class="n">md</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>  <span class="c1"># the &quot;golden angle&quot;</span>
         <span class="n">points</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">md</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-          <span class="n">theta</span> <span class="o">=</span> <span class="n">k</span> <span class="o">*</span> <span class="n">alpha</span> <span class="o">+</span> <span class="n">phi_0</span>
-          <span class="n">r</span> <span class="o">=</span> <span class="n">radius</span> <span class="o">*</span> <span class="n">md</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">k</span><span class="p">)</span><span class="o">/</span><span class="n">n</span><span class="p">)</span>
-          <span class="n">points</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">r</span> <span class="o">*</span> <span class="n">md</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">),</span> <span class="n">r</span> <span class="o">*</span> <span class="n">md</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">)))</span>
-        <span class="n">points</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">points</span><span class="p">)</span><span class="o">.</span><span class="n">T</span> <span class="o">+</span> <span class="n">offset</span><span class="p">[:,</span><span class="kc">None</span><span class="p">]</span>
+            <span class="n">theta</span> <span class="o">=</span> <span class="n">k</span> <span class="o">*</span> <span class="n">alpha</span> <span class="o">+</span> <span class="n">phi_0</span>
+            <span class="n">r</span> <span class="o">=</span> <span class="n">radius</span> <span class="o">*</span> <span class="n">md</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="o">/</span> <span class="n">n</span><span class="p">)</span>
+            <span class="n">points</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">r</span> <span class="o">*</span> <span class="n">md</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">),</span> <span class="n">r</span> <span class="o">*</span> <span class="n">md</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">)))</span>
+        <span class="n">points</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">points</span><span class="p">)</span><span class="o">.</span><span class="n">T</span> <span class="o">+</span> <span class="n">offset</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span>
         <span class="n">myobj</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">(</span><span class="o">*</span><span class="n">points</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="n">unit</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">myobj</span></div>
 
@@ -388,8 +377,8 @@
 <a class="viewcode-back" href="../../../nifits.backend.html#nifits.backend.backend.PointCollection.from_grid">[docs]</a>
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">from_grid</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">a_coords</span><span class="p">:</span> <span class="n">ArrayLike</span><span class="p">,</span> <span class="n">b_coords</span><span class="p">:</span> <span class="n">ArrayLike</span><span class="p">,</span>
-                        <span class="n">md</span><span class="p">:</span> <span class="n">ModuleType</span> <span class="o">=</span> <span class="n">np</span><span class="p">,</span>
-                        <span class="n">unit</span><span class="p">:</span> <span class="n">units</span><span class="o">.</span><span class="n">Unit</span> <span class="o">=</span> <span class="n">units</span><span class="o">.</span><span class="n">mas</span><span class="p">):</span>
+                  <span class="n">md</span><span class="p">:</span> <span class="n">ModuleType</span> <span class="o">=</span> <span class="n">np</span><span class="p">,</span>
+                  <span class="n">unit</span><span class="p">:</span> <span class="n">units</span><span class="o">.</span><span class="n">Unit</span> <span class="o">=</span> <span class="n">units</span><span class="o">.</span><span class="n">mas</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">            Create a point collection as a cartesian grid.</span>
 
@@ -418,10 +407,10 @@
 <a class="viewcode-back" href="../../../nifits.backend.html#nifits.backend.backend.PointCollection.from_segment">[docs]</a>
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">from_segment</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">start_coords</span><span class="p">:</span> <span class="n">ArrayLike</span><span class="p">,</span>
-                        <span class="n">end_coords</span><span class="p">:</span> <span class="n">ArrayLike</span><span class="p">,</span>
-                        <span class="n">n_samples</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-                        <span class="n">md</span><span class="p">:</span> <span class="n">ModuleType</span> <span class="o">=</span> <span class="n">np</span><span class="p">,</span>
-                        <span class="n">unit</span><span class="p">:</span> <span class="n">units</span><span class="o">.</span><span class="n">Unit</span> <span class="o">=</span> <span class="n">units</span><span class="o">.</span><span class="n">mas</span><span class="p">):</span>
+                     <span class="n">end_coords</span><span class="p">:</span> <span class="n">ArrayLike</span><span class="p">,</span>
+                     <span class="n">n_samples</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+                     <span class="n">md</span><span class="p">:</span> <span class="n">ModuleType</span> <span class="o">=</span> <span class="n">np</span><span class="p">,</span>
+                     <span class="n">unit</span><span class="p">:</span> <span class="n">units</span><span class="o">.</span><span class="n">Unit</span> <span class="o">=</span> <span class="n">units</span><span class="o">.</span><span class="n">mas</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">            Create a point collection as a cartesian grid.</span>
 
@@ -447,9 +436,9 @@
 <a class="viewcode-back" href="../../../nifits.backend.html#nifits.backend.backend.PointCollection.from_centered_square_grid">[docs]</a>
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">from_centered_square_grid</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span>
-                        <span class="n">radius</span><span class="p">,</span>
-                        <span class="n">resolution</span><span class="p">,</span>
-                        <span class="n">md</span><span class="p">:</span> <span class="n">ModuleType</span> <span class="o">=</span> <span class="n">np</span><span class="p">):</span>
+                                  <span class="n">radius</span><span class="p">,</span>
+                                  <span class="n">resolution</span><span class="p">,</span>
+                                  <span class="n">md</span><span class="p">:</span> <span class="n">ModuleType</span> <span class="o">=</span> <span class="n">np</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">            Create a centered square cartesian grid object</span>
 
@@ -460,11 +449,10 @@
         <span class="n">a_coords</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="n">radius</span><span class="p">,</span> <span class="n">radius</span><span class="p">,</span> <span class="n">resolution</span><span class="p">)</span>
         <span class="n">b_coords</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="n">radius</span><span class="p">,</span> <span class="n">radius</span><span class="p">,</span> <span class="n">resolution</span><span class="p">)</span>
         <span class="n">myobj</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">from_grid</span><span class="p">(</span><span class="n">a_coords</span><span class="o">=</span><span class="n">a_coords</span><span class="p">,</span>
-                            <span class="n">b_coords</span><span class="o">=</span><span class="n">b_coords</span><span class="p">,</span>
-                            <span class="n">md</span><span class="o">=</span><span class="n">md</span><span class="p">)</span>
+                              <span class="n">b_coords</span><span class="o">=</span><span class="n">b_coords</span><span class="p">,</span>
+                              <span class="n">md</span><span class="o">=</span><span class="n">md</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">myobj</span></div>
 
-        
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">coords</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -473,17 +461,17 @@
 <span class="sd">        flat arrays.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">aa</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">bb</span><span class="p">)</span>
-    
+
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">coords_rad</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="p">(</span><span class="n">mas2rad</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">aa</span><span class="p">,</span> <span class="n">mas2rad</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">bb</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">mas2rad</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">aa</span><span class="p">,</span> <span class="n">mas2rad</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">bb</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">coords_radial</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the radial coordinates of points. (rho, theta) ([unit], [rad]).</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">cpx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">aa</span> <span class="o">+</span> <span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">bb</span>
+        <span class="n">cpx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">aa</span> <span class="o">+</span> <span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">bb</span>
         <span class="k">return</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">cpx</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">angle</span><span class="p">(</span><span class="n">cpx</span><span class="p">))</span>
 
     <span class="nd">@property</span>
@@ -492,22 +480,23 @@
             <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">aa</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">orig_shape</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">bb</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">orig_shape</span><span class="p">))</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s2">&quot;Did not have an original shape&quot;</span><span class="p">)</span>
+
 <div class="viewcode-block" id="PointCollection.plot_frame">
 <a class="viewcode-back" href="../../../nifits.backend.html#nifits.backend.backend.PointCollection.plot_frame">[docs]</a>
     <span class="k">def</span> <span class="nf">plot_frame</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">z</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">frame_index</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">wl_index</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-                        <span class="n">out_index</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">mycmap</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">marksize_increase</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
-                        <span class="n">colorbar</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">xlabel</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+                   <span class="n">out_index</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">mycmap</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">marksize_increase</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+                   <span class="n">colorbar</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">xlabel</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-        <span class="n">marksize</span> <span class="o">=</span> <span class="n">marksize_increase</span> <span class="o">*</span> <span class="mi">50000</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">marksize</span> <span class="o">=</span> <span class="n">marksize_increase</span> <span class="o">*</span> <span class="mi">50000</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">orig_shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">coords</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">z</span><span class="p">[</span><span class="n">frame_index</span><span class="p">,</span><span class="n">wl_index</span><span class="p">,</span><span class="n">out_index</span><span class="p">,:],</span>
-                    <span class="n">cmap</span><span class="o">=</span><span class="n">mycmap</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="n">marksize</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">coords</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">z</span><span class="p">[</span><span class="n">frame_index</span><span class="p">,</span> <span class="n">wl_index</span><span class="p">,</span> <span class="n">out_index</span><span class="p">,</span> <span class="p">:],</span>
+                        <span class="n">cmap</span><span class="o">=</span><span class="n">mycmap</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="n">marksize</span><span class="p">)</span>
             <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="s2">&quot;equal&quot;</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">z</span><span class="p">[</span><span class="n">frame_index</span><span class="p">,</span><span class="n">wl_index</span><span class="p">,</span><span class="n">out_index</span><span class="p">,:]</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">orig_shape</span><span class="p">)),</span>
-                <span class="n">cmap</span><span class="o">=</span><span class="n">mycmap</span><span class="p">,</span> <span class="n">extent</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">extent</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">z</span><span class="p">[</span><span class="n">frame_index</span><span class="p">,</span> <span class="n">wl_index</span><span class="p">,</span> <span class="n">out_index</span><span class="p">,</span> <span class="p">:]</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">orig_shape</span><span class="p">)),</span>
+                       <span class="n">cmap</span><span class="o">=</span><span class="n">mycmap</span><span class="p">,</span> <span class="n">extent</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">extent</span><span class="p">)</span>
             <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="s2">&quot;equal&quot;</span><span class="p">)</span>
-            
+
         <span class="k">if</span> <span class="n">colorbar</span><span class="p">:</span>
             <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">xlabel</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
@@ -519,8 +508,6 @@
         <span class="k">elif</span> <span class="n">title</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">False</span><span class="p">:</span>
             <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span></div>
 
-
-            
 
 <div class="viewcode-block" id="PointCollection.__add__">
 <a class="viewcode-back" href="../../../autoapi/nifits/backend/index.html#nifits.backend.backend.PointCollection.__add__">[docs]</a>
@@ -538,12 +525,12 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">md</span> <span class="o">=</span> <span class="n">np</span>
         <span class="n">new</span> <span class="o">=</span> <span class="n">copy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-        <span class="n">new</span><span class="o">.</span><span class="n">aa</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">new</span><span class="o">.</span><span class="n">aa</span><span class="p">,</span> <span class="n">other</span><span class="o">.</span><span class="n">aa</span><span class="o">*</span><span class="n">other</span><span class="o">.</span><span class="n">unit</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">unit</span><span class="p">)))</span>
-        <span class="n">new</span><span class="o">.</span><span class="n">bb</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">new</span><span class="o">.</span><span class="n">bb</span><span class="p">,</span> <span class="n">other</span><span class="o">.</span><span class="n">bb</span><span class="o">*</span><span class="n">other</span><span class="o">.</span><span class="n">unit</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">unit</span><span class="p">)))</span>
+        <span class="n">new</span><span class="o">.</span><span class="n">aa</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">new</span><span class="o">.</span><span class="n">aa</span><span class="p">,</span> <span class="n">other</span><span class="o">.</span><span class="n">aa</span> <span class="o">*</span> <span class="n">other</span><span class="o">.</span><span class="n">unit</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">unit</span><span class="p">)))</span>
+        <span class="n">new</span><span class="o">.</span><span class="n">bb</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">new</span><span class="o">.</span><span class="n">bb</span><span class="p">,</span> <span class="n">other</span><span class="o">.</span><span class="n">bb</span> <span class="o">*</span> <span class="n">other</span><span class="o">.</span><span class="n">unit</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">unit</span><span class="p">)))</span>
         <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;cc&quot;</span><span class="p">):</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="s2">&quot;cc&quot;</span><span class="p">):</span>
                 <span class="n">other</span><span class="o">.</span><span class="n">cc</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">aa</span><span class="p">)</span>
-            <span class="n">new</span><span class="o">.</span><span class="n">cc</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">new</span><span class="o">.</span><span class="n">cc</span><span class="p">,</span> <span class="n">other</span><span class="o">.</span><span class="n">cc</span><span class="o">*</span><span class="n">other</span><span class="o">.</span><span class="n">unit</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">unit</span><span class="p">)))</span>
+            <span class="n">new</span><span class="o">.</span><span class="n">cc</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">new</span><span class="o">.</span><span class="n">cc</span><span class="p">,</span> <span class="n">other</span><span class="o">.</span><span class="n">cc</span> <span class="o">*</span> <span class="n">other</span><span class="o">.</span><span class="n">unit</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">unit</span><span class="p">)))</span>
 
         <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">new</span><span class="p">,</span> <span class="s2">&quot;extent&quot;</span><span class="p">):</span>
             <span class="k">del</span> <span class="n">new</span><span class="o">.</span><span class="n">extent</span>
@@ -552,6 +539,7 @@
         <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">new</span><span class="p">,</span> <span class="s2">&quot;orig_shape&quot;</span><span class="p">):</span>
             <span class="k">del</span> <span class="n">new</span><span class="o">.</span><span class="n">orig_shape</span>
         <span class="k">return</span> <span class="n">new</span></div>
+
 
 <div class="viewcode-block" id="PointCollection.transform">
 <a class="viewcode-back" href="../../../nifits.backend.html#nifits.backend.backend.PointCollection.transform">[docs]</a>
@@ -567,12 +555,12 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">cc</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">aa</span><span class="p">)</span>
         <span class="n">vectors</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">vstack</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">aa</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">bb</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cc</span><span class="p">))</span>
         <span class="n">transformed</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">vectors</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">aa</span> <span class="o">=</span> <span class="n">transformed</span><span class="p">[</span><span class="mi">0</span><span class="p">,:]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">bb</span> <span class="o">=</span> <span class="n">transformed</span><span class="p">[</span><span class="mi">1</span><span class="p">,:]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">cc</span> <span class="o">=</span> <span class="n">transformed</span><span class="p">[</span><span class="mi">2</span><span class="p">,:]</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">aa</span> <span class="o">=</span> <span class="n">transformed</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bb</span> <span class="o">=</span> <span class="n">transformed</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cc</span> <span class="o">=</span> <span class="n">transformed</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="p">:]</span></div>
 </div>
 
-        
+
 
 <div class="viewcode-block" id="MovingCollection">
 <a class="viewcode-back" href="../../../nifits.backend.html#nifits.backend.backend.MovingCollection">[docs]</a>
@@ -585,29 +573,30 @@
         <span class="n">arraypoints</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">thecollec</span><span class="o">.</span><span class="n">coords_rad</span> <span class="k">for</span> <span class="n">thecollec</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">series</span><span class="p">])</span>
         <span class="n">arranged</span> <span class="o">=</span> <span class="n">rearrange</span><span class="p">(</span><span class="n">arraypoints</span><span class="p">,</span> <span class="s2">&quot;time coord points -&gt; coord time points&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">arranged</span>
-        
+
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">coords</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">arraypoints</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">thecollec</span><span class="o">.</span><span class="n">coords</span> <span class="k">for</span> <span class="n">thecollec</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">series</span><span class="p">])</span>
         <span class="n">arranged</span> <span class="o">=</span> <span class="n">rearrange</span><span class="p">(</span><span class="n">arraypoints</span><span class="p">,</span> <span class="s2">&quot;time coord points -&gt; coord time points&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">arranged</span>
-        
+
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">coords_radial</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the radial coordinates of points. (rho, theta) ([unit], [rad]).</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">cpx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">aa</span> <span class="o">+</span> <span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">bb</span>
+        <span class="n">cpx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">aa</span> <span class="o">+</span> <span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">bb</span>
         <span class="k">return</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">cpx</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">angle</span><span class="p">(</span><span class="n">cpx</span><span class="p">))</span>
-        
+
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">coords_shaped</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">series</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;orig_shape&quot;</span><span class="p">):</span>
-            <span class="n">reshaped</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">coords</span><span class="p">[:,:,</span><span class="bp">self</span><span class="o">.</span><span class="n">series</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">orig_shape</span><span class="p">]</span>
+            <span class="n">reshaped</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">coords</span><span class="p">[:,</span> <span class="p">:,</span> <span class="bp">self</span><span class="o">.</span><span class="n">series</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">orig_shape</span><span class="p">]</span>
             <span class="k">return</span> <span class="n">reshaped</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s2">&quot;Did not have an original shape&quot;</span><span class="p">)</span></div>
+
 
 
 <div class="viewcode-block" id="NI_Backend">
@@ -617,9 +606,10 @@
 <span class="sd">    A class to produce calculations based on the NIFITS standard.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="c1"># def __init__(self, myfits: type(io.oifits.NIFITS)):</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nifits</span><span class="p">:</span> <span class="n">NIFITSClass</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                    <span class="n">module</span><span class="o">=</span><span class="n">np</span><span class="p">):</span>
+                 <span class="n">module</span><span class="o">=</span><span class="n">np</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">nifits</span> <span class="o">=</span> <span class="n">nifits</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Backend object. Typically created empty. The nifits</span>
@@ -637,8 +627,8 @@
 <div class="viewcode-block" id="NI_Backend.add_instrument_definition">
 <a class="viewcode-back" href="../../../nifits.backend.html#nifits.backend.backend.NI_Backend.add_instrument_definition">[docs]</a>
     <span class="k">def</span> <span class="nf">add_instrument_definition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nifits_instrument</span><span class="p">:</span> <span class="n">NIFITSClass</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                                    <span class="n">force</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-                                    <span class="n">verbose</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+                                  <span class="n">force</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+                                  <span class="n">verbose</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Adds the instrument definition to the model.</span>
 <span class="sd">        </span>
@@ -656,20 +646,20 @@
                 <span class="k">for</span> <span class="n">anext</span> <span class="ow">in</span> <span class="n">NIFITS_EXTENSIONS</span><span class="p">[</span><span class="n">STATIC_EXTENSIONS</span><span class="p">]:</span>
                     <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">nifits_instrument</span><span class="p">,</span> <span class="n">anext</span><span class="o">.</span><span class="n">lower</span><span class="p">()):</span>
                         <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="p">,</span> <span class="n">anext</span><span class="o">.</span><span class="n">lower</span><span class="p">()))</span> \
-                            <span class="ow">or</span> <span class="n">force</span><span class="p">:</span>
+                                <span class="ow">or</span> <span class="n">force</span><span class="p">:</span>
                             <span class="bp">self</span><span class="o">.</span><span class="fm">__setattr__</span><span class="p">(</span><span class="n">anext</span><span class="o">.</span><span class="n">lower</span><span class="p">(),</span>
-                                <span class="n">nifits_instrument</span><span class="o">.</span><span class="fm">__getattribute__</span><span class="p">(</span><span class="n">anext</span><span class="o">.</span><span class="n">lower</span><span class="p">()))</span>
+                                             <span class="n">nifits_instrument</span><span class="o">.</span><span class="fm">__getattribute__</span><span class="p">(</span><span class="n">anext</span><span class="o">.</span><span class="n">lower</span><span class="p">()))</span>
                         <span class="k">else</span><span class="p">:</span>
                             <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Local nifits, already has </span><span class="si">{</span><span class="n">anext</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
                     <span class="k">else</span><span class="p">:</span>
                         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Could not find </span><span class="si">{</span><span class="n">anext</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
 
-    
+
 <div class="viewcode-block" id="NI_Backend.add_observation_data">
 <a class="viewcode-back" href="../../../nifits.backend.html#nifits.backend.backend.NI_Backend.add_observation_data">[docs]</a>
     <span class="k">def</span> <span class="nf">add_observation_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nifits_data</span><span class="p">:</span> <span class="n">NIFITSClass</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                                    <span class="n">force</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-                                    <span class="n">verbose</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+                             <span class="n">force</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+                             <span class="n">verbose</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Adds the observation data to the model.</span>
 <span class="sd">        </span>
@@ -687,9 +677,9 @@
                 <span class="k">for</span> <span class="n">anext</span> <span class="ow">in</span> <span class="n">NIFITS_EXTENSIONS</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">logical_not</span><span class="p">(</span><span class="n">STATIC_EXTENSIONS</span><span class="p">)]:</span>
                     <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">nifits_data</span><span class="p">,</span> <span class="n">anext</span><span class="o">.</span><span class="n">lower</span><span class="p">()):</span>
                         <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="p">,</span> <span class="n">anext</span><span class="o">.</span><span class="n">lower</span><span class="p">()))</span> \
-                            <span class="ow">or</span> <span class="n">force</span><span class="p">:</span>
+                                <span class="ow">or</span> <span class="n">force</span><span class="p">:</span>
                             <span class="bp">self</span><span class="o">.</span><span class="fm">__setattr__</span><span class="p">(</span><span class="n">anext</span><span class="o">.</span><span class="n">lower</span><span class="p">(),</span>
-                                <span class="n">nifits_data</span><span class="o">.</span><span class="fm">__getattribute__</span><span class="p">(</span><span class="n">anext</span><span class="o">.</span><span class="n">lower</span><span class="p">()))</span>
+                                             <span class="n">nifits_data</span><span class="o">.</span><span class="fm">__getattribute__</span><span class="p">(</span><span class="n">anext</span><span class="o">.</span><span class="n">lower</span><span class="p">()))</span>
                         <span class="k">else</span><span class="p">:</span>
                             <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Local nifits, already has </span><span class="si">{</span><span class="n">anext</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
                     <span class="k">else</span><span class="p">:</span>
@@ -711,11 +701,12 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_fov</span><span class="o">.</span><span class="n">header</span><span class="p">[</span><span class="s2">&quot;NIFITS FOV_MODE&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;diameter_gaussian_radial&quot;</span>
         <span class="n">D</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_fov</span><span class="o">.</span><span class="n">header</span><span class="p">[</span><span class="s2">&quot;NIFITS FOV_TELDIAM&quot;</span><span class="p">]</span> \
-                <span class="o">*</span><span class="n">units</span><span class="o">.</span><span class="n">Unit</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_fov</span><span class="o">.</span><span class="n">header</span><span class="p">[</span><span class="s2">&quot;NIFITS FOV_TELDIAM_UNIT&quot;</span><span class="p">]))</span>\
-                    <span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">units</span><span class="o">.</span><span class="n">m</span><span class="p">)</span><span class="o">.</span><span class="n">value</span>
-        <span class="n">r_0</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">oi_wavelength</span><span class="o">.</span><span class="n">lambs</span><span class="o">/</span><span class="n">D</span><span class="p">)</span><span class="c1"># *units.rad.to(units.mas)</span>
+             <span class="o">*</span> <span class="n">units</span><span class="o">.</span><span class="n">Unit</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_fov</span><span class="o">.</span><span class="n">header</span><span class="p">[</span><span class="s2">&quot;NIFITS FOV_TELDIAM_UNIT&quot;</span><span class="p">]))</span> \
+            <span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">units</span><span class="o">.</span><span class="n">m</span><span class="p">)</span><span class="o">.</span><span class="n">value</span>
+        <span class="n">r_0</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">oi_wavelength</span><span class="o">.</span><span class="n">lambs</span> <span class="o">/</span> <span class="n">D</span><span class="p">)</span>  <span class="c1"># *units.rad.to(units.mas)</span>
         <span class="n">offset</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_fov</span><span class="o">.</span><span class="n">data_table</span><span class="p">[</span><span class="s2">&quot;offsets&quot;</span><span class="p">])</span>
-        <span class="k">def</span> <span class="nf">xy2phasor</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span> <span class="n">md</span><span class="o">=</span><span class="n">md</span><span class="p">):</span>
+
+        <span class="k">def</span> <span class="nf">xy2phasor</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">md</span><span class="o">=</span><span class="n">md</span><span class="p">):</span>
 <span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">            x and y in rad.</span>
 
@@ -724,12 +715,13 @@
 <span class="sd">                y     : ArrayLike [rad] Coordinate in the Fov.</span>
 
 <span class="sd">            &quot;&quot;&quot;</span>
-            <span class="n">r</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">hypot</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,:]</span><span class="o">-</span><span class="n">offset</span><span class="p">[:,:,</span><span class="mi">0</span><span class="p">,</span><span class="kc">None</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span><span class="kc">None</span><span class="p">,:]</span><span class="o">-</span><span class="n">offset</span><span class="p">[:,:,</span><span class="mi">1</span><span class="p">,</span><span class="kc">None</span><span class="p">])</span>
-            <span class="n">phasor</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">r</span><span class="p">[:,:]</span><span class="o">/</span><span class="n">r_0</span><span class="p">[:,</span><span class="kc">None</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+            <span class="n">r</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">hypot</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="p">:]</span> <span class="o">-</span> <span class="n">offset</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="p">:]</span> <span class="o">-</span> <span class="n">offset</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">1</span><span class="p">,</span> <span class="kc">None</span><span class="p">])</span>
+            <span class="n">phasor</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">r</span><span class="p">[:,</span> <span class="p">:]</span> <span class="o">/</span> <span class="n">r_0</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">])</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">phasor</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">complex</span><span class="p">)</span>
+
         <span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_fov</span><span class="o">.</span><span class="n">xy2phasor</span> <span class="o">=</span> <span class="n">xy2phasor</span>
 
-        <span class="k">def</span> <span class="nf">xy2phasor_moving</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">):</span>
+        <span class="k">def</span> <span class="nf">xy2phasor_moving</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
 <span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">            Employed to deal with point-samples that move in the FoV</span>
 <span class="sd">            during the series of frames.</span>
@@ -741,9 +733,10 @@
 <span class="sd">                y     : ArrayLike [rad] (time, point) Coordinate in the Fov.</span>
 
 <span class="sd">            &quot;&quot;&quot;</span>
-            <span class="n">r</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">hypot</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">,:]</span><span class="o">-</span><span class="n">offset</span><span class="p">[:,:,</span><span class="mi">0</span><span class="p">,</span><span class="kc">None</span><span class="p">],</span> <span class="n">y</span><span class="p">[:,</span><span class="kc">None</span><span class="p">,:]</span><span class="o">-</span><span class="n">offset</span><span class="p">[:,:,</span><span class="mi">1</span><span class="p">,</span><span class="kc">None</span><span class="p">])</span>
-            <span class="n">phasor</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">r</span><span class="p">[:,:]</span><span class="o">/</span><span class="n">r_0</span><span class="p">[:,</span><span class="kc">None</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+            <span class="n">r</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">hypot</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">,</span> <span class="p">:]</span> <span class="o">-</span> <span class="n">offset</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span> <span class="n">y</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">,</span> <span class="p">:]</span> <span class="o">-</span> <span class="n">offset</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">1</span><span class="p">,</span> <span class="kc">None</span><span class="p">])</span>
+            <span class="n">phasor</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">r</span><span class="p">[:,</span> <span class="p">:]</span> <span class="o">/</span> <span class="n">r_0</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">])</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">phasor</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">complex</span><span class="p">)</span>
+
         <span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_fov</span><span class="o">.</span><span class="n">xy2phasor_moving</span> <span class="o">=</span> <span class="n">xy2phasor_moving</span></div>
 
 
@@ -762,13 +755,13 @@
         <span class="c1"># mods = md.array([a  for a in self.nifits.ni_mod.phasors]).T</span>
         <span class="n">mods</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_mod</span><span class="o">.</span><span class="n">all_phasors</span><span class="p">)</span>
         <span class="n">col_area</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_mod</span><span class="o">.</span><span class="n">arrcol</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">mods</span><span class="o">*</span><span class="n">md</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">col_area</span><span class="p">)[:,</span><span class="kc">None</span><span class="p">,:]</span></div>
+        <span class="k">return</span> <span class="n">mods</span> <span class="o">*</span> <span class="n">md</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">col_area</span><span class="p">)[:,</span> <span class="kc">None</span><span class="p">,</span> <span class="p">:]</span></div>
 
 
 <div class="viewcode-block" id="NI_Backend.geometric_phasor">
 <a class="viewcode-back" href="../../../nifits.backend.html#nifits.backend.backend.NI_Backend.geometric_phasor">[docs]</a>
-    <span class="k">def</span> <span class="nf">geometric_phasor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">include_mod</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                            <span class="n">md</span><span class="o">=</span><span class="n">np</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">geometric_phasor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">include_mod</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                         <span class="n">md</span><span class="o">=</span><span class="n">np</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the complex phasor corresponding to the locations</span>
 <span class="sd">        of the family of sources</span>
@@ -777,45 +770,47 @@
 <span class="sd">            alpha         : The coordinate matched to X in the array geometry</span>
 <span class="sd">            beta          : The coordinate matched to Y in the array geometry</span>
 <span class="sd">            anarray       : The array geometry (n_input, 2)</span>
-<span class="sd">            include_mod   : Include the modulation phasor</span>
+<span class="sd">            include_mod   : (False) Include the modulation phasor</span>
 <span class="sd">        </span>
 <span class="sd">        Returns:</span>
 <span class="sd">            A vector of complex phasors</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">xy_array</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_mod</span><span class="o">.</span><span class="n">appxy</span>
         <span class="n">lambs</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">oi_wavelength</span><span class="o">.</span><span class="n">lambs</span><span class="p">)</span>
-        <span class="n">k</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">md</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="n">lambs</span>
+        <span class="n">k</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">md</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="n">lambs</span>
         <span class="n">a</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">array</span><span class="p">((</span><span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">md</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
         <span class="c1"># print(xy_array.shape)</span>
         <span class="c1"># print(a.shape)</span>
-        <span class="c1"># phi = k[:,None,None,None] * md.array([anxy_array[:,:].dot(a[:,:]) for anxy_array in xy_array])</span>
-        <span class="n">phi</span> <span class="o">=</span> <span class="n">k</span><span class="p">[:,</span><span class="kc">None</span><span class="p">,</span><span class="kc">None</span><span class="p">,</span><span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="n">md</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s2">&quot;t a x, x m -&gt; t a m&quot;</span><span class="p">,</span> <span class="n">xy_array</span><span class="p">[:,:,:],</span> <span class="n">a</span><span class="p">[:,:])</span>
+        <span class="c1"># phi = k[:,None,None,None] * md.array([anxy_array[:,:].dot(a[:,:]) for anxy_array in xy_array</span>
+        <span class="c1">#                                     &quot;frame beam x, x mpoint -&gt; frame beam mpoint&quot; </span>
+        <span class="n">phi</span> <span class="o">=</span> <span class="n">k</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="n">md</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s2">&quot;f b x, x m -&gt; f b m&quot;</span><span class="p">,</span> <span class="n">xy_array</span><span class="p">[:,</span> <span class="p">:,</span> <span class="p">:],</span> <span class="n">a</span><span class="p">[:,</span> <span class="p">:])[:,</span> <span class="kc">None</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span>
         <span class="c1"># print(a.shape)</span>
-        <span class="n">b</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">phi</span><span class="p">)</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">phi</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">include_mod</span><span class="p">:</span>
-            <span class="n">mods</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_modulation_phasor</span><span class="p">(</span><span class="n">md</span><span class="o">=</span><span class="n">md</span><span class="p">)</span>
-            <span class="n">b</span> <span class="o">*=</span> <span class="n">mods</span><span class="p">[:,:,</span><span class="kc">None</span><span class="p">]</span>
+            <span class="n">mods</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_modulation_phasor</span><span class="p">(</span><span class="n">md</span><span class="o">=</span><span class="n">md</span><span class="p">)[:,</span> <span class="p">:,</span> <span class="p">:,</span> <span class="kc">None</span><span class="p">]</span>
+            <span class="n">b</span> <span class="o">*=</span> <span class="n">mods</span>
         <span class="c1"># print(b.shape)</span>
-        <span class="k">return</span> <span class="n">b</span><span class="o">.</span><span class="n">transpose</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span></div>
+        <span class="k">return</span> <span class="n">b</span></div>
 
-        
+
 <div class="viewcode-block" id="NI_Backend.get_Is">
 <a class="viewcode-back" href="../../../nifits.backend.html#nifits.backend.backend.NI_Backend.get_Is">[docs]</a>
     <span class="k">def</span> <span class="nf">get_Is</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xs</span><span class="p">,</span> <span class="n">md</span><span class="o">=</span><span class="n">np</span><span class="p">):</span>
+        <span class="c1"># TODO: missing arguments documentation</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get intensity from an array of sources.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">E</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s2">&quot;w o i , t w i m -&gt; t w o m&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_catm</span><span class="o">.</span><span class="n">M</span><span class="p">,</span> <span class="n">xs</span><span class="p">)</span>
-        <span class="n">I</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">E</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+        <span class="n">I</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">E</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
         <span class="k">return</span> <span class="n">I</span></div>
 
 
 <div class="viewcode-block" id="NI_Backend.get_KIs">
 <a class="viewcode-back" href="../../../nifits.backend.html#nifits.backend.backend.NI_Backend.get_KIs">[docs]</a>
     <span class="k">def</span> <span class="nf">get_KIs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-                    <span class="n">Iarray</span><span class="p">:</span><span class="n">ArrayLike</span><span class="p">,</span>
-                    <span class="n">md</span><span class="p">:</span> <span class="n">ModuleType</span> <span class="o">=</span> <span class="n">np</span><span class="p">):</span>
+                <span class="n">Iarray</span><span class="p">:</span> <span class="n">ArrayLike</span><span class="p">,</span>
+                <span class="n">md</span><span class="p">:</span> <span class="n">ModuleType</span> <span class="o">=</span> <span class="n">np</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get the prost-processed observable from an array of output intensities. The</span>
 <span class="sd">        post-processing matrix K is taken from ``self.nifits.ni_kmat.K``</span>
@@ -828,15 +823,15 @@
 <span class="sd">            The vector :math:`\boldsymbol{\kappa} = \mathbf{K}\cdot\mathbf{I}`</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">KI</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s2">&quot;k o, t w o m -&gt; t w k m&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_kmat</span><span class="o">.</span><span class="n">K</span><span class="p">[:,:],</span> <span class="n">Iarray</span><span class="p">)</span>
+        <span class="n">KI</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s2">&quot;k o, t w o m -&gt; t w k m&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_kmat</span><span class="o">.</span><span class="n">K</span><span class="p">[:,</span> <span class="p">:],</span> <span class="n">Iarray</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">KI</span></div>
 
-        
+
 <div class="viewcode-block" id="NI_Backend.get_all_outs">
 <a class="viewcode-back" href="../../../nifits.backend.html#nifits.backend.backend.NI_Backend.get_all_outs">[docs]</a>
     <span class="k">def</span> <span class="nf">get_all_outs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">alphas</span><span class="p">,</span> <span class="n">betas</span><span class="p">,</span>
-                        <span class="n">kernels</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-                        <span class="n">md</span><span class="o">=</span><span class="n">np</span><span class="p">):</span>
+                     <span class="n">kernels</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                     <span class="n">md</span><span class="o">=</span><span class="n">np</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Compute the transmission map for an array of coordinates. The map can be seen</span>
 <span class="sd">        as equivalent collecting power expressed in [m^2] for each point sampled so as</span>
@@ -859,17 +854,17 @@
         <span class="c1"># The phasor from the incidence on the array:</span>
         <span class="n">xs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometric_phasor</span><span class="p">(</span><span class="n">alphas</span><span class="p">,</span> <span class="n">betas</span><span class="p">,</span> <span class="n">include_mod</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">md</span><span class="o">=</span><span class="n">md</span><span class="p">)</span>
         <span class="c1"># print(&quot;xs&quot;, xs)</span>
-        
+
         <span class="c1"># The phasor from the spatial filtering:</span>
         <span class="n">x_inj</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_fov</span><span class="o">.</span><span class="n">xy2phasor</span><span class="p">(</span><span class="n">alphas</span><span class="p">,</span> <span class="n">betas</span><span class="p">,</span> <span class="n">md</span><span class="o">=</span><span class="n">md</span><span class="p">)</span>
         <span class="c1"># print(&quot;x_inj&quot;, x_inj)</span>
-        
+
         <span class="c1"># The phasor from the internal modulation</span>
         <span class="c1"># x_mod = self.nifits.ni_mod.all_phasors</span>
         <span class="n">x_mod</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_modulation_phasor</span><span class="p">()</span>
         <span class="c1"># print(&quot;x_mod&quot;, x_mod)</span>
-        
-        <span class="n">Is</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_Is</span><span class="p">(</span><span class="n">xs</span> <span class="o">*</span> <span class="n">x_inj</span><span class="p">[:,:,</span><span class="kc">None</span><span class="p">,:]</span> <span class="o">*</span> <span class="n">x_mod</span><span class="p">[:,:,:,</span><span class="kc">None</span><span class="p">],</span> <span class="n">md</span><span class="o">=</span><span class="n">md</span><span class="p">)</span>
+
+        <span class="n">Is</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_Is</span><span class="p">(</span><span class="n">xs</span> <span class="o">*</span> <span class="n">x_inj</span><span class="p">[:,</span> <span class="p">:,</span> <span class="kc">None</span><span class="p">,</span> <span class="p">:]</span> <span class="o">*</span> <span class="n">x_mod</span><span class="p">[:,</span> <span class="p">:,</span> <span class="p">:,</span> <span class="kc">None</span><span class="p">],</span> <span class="n">md</span><span class="o">=</span><span class="n">md</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">kernels</span><span class="p">:</span>
             <span class="n">KIs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_KIs</span><span class="p">(</span><span class="n">Is</span><span class="p">,</span> <span class="n">md</span><span class="o">=</span><span class="n">md</span><span class="p">)</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">downsample</span><span class="p">(</span><span class="n">KIs</span><span class="p">)</span>
@@ -877,11 +872,11 @@
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">downsample</span><span class="p">(</span><span class="n">Is</span><span class="p">)</span></div>
 
 
-
 <div class="viewcode-block" id="NI_Backend.moving_geometric_phasor">
 <a class="viewcode-back" href="../../../nifits.backend.html#nifits.backend.backend.NI_Backend.moving_geometric_phasor">[docs]</a>
-    <span class="k">def</span> <span class="nf">moving_geometric_phasor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">alphas</span><span class="p">,</span> <span class="n">betas</span><span class="p">,</span> <span class="n">include_mod</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                            <span class="n">md</span><span class="o">=</span><span class="n">np</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">moving_geometric_phasor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">alphas</span><span class="p">,</span> <span class="n">betas</span><span class="p">,</span> <span class="n">include_mod</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                                <span class="n">md</span><span class="o">=</span><span class="n">np</span><span class="p">):</span>
+        <span class="c1"># TODO: fix argument documentation</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the complex phasor corresponding to the locations</span>
 <span class="sd">        of the family of sources</span>
@@ -891,21 +886,22 @@
 <span class="sd">        * ``alpha``         : (n_frames, n_points) The coordinate matched to X in the array geometry</span>
 <span class="sd">        * ``beta``          : (n_frames, n_points) The coordinate matched to Y in the array geometry</span>
 <span class="sd">        * ``anarray``       : The array geometry (n_input, 2)</span>
-<span class="sd">        * ``include_mod``   : Include the modulation phasor</span>
+<span class="sd">        * ``include_mod``   : (False) Include the modulation phasor</span>
 <span class="sd">        </span>
 <span class="sd">        **Returns** : A vector of complex phasors</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">xy_array</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_mod</span><span class="o">.</span><span class="n">appxy</span><span class="p">)</span>
         <span class="n">lambs</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">oi_wavelength</span><span class="o">.</span><span class="n">lambs</span><span class="p">)</span>
-        <span class="n">k</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">md</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="n">lambs</span>
+        <span class="n">k</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">md</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="n">lambs</span>
         <span class="n">a</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">array</span><span class="p">((</span><span class="n">alphas</span><span class="p">,</span> <span class="n">betas</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">md</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
-        <span class="n">phi</span> <span class="o">=</span> <span class="n">k</span><span class="p">[:,</span><span class="kc">None</span><span class="p">,</span><span class="kc">None</span><span class="p">,</span><span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="n">md</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s2">&quot;t a x, x t m -&gt; t a m&quot;</span><span class="p">,</span> <span class="n">xy_array</span><span class="p">[:,:,:],</span> <span class="n">a</span><span class="p">[:,:,:])</span>
-        <span class="n">b</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">phi</span><span class="p">)</span>
+        <span class="c1">#                                     &quot;frame beam x, x frame mpoint -&gt; frame beam mpoint&quot; </span>
+        <span class="n">phi</span> <span class="o">=</span> <span class="n">k</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="n">md</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s2">&quot;f b x, x f m -&gt; f b m&quot;</span><span class="p">,</span> <span class="n">xy_array</span><span class="p">[:,</span> <span class="p">:,</span> <span class="p">:],</span> <span class="n">a</span><span class="p">[:,</span> <span class="p">:])[:,</span> <span class="kc">None</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">phi</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">include_mod</span><span class="p">:</span>
-            <span class="n">mods</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_modulation_phasor</span><span class="p">(</span><span class="n">md</span><span class="o">=</span><span class="n">md</span><span class="p">)</span>
-            <span class="n">b</span> <span class="o">*=</span> <span class="n">mods</span><span class="p">[:,:,</span><span class="kc">None</span><span class="p">]</span>
-        <span class="k">return</span> <span class="n">b</span><span class="o">.</span><span class="n">transpose</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span></div>
+            <span class="n">mods</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_modulation_phasor</span><span class="p">(</span><span class="n">md</span><span class="o">=</span><span class="n">md</span><span class="p">)[:,</span> <span class="p">:,</span> <span class="p">:,</span> <span class="kc">None</span><span class="p">]</span>
+            <span class="n">b</span> <span class="o">*=</span> <span class="n">mods</span>
+        <span class="k">return</span> <span class="n">b</span></div>
 
 
 <div class="viewcode-block" id="NI_Backend.get_moving_outs">
@@ -935,17 +931,17 @@
         <span class="c1"># The phasor from the incidence on the array:</span>
         <span class="n">xs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">moving_geometric_phasor</span><span class="p">(</span><span class="n">alphas</span><span class="p">,</span> <span class="n">betas</span><span class="p">,</span> <span class="n">include_mod</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
         <span class="c1"># print(&quot;xs&quot;, xs)</span>
-        
+
         <span class="c1"># The phasor from the spatial filtering:</span>
         <span class="n">x_inj</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_fov</span><span class="o">.</span><span class="n">xy2phasor_moving</span><span class="p">(</span><span class="n">alphas</span><span class="p">,</span> <span class="n">betas</span><span class="p">)</span>
         <span class="c1"># print(&quot;x_inj&quot;, x_inj)</span>
-        
+
         <span class="c1"># The phasor from the internal modulation</span>
         <span class="c1"># x_mod = self.nifits.ni_mod.all_phasors</span>
         <span class="n">x_mod</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_modulation_phasor</span><span class="p">()</span>
         <span class="c1"># print(&quot;x_mod&quot;, x_mod)</span>
-        
-        <span class="n">Is</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_Is</span><span class="p">(</span><span class="n">xs</span> <span class="o">*</span> <span class="n">x_inj</span><span class="p">[:,:,</span><span class="kc">None</span><span class="p">,:]</span> <span class="o">*</span> <span class="n">x_mod</span><span class="p">[:,:,:,</span><span class="kc">None</span><span class="p">],</span> <span class="n">md</span><span class="o">=</span><span class="n">md</span><span class="p">)</span>
+
+        <span class="n">Is</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_Is</span><span class="p">(</span><span class="n">xs</span> <span class="o">*</span> <span class="n">x_inj</span><span class="p">[:,</span> <span class="p">:,</span> <span class="kc">None</span><span class="p">,</span> <span class="p">:]</span> <span class="o">*</span> <span class="n">x_mod</span><span class="p">[:,</span> <span class="p">:,</span> <span class="p">:,</span> <span class="kc">None</span><span class="p">],</span> <span class="n">md</span><span class="o">=</span><span class="n">md</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">kernels</span><span class="p">:</span>
             <span class="n">KIs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_KIs</span><span class="p">(</span><span class="n">Is</span><span class="p">,</span> <span class="n">md</span><span class="o">=</span><span class="n">md</span><span class="p">)</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">downsample</span><span class="p">(</span><span class="n">KIs</span><span class="p">)</span>
@@ -974,14 +970,21 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_dsamp</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_oswavelength</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">):</span>
             <span class="k">return</span> <span class="n">Is</span>
-        <span class="n">Ids</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s2">&quot;l w, t w o m -&gt; t l o m&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_dsamp</span><span class="o">.</span><span class="n">D</span><span class="p">,</span> <span class="n">Is</span> <span class="p">)</span>
+        <span class="n">Ids</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s2">&quot;l w, t w o m -&gt; t l o m&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_dsamp</span><span class="o">.</span><span class="n">D</span><span class="p">,</span> <span class="n">Is</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">Ids</span></div>
 
 
 <div class="viewcode-block" id="NI_Backend.plot_recorded">
 <a class="viewcode-back" href="../../../nifits.backend.html#nifits.backend.backend.NI_Backend.plot_recorded">[docs]</a>
     <span class="k">def</span> <span class="nf">plot_recorded</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;viridis&quot;</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">nrows_ncols</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                    <span class="n">res_x</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">res_y</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">interp</span><span class="o">=</span><span class="s2">&quot;nearest&quot;</span><span class="p">):</span>
+                      <span class="n">res_x</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">res_y</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">interp</span><span class="o">=</span><span class="s2">&quot;nearest&quot;</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Quick plot summarizing the acquired data</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            fig    : (plt.figure)</span>
+<span class="sd">            axarr  : (array of axes)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
         <span class="kn">from</span> <span class="nn">scipy.interpolate</span> <span class="kn">import</span> <span class="n">griddata</span>
         <span class="k">if</span> <span class="n">outputs</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -993,30 +996,30 @@
         <span class="n">n_frames</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_iout</span><span class="o">.</span><span class="n">data_table</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
         <span class="n">n_wls</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_iout</span><span class="o">.</span><span class="n">data_table</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
         <span class="k">if</span> <span class="n">nrows_ncols</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">test_ncols</span>  <span class="o">=</span> <span class="n">n_subplots</span><span class="o">//</span><span class="mi">2</span>
+            <span class="n">test_ncols</span> <span class="o">=</span> <span class="n">n_subplots</span> <span class="o">//</span> <span class="mi">2</span>
             <span class="k">if</span> <span class="n">test_ncols</span> <span class="o">&gt;</span> <span class="mi">4</span><span class="p">:</span>
                 <span class="n">ncols</span> <span class="o">=</span> <span class="mi">4</span>
             <span class="n">nrows</span><span class="p">,</span> <span class="n">ncols</span> <span class="o">=</span> <span class="n">col_row_numbers</span><span class="p">(</span><span class="n">n_subplots</span><span class="p">)</span>
-        <span class="k">else</span> <span class="p">:</span>
+        <span class="k">else</span><span class="p">:</span>
             <span class="n">nrows</span><span class="p">,</span> <span class="n">ncols</span> <span class="o">=</span> <span class="n">nrows_ncols</span>
         <span class="n">max_time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_mod</span><span class="o">.</span><span class="n">data_table</span><span class="p">[</span><span class="s2">&quot;MJD&quot;</span><span class="p">])</span>
         <span class="n">min_time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_mod</span><span class="o">.</span><span class="n">data_table</span><span class="p">[</span><span class="s2">&quot;MJD&quot;</span><span class="p">])</span>
         <span class="n">max_wl</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">oi_wavelength</span><span class="o">.</span><span class="n">lambs</span><span class="p">)</span>
         <span class="n">min_wl</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">oi_wavelength</span><span class="o">.</span><span class="n">lambs</span><span class="p">)</span>
         <span class="n">gridx</span><span class="p">,</span> <span class="n">gridy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">min_time</span><span class="p">,</span> <span class="n">max_time</span><span class="p">,</span> <span class="n">res_x</span><span class="p">),</span>
-                                        <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">min_wl</span><span class="p">,</span> <span class="n">max_wl</span><span class="p">,</span> <span class="n">res_y</span><span class="p">))</span>
+                                   <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">min_wl</span><span class="p">,</span> <span class="n">max_wl</span><span class="p">,</span> <span class="n">res_y</span><span class="p">))</span>
         <span class="n">gridextent</span> <span class="o">=</span> <span class="p">[</span><span class="n">min_time</span><span class="p">,</span> <span class="n">max_time</span><span class="p">,</span> <span class="n">min_wl</span><span class="p">,</span> <span class="n">max_wl</span><span class="p">]</span>
 
         <span class="n">fig</span><span class="p">,</span> <span class="n">axarr</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="n">nrows</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="n">ncols</span><span class="p">,</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="n">points</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_mod</span><span class="o">.</span><span class="n">data_table</span><span class="p">[</span><span class="s2">&quot;MJD&quot;</span><span class="p">],</span>
-                                        <span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">oi_wavelength</span><span class="o">.</span><span class="n">lambs</span><span class="p">))</span>
-        <span class="n">points</span> <span class="o">=</span> <span class="n">points</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">T</span>
+                                      <span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">oi_wavelength</span><span class="o">.</span><span class="n">lambs</span><span class="p">))</span>
+        <span class="n">points</span> <span class="o">=</span> <span class="n">points</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">T</span>
         <span class="c1"># points = points.transpose(1,2,0)</span>
         <span class="c1"># print(&quot;points&quot;, points.shape)</span>
         <span class="c1"># print(&quot;data&quot;, np.array(self.nifits.ni_iout.data_table[&quot;value&quot;]).shape)</span>
 
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_subplots</span><span class="p">):</span>
-            <span class="n">thevals</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_iout</span><span class="o">.</span><span class="n">data_table</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">][:,:,</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">thevals</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_iout</span><span class="o">.</span><span class="n">data_table</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">][:,</span> <span class="p">:,</span> <span class="n">i</span><span class="p">]</span>
             <span class="n">thevals</span> <span class="o">=</span> <span class="n">thevals</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
             <span class="c1"># print(&quot;thevals&quot;, thevals.shape)</span>
             <span class="c1"># print(&quot;points&quot;, points.shape)</span>
@@ -1038,7 +1041,17 @@
 <div class="viewcode-block" id="NI_Backend.make_combiner_graph">
 <a class="viewcode-back" href="../../../nifits.backend.html#nifits.backend.backend.NI_Backend.make_combiner_graph">[docs]</a>
     <span class="k">def</span> <span class="nf">make_combiner_graph</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">try</span> <span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Creates a directional graph of the beam-combiner and</span>
+<span class="sd">        its interfaces. This graph uses the IOTAGS to label the</span>
+<span class="sd">        inputs and outputs of the combiner.</span>
+
+<span class="sd">        Requires the optional *graphviz* library.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            mydot  :  a graphviz object</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
             <span class="kn">import</span> <span class="nn">graphviz</span>
             <span class="kn">from</span> <span class="nn">graphviz</span> <span class="kn">import</span> <span class="n">Digraph</span>
         <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
@@ -1080,9 +1093,12 @@
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Create a scatter plot of the recorded frames.</span>
 
-<span class="sd">        Arguments:</span>
+<span class="sd">        Args:</span>
 <span class="sd">            outindex: (int) The index of output to plot</span>
-<span class="sd">            diffout : (bool) The </span>
+<span class="sd">            diffout : (bool) Whether to use the differential outputs</span>
+<span class="sd">            cmap    : (str) Refers to a colormap name in matplotlib</span>
+<span class="sd">                        defaults to coolwarm if ``diffout`` and to viridis</span>
+<span class="sd">                        otherwise</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
@@ -1098,19 +1114,19 @@
                 <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_iotags</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
                     <span class="n">title_string</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_iotags</span><span class="o">.</span><span class="n">output_type</span><span class="p">(</span><span class="n">outindex</span><span class="p">)</span>
             <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">awl</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">oi_wavelength</span><span class="o">.</span><span class="n">lambs</span><span class="p">):</span>
-                <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">awl</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">xs</span><span class="p">),</span> <span class="n">c</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_iout</span><span class="o">.</span><span class="n">iout</span><span class="p">[:,</span><span class="n">i</span><span class="p">,</span><span class="n">outindex</span><span class="p">],</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">awl</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">xs</span><span class="p">),</span> <span class="n">c</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_iout</span><span class="o">.</span><span class="n">iout</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="n">outindex</span><span class="p">],</span>
                             <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;s&quot;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cmap</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">valminmax</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="n">cmax</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmax</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_kiout</span><span class="o">.</span><span class="n">kiout</span><span class="p">[:,:,</span><span class="n">outindex</span><span class="p">]))</span>
+                <span class="n">cmax</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmax</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_kiout</span><span class="o">.</span><span class="n">kiout</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">outindex</span><span class="p">]))</span>
                 <span class="n">cmin</span> <span class="o">=</span> <span class="o">-</span><span class="n">cmax</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">cmin</span> <span class="o">=</span> <span class="o">-</span><span class="n">valminmax</span>
                 <span class="n">cmax</span> <span class="o">=</span> <span class="n">valminmax</span>
             <span class="n">title_string</span> <span class="o">+=</span> <span class="s2">&quot; differential&quot;</span>
             <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">awl</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">oi_wavelength</span><span class="o">.</span><span class="n">lambs</span><span class="p">):</span>
-                <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">awl</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">xs</span><span class="p">),</span> <span class="n">c</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_kiout</span><span class="o">.</span><span class="n">kiout</span><span class="p">[:,</span><span class="n">i</span><span class="p">,</span><span class="n">outindex</span><span class="p">],</span>
-                       <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;s&quot;</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="n">cmin</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="n">cmax</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cmap</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">awl</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">xs</span><span class="p">),</span> <span class="n">c</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_kiout</span><span class="o">.</span><span class="n">kiout</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="n">outindex</span><span class="p">],</span>
+                            <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;s&quot;</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="n">cmin</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="n">cmax</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cmap</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">title_string</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;MJD [d]&quot;</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Wavelength [m]&quot;</span><span class="p">)</span>
@@ -1119,22 +1135,28 @@
         <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span></div>
 </div>
 
-        
-        
-            
+
+
 <div class="viewcode-block" id="col_row_numbers">
 <a class="viewcode-back" href="../../../nifits.backend.html#nifits.backend.backend.col_row_numbers">[docs]</a>
 <span class="k">def</span> <span class="nf">col_row_numbers</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">col_ceiling</span><span class="o">=</span><span class="mi">4</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Convenience function to decide the</span>
+<span class="sd">    numer of rows and columns of a table for n items</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        n           :  (int) number of items</span>
+<span class="sd">        col_ceiling : (int)(4) The maximum number of columns acceptable</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        nrows       : (int)</span>
+<span class="sd">        ncols       : (int)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">ncols</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
-    <span class="k">if</span> <span class="n">ncols</span> <span class="o">&gt;</span><span class="n">col_ceiling</span><span class="p">:</span>
-        <span class="n">ncols</span><span class="o">=</span><span class="n">col_ceiling</span>
-    <span class="n">nrows</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">n</span><span class="o">/</span><span class="n">ncols</span><span class="p">))</span>
-    <span class="k">return</span> <span class="n">nrows</span><span class="p">,</span> <span class="n">ncols</span>        </div>
-
-
-        
-        
-    
+    <span class="k">if</span> <span class="n">ncols</span> <span class="o">&gt;</span> <span class="n">col_ceiling</span><span class="p">:</span>
+        <span class="n">ncols</span> <span class="o">=</span> <span class="n">col_ceiling</span>
+    <span class="n">nrows</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">n</span> <span class="o">/</span> <span class="n">ncols</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">nrows</span><span class="p">,</span> <span class="n">ncols</span></div>
 
 </pre></div>
         </article>
