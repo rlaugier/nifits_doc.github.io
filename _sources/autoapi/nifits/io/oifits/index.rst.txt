@@ -102,12 +102,12 @@ Attributes
    
 
 .. py:data:: __version__
-   :value: '0.0.6'
+   :value: '0.0.8'
 
    
 
 .. py:data:: __standard_version__
-   :value: '0.4'
+   :value: '0.6'
 
    
 
@@ -397,7 +397,7 @@ Attributes
 
    .. py:method:: to_hdu()
 
-      Returns and hdu object to save into fits
+      Returns an hdu object to save into fits
 
       .. admonition:: Note
 
@@ -825,7 +825,7 @@ Attributes
       +---------------+----------------------------+------------------+-------------------+
       | Item          | format                     | unit             | comment           |
       +===============+============================+==================+===================+
-      | ``APP_INDEX`` |  ``int``                   | NA               | Indices of        |
+      | ``APP_INDEX`` |  ``n_a`` ``int``           | NA               | Indices of        |
       |               |                            |                  | subaperture       |
       |               |                            |                  | (starts at 0)     |
       +---------------+----------------------------+------------------+-------------------+
@@ -843,7 +843,7 @@ Attributes
       |               |                            |                  | modulation for    |
       |               |                            |                  | all collectors    |
       +---------------+----------------------------+------------------+-------------------+
-      | ``APPXY``     | ``n_a,2`` ``float``        | m                | Projected         |
+      | ``APPXY``     | ``n_a, 2`` ``float``       | m                | Projected         |
       |               |                            |                  | location of       |
       |               |                            |                  | subapertures in   |
       |               |                            |                  | the plane         |
@@ -945,17 +945,6 @@ Attributes
       :param header: (astropy.io.fits.Header) Header containing the required information
                      such as ``NIFITS FOV_TELDIAM`` and ``NIFITS FOV_TELDIAM_UNIT`` which are used to
                      create the gaussian profiles of radius :math:`\lambda/D`
-
-
-   .. py:method:: get_fov_function(lamb: ArrayLike, n: int)
-
-      Returns the function to get the chromatic phasor
-      given by injection for a the index n of the time series
-
-      **This method will move to the backend**
-
-      :param lamb: The array of wavelength bins [m]
-      :param n: The index of the time series to compute for
 
 
    .. py:method:: __info__()

@@ -6,7 +6,7 @@
 <link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" /><link rel="next" title="nifits.extra.extra" href="extra/index.html" /><link rel="prev" title="nifits.backend.backend" href="../backend/backend/index.html" />
 
     <!-- Generated with Sphinx 7.3.7 and Furo 2024.08.06 -->
-        <title>nifits.extra - NIFITS 0.0.6 documentation</title>
+        <title>nifits.extra - NIFITS 0.0.8 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=362ab14a" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?v=354aac6f" />
     <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=fd3f3429" />
@@ -168,7 +168,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../../../index.html"><div class="brand">NIFITS 0.0.6 documentation</div></a>
+      <a href="../../../index.html"><div class="brand">NIFITS 0.0.8 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -192,7 +192,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../../../index.html">
   
   
-  <span class="sidebar-brand-text">NIFITS 0.0.6 documentation</span>
+  <span class="sidebar-brand-text">NIFITS 0.0.8 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="../../../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -282,6 +282,24 @@
 <tr class="row-even"><td><p><a class="reference internal" href="#nifits.extra.Post" title="nifits.extra.Post"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Post</span></code></a></p></td>
 <td><p>This variant of the backend class offers a statistically whitened alternate</p></td>
 </tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nifits.extra.Converted_BB" title="nifits.extra.Converted_BB"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Converted_BB</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#nifits.extra.PointCollection" title="nifits.extra.PointCollection"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PointCollection</span></code></a></p></td>
+<td><p>A class to hold arrays of coordinates. Handy to compute</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nifits.extra.OI_WAVELENGTH" title="nifits.extra.OI_WAVELENGTH"><code class="xref py py-obj docutils literal notranslate"><span class="pre">OI_WAVELENGTH</span></code></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">NI_EXTENSION</span></code> Generic class for NIFITS extensions</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#nifits.extra.BaseSource" title="nifits.extra.BaseSource"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BaseSource</span></code></a></p></td>
+<td><p>A class to hold arrays of coordinates. Handy to compute</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nifits.extra.FixedSource" title="nifits.extra.FixedSource"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FixedSource</span></code></a></p></td>
+<td><p>A class to hold arrays of coordinates. Handy to compute</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#nifits.extra.SceneFitter" title="nifits.extra.SceneFitter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SceneFitter</span></code></a></p></td>
+<td><p></p></td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -335,10 +353,13 @@
 <tr class="row-even"><td><p><a class="reference internal" href="#id1" title="nifits.extra.STATIC_EXTENSIONS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">STATIC_EXTENSIONS</span></code></a></p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#nifits.extra.massq2sr" title="nifits.extra.massq2sr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">massq2sr</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nifits.extra.BackendLike" title="nifits.extra.BackendLike"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BackendLike</span></code></a></p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#nifits.extra.sr2massq" title="nifits.extra.sr2massq"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sr2massq</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#nifits.extra.massq2sr" title="nifits.extra.massq2sr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">massq2sr</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nifits.extra.sr2massq" title="nifits.extra.sr2massq"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sr2massq</span></code></a></p></td>
 <td><p></p></td>
 </tr>
 </tbody>
@@ -396,7 +417,7 @@
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="nifits.extra.NIFITSClass.oi_wavelength">
-<span class="sig-name descname"><span class="pre">oi_wavelength</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="../../../nifits.io.html#nifits.io.oifits.OI_WAVELENGTH" title="nifits.io.oifits.OI_WAVELENGTH"><span class="pre">OI_WAVELENGTH</span></a></em><a class="headerlink" href="#nifits.extra.NIFITSClass.oi_wavelength" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">oi_wavelength</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#nifits.extra.OI_WAVELENGTH" title="nifits.extra.OI_WAVELENGTH"><span class="pre">OI_WAVELENGTH</span></a></em><a class="headerlink" href="#nifits.extra.NIFITSClass.oi_wavelength" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -626,8 +647,9 @@ to the output of the function. The whitening relies on
 <dt class="sig sig-object py" id="nifits.extra.Post.get_blackbody_collected">
 <span class="sig-name descname"><span class="pre">get_blackbody_collected</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">alphas</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">betas</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kernels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">whiten</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">to_si</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nifits/extra/extra.html#Post.get_blackbody_collected"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.extra.Post.get_blackbody_collected" title="Link to this definition">¶</a></dt>
 <dd><blockquote>
-<div><p>Obtain the output spectra of a blackbody at the given blackbody temperature</p>
+<div><p>Obtain the output spectra of a blackbody at the given blackbody</p>
 </div></blockquote>
+<p>temperature.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -656,7 +678,7 @@ is not implemented yet)</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="nifits.extra.Post.get_pdet_te">
-<span class="sig-name descname"><span class="pre">get_pdet_te</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">alphas</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">betas</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">solid_angle</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kernels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pfa</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.046</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">whiten</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temperature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nifits/extra/extra.html#Post.get_pdet_te"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.extra.Post.get_pdet_te" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">get_pdet_te</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">alphas</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">betas</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">solid_angle</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kernels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pfa</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.046</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temperature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nifits/extra/extra.html#Post.get_pdet_te"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.extra.Post.get_pdet_te" title="Link to this definition">¶</a></dt>
 <dd><blockquote>
 <div><p>Computes a detection probability of a point-source at a given</p>
 </div></blockquote>
@@ -671,7 +693,6 @@ of the source is a blackbody spectrum of fixed temperature.</p>
 <li><p><strong>beta</strong> – [rad] The coordinate matched to Y in the array geometry</p></li>
 <li><p><strong>solid_angle</strong> – [sr] Solid angle of the source</p></li>
 <li><p><strong>temperature</strong> – [K] The temperature of the blackbody</p></li>
-<li><p><strong>whiten</strong> – Bool (True) Whether to use the whitening transform</p></li>
 <li><p><strong>kernels</strong> – Bool (True) Whether to use the K matrix to work in differential outputs</p></li>
 <li><p><strong>pfa</strong> – float The false-alarm rate (p-value) to consider</p></li>
 </ul>
@@ -692,7 +713,50 @@ of the source is a blackbody spectrum of fixed temperature.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="nifits.extra.Post.get_sensitivity_te">
 <span class="sig-name descname"><span class="pre">get_sensitivity_te</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">alphas</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">betas</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kernels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temperature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pfa</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.046</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pdet</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.9</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">radius_unit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">units.Rjup</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">md</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">np</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nifits/extra/extra.html#Post.get_sensitivity_te"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.extra.Post.get_sensitivity_te" title="Link to this definition">¶</a></dt>
-<dd><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">ncx2</span>
+<dd><blockquote>
+<div><p>Computes a sensitivity of the observation to point source(s) located</p>
+</div></blockquote>
+<p>at the given coordinates, based on the energy detector test defined in
+Ceau et al. 2019. This is a simple test of deviation from the expected
+Gaussian distribution, entirely agnostic to the family of signal of interest.
+The spectrum of the source is a blackbody spectrum of fixed temperature.
+The sensitivity is converted to a sphere diameter</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>alpha</strong> – [rad] The coordinate matched to X in the array geometry</p></li>
+<li><p><strong>beta</strong> – [rad] The coordinate matched to Y in the array geometry</p></li>
+<li><p><strong>temperature</strong> – [K] The temperature of the hypothetical source</p></li>
+<li><p><strong>pfa</strong> – (0.046) False alarm rate (p-value) for signficance</p></li>
+<li><p><strong>pdet</strong> – (0.9) Detection probability.</p></li>
+<li><p><strong>distance</strong> – (distance Quantity) Optional. The distance to the system.
+If provided, used to translate the solid angle limit to
+to a sphere radius limit.</p></li>
+<li><p><strong>radius_unit</strong> – (length Unit) Optional. The unit to express the
+radius limit.</p></li>
+<li><p><strong>kernels</strong> – Bool (True) Whether to use the K matrix to work in differential outputs</p></li>
+<li><p><strong>pfa</strong> – float The false-alarm rate (p-value) to consider</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>(astropy.Quantity) An estimate of the sensitivity limit</dt><dd><p>of the observation. If distance is not providede, limit
+is the solid angle of the source seen from the observer.
+If a distance is provided, the limit is converted to the
+radius of a sphere at this distance</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>lim_radius</p>
+</dd>
+</dl>
+<p>pfa:
+* 1 sigma: 0.32
+* 2 sigma: 0.046
+* 3 sigma: 0.0027</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">ncx2</span>
 <span class="n">xs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
 <span class="n">ys</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">1e-6</span><span class="p">,</span> <span class="mf">0.999</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
 <span class="n">u</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">ncx2</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">df</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">nc</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
@@ -725,7 +789,7 @@ is supposed to be distributed as a chi^2 under H_0.</p>
 and x is the target .</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Te</p>
+<dd class="field-odd"><p>Tnp</p>
 </dd>
 </dl>
 </dd></dl>
@@ -763,7 +827,46 @@ of the source is a blackbody spectrum of fixed temperature.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="nifits.extra.Post.get_sensitivity_tnp">
 <span class="sig-name descname"><span class="pre">get_sensitivity_tnp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">alphas</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">betas</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kernels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temperature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pfa</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.046</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pdet</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.9</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">radius_unit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">units.Rjup</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">md</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">np</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nifits/extra/extra.html#Post.get_sensitivity_tnp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.extra.Post.get_sensitivity_tnp" title="Link to this definition">¶</a></dt>
-<dd><p>Untested</p>
+<dd><blockquote>
+<div><p>Computes a sensitivity of the observation to point source(s) located</p>
+</div></blockquote>
+<p>at the given coordinates, based on the Neyman-Pearson test defined in
+Ceau et al. 2019. This is a idealized test that represents the
+theoretical limit if we perfectly know the signature of interest.
+The spectrum of the source is a blackbody spectrum of fixed temperature.
+The sensitivity is converted to a sphere diameter.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>alphas</strong> – [rad] The coordinate matched to X in the array geometry</p></li>
+<li><p><strong>betas</strong> – [rad] The coordinate matched to Y in the array geometry</p></li>
+<li><p><strong>temperature</strong> – [K] The temperature of the hypothetical source</p></li>
+<li><p><strong>pfa</strong> – (0.046) False alarm rate (p-value) for signficance</p></li>
+<li><p><strong>pdet</strong> – (0.9) Detection probability.</p></li>
+<li><p><strong>distance</strong> – (distance Quantity) Optional. The distance to the system.
+If provided, used to translate the solid angle limit to
+to a sphere radius limit.</p></li>
+<li><p><strong>radius_unit</strong> – (length Unit) Optional. The unit to express the
+radius limit. Default : Rjup</p></li>
+<li><p><strong>kernels</strong> – Bool (True) Whether to use the K matrix to work
+in differential outputs</p></li>
+<li><p><strong>pfa</strong> – float The false-alarm rate (p-value) to consider</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>(astropy.Quantity) An estimate of the sensitivity limit</dt><dd><p>of the observation. If distance is not providede, limit
+is the solid angle of the source seen from the observer.
+If a distance is provided, the limit is converted to the
+radius of a sphere at this distance</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>lim_radius</p>
+</dd>
+</dl>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">ncx2</span>
 <span class="n">xs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
 <span class="n">ys</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">1e-6</span><span class="p">,</span> <span class="mf">0.999</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
@@ -781,6 +884,522 @@ of the source is a blackbody spectrum of fixed temperature.</p>
 </pre></div>
 </div>
 </dd></dl>
+
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="nifits.extra.BackendLike">
+<span class="sig-prename descclassname"><span class="pre">nifits.extra.</span></span><span class="sig-name descname"><span class="pre">BackendLike</span></span><a class="headerlink" href="#nifits.extra.BackendLike" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nifits.extra.Converted_BB">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nifits.extra.</span></span><span class="sig-name descname"><span class="pre">Converted_BB</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">temperature</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">oi_wavelength</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">solid_angle</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">iout_unit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nifits/extra/extra.html#Converted_BB"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.extra.Converted_BB" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py property">
+<dt class="sig sig-object py" id="nifits.extra.Converted_BB.temperature">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">temperature</span></span><a class="headerlink" href="#nifits.extra.Converted_BB.temperature" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nifits.extra.Converted_BB.set_temperature">
+<span class="sig-name descname"><span class="pre">set_temperature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">temperature</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nifits/extra/extra.html#Converted_BB.set_temperature"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.extra.Converted_BB.set_temperature" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id2">
+<span class="sig-name descname"><span class="pre">set_temperature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">temperature</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nifits/extra/extra.html#Converted_BB.set_temperature"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id2" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nifits.extra.Converted_BB.get_blackbody_native">
+<span class="sig-name descname"><span class="pre">get_blackbody_native</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nifits/extra/extra.html#Converted_BB.get_blackbody_native"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.extra.Converted_BB.get_blackbody_native" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><dl class="simple">
+<dt>in units consistent with the native</dt><dd><p>units of the file $[a.sr^{-1}.m^{-2}]$ (where [a] is the</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>blackbody_spectrum</p>
+</dd>
+</dl>
+<p>flux unit used in the file, typically [ph/s]).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nifits.extra.Converted_BB.converted_blackbody">
+<span class="sig-name descname"><span class="pre">converted_blackbody</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nifits/extra/extra.html#Converted_BB.converted_blackbody"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.extra.Converted_BB.converted_blackbody" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nifits.extra.PointCollection">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nifits.extra.</span></span><span class="sig-name descname"><span class="pre">PointCollection</span></span><a class="reference internal" href="../../../_modules/nifits/backend/backend.html#PointCollection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.extra.PointCollection" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">object</span></code></p>
+<blockquote>
+<div><p>A class to hold arrays of coordinates. Handy to compute</p>
+</div></blockquote>
+<p>the transmission map on a large number of points.</p>
+<p><strong>Units default to mas.</strong></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>aa</strong> – [unit (mas)] (ArrayLike) first coordinate flat array,
+typically RA.</p></li>
+<li><p><strong>bb</strong> – [unit (mas)] (ArrayLike) second coordinate flat array,
+typically Dec.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Constructors:</dt><dd><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">from_uniform_disk</span></code>   :</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">from_grid</span></code>           :</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">from_centered_square</span></code>:</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">from_segment</span></code>        :</p></li>
+</ul>
+</dd>
+<dt>Modificators:</dt><dd><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">__add__</span></code>         : basically a concatenation</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">transform</span></code>       : Linear transformation in 3D by a matrix</p></li>
+</ul>
+</dd>
+<dt>Handles:</dt><dd><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">coords</span></code>         : The array values as first provided</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">coords_rad</span></code>     : The array values, converted from
+<code class="docutils literal notranslate"><span class="pre">self.unit</span></code> into radians.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">coords_quantity</span></code>: Return the values as a quantity.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">coords_radial</span></code>  : Returns the radial coordinates (rho,theta)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">extent</span></code>         : The [left, right, top, bottom] extent
+(used for some plots).</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="nifits.extra.PointCollection.coords">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">coords</span></span><a class="headerlink" href="#nifits.extra.PointCollection.coords" title="Link to this definition">¶</a></dt>
+<dd><p>Returns a tuple with the <code class="docutils literal notranslate"><span class="pre">alpha</span></code> and <code class="docutils literal notranslate"><span class="pre">beta</span></code> coordinates in
+flat arrays.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="nifits.extra.PointCollection.coords_rad">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">coords_rad</span></span><a class="headerlink" href="#nifits.extra.PointCollection.coords_rad" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="nifits.extra.PointCollection.coords_radial">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">coords_radial</span></span><a class="headerlink" href="#nifits.extra.PointCollection.coords_radial" title="Link to this definition">¶</a></dt>
+<dd><p>Returns the radial coordinates of points. (rho, theta) ([unit], [rad]).</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="nifits.extra.PointCollection.coords_shaped">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">coords_shaped</span></span><a class="headerlink" href="#nifits.extra.PointCollection.coords_shaped" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nifits.extra.PointCollection.aa">
+<span class="sig-name descname"><span class="pre">aa</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ArrayLike</span></em><a class="headerlink" href="#nifits.extra.PointCollection.aa" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nifits.extra.PointCollection.bb">
+<span class="sig-name descname"><span class="pre">bb</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ArrayLike</span></em><a class="headerlink" href="#nifits.extra.PointCollection.bb" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nifits.extra.PointCollection.unit">
+<span class="sig-name descname"><span class="pre">unit</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">astropy.units.Unit</span></em><a class="headerlink" href="#nifits.extra.PointCollection.unit" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nifits.extra.PointCollection.__post_init__">
+<span class="sig-name descname"><span class="pre">__post_init__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nifits/backend/backend.html#PointCollection.__post_init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.extra.PointCollection.__post_init__" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nifits.extra.PointCollection.from_uniform_disk">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_uniform_disk</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">radius</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phi_0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ArrayLike</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">np.array((0.0,</span> <span class="pre">0.0))</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">md</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ModuleType</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">np</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">astropy.units.Unit</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">units.mas</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nifits/backend/backend.html#PointCollection.from_uniform_disk"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.extra.PointCollection.from_uniform_disk" title="Link to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Create a point collection as a uniformly sampled disk.</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>radius</strong> – [mas] The angular radius of the disk to model</p></li>
+<li><p><strong>n</strong> – The total number of points to create</p></li>
+<li><p><strong>phi_0</strong> – [rad] Arbitrary angle to initialiaze pattern</p></li>
+<li><p><strong>offset</strong> – [mas] An offset of the disk location with respect
+to the center of the field of view</p></li>
+<li><p><strong>md</strong> – The numerical module to use as backend</p></li>
+<li><p><strong>unit</strong> – The unit to use for interactions</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nifits.extra.PointCollection.from_grid">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_grid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a_coords</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ArrayLike</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b_coords</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ArrayLike</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">md</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ModuleType</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">np</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">astropy.units.Unit</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">units.mas</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nifits/backend/backend.html#PointCollection.from_grid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.extra.PointCollection.from_grid" title="Link to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Create a point collection as a cartesian grid.</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>a_coords</strong> – The array of samples along the first axis
+(typically alpha)</p></li>
+<li><p><strong>b_coords</strong> – The array of samples along the second axis
+(typically beta, the second dimension)</p></li>
+<li><p><strong>md</strong> – Module of choice for the computation</p></li>
+<li><p><strong>unit</strong> – Units for <code class="docutils literal notranslate"><span class="pre">a_coords</span></code> and <code class="docutils literal notranslate"><span class="pre">b_coords</span></code></p></li>
+</ul>
+</dd>
+</dl>
+<p><strong>Handles:</strong></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nifits.extra.PointCollection.from_segment">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_segment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start_coords</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ArrayLike</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_coords</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ArrayLike</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_samples</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">md</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ModuleType</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">np</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">astropy.units.Unit</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">units.mas</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nifits/backend/backend.html#PointCollection.from_segment"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.extra.PointCollection.from_segment" title="Link to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Create a point collection as a cartesian grid.</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>start_coords</strong> – The (a,b) array of the starting point.
+(typically alpha, beta)</p></li>
+<li><p><strong>end_coords</strong> – The (a,b) array of the ending point.
+(typically alpha, beta)</p></li>
+<li><p><strong>n_sameples</strong> – The number of samples along the line.</p></li>
+</ul>
+</dd>
+</dl>
+<p><strong>Handles:</strong></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nifits.extra.PointCollection.from_centered_square_grid">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_centered_square_grid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">radius</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resolution</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">md</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ModuleType</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">np</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nifits/backend/backend.html#PointCollection.from_centered_square_grid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.extra.PointCollection.from_centered_square_grid" title="Link to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Create a centered square cartesian grid object</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>radius</strong> – The radial extent of the grid.</p></li>
+<li><p><strong>resolution</strong> – The number of pixels across the width.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nifits.extra.PointCollection.plot_frame">
+<span class="sig-name descname"><span class="pre">plot_frame</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">z</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frame_index</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wl_index</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_index</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mycmap</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">marksize_increase</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colorbar</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xlabel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nifits/backend/backend.html#PointCollection.plot_frame"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.extra.PointCollection.plot_frame" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nifits.extra.PointCollection.__add__">
+<span class="sig-name descname"><span class="pre">__add__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nifits/backend/backend.html#PointCollection.__add__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.extra.PointCollection.__add__" title="Link to this definition">¶</a></dt>
+<dd><p>Add together two collection of points.</p>
+<p>The result inerits properties of the first argument.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nifits.extra.PointCollection.transform">
+<span class="sig-name descname"><span class="pre">transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">matrix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">md</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">np</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nifits/backend/backend.html#PointCollection.transform"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.extra.PointCollection.transform" title="Link to this definition">¶</a></dt>
+<dd><p>Produce a linear transform of the coordinates.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>matrix</strong> – A transformation matrix (3D)</p></li>
+<li><p><strong>md</strong> – A module to do the operation</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nifits.extra.OI_WAVELENGTH">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nifits.extra.</span></span><span class="sig-name descname"><span class="pre">OI_WAVELENGTH</span></span><a class="reference internal" href="../../../_modules/nifits/io/oifits.html#OI_WAVELENGTH"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.extra.OI_WAVELENGTH" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">NI_EXTENSION</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">NI_EXTENSION</span></code> Generic class for NIFITS extensions</p>
+<p><strong>Inherited methods:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">from_hdu</span></code>: Creates the object from an <code class="docutils literal notranslate"><span class="pre">astropy.io.fits.TableHDU</span></code> object</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">to_hdu</span></code>  : Returns the <code class="docutils literal notranslate"><span class="pre">TableHDU</span></code> from itself.</p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data_table</strong> – [ArrayLike] The data to stored</p></li>
+<li><p><strong>header</strong> – [fits.Header] A fits header (optional)</p></li>
+<li><p><strong>unit</strong> – [astropy.units.Unit] Units of the data stored
+(mandatory of NI_IOUT, NI_KIOUT and NI_KCOV)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="nifits.extra.OI_WAVELENGTH.lambs">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">lambs</span></span><a class="headerlink" href="#nifits.extra.OI_WAVELENGTH.lambs" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="nifits.extra.OI_WAVELENGTH.dlambs">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dlambs</span></span><a class="headerlink" href="#nifits.extra.OI_WAVELENGTH.dlambs" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="nifits.extra.OI_WAVELENGTH.nus">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">nus</span></span><a class="headerlink" href="#nifits.extra.OI_WAVELENGTH.nus" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="nifits.extra.OI_WAVELENGTH.dnus">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dnus</span></span><a class="headerlink" href="#nifits.extra.OI_WAVELENGTH.dnus" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nifits.extra.OI_WAVELENGTH.__doc__">
+<span class="sig-name descname"><span class="pre">__doc__</span></span><a class="headerlink" href="#nifits.extra.OI_WAVELENGTH.__doc__" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nifits.extra.OI_WAVELENGTH.name">
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'OI_WAVELENGTH'</span></em><a class="headerlink" href="#nifits.extra.OI_WAVELENGTH.name" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nifits.extra.BaseSource">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nifits.extra.</span></span><span class="sig-name descname"><span class="pre">BaseSource</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">samples</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../backend/index.html#nifits.backend.PointCollection" title="nifits.backend.PointCollection"><span class="pre">nifits.backend.PointCollection</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">flux_density</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nifits/extra/extra.html#BaseSource"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.extra.BaseSource" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="../backend/index.html#nifits.backend.PointCollection" title="nifits.backend.PointCollection"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nifits.backend.PointCollection</span></code></a></p>
+<blockquote>
+<div><p>A class to hold arrays of coordinates. Handy to compute</p>
+</div></blockquote>
+<p>the transmission map on a large number of points.</p>
+<p><strong>Units default to mas.</strong></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>aa</strong> – [unit (mas)] (ArrayLike) first coordinate flat array,
+typically RA.</p></li>
+<li><p><strong>bb</strong> – [unit (mas)] (ArrayLike) second coordinate flat array,
+typically Dec.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Constructors:</dt><dd><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">from_uniform_disk</span></code>   :</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">from_grid</span></code>           :</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">from_centered_square</span></code>:</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">from_segment</span></code>        :</p></li>
+</ul>
+</dd>
+<dt>Modificators:</dt><dd><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">__add__</span></code>         : basically a concatenation</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">transform</span></code>       : Linear transformation in 3D by a matrix</p></li>
+</ul>
+</dd>
+<dt>Handles:</dt><dd><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">coords</span></code>         : The array values as first provided</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">coords_rad</span></code>     : The array values, converted from
+<code class="docutils literal notranslate"><span class="pre">self.unit</span></code> into radians.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">coords_quantity</span></code>: Return the values as a quantity.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">coords_radial</span></code>  : Returns the radial coordinates (rho,theta)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">extent</span></code>         : The [left, right, top, bottom] extent
+(used for some plots).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nifits.extra.FixedSource">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nifits.extra.</span></span><span class="sig-name descname"><span class="pre">FixedSource</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">samples</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../backend/index.html#nifits.backend.PointCollection" title="nifits.backend.PointCollection"><span class="pre">nifits.backend.PointCollection</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">temperature</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">astropy.units.quantity</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sp_dens</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">solid_angle</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">astropy.units.quantity</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">oi_wavelength</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../../../nifits.io.html#nifits.io.oifits.OI_WAVELENGTH" title="nifits.io.oifits.OI_WAVELENGTH"><span class="pre">nifits.io.oifits.OI_WAVELENGTH</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">iout_unit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">astropy.units.Unit</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">md</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">np</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nifits/extra/extra.html#FixedSource"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.extra.FixedSource" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="../backend/index.html#nifits.backend.PointCollection" title="nifits.backend.PointCollection"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nifits.backend.PointCollection</span></code></a></p>
+<blockquote>
+<div><p>A class to hold arrays of coordinates. Handy to compute</p>
+</div></blockquote>
+<p>the transmission map on a large number of points.</p>
+<p><strong>Units default to mas.</strong></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>aa</strong> – [unit (mas)] (ArrayLike) first coordinate flat array,
+typically RA.</p></li>
+<li><p><strong>bb</strong> – [unit (mas)] (ArrayLike) second coordinate flat array,
+typically Dec.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Constructors:</dt><dd><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">from_uniform_disk</span></code>   :</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">from_grid</span></code>           :</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">from_centered_square</span></code>:</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">from_segment</span></code>        :</p></li>
+</ul>
+</dd>
+<dt>Modificators:</dt><dd><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">__add__</span></code>         : basically a concatenation</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">transform</span></code>       : Linear transformation in 3D by a matrix</p></li>
+</ul>
+</dd>
+<dt>Handles:</dt><dd><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">coords</span></code>         : The array values as first provided</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">coords_rad</span></code>     : The array values, converted from
+<code class="docutils literal notranslate"><span class="pre">self.unit</span></code> into radians.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">coords_quantity</span></code>: Return the values as a quantity.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">coords_radial</span></code>  : Returns the radial coordinates (rho,theta)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">extent</span></code>         : The [left, right, top, bottom] extent
+(used for some plots).</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="nifits.extra.FixedSource.ds_sr">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ds_sr</span></span><a class="headerlink" href="#nifits.extra.FixedSource.ds_sr" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="nifits.extra.FixedSource.ss">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ss</span></span><a class="headerlink" href="#nifits.extra.FixedSource.ss" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nifits.extra.FixedSource.get_flux_density">
+<span class="sig-name descname"><span class="pre">get_flux_density</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nifits/extra/extra.html#FixedSource.get_flux_density"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.extra.FixedSource.get_flux_density" title="Link to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Returns the (spatial) flux density in [a/m^2] where</p>
+</div></blockquote>
+<p>a is the unit of flux collected at the outputs (ni_iout.unit)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>an array with dimension (n_wl, n_points)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>spectrum</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nifits.extra.FixedSource.warm_sphere_opaque">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">warm_sphere_opaque</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">distance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">radius</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temperature</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">location</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">oi_wavelength</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">iout_unit</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">md</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">np</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nifits/extra/extra.html#FixedSource.warm_sphere_opaque"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.extra.FixedSource.warm_sphere_opaque" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nifits.extra.SceneFitter">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nifits.extra.</span></span><span class="sig-name descname"><span class="pre">SceneFitter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">backend</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#nifits.extra.Post" title="nifits.extra.Post"><span class="pre">Post</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">nuisance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interest</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kernels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nifits/extra/extra.html#SceneFitter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.extra.SceneFitter" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="nifits.extra.SceneFitter.update_nuisance">
+<span class="sig-name descname"><span class="pre">update_nuisance</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nifits/extra/extra.html#SceneFitter.update_nuisance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.extra.SceneFitter.update_nuisance" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nifits.extra.SceneFitter.inject_object">
+<span class="sig-name descname"><span class="pre">inject_object</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">asource</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#nifits.extra.BaseSource" title="nifits.extra.BaseSource"><span class="pre">BaseSource</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nifits/extra/extra.html#SceneFitter.inject_object"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.extra.SceneFitter.inject_object" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nifits.extra.SceneFitter.clear_injection">
+<span class="sig-name descname"><span class="pre">clear_injection</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nifits/extra/extra.html#SceneFitter.clear_injection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.extra.SceneFitter.clear_injection" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nifits.extra.SceneFitter.create_maps">
+<span class="sig-name descname"><span class="pre">create_maps</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nifits/extra/extra.html#SceneFitter.create_maps"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.extra.SceneFitter.create_maps" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nifits.extra.SceneFitter.get_source_output">
+<span class="sig-name descname"><span class="pre">get_source_output</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">asource</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nifits/extra/extra.html#SceneFitter.get_source_output"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.extra.SceneFitter.get_source_output" title="Link to this definition">¶</a></dt>
+<dd><p>Updates the transmission map, and computes and returns the total flux.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nifits.extra.SceneFitter.get_source_output_fast">
+<span class="sig-name descname"><span class="pre">get_source_output_fast</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">asource</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nifits/extra/extra.html#SceneFitter.get_source_output_fast"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.extra.SceneFitter.get_source_output_fast" title="Link to this definition">¶</a></dt>
+<dd><p>Computes and returns the total flux without recomputing the transmission map</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nifits.extra.SceneFitter.get_total_group">
+<span class="sig-name descname"><span class="pre">get_total_group</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sourcebank</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nifits/extra/extra.html#SceneFitter.get_total_group"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.extra.SceneFitter.get_total_group" title="Link to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Updates the transmission map and computes and returns</p>
+</div></blockquote>
+<p>the flux of a given source bank</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nifits.extra.SceneFitter.get_total_group_fast">
+<span class="sig-name descname"><span class="pre">get_total_group_fast</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sourcebank</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nifits/extra/extra.html#SceneFitter.get_total_group_fast"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.extra.SceneFitter.get_total_group_fast" title="Link to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Computes and returns the flux of a given source bank.</p>
+</div></blockquote>
+<p>The transmission map is not updated.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nifits.extra.SceneFitter.get_total_fast">
+<span class="sig-name descname"><span class="pre">get_total_fast</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dosum</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nifits/extra/extra.html#SceneFitter.get_total_fast"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.extra.SceneFitter.get_total_fast" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nifits.extra.SceneFitter.get_total_output">
+<span class="sig-name descname"><span class="pre">get_total_output</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dosum</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nifits/extra/extra.html#SceneFitter.get_total_output"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.extra.SceneFitter.get_total_output" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nifits.extra.SceneFitter.create_star_1p">
+<span class="sig-name descname"><span class="pre">create_star_1p</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">backend</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">star_rad</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">star_temp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">star_nb_pts</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">planet_radius</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">planet_temp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">planet_pos</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kernel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nifits/extra/extra.html#SceneFitter.create_star_1p"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.extra.SceneFitter.create_star_1p" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nifits.extra.SceneFitter.update_single_planet">
+<span class="sig-name descname"><span class="pre">update_single_planet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nifits/extra/extra.html#SceneFitter.update_single_planet"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.extra.SceneFitter.update_single_planet" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nifits.extra.SceneFitter.update_dual_planet">
+<span class="sig-name descname"><span class="pre">update_dual_planet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nifits/extra/extra.html#SceneFitter.update_dual_planet"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.extra.SceneFitter.update_dual_planet" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nifits.extra.SceneFitter.update_ring_density">
+<span class="sig-name descname"><span class="pre">update_ring_density</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nifits/extra/extra.html#SceneFitter.update_ring_density"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.extra.SceneFitter.update_ring_density" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nifits.extra.SceneFitter.update_star_rad_disk_density">
+<span class="sig-name descname"><span class="pre">update_star_rad_disk_density</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nifits/extra/extra.html#SceneFitter.update_star_rad_disk_density"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.extra.SceneFitter.update_star_rad_disk_density" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nifits.extra.SceneFitter._get_signal">
+<span class="sig-name descname"><span class="pre">_get_signal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nifits/extra/extra.html#SceneFitter._get_signal"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.extra.SceneFitter._get_signal" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nifits.extra.SceneFitter.get_residual">
+<span class="sig-name descname"><span class="pre">get_residual</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nifits/extra/extra.html#SceneFitter.get_residual"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.extra.SceneFitter.get_residual" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
 
 </dd></dl>
 
@@ -999,6 +1618,70 @@ object by <cite>create_whitening_matrix</cite></p>
 <li><a class="reference internal" href="#nifits.extra.Post.get_sensitivity_tnp"><code class="docutils literal notranslate"><span class="pre">Post.get_sensitivity_tnp()</span></code></a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#nifits.extra.BackendLike"><code class="docutils literal notranslate"><span class="pre">BackendLike</span></code></a></li>
+<li><a class="reference internal" href="#nifits.extra.Converted_BB"><code class="docutils literal notranslate"><span class="pre">Converted_BB</span></code></a><ul>
+<li><a class="reference internal" href="#nifits.extra.Converted_BB.temperature"><code class="docutils literal notranslate"><span class="pre">Converted_BB.temperature</span></code></a></li>
+<li><a class="reference internal" href="#nifits.extra.Converted_BB.set_temperature"><code class="docutils literal notranslate"><span class="pre">Converted_BB.set_temperature()</span></code></a></li>
+<li><a class="reference internal" href="#id2"><code class="docutils literal notranslate"><span class="pre">Converted_BB.set_temperature()</span></code></a></li>
+<li><a class="reference internal" href="#nifits.extra.Converted_BB.get_blackbody_native"><code class="docutils literal notranslate"><span class="pre">Converted_BB.get_blackbody_native()</span></code></a></li>
+<li><a class="reference internal" href="#nifits.extra.Converted_BB.converted_blackbody"><code class="docutils literal notranslate"><span class="pre">Converted_BB.converted_blackbody()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#nifits.extra.PointCollection"><code class="docutils literal notranslate"><span class="pre">PointCollection</span></code></a><ul>
+<li><a class="reference internal" href="#nifits.extra.PointCollection.coords"><code class="docutils literal notranslate"><span class="pre">PointCollection.coords</span></code></a></li>
+<li><a class="reference internal" href="#nifits.extra.PointCollection.coords_rad"><code class="docutils literal notranslate"><span class="pre">PointCollection.coords_rad</span></code></a></li>
+<li><a class="reference internal" href="#nifits.extra.PointCollection.coords_radial"><code class="docutils literal notranslate"><span class="pre">PointCollection.coords_radial</span></code></a></li>
+<li><a class="reference internal" href="#nifits.extra.PointCollection.coords_shaped"><code class="docutils literal notranslate"><span class="pre">PointCollection.coords_shaped</span></code></a></li>
+<li><a class="reference internal" href="#nifits.extra.PointCollection.aa"><code class="docutils literal notranslate"><span class="pre">PointCollection.aa</span></code></a></li>
+<li><a class="reference internal" href="#nifits.extra.PointCollection.bb"><code class="docutils literal notranslate"><span class="pre">PointCollection.bb</span></code></a></li>
+<li><a class="reference internal" href="#nifits.extra.PointCollection.unit"><code class="docutils literal notranslate"><span class="pre">PointCollection.unit</span></code></a></li>
+<li><a class="reference internal" href="#nifits.extra.PointCollection.__post_init__"><code class="docutils literal notranslate"><span class="pre">PointCollection.__post_init__()</span></code></a></li>
+<li><a class="reference internal" href="#nifits.extra.PointCollection.from_uniform_disk"><code class="docutils literal notranslate"><span class="pre">PointCollection.from_uniform_disk()</span></code></a></li>
+<li><a class="reference internal" href="#nifits.extra.PointCollection.from_grid"><code class="docutils literal notranslate"><span class="pre">PointCollection.from_grid()</span></code></a></li>
+<li><a class="reference internal" href="#nifits.extra.PointCollection.from_segment"><code class="docutils literal notranslate"><span class="pre">PointCollection.from_segment()</span></code></a></li>
+<li><a class="reference internal" href="#nifits.extra.PointCollection.from_centered_square_grid"><code class="docutils literal notranslate"><span class="pre">PointCollection.from_centered_square_grid()</span></code></a></li>
+<li><a class="reference internal" href="#nifits.extra.PointCollection.plot_frame"><code class="docutils literal notranslate"><span class="pre">PointCollection.plot_frame()</span></code></a></li>
+<li><a class="reference internal" href="#nifits.extra.PointCollection.__add__"><code class="docutils literal notranslate"><span class="pre">PointCollection.__add__()</span></code></a></li>
+<li><a class="reference internal" href="#nifits.extra.PointCollection.transform"><code class="docutils literal notranslate"><span class="pre">PointCollection.transform()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#nifits.extra.OI_WAVELENGTH"><code class="docutils literal notranslate"><span class="pre">OI_WAVELENGTH</span></code></a><ul>
+<li><a class="reference internal" href="#nifits.extra.OI_WAVELENGTH.lambs"><code class="docutils literal notranslate"><span class="pre">OI_WAVELENGTH.lambs</span></code></a></li>
+<li><a class="reference internal" href="#nifits.extra.OI_WAVELENGTH.dlambs"><code class="docutils literal notranslate"><span class="pre">OI_WAVELENGTH.dlambs</span></code></a></li>
+<li><a class="reference internal" href="#nifits.extra.OI_WAVELENGTH.nus"><code class="docutils literal notranslate"><span class="pre">OI_WAVELENGTH.nus</span></code></a></li>
+<li><a class="reference internal" href="#nifits.extra.OI_WAVELENGTH.dnus"><code class="docutils literal notranslate"><span class="pre">OI_WAVELENGTH.dnus</span></code></a></li>
+<li><a class="reference internal" href="#nifits.extra.OI_WAVELENGTH.__doc__"><code class="docutils literal notranslate"><span class="pre">OI_WAVELENGTH.__doc__</span></code></a></li>
+<li><a class="reference internal" href="#nifits.extra.OI_WAVELENGTH.name"><code class="docutils literal notranslate"><span class="pre">OI_WAVELENGTH.name</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#nifits.extra.BaseSource"><code class="docutils literal notranslate"><span class="pre">BaseSource</span></code></a></li>
+<li><a class="reference internal" href="#nifits.extra.FixedSource"><code class="docutils literal notranslate"><span class="pre">FixedSource</span></code></a><ul>
+<li><a class="reference internal" href="#nifits.extra.FixedSource.ds_sr"><code class="docutils literal notranslate"><span class="pre">FixedSource.ds_sr</span></code></a></li>
+<li><a class="reference internal" href="#nifits.extra.FixedSource.ss"><code class="docutils literal notranslate"><span class="pre">FixedSource.ss</span></code></a></li>
+<li><a class="reference internal" href="#nifits.extra.FixedSource.get_flux_density"><code class="docutils literal notranslate"><span class="pre">FixedSource.get_flux_density()</span></code></a></li>
+<li><a class="reference internal" href="#nifits.extra.FixedSource.warm_sphere_opaque"><code class="docutils literal notranslate"><span class="pre">FixedSource.warm_sphere_opaque()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#nifits.extra.SceneFitter"><code class="docutils literal notranslate"><span class="pre">SceneFitter</span></code></a><ul>
+<li><a class="reference internal" href="#nifits.extra.SceneFitter.update_nuisance"><code class="docutils literal notranslate"><span class="pre">SceneFitter.update_nuisance()</span></code></a></li>
+<li><a class="reference internal" href="#nifits.extra.SceneFitter.inject_object"><code class="docutils literal notranslate"><span class="pre">SceneFitter.inject_object()</span></code></a></li>
+<li><a class="reference internal" href="#nifits.extra.SceneFitter.clear_injection"><code class="docutils literal notranslate"><span class="pre">SceneFitter.clear_injection()</span></code></a></li>
+<li><a class="reference internal" href="#nifits.extra.SceneFitter.create_maps"><code class="docutils literal notranslate"><span class="pre">SceneFitter.create_maps()</span></code></a></li>
+<li><a class="reference internal" href="#nifits.extra.SceneFitter.get_source_output"><code class="docutils literal notranslate"><span class="pre">SceneFitter.get_source_output()</span></code></a></li>
+<li><a class="reference internal" href="#nifits.extra.SceneFitter.get_source_output_fast"><code class="docutils literal notranslate"><span class="pre">SceneFitter.get_source_output_fast()</span></code></a></li>
+<li><a class="reference internal" href="#nifits.extra.SceneFitter.get_total_group"><code class="docutils literal notranslate"><span class="pre">SceneFitter.get_total_group()</span></code></a></li>
+<li><a class="reference internal" href="#nifits.extra.SceneFitter.get_total_group_fast"><code class="docutils literal notranslate"><span class="pre">SceneFitter.get_total_group_fast()</span></code></a></li>
+<li><a class="reference internal" href="#nifits.extra.SceneFitter.get_total_fast"><code class="docutils literal notranslate"><span class="pre">SceneFitter.get_total_fast()</span></code></a></li>
+<li><a class="reference internal" href="#nifits.extra.SceneFitter.get_total_output"><code class="docutils literal notranslate"><span class="pre">SceneFitter.get_total_output()</span></code></a></li>
+<li><a class="reference internal" href="#nifits.extra.SceneFitter.create_star_1p"><code class="docutils literal notranslate"><span class="pre">SceneFitter.create_star_1p()</span></code></a></li>
+<li><a class="reference internal" href="#nifits.extra.SceneFitter.update_single_planet"><code class="docutils literal notranslate"><span class="pre">SceneFitter.update_single_planet()</span></code></a></li>
+<li><a class="reference internal" href="#nifits.extra.SceneFitter.update_dual_planet"><code class="docutils literal notranslate"><span class="pre">SceneFitter.update_dual_planet()</span></code></a></li>
+<li><a class="reference internal" href="#nifits.extra.SceneFitter.update_ring_density"><code class="docutils literal notranslate"><span class="pre">SceneFitter.update_ring_density()</span></code></a></li>
+<li><a class="reference internal" href="#nifits.extra.SceneFitter.update_star_rad_disk_density"><code class="docutils literal notranslate"><span class="pre">SceneFitter.update_star_rad_disk_density()</span></code></a></li>
+<li><a class="reference internal" href="#nifits.extra.SceneFitter._get_signal"><code class="docutils literal notranslate"><span class="pre">SceneFitter._get_signal()</span></code></a></li>
+<li><a class="reference internal" href="#nifits.extra.SceneFitter.get_residual"><code class="docutils literal notranslate"><span class="pre">SceneFitter.get_residual()</span></code></a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#nifits.extra.massq2sr"><code class="docutils literal notranslate"><span class="pre">massq2sr</span></code></a></li>
 <li><a class="reference internal" href="#nifits.extra.sr2massq"><code class="docutils literal notranslate"><span class="pre">sr2massq</span></code></a></li>
 <li><a class="reference internal" href="#nifits.extra.e2ph"><code class="docutils literal notranslate"><span class="pre">e2ph()</span></code></a></li>
@@ -1021,7 +1704,7 @@ object by <cite>create_whitening_matrix</cite></p>
       
     </aside>
   </div>
-</div><script src="../../../_static/documentation_options.js?v=1fd71caa"></script>
+</div><script src="../../../_static/documentation_options.js?v=53b53b71"></script>
     <script src="../../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/scripts/furo.js?v=5fa4622c"></script>

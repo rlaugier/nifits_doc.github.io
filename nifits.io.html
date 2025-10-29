@@ -6,7 +6,7 @@
 <link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" />
 
     <!-- Generated with Sphinx 7.3.7 and Furo 2024.08.06 -->
-        <title>nifits.io package - NIFITS 0.0.6 documentation</title>
+        <title>nifits.io package - NIFITS 0.0.8 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=362ab14a" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=354aac6f" />
     <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=fd3f3429" />
@@ -168,7 +168,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="index.html"><div class="brand">NIFITS 0.0.6 documentation</div></a>
+      <a href="index.html"><div class="brand">NIFITS 0.0.8 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -192,7 +192,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
   
   
-  <span class="sidebar-brand-text">NIFITS 0.0.6 documentation</span>
+  <span class="sidebar-brand-text">NIFITS 0.0.8 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -474,7 +474,7 @@ extra first dimension of length 2 for (real, imaginary) parts.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="nifits.io.oifits.NI_EXTENSION_CPX_ARRAY.to_hdu">
 <span class="sig-name descname"><span class="pre">to_hdu</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/nifits/io/oifits.html#NI_EXTENSION_CPX_ARRAY.to_hdu"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.io.oifits.NI_EXTENSION_CPX_ARRAY.to_hdu" title="Link to this definition">¶</a></dt>
-<dd><p>Returns and hdu object to save into fits</p>
+<dd><p>Returns an hdu object to save into fits</p>
 <div class="admonition-note admonition">
 <p class="admonition-title">Note</p>
 <p>This also updates the header if dimension changes</p>
@@ -514,22 +514,6 @@ extension with 0 offset.</p></li>
 </ul>
 </dd>
 </dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="nifits.io.oifits.NI_FOV.get_fov_function">
-<span class="sig-name descname"><span class="pre">get_fov_function</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lamb</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nifits/io/oifits.html#NI_FOV.get_fov_function"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.io.oifits.NI_FOV.get_fov_function" title="Link to this definition">¶</a></dt>
-<dd><p>Returns the function to get the chromatic phasor
-given by injection for a the index n of the time series</p>
-<p><strong>This method will move to the backend</strong></p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>lamb</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Buffer</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">_SupportsArray</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">dtype</span></code>[<code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code>]], <code class="xref py py-class docutils literal notranslate"><span class="pre">_NestedSequence</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">_SupportsArray</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">dtype</span></code>[<code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code>]]], <code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">complex</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">_NestedSequence</span></code>[<code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">complex</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code>]]]</span>) – The array of wavelength bins [m]</p></li>
-<li><p><strong>n</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></span>) – The index of the time series to compute for</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
 <dl class="py attribute">
 <dt class="sig sig-object py" id="nifits.io.oifits.NI_FOV.name">
 <span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'NI_FOV'</span></em><a class="headerlink" href="#nifits.io.oifits.NI_FOV.name" title="Link to this definition">¶</a></dt>
@@ -819,7 +803,7 @@ NI_MOD any affect that may vary throughout the observµng run.</p>
 </thead>
 <tbody>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">APP_INDEX</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">int</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">n_a</span></code> <code class="docutils literal notranslate"><span class="pre">int</span></code></p></td>
 <td><p>NA</p></td>
 <td><p>Indices of
 subaperture
@@ -855,7 +839,7 @@ modulation for
 all collectors</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">APPXY</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">n_a,2</span></code> <code class="docutils literal notranslate"><span class="pre">float</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">n_a,</span> <span class="pre">2</span></code> <code class="docutils literal notranslate"><span class="pre">float</span></code></p></td>
 <td><p>m</p></td>
 <td><p>Projected
 location of
@@ -1396,7 +1380,6 @@ Default: “”</p></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#nifits.io.oifits.NI_FOV"><code class="docutils literal notranslate"><span class="pre">NI_FOV</span></code></a><ul>
-<li><a class="reference internal" href="#nifits.io.oifits.NI_FOV.get_fov_function"><code class="docutils literal notranslate"><span class="pre">NI_FOV.get_fov_function()</span></code></a></li>
 <li><a class="reference internal" href="#nifits.io.oifits.NI_FOV.name"><code class="docutils literal notranslate"><span class="pre">NI_FOV.name</span></code></a></li>
 <li><a class="reference internal" href="#nifits.io.oifits.NI_FOV.simple_from_header"><code class="docutils literal notranslate"><span class="pre">NI_FOV.simple_from_header()</span></code></a></li>
 </ul>
@@ -1519,7 +1502,7 @@ Default: “”</p></li>
       
     </aside>
   </div>
-</div><script src="_static/documentation_options.js?v=1fd71caa"></script>
+</div><script src="_static/documentation_options.js?v=53b53b71"></script>
     <script src="_static/doctools.js?v=9a2dae69"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/scripts/furo.js?v=5fa4622c"></script>

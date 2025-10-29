@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" />
 
     <!-- Generated with Sphinx 7.3.7 and Furo 2024.08.06 -->
-        <title>nifits.extra.extra - NIFITS 0.0.6 documentation</title>
+        <title>nifits.extra.extra - NIFITS 0.0.8 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=362ab14a" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?v=354aac6f" />
     <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=fd3f3429" />
@@ -167,7 +167,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../../../index.html"><div class="brand">NIFITS 0.0.6 documentation</div></a>
+      <a href="../../../index.html"><div class="brand">NIFITS 0.0.8 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -191,7 +191,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../../../index.html">
   
   
-  <span class="sidebar-brand-text">NIFITS 0.0.6 documentation</span>
+  <span class="sidebar-brand-text">NIFITS 0.0.8 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="../../../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -296,6 +296,9 @@
 <span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">ncx2</span> <span class="k">as</span> <span class="n">ncx2</span>
 <span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span> <span class="k">as</span> <span class="n">norm</span>
 <span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">chi2</span> <span class="k">as</span> <span class="n">chi2</span>
+
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span>
+
 
 <div class="viewcode-block" id="local_sqrtm">
 <a class="viewcode-back" href="../../../autoapi/nifits/extra/index.html#nifits.extra.extra.local_sqrtm">[docs]</a>
@@ -511,7 +514,9 @@
                         <span class="n">kernels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">whiten</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                             <span class="n">to_si</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">            Obtain the output spectra of a blackbody at the given blackbody temperature</span>
+<span class="sd">            Obtain the output spectra of a blackbody at the given blackbody</span>
+<span class="sd">        temperature.</span>
+
 <span class="sd">        Args:</span>
 <span class="sd">            alphas: ArrayLike: Relative position in rad</span>
 <span class="sd">            betas:  ArrayLike: Relative position in rad</span>
@@ -560,7 +565,6 @@
     <span class="k">def</span> <span class="nf">get_pdet_te</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">alphas</span><span class="p">,</span> <span class="n">betas</span><span class="p">,</span>
                     <span class="n">solid_angle</span><span class="p">,</span>
                     <span class="n">kernels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">pfa</span><span class="o">=</span><span class="mf">0.046</span><span class="p">,</span>
-                    <span class="n">whiten</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                     <span class="n">temperature</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">            Computes a detection probability of a point-source at a given</span>
@@ -574,7 +578,6 @@
 <span class="sd">            beta          : [rad] The coordinate matched to Y in the array geometry</span>
 <span class="sd">            solid_angle   : [sr] Solid angle of the source</span>
 <span class="sd">            temperature   : [K] The temperature of the blackbody</span>
-<span class="sd">            whiten        : Bool (True) Whether to use the whitening transform</span>
 <span class="sd">            kernels       : Bool (True) Whether to use the K matrix to work in differential outputs</span>
 <span class="sd">            pfa           : float The false-alarm rate (p-value) to consider</span>
 
@@ -608,7 +611,40 @@
                     <span class="n">distance</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">radius_unit</span><span class="o">=</span><span class="n">units</span><span class="o">.</span><span class="n">Rjup</span><span class="p">,</span>
                     <span class="n">md</span><span class="o">=</span><span class="n">np</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Computes a sensitivity of the observation to point source(s) located</span>
+<span class="sd">        at the given coordinates, based on the energy detector test defined in</span>
+<span class="sd">        Ceau et al. 2019. This is a simple test of deviation from the expected</span>
+<span class="sd">        Gaussian distribution, entirely agnostic to the family of signal of interest.</span>
+<span class="sd">        The spectrum of the source is a blackbody spectrum of fixed temperature.</span>
+<span class="sd">        The sensitivity is converted to a sphere diameter</span>
+
+<span class="sd">        Args: </span>
+<span class="sd">            alpha         : [rad] The coordinate matched to X in the array geometry</span>
+<span class="sd">            beta          : [rad] The coordinate matched to Y in the array geometry</span>
+<span class="sd">            temperature   : [K] The temperature of the hypothetical source</span>
+<span class="sd">            pfa           : (0.046) False alarm rate (p-value) for signficance</span>
+<span class="sd">            pdet          : (0.9) Detection probability.</span>
+<span class="sd">            distance      : (distance Quantity) Optional. The distance to the system.</span>
+<span class="sd">                            If provided, used to translate the solid angle limit to</span>
+<span class="sd">                            to a sphere radius limit.</span>
+<span class="sd">            radius_unit   : (length Unit) Optional. The unit to express the</span>
+<span class="sd">                            radius limit.</span>
+<span class="sd">            kernels       : Bool (True) Whether to use the K matrix to work in differential outputs</span>
+<span class="sd">            pfa           : float The false-alarm rate (p-value) to consider</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            lim_radius : (astropy.Quantity) An estimate of the sensitivity limit</span>
+<span class="sd">                            of the observation. If distance is not providede, limit</span>
+<span class="sd">                            is the solid angle of the source seen from the observer.</span>
+<span class="sd">                            If a distance is provided, the limit is converted to the</span>
+<span class="sd">                            radius of a sphere at this distance</span>
+<span class="sd">                        </span>
 <span class="sd">        </span>
+<span class="sd">        pfa:</span>
+<span class="sd">        * 1 sigma: 0.32</span>
+<span class="sd">        * 2 sigma: 0.046</span>
+<span class="sd">        * 3 sigma: 0.0027</span>
+<span class="sd">         </span>
 <span class="sd">        .. code-block:: python</span>
 
 <span class="sd">            from scipy.stats import ncx2</span>
@@ -640,7 +676,7 @@
         <span class="n">xtx</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s2">&quot;m i, i m -&gt; m&quot;</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
         <span class="n">lambda0</span> <span class="o">=</span> <span class="mf">1.0e-3</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">fullyflatshape</span>
         <span class="c1"># The solution lambda is the x^T.x value satisfying Pdet and Pfa</span>
-        <span class="n">sol</span> <span class="o">=</span> <span class="n">leastsq</span><span class="p">(</span><span class="n">residual_pdet_Te</span><span class="p">,</span> <span class="n">lambda0</span><span class="p">,</span> 
+        <span class="n">sol</span> <span class="o">=</span> <span class="n">leastsq</span><span class="p">(</span><span class="n">residual_pdet_Te</span><span class="p">,</span> <span class="n">lambda0</span><span class="p">,</span>
                         <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">threshold</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">fullyflatshape</span><span class="p">,</span> <span class="n">pdet</span><span class="p">))</span><span class="c1"># AKA lambda</span>
         <span class="n">lamb</span> <span class="o">=</span> <span class="n">sol</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
         <span class="c1"># Concatenate the wavelengths</span>
@@ -650,7 +686,8 @@
         <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">distance</span><span class="p">,</span> <span class="n">units</span><span class="o">.</span><span class="n">Quantity</span><span class="p">):</span>
             <span class="n">dist_converted</span> <span class="o">=</span> <span class="n">distance</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">radius_unit</span><span class="p">)</span>
             <span class="n">lim_radius</span> <span class="o">=</span> <span class="n">dist_converted</span><span class="o">*</span><span class="n">md</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">lim_solid_angle</span><span class="o">/</span><span class="n">md</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span>
-            <span class="k">return</span> <span class="n">lim_radius</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">radius_unit</span><span class="p">,</span> <span class="n">equivalencies</span><span class="o">=</span><span class="n">units</span><span class="o">.</span><span class="n">equivalencies</span><span class="o">.</span><span class="n">dimensionless_angles</span><span class="p">())</span></div>
+            <span class="k">return</span> <span class="n">lim_radius</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">radius_unit</span><span class="p">,</span>
+                                <span class="n">equivalencies</span><span class="o">=</span><span class="n">units</span><span class="o">.</span><span class="n">equivalencies</span><span class="o">.</span><span class="n">dimensionless_angles</span><span class="p">())</span></div>
 
 
 
@@ -667,7 +704,7 @@
 <span class="sd">            x : Known signature of the signal of interest.</span>
 <span class="sd">        </span>
 <span class="sd">        Returns:</span>
-<span class="sd">            Te : y.T.dot(x) where y is the whitened signal recorded</span>
+<span class="sd">            Tnp : y.T.dot(x) where y is the whitened signal recorded</span>
 <span class="sd">            and x is the target .</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="p">,</span> <span class="s2">&quot;ni_kiout&quot;</span><span class="p">):</span>
@@ -731,7 +768,34 @@
                     <span class="n">distance</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">radius_unit</span><span class="o">=</span><span class="n">units</span><span class="o">.</span><span class="n">Rjup</span><span class="p">,</span>
                     <span class="n">md</span><span class="o">=</span><span class="n">np</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Untested</span>
+<span class="sd">            Computes a sensitivity of the observation to point source(s) located</span>
+<span class="sd">        at the given coordinates, based on the Neyman-Pearson test defined in</span>
+<span class="sd">        Ceau et al. 2019. This is a idealized test that represents the</span>
+<span class="sd">        theoretical limit if we perfectly know the signature of interest.</span>
+<span class="sd">        The spectrum of the source is a blackbody spectrum of fixed temperature.</span>
+<span class="sd">        The sensitivity is converted to a sphere diameter.</span>
+
+<span class="sd">        Args: </span>
+<span class="sd">            alphas        : [rad] The coordinate matched to X in the array geometry</span>
+<span class="sd">            betas         : [rad] The coordinate matched to Y in the array geometry</span>
+<span class="sd">            temperature   : [K] The temperature of the hypothetical source</span>
+<span class="sd">            pfa           : (0.046) False alarm rate (p-value) for signficance</span>
+<span class="sd">            pdet          : (0.9) Detection probability.</span>
+<span class="sd">            distance      : (distance Quantity) Optional. The distance to the system.</span>
+<span class="sd">                            If provided, used to translate the solid angle limit to</span>
+<span class="sd">                            to a sphere radius limit.</span>
+<span class="sd">            radius_unit   : (length Unit) Optional. The unit to express the</span>
+<span class="sd">                            radius limit. Default : Rjup</span>
+<span class="sd">            kernels       : Bool (True) Whether to use the K matrix to work</span>
+<span class="sd">                            in differential outputs</span>
+<span class="sd">            pfa           : float The false-alarm rate (p-value) to consider</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            lim_radius : (astropy.Quantity) An estimate of the sensitivity limit</span>
+<span class="sd">                            of the observation. If distance is not providede, limit</span>
+<span class="sd">                            is the solid angle of the source seen from the observer.</span>
+<span class="sd">                            If a distance is provided, the limit is converted to the</span>
+<span class="sd">                            radius of a sphere at this distance</span>
 <span class="sd">        </span>
 <span class="sd">        .. code-block:: python</span>
 
@@ -784,6 +848,356 @@
             <span class="k">return</span> <span class="n">lim_radius</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">radius_unit</span><span class="p">,</span> <span class="n">equivalencies</span><span class="o">=</span><span class="n">units</span><span class="o">.</span><span class="n">equivalencies</span><span class="o">.</span><span class="n">dimensionless_angles</span><span class="p">())</span></div>
 </div>
 
+
+<span class="n">BackendLike</span> <span class="o">=</span> <span class="n">Union</span><span class="p">[</span><span class="n">be</span><span class="o">.</span><span class="n">NI_Backend</span><span class="p">,</span> <span class="n">Post</span><span class="p">]</span>
+
+<div class="viewcode-block" id="Converted_BB">
+<a class="viewcode-back" href="../../../autoapi/nifits/extra/index.html#nifits.extra.extra.Converted_BB">[docs]</a>
+<span class="k">class</span> <span class="nc">Converted_BB</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">temperature</span><span class="p">,</span> <span class="n">oi_wavelength</span><span class="p">,</span> <span class="n">solid_angle</span><span class="p">,</span>
+                    <span class="n">iout_unit</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">blackbody</span> <span class="o">=</span> <span class="n">BB</span><span class="p">(</span><span class="n">temperature</span><span class="p">[:,</span><span class="kc">None</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">oi_wavelength</span> <span class="o">=</span> <span class="n">oi_wavelength</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">iout_unit</span> <span class="o">=</span> <span class="n">iout_unit</span>
+    <span class="k">def</span> <span class="nf">set_temperature</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">temperature</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">blackbody</span> <span class="o">=</span> <span class="n">BB</span><span class="p">(</span><span class="n">temperature</span><span class="p">[:,</span><span class="kc">None</span><span class="p">])</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">temperature</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">bb</span><span class="o">.</span><span class="n">temperature</span>
+
+<div class="viewcode-block" id="Converted_BB.set_temperature">
+<a class="viewcode-back" href="../../../autoapi/nifits/extra/index.html#nifits.extra.extra.Converted_BB.set_temperature">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_temperature</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">temperature</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bb</span><span class="o">.</span><span class="n">temperature</span> <span class="o">=</span> <span class="n">temperature</span></div>
+
+
+<div class="viewcode-block" id="Converted_BB.get_blackbody_native">
+<a class="viewcode-back" href="../../../autoapi/nifits/extra/index.html#nifits.extra.extra.Converted_BB.get_blackbody_native">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_blackbody_native</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            blackbody_spectrum: in units consistent with the native</span>
+<span class="sd">                units of the file $[a.sr^{-1}.m^{-2}]$ (where [a] is the</span>
+<span class="sd">        flux unit used in the file, typically [ph/s]).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Typically given there in erg/Hz/s/sr/cm^2</span>
+        <span class="n">myspectral_density</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">blackbody</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">oi_wavelength</span><span class="o">.</span><span class="n">lambs</span><span class="p">[</span><span class="kc">None</span><span class="p">,:]</span> <span class="o">*</span> <span class="n">units</span><span class="o">.</span><span class="n">m</span><span class="p">)</span>
+        <span class="c1"># Photon_energies in J/ph</span>
+        <span class="n">photon_energies</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">oi_wavelength</span><span class="o">.</span><span class="n">lambs</span><span class="o">*</span><span class="n">units</span><span class="o">.</span><span class="n">m</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span>
+                            <span class="n">units</span><span class="o">.</span><span class="n">J</span><span class="p">,</span> <span class="n">equivalencies</span><span class="o">=</span><span class="n">units</span><span class="o">.</span><span class="n">equivalencies</span><span class="o">.</span><span class="n">spectral</span><span class="p">())</span>\
+                                <span class="o">/</span> <span class="n">units</span><span class="o">.</span><span class="n">photon</span>
+        <span class="n">dnus</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">oi_wavelength</span><span class="o">.</span><span class="n">dnus</span> <span class="o">*</span> <span class="p">(</span><span class="n">units</span><span class="o">.</span><span class="n">Hz</span><span class="p">)</span>
+        <span class="c1"># print((myspectral_density * dnus / photon_energies).unit)</span>
+        <span class="n">blackbody_spectrum</span> <span class="o">=</span> <span class="p">(</span><span class="n">myspectral_density</span> <span class="o">*</span> <span class="n">dnus</span> <span class="o">/</span> <span class="n">photon_energies</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span>
+                                 <span class="bp">self</span><span class="o">.</span><span class="n">iout_unit</span> <span class="o">/</span> <span class="n">units</span><span class="o">.</span><span class="n">sr</span> <span class="o">/</span> <span class="p">(</span><span class="n">units</span><span class="o">.</span><span class="n">m</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">blackbody_spectrum</span></div>
+
+
+<div class="viewcode-block" id="Converted_BB.converted_blackbody">
+<a class="viewcode-back" href="../../../autoapi/nifits/extra/index.html#nifits.extra.extra.Converted_BB.converted_blackbody">[docs]</a>
+    <span class="k">def</span> <span class="nf">converted_blackbody</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">raw_bb</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">iout_unit</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_blackbody_native</span><span class="p">()</span>
+        <span class="k">return</span>  <span class="n">raw_bb</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">raw_bb</span><span class="o">.</span><span class="n">unit</span><span class="o">.</span><span class="n">to_system</span><span class="p">(</span><span class="n">units</span><span class="o">.</span><span class="n">si</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span></div>
+</div>
+
+
+<span class="kn">from</span> <span class="nn">nifits.backend</span> <span class="kn">import</span> <span class="n">PointCollection</span>
+<span class="kn">from</span> <span class="nn">nifits.io.oifits</span> <span class="kn">import</span> <span class="n">OI_WAVELENGTH</span>
+
+<div class="viewcode-block" id="BaseSource">
+<a class="viewcode-back" href="../../../autoapi/nifits/extra/index.html#nifits.extra.extra.BaseSource">[docs]</a>
+<span class="k">class</span> <span class="nc">BaseSource</span><span class="p">(</span><span class="n">PointCollection</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">samples</span><span class="p">:</span> <span class="n">PointCollection</span><span class="p">,</span>
+                    <span class="n">flux_density</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">aa</span> <span class="o">=</span> <span class="n">samples</span><span class="o">.</span><span class="n">aa</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bb</span> <span class="o">=</span> <span class="n">samples</span><span class="o">.</span><span class="n">bb</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ss</span> <span class="o">=</span> <span class="n">flux_density</span> <span class="c1"># Units: a/m^2 (where a is the unit of output used)</span></div>
+
+
+<div class="viewcode-block" id="FixedSource">
+<a class="viewcode-back" href="../../../autoapi/nifits/extra/index.html#nifits.extra.extra.FixedSource">[docs]</a>
+<span class="k">class</span> <span class="nc">FixedSource</span><span class="p">(</span><span class="n">PointCollection</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">samples</span><span class="p">:</span> <span class="n">PointCollection</span><span class="p">,</span>
+                    <span class="n">temperature</span><span class="p">:</span> <span class="n">units</span><span class="o">.</span><span class="n">quantity</span><span class="p">,</span>
+                    <span class="n">sp_dens</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+                    <span class="n">solid_angle</span><span class="p">:</span> <span class="n">units</span><span class="o">.</span><span class="n">quantity</span><span class="p">,</span>
+                    <span class="n">oi_wavelength</span><span class="p">:</span> <span class="n">OI_WAVELENGTH</span><span class="p">,</span>
+                    <span class="n">iout_unit</span><span class="p">:</span> <span class="n">units</span><span class="o">.</span><span class="n">Unit</span><span class="p">,</span>
+                    <span class="n">md</span><span class="o">=</span><span class="n">np</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">aa</span> <span class="o">=</span> <span class="n">samples</span><span class="o">.</span><span class="n">aa</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bb</span> <span class="o">=</span> <span class="n">samples</span><span class="o">.</span><span class="n">bb</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">solid_angle</span> <span class="o">=</span> <span class="n">solid_angle</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sp_dens</span> <span class="o">=</span> <span class="n">sp_dens</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ds_bb</span> <span class="o">=</span> <span class="n">Converted_BB</span><span class="p">(</span><span class="n">temperature</span><span class="p">,</span>
+                                <span class="n">oi_wavelength</span><span class="o">=</span><span class="n">oi_wavelength</span><span class="p">,</span>
+                                <span class="n">solid_angle</span><span class="o">=</span><span class="n">solid_angle</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">aa</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                                <span class="n">iout_unit</span><span class="o">=</span><span class="n">iout_unit</span><span class="p">)</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">ds_sr</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="mi">1</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">aa</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">solid_angle</span>
+<div class="viewcode-block" id="FixedSource.get_flux_density">
+<a class="viewcode-back" href="../../../autoapi/nifits/extra/index.html#nifits.extra.extra.FixedSource.get_flux_density">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_flux_density</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Returns the (spatial) flux density in [a/m^2] where</span>
+<span class="sd">        a is the unit of flux collected at the outputs (ni_iout.unit)</span>
+
+<span class="sd">        returns:</span>
+<span class="sd">            spectrum : an array with dimension (n_wl, n_points)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">spectrum</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ds_sr</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">ds_bb</span><span class="o">.</span><span class="n">converted_blackbody</span><span class="p">()</span><span class="o">.</span><span class="n">T</span>\
+                        <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">aa</span><span class="p">)[</span><span class="kc">None</span><span class="p">,:]</span>
+        <span class="k">return</span> <span class="n">spectrum</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="n">units</span><span class="o">.</span><span class="n">m</span><span class="o">**</span><span class="mi">2</span><span class="p">),</span> <span class="n">equivalencies</span><span class="o">=</span><span class="n">units</span><span class="o">.</span><span class="n">dimensionless_angles</span><span class="p">())</span></div>
+
+    
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">ss</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># return self.get_spectrum()</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_flux_density</span><span class="p">()</span>
+
+
+<div class="viewcode-block" id="FixedSource.warm_sphere_opaque">
+<a class="viewcode-back" href="../../../autoapi/nifits/extra/index.html#nifits.extra.extra.FixedSource.warm_sphere_opaque">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">warm_sphere_opaque</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">distance</span><span class="p">,</span> <span class="n">radius</span><span class="p">,</span>
+                    <span class="n">temperature</span><span class="p">,</span> <span class="n">location</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span>
+                    <span class="n">oi_wavelength</span><span class="p">,</span> <span class="n">iout_unit</span><span class="p">,</span> <span class="n">md</span><span class="o">=</span><span class="n">np</span><span class="p">):</span>
+        <span class="n">radius_mas</span> <span class="o">=</span> <span class="p">((</span><span class="n">radius</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">units</span><span class="o">.</span><span class="n">pc</span><span class="p">)</span><span class="o">/</span><span class="n">distance</span><span class="p">)</span><span class="o">*</span><span class="n">units</span><span class="o">.</span><span class="n">rad</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">units</span><span class="o">.</span><span class="n">mas</span><span class="p">)</span>
+        <span class="n">solid_angle_mas</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">radius_mas</span><span class="o">**</span><span class="mi">2</span>
+        <span class="n">pc</span> <span class="o">=</span> <span class="n">PointCollection</span><span class="o">.</span><span class="n">from_uniform_disk</span><span class="p">(</span><span class="n">radius</span><span class="o">=</span><span class="n">radius_mas</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+                                                <span class="n">n</span><span class="o">=</span><span class="n">n</span><span class="p">,</span>
+                                                <span class="n">offset</span><span class="o">=</span><span class="n">location</span><span class="p">,</span>
+                                                <span class="n">md</span><span class="o">=</span><span class="n">md</span><span class="p">)</span>
+        <span class="n">sp_dens</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">*</span> <span class="n">md</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">pc</span><span class="o">.</span><span class="n">aa</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">samples</span><span class="o">=</span><span class="n">pc</span><span class="p">,</span>
+                    <span class="n">temperature</span><span class="o">=</span><span class="n">md</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">temperature</span><span class="o">.</span><span class="n">value</span><span class="p">])</span><span class="o">*</span><span class="n">temperature</span><span class="o">.</span><span class="n">unit</span><span class="p">,</span>
+                    <span class="n">sp_dens</span><span class="o">=</span><span class="n">sp_dens</span><span class="p">,</span>
+                    <span class="n">solid_angle</span><span class="o">=</span><span class="n">solid_angle_mas</span><span class="p">,</span>
+                    <span class="n">oi_wavelength</span><span class="o">=</span><span class="n">oi_wavelength</span><span class="p">,</span>
+                    <span class="n">iout_unit</span><span class="o">=</span><span class="n">iout_unit</span><span class="p">,</span>
+                    <span class="n">md</span><span class="o">=</span><span class="n">md</span>
+                    <span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="SceneFitter">
+<a class="viewcode-back" href="../../../autoapi/nifits/extra/index.html#nifits.extra.extra.SceneFitter">[docs]</a>
+<span class="k">class</span> <span class="nc">SceneFitter</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">backend</span><span class="p">:</span> <span class="n">Post</span><span class="p">,</span> <span class="n">nuisance</span><span class="p">,</span> <span class="n">interest</span><span class="p">,</span> <span class="n">kernels</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">backend</span> <span class="o">=</span> <span class="n">backend</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">nuisance</span> <span class="o">=</span> <span class="n">nuisance</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">interest</span> <span class="o">=</span> <span class="n">interest</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">update_function</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">kernels</span> <span class="o">=</span> <span class="n">kernels</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">backend</span><span class="p">,</span> <span class="n">Post</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">whiten</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">backend</span><span class="p">,</span> <span class="s2">&quot;Ws&quot;</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">backend</span><span class="o">.</span><span class="n">create_whitening_matrix</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">get_signal</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_signal</span>
+                <span class="c1"># Not whiten since we will need to multiply by spectrum first</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">whiten</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">get_signal</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_signal</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">injecting</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">original_iout</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">original_kiout</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">update_nuisance</span><span class="p">()</span>
+
+<div class="viewcode-block" id="SceneFitter.update_nuisance">
+<a class="viewcode-back" href="../../../autoapi/nifits/extra/index.html#nifits.extra.extra.SceneFitter.update_nuisance">[docs]</a>
+    <span class="k">def</span> <span class="nf">update_nuisance</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">nuisance_flux</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_total_group</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nuisance</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="SceneFitter.inject_object">
+<a class="viewcode-back" href="../../../autoapi/nifits/extra/index.html#nifits.extra.extra.SceneFitter.inject_object">[docs]</a>
+    <span class="k">def</span> <span class="nf">inject_object</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">asource</span><span class="p">:</span> <span class="n">BaseSource</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">injecting</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">original_iout</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> <span class="c1"># only backup if no backup exists</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">original_iout</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">backend</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_iout</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">backend</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_kiout</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">original_kiout</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">backend</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_kiout</span>
+        <span class="n">z0</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">backend</span><span class="o">.</span><span class="n">get_all_outs</span><span class="p">(</span><span class="o">*</span><span class="n">asource</span><span class="o">.</span><span class="n">coords_rad</span><span class="p">,</span> <span class="n">kernels</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">extra_flux</span> <span class="o">=</span> <span class="n">z0</span> <span class="o">*</span> <span class="n">asource</span><span class="o">.</span><span class="n">ss</span><span class="p">[</span><span class="kc">None</span><span class="p">,:,</span><span class="kc">None</span><span class="p">,:]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">backend</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_iout</span><span class="o">.</span><span class="n">iout</span> <span class="o">+=</span> <span class="n">extra_flux</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">backend</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_kiout</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">z0</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">backend</span><span class="o">.</span><span class="n">get_all_outs</span><span class="p">(</span><span class="o">*</span><span class="n">asource</span><span class="o">.</span><span class="n">coords_rad</span><span class="p">,</span> <span class="n">kernels</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">extra_flux</span> <span class="o">=</span> <span class="n">z0</span> <span class="o">*</span> <span class="n">asource</span><span class="o">.</span><span class="n">ss</span><span class="p">[</span><span class="kc">None</span><span class="p">,:,</span><span class="kc">None</span><span class="p">,:]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">backend</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_kiout</span><span class="o">.</span><span class="n">iout</span> <span class="o">+=</span> <span class="n">extra_flux</span></div>
+
+
+<div class="viewcode-block" id="SceneFitter.clear_injection">
+<a class="viewcode-back" href="../../../autoapi/nifits/extra/index.html#nifits.extra.extra.SceneFitter.clear_injection">[docs]</a>
+    <span class="k">def</span> <span class="nf">clear_injection</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">injecting</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">backend</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_iout</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">original_iout</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">backend</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_kiout</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">backend</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_kiout</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">original_kiout</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">pass</span></div>
+
+
+<div class="viewcode-block" id="SceneFitter.create_maps">
+<a class="viewcode-back" href="../../../autoapi/nifits/extra/index.html#nifits.extra.extra.SceneFitter.create_maps">[docs]</a>
+    <span class="k">def</span> <span class="nf">create_maps</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">asource</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">interest</span><span class="p">:</span>
+            <span class="n">asource</span><span class="o">.</span><span class="n">z</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_signal</span><span class="p">(</span><span class="o">*</span><span class="n">asource</span><span class="o">.</span><span class="n">coords_rad</span><span class="p">,</span> <span class="n">kernels</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">kernels</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">asource</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">nuisance</span><span class="p">:</span>
+            <span class="n">asource</span><span class="o">.</span><span class="n">z</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_signal</span><span class="p">(</span><span class="o">*</span><span class="n">asource</span><span class="o">.</span><span class="n">coords_rad</span><span class="p">,</span> <span class="n">kernels</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">kernels</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="SceneFitter.get_source_output">
+<a class="viewcode-back" href="../../../autoapi/nifits/extra/index.html#nifits.extra.extra.SceneFitter.get_source_output">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_source_output</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">asource</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Updates the transmission map, and computes and returns the total flux.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">asource</span><span class="o">.</span><span class="n">z</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_signal</span><span class="p">(</span><span class="o">*</span><span class="n">asource</span><span class="o">.</span><span class="n">coords_rad</span><span class="p">,</span> <span class="n">kernels</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">kernels</span><span class="p">)</span>
+        <span class="n">myflux</span> <span class="o">=</span> <span class="n">asource</span><span class="o">.</span><span class="n">z</span> <span class="o">*</span> <span class="n">asource</span><span class="o">.</span><span class="n">ss</span><span class="p">[</span><span class="kc">None</span><span class="p">,:,</span><span class="kc">None</span><span class="p">,:]</span>
+        <span class="k">return</span> <span class="n">myflux</span></div>
+
+
+<div class="viewcode-block" id="SceneFitter.get_source_output_fast">
+<a class="viewcode-back" href="../../../autoapi/nifits/extra/index.html#nifits.extra.extra.SceneFitter.get_source_output_fast">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_source_output_fast</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">asource</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Computes and returns the total flux without recomputing the transmission map</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># We use precomputed map</span>
+        <span class="n">raw_flux</span> <span class="o">=</span> <span class="n">asource</span><span class="o">.</span><span class="n">z</span> <span class="o">*</span> <span class="n">asource</span><span class="o">.</span><span class="n">ss</span><span class="p">[</span><span class="kc">None</span><span class="p">,:,</span><span class="kc">None</span><span class="p">,:]</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">whiten</span><span class="p">:</span>
+            <span class="n">myflux</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">backend</span><span class="o">.</span><span class="n">whiten_signal</span><span class="p">(</span><span class="n">raw_flux</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">myflux</span> <span class="o">=</span> <span class="n">raw_flux</span>
+        <span class="k">return</span> <span class="n">myflux</span></div>
+
+
+<div class="viewcode-block" id="SceneFitter.get_total_group">
+<a class="viewcode-back" href="../../../autoapi/nifits/extra/index.html#nifits.extra.extra.SceneFitter.get_total_group">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_total_group</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sourcebank</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Updates the transmission map and computes and returns</span>
+<span class="sd">        the flux of a given source bank</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">interest_flux</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">asource</span> <span class="ow">in</span> <span class="n">sourcebank</span><span class="p">:</span>
+            <span class="n">interest_flux</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_source_output</span><span class="p">(</span><span class="n">asource</span><span class="p">))</span>
+        <span class="n">interest_flux</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">interest_flux</span><span class="p">)</span>
+        <span class="n">interest_flux</span> <span class="o">=</span> <span class="n">interest_flux</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">interest_flux</span></div>
+
+<div class="viewcode-block" id="SceneFitter.get_total_group_fast">
+<a class="viewcode-back" href="../../../autoapi/nifits/extra/index.html#nifits.extra.extra.SceneFitter.get_total_group_fast">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_total_group_fast</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sourcebank</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Computes and returns the flux of a given source bank.</span>
+<span class="sd">        The transmission map is not updated.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">interest_flux</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">asource</span> <span class="ow">in</span> <span class="n">sourcebank</span><span class="p">:</span>
+            <span class="n">interest_flux</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_source_output_fast</span><span class="p">(</span><span class="n">asource</span><span class="p">))</span>
+        <span class="n">interest_flux</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">interest_flux</span><span class="p">)</span>
+        <span class="n">interest_flux</span> <span class="o">=</span> <span class="n">interest_flux</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">interest_flux</span></div>
+
+    
+<div class="viewcode-block" id="SceneFitter.get_total_fast">
+<a class="viewcode-back" href="../../../autoapi/nifits/extra/index.html#nifits.extra.extra.SceneFitter.get_total_fast">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_total_fast</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dosum</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create_maps</span><span class="p">()</span>
+        <span class="n">interest_flux</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_total_fast</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">interest</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">dosum</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">interest_flux</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">nuisance_flux</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">interest_flux</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">nuisance_flux</span></div>
+
+
+<div class="viewcode-block" id="SceneFitter.get_total_output">
+<a class="viewcode-back" href="../../../autoapi/nifits/extra/index.html#nifits.extra.extra.SceneFitter.get_total_output">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_total_output</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dosum</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create_maps</span><span class="p">()</span>
+        <span class="n">interest_flux</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_total_group</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">interest</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">dosum</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">interest_flux</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">nuisance_flux</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">interest_flux</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">nuisance_flux</span></div>
+
+
+<div class="viewcode-block" id="SceneFitter.create_star_1p">
+<a class="viewcode-back" href="../../../autoapi/nifits/extra/index.html#nifits.extra.extra.SceneFitter.create_star_1p">[docs]</a>
+    <span class="k">def</span> <span class="nf">create_star_1p</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">backend</span><span class="p">,</span>
+                            <span class="n">distance</span><span class="p">,</span>
+                            <span class="n">star_rad</span><span class="p">,</span>
+                            <span class="n">star_temp</span><span class="p">,</span>
+                            <span class="n">star_nb_pts</span><span class="p">,</span>
+                            <span class="n">planet_radius</span><span class="p">,</span>
+                            <span class="n">planet_temp</span><span class="p">,</span>
+                            <span class="n">planet_pos</span><span class="p">,</span>
+                            <span class="n">kernel</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="n">aplanet</span> <span class="o">=</span> <span class="n">FixedSource</span><span class="o">.</span><span class="n">warm_sphere_opaquee_opaque</span><span class="p">(</span><span class="n">distance</span><span class="o">=</span><span class="n">distance</span><span class="p">,</span>
+                                    <span class="n">radius</span><span class="o">=</span><span class="n">planet_radius</span><span class="p">,</span>
+                                    <span class="n">temperature</span><span class="o">=</span><span class="n">planet_temp</span><span class="p">,</span>
+                                    <span class="n">location</span><span class="o">=</span><span class="n">planet_pos</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                                    <span class="n">oi_wavelength</span><span class="o">=</span><span class="n">backend</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">oi_wavelength</span><span class="p">,</span>
+                                    <span class="n">iout_unit</span><span class="o">=</span><span class="n">backend</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_iout</span><span class="o">.</span><span class="n">unit</span><span class="p">,</span>
+                                    <span class="p">)</span>
+        <span class="n">astar</span> <span class="o">=</span> <span class="n">FixedSource</span><span class="o">.</span><span class="n">warm_sphere_opaque</span><span class="p">(</span><span class="n">distance</span><span class="o">=</span><span class="n">distance</span><span class="p">,</span>
+                                    <span class="n">radius</span><span class="o">=</span><span class="n">star_rad</span><span class="p">,</span>
+                                    <span class="n">temperature</span><span class="o">=</span><span class="n">star_temp</span><span class="p">,</span>
+                                    <span class="n">location</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span>
+                                    <span class="n">n</span><span class="o">=</span><span class="n">star_nb_pts</span><span class="p">,</span>
+                                    <span class="n">oi_wavelength</span><span class="o">=</span><span class="n">backend</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">oi_wavelength</span><span class="p">,</span>
+                                    <span class="n">iout_unit</span><span class="o">=</span><span class="n">backend</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_iout</span><span class="o">.</span><span class="n">unit</span><span class="p">,</span>
+                                    <span class="p">)</span>
+        <span class="n">myobj</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">(</span><span class="n">backend</span><span class="o">=</span><span class="n">backend</span><span class="p">,</span> <span class="n">nuisance</span><span class="o">=</span><span class="p">[</span><span class="n">astar</span><span class="p">,],</span>
+                <span class="n">interest</span><span class="o">=</span><span class="p">[</span><span class="n">aplanet</span><span class="p">,],</span> <span class="n">kernel</span><span class="o">=</span><span class="n">kernel</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">myobj</span></div>
+
+
+<div class="viewcode-block" id="SceneFitter.update_single_planet">
+<a class="viewcode-back" href="../../../autoapi/nifits/extra/index.html#nifits.extra.extra.SceneFitter.update_single_planet">[docs]</a>
+    <span class="k">def</span> <span class="nf">update_single_planet</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+        <span class="c1"># refresh planet map</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="SceneFitter.update_dual_planet">
+<a class="viewcode-back" href="../../../autoapi/nifits/extra/index.html#nifits.extra.extra.SceneFitter.update_dual_planet">[docs]</a>
+    <span class="k">def</span> <span class="nf">update_dual_planet</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+        <span class="c1"># refresh planets map</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">aplanet</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">interest</span><span class="p">):</span>
+            <span class="n">aplanet</span><span class="o">.</span><span class="n">ds_bb</span><span class="o">.</span><span class="n">blackbody</span><span class="o">.</span><span class="n">temperature</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;Tp</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value</span>
+            <span class="n">cpform</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;rhop</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">params</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;thetap</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+            <span class="n">aplanet</span><span class="o">.</span><span class="n">aa</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">cpform</span><span class="o">.</span><span class="n">real</span>
+            <span class="n">aplanet</span><span class="o">.</span><span class="n">bb</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">cpform</span><span class="o">.</span><span class="n">imag</span>
+            <span class="n">aplanet</span><span class="o">.</span><span class="n">z</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_signal</span><span class="p">(</span><span class="o">*</span><span class="n">aplanet</span><span class="o">.</span><span class="n">coords_rad</span><span class="p">,</span> <span class="n">kernels</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">kernels</span><span class="p">)</span></div>
+
+        
+<div class="viewcode-block" id="SceneFitter.update_ring_density">
+<a class="viewcode-back" href="../../../autoapi/nifits/extra/index.html#nifits.extra.extra.SceneFitter.update_ring_density">[docs]</a>
+    <span class="k">def</span> <span class="nf">update_ring_density</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="SceneFitter.update_star_rad_disk_density">
+<a class="viewcode-back" href="../../../autoapi/nifits/extra/index.html#nifits.extra.extra.SceneFitter.update_star_rad_disk_density">[docs]</a>
+    <span class="k">def</span> <span class="nf">update_star_rad_disk_density</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="SceneFitter._get_signal">
+<a class="viewcode-back" href="../../../autoapi/nifits/extra/index.html#nifits.extra.extra.SceneFitter._get_signal">[docs]</a>
+    <span class="k">def</span> <span class="nf">_get_signal</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">backend</span><span class="o">.</span><span class="n">get_all_outs</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">,)</span></div>
+
+    <span class="c1"># def _get_whitened_signal(self,*args, **kwargs):</span>
+    <span class="c1">#     return self.backend.w_get_all_outs(*args, **kwargs,)</span>
+<div class="viewcode-block" id="SceneFitter.get_residual">
+<a class="viewcode-back" href="../../../autoapi/nifits/extra/index.html#nifits.extra.extra.SceneFitter.get_residual">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_residual</span><span class="p">(</span><span class="bp">self</span><span class="p">,):</span>
+        <span class="k">pass</span></div>
+</div>
+
+        
 
 
 <span class="n">massq2sr</span> <span class="o">=</span> <span class="p">(</span><span class="n">units</span><span class="o">.</span><span class="n">mas</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">units</span><span class="o">.</span><span class="n">sr</span><span class="p">)</span>
@@ -933,7 +1347,7 @@
       
     </aside>
   </div>
-</div><script src="../../../_static/documentation_options.js?v=1fd71caa"></script>
+</div><script src="../../../_static/documentation_options.js?v=53b53b71"></script>
     <script src="../../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/scripts/furo.js?v=5fa4622c"></script>

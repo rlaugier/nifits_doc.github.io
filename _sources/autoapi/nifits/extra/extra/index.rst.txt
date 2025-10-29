@@ -40,6 +40,10 @@ Classes
 .. autoapisummary::
 
    nifits.extra.extra.Post
+   nifits.extra.extra.Converted_BB
+   nifits.extra.extra.BaseSource
+   nifits.extra.extra.FixedSource
+   nifits.extra.extra.SceneFitter
 
 
 
@@ -62,6 +66,7 @@ Attributes
 
 .. autoapisummary::
 
+   nifits.extra.extra.BackendLike
    nifits.extra.extra.massq2sr
    nifits.extra.extra.sr2massq
 
@@ -168,7 +173,9 @@ Attributes
 
    .. py:method:: get_blackbody_collected(alphas, betas, kernels=True, whiten=True, to_si=True)
 
-          Obtain the output spectra of a blackbody at the given blackbody temperature
+          Obtain the output spectra of a blackbody at the given blackbody
+      temperature.
+
       :param alphas: ArrayLike: Relative position in rad
       :param betas: ArrayLike: Relative position in rad
       :param kernels: Bool (True) Whether to work in the kernel postprocessing space
@@ -186,7 +193,7 @@ Attributes
       :rtype: Te
 
 
-   .. py:method:: get_pdet_te(alphas, betas, solid_angle, kernels=True, pfa=0.046, whiten=True, temperature=None)
+   .. py:method:: get_pdet_te(alphas, betas, solid_angle, kernels=True, pfa=0.046, temperature=None)
 
           Computes a detection probability of a point-source at a given
       position based on the energy detector defined in Ceau et al. 2019.
@@ -198,7 +205,6 @@ Attributes
       :param beta: [rad] The coordinate matched to Y in the array geometry
       :param solid_angle: [sr] Solid angle of the source
       :param temperature: [K] The temperature of the blackbody
-      :param whiten: Bool (True) Whether to use the whitening transform
       :param kernels: Bool (True) Whether to use the K matrix to work in differential outputs
       :param pfa: float The false-alarm rate (p-value) to consider
 
@@ -212,6 +218,40 @@ Attributes
 
 
    .. py:method:: get_sensitivity_te(alphas, betas, kernels=True, temperature=None, pfa=0.046, pdet=0.9, distance=None, radius_unit=units.Rjup, md=np)
+
+          Computes a sensitivity of the observation to point source(s) located
+      at the given coordinates, based on the energy detector test defined in
+      Ceau et al. 2019. This is a simple test of deviation from the expected
+      Gaussian distribution, entirely agnostic to the family of signal of interest.
+      The spectrum of the source is a blackbody spectrum of fixed temperature.
+      The sensitivity is converted to a sphere diameter
+
+      :param alpha: [rad] The coordinate matched to X in the array geometry
+      :param beta: [rad] The coordinate matched to Y in the array geometry
+      :param temperature: [K] The temperature of the hypothetical source
+      :param pfa: (0.046) False alarm rate (p-value) for signficance
+      :param pdet: (0.9) Detection probability.
+      :param distance: (distance Quantity) Optional. The distance to the system.
+                       If provided, used to translate the solid angle limit to
+                       to a sphere radius limit.
+      :param radius_unit: (length Unit) Optional. The unit to express the
+                          radius limit.
+      :param kernels: Bool (True) Whether to use the K matrix to work in differential outputs
+      :param pfa: float The false-alarm rate (p-value) to consider
+
+      :returns:
+
+                (astropy.Quantity) An estimate of the sensitivity limit
+                                of the observation. If distance is not providede, limit
+                                is the solid angle of the source seen from the observer.
+                                If a distance is provided, the limit is converted to the
+                                radius of a sphere at this distance
+      :rtype: lim_radius
+
+      pfa:
+      * 1 sigma: 0.32
+      * 2 sigma: 0.046
+      * 3 sigma: 0.0027
 
       .. code-block:: python
 
@@ -242,7 +282,7 @@ Attributes
 
       :returns: y.T.dot(x) where y is the whitened signal recorded
                 and x is the target .
-      :rtype: Te
+      :rtype: Tnp
 
 
    .. py:method:: get_pdet_tnp(alphas, betas, solid_angle, kernels=True, pfa=0.046, whiten=True, temperature=None)
@@ -271,7 +311,35 @@ Attributes
 
    .. py:method:: get_sensitivity_tnp(alphas, betas, kernels=True, temperature=None, pfa=0.046, pdet=0.9, distance=None, radius_unit=units.Rjup, md=np)
 
-      Untested
+          Computes a sensitivity of the observation to point source(s) located
+      at the given coordinates, based on the Neyman-Pearson test defined in
+      Ceau et al. 2019. This is a idealized test that represents the
+      theoretical limit if we perfectly know the signature of interest.
+      The spectrum of the source is a blackbody spectrum of fixed temperature.
+      The sensitivity is converted to a sphere diameter.
+
+      :param alphas: [rad] The coordinate matched to X in the array geometry
+      :param betas: [rad] The coordinate matched to Y in the array geometry
+      :param temperature: [K] The temperature of the hypothetical source
+      :param pfa: (0.046) False alarm rate (p-value) for signficance
+      :param pdet: (0.9) Detection probability.
+      :param distance: (distance Quantity) Optional. The distance to the system.
+                       If provided, used to translate the solid angle limit to
+                       to a sphere radius limit.
+      :param radius_unit: (length Unit) Optional. The unit to express the
+                          radius limit. Default : Rjup
+      :param kernels: Bool (True) Whether to use the K matrix to work
+                      in differential outputs
+      :param pfa: float The false-alarm rate (p-value) to consider
+
+      :returns:
+
+                (astropy.Quantity) An estimate of the sensitivity limit
+                                of the observation. If distance is not providede, limit
+                                is the solid angle of the source seen from the observer.
+                                If a distance is provided, the limit is converted to the
+                                radius of a sphere at this distance
+      :rtype: lim_radius
 
       .. code-block:: python
 
@@ -289,6 +357,195 @@ Attributes
           plt.plot(ys, v)
           plt.plot(u, xs)
           plt.show()
+
+
+
+.. py:data:: BackendLike
+
+   
+
+.. py:class:: Converted_BB(temperature, oi_wavelength, solid_angle, iout_unit=None)
+
+
+   Bases: :py:obj:`object`
+
+   .. py:property:: temperature
+
+
+   .. py:method:: set_temperature(temperature)
+
+
+   .. py:method:: set_temperature(temperature)
+
+
+   .. py:method:: get_blackbody_native()
+
+      :returns:
+
+                in units consistent with the native
+                    units of the file $[a.sr^{-1}.m^{-2}]$ (where [a] is the
+      :rtype: blackbody_spectrum
+
+      flux unit used in the file, typically [ph/s]).
+
+
+   .. py:method:: converted_blackbody()
+
+
+
+.. py:class:: BaseSource(samples: nifits.backend.PointCollection, flux_density: numpy.ndarray)
+
+
+   Bases: :py:obj:`nifits.backend.PointCollection`
+
+       A class to hold arrays of coordinates. Handy to compute
+   the transmission map on a large number of points.
+
+   **Units default to mas.**
+
+   :param aa: [unit (mas)] (ArrayLike) first coordinate flat array,
+              typically RA.
+   :param bb: [unit (mas)] (ArrayLike) second coordinate flat array,
+              typically Dec.
+
+   Constructors:
+       * ``from_uniform_disk``   :
+       * ``from_grid``           :
+       * ``from_centered_square``:
+       * ``from_segment``        :
+
+   Modificators:
+       * ``__add__``         : basically a concatenation
+       * ``transform``       : Linear transformation in 3D by a matrix
+
+   Handles:
+       * ``coords``         : The array values as first provided
+       * ``coords_rad``     : The array values, converted from
+         ``self.unit`` into radians.
+       * ``coords_quantity``: Return the values as a quantity.
+       * ``coords_radial``  : Returns the radial coordinates (rho,theta)
+       * ``extent``         : The [left, right, top, bottom] extent
+         (used for some plots).
+
+
+.. py:class:: FixedSource(samples: nifits.backend.PointCollection, temperature: astropy.units.quantity, sp_dens: numpy.ndarray, solid_angle: astropy.units.quantity, oi_wavelength: nifits.io.oifits.OI_WAVELENGTH, iout_unit: astropy.units.Unit, md=np)
+
+
+   Bases: :py:obj:`nifits.backend.PointCollection`
+
+       A class to hold arrays of coordinates. Handy to compute
+   the transmission map on a large number of points.
+
+   **Units default to mas.**
+
+   :param aa: [unit (mas)] (ArrayLike) first coordinate flat array,
+              typically RA.
+   :param bb: [unit (mas)] (ArrayLike) second coordinate flat array,
+              typically Dec.
+
+   Constructors:
+       * ``from_uniform_disk``   :
+       * ``from_grid``           :
+       * ``from_centered_square``:
+       * ``from_segment``        :
+
+   Modificators:
+       * ``__add__``         : basically a concatenation
+       * ``transform``       : Linear transformation in 3D by a matrix
+
+   Handles:
+       * ``coords``         : The array values as first provided
+       * ``coords_rad``     : The array values, converted from
+         ``self.unit`` into radians.
+       * ``coords_quantity``: Return the values as a quantity.
+       * ``coords_radial``  : Returns the radial coordinates (rho,theta)
+       * ``extent``         : The [left, right, top, bottom] extent
+         (used for some plots).
+
+   .. py:property:: ds_sr
+
+
+   .. py:property:: ss
+
+
+   .. py:method:: get_flux_density()
+
+          Returns the (spatial) flux density in [a/m^2] where
+      a is the unit of flux collected at the outputs (ni_iout.unit)
+
+      :returns: an array with dimension (n_wl, n_points)
+      :rtype: spectrum
+
+
+   .. py:method:: warm_sphere_opaque(distance, radius, temperature, location, n, oi_wavelength, iout_unit, md=np)
+      :classmethod:
+
+
+
+.. py:class:: SceneFitter(backend: Post, nuisance, interest, kernels=False)
+
+
+   Bases: :py:obj:`object`
+
+   .. py:method:: update_nuisance()
+
+
+   .. py:method:: inject_object(asource: BaseSource)
+
+
+   .. py:method:: clear_injection()
+
+
+   .. py:method:: create_maps()
+
+
+   .. py:method:: get_source_output(asource)
+
+      Updates the transmission map, and computes and returns the total flux.
+
+
+   .. py:method:: get_source_output_fast(asource)
+
+      Computes and returns the total flux without recomputing the transmission map
+
+
+   .. py:method:: get_total_group(sourcebank)
+
+          Updates the transmission map and computes and returns
+      the flux of a given source bank
+
+
+   .. py:method:: get_total_group_fast(sourcebank)
+
+          Computes and returns the flux of a given source bank.
+      The transmission map is not updated.
+
+
+   .. py:method:: get_total_fast(dosum=True)
+
+
+   .. py:method:: get_total_output(dosum=True)
+
+
+   .. py:method:: create_star_1p(backend, distance, star_rad, star_temp, star_nb_pts, planet_radius, planet_temp, planet_pos, kernel=True)
+
+
+   .. py:method:: update_single_planet(params)
+
+
+   .. py:method:: update_dual_planet(params)
+
+
+   .. py:method:: update_ring_density(params)
+
+
+   .. py:method:: update_star_rad_disk_density(params)
+
+
+   .. py:method:: _get_signal(*args, **kwargs)
+
+
+   .. py:method:: get_residual()
 
 
 
