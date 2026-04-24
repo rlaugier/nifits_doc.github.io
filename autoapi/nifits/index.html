@@ -6,7 +6,7 @@
 <link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" /><link rel="next" title="nifits.backend" href="backend/index.html" /><link rel="prev" title="API Reference" href="../index.html" />
 
     <!-- Generated with Sphinx 7.3.7 and Furo 2024.08.06 -->
-        <title>nifits - NIFITS 0.0.8 documentation</title>
+        <title>nifits - NIFITS 0.1.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=362ab14a" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=354aac6f" />
     <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=fd3f3429" />
@@ -168,7 +168,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../../index.html"><div class="brand">NIFITS 0.0.8 documentation</div></a>
+      <a href="../../index.html"><div class="brand">NIFITS 0.1.0 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -192,7 +192,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../../index.html">
   
   
-  <span class="sidebar-brand-text">NIFITS 0.0.8 documentation</span>
+  <span class="sidebar-brand-text">NIFITS 0.1.0 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="../../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -209,10 +209,12 @@
 </li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="extra/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">nifits.extra</span></code></a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of nifits.extra</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l4"><a class="reference internal" href="extra/extra/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">nifits.extra.extra</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="extra/promote/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">nifits.extra.promote</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="io/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">nifits.io</span></code></a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of nifits.io</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l4"><a class="reference internal" href="io/oifits/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">nifits.io.oifits</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="io/niio/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">nifits.io.niio</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="io/utils/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">nifits.io.utils</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -271,10 +273,12 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="extra/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">nifits.extra</span></code></a><ul>
 <li class="toctree-l2"><a class="reference internal" href="extra/extra/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">nifits.extra.extra</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="extra/promote/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">nifits.extra.promote</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="io/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">nifits.io</span></code></a><ul>
-<li class="toctree-l2"><a class="reference internal" href="io/oifits/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">nifits.io.oifits</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="io/niio/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">nifits.io.niio</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="io/utils/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">nifits.io.utils</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -282,16 +286,60 @@
 </section>
 <section id="package-contents">
 <h2>Package Contents<a class="headerlink" href="#package-contents" title="Link to this heading">¶</a></h2>
+<section id="functions">
+<h3>Functions<a class="headerlink" href="#functions" title="Link to this heading">¶</a></h3>
+<div class="table-wrapper autosummary longtable docutils container">
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nifits.__version_int__" title="nifits.__version_int__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__version_int__</span></code></a>()</p></td>
+<td><p>Returns the nifits standard version as a tuple</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#nifits.__standard_version_int__" title="nifits.__standard_version_int__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__standard_version_int__</span></code></a>()</p></td>
+<td><p>Returns the nifits standard version as a pair</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="attributes">
+<h3>Attributes<a class="headerlink" href="#attributes" title="Link to this heading">¶</a></h3>
+<div class="table-wrapper autosummary longtable docutils container">
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nifits.__version__" title="nifits.__version__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__version__</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#nifits.__standard_version__" title="nifits.__standard_version__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__standard_version__</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
 <dl class="py data">
 <dt class="sig sig-object py" id="nifits.__version__">
-<span class="sig-prename descclassname"><span class="pre">nifits.</span></span><span class="sig-name descname"><span class="pre">__version__</span></span><a class="headerlink" href="#nifits.__version__" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">nifits.</span></span><span class="sig-name descname"><span class="pre">__version__</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'0.1.0'</span></em><a class="headerlink" href="#nifits.__version__" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nifits.__version_int__">
+<span class="sig-prename descclassname"><span class="pre">nifits.</span></span><span class="sig-name descname"><span class="pre">__version_int__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/nifits/io/niio.html#__version_int__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.__version_int__" title="Link to this definition">¶</a></dt>
+<dd><p>Returns the nifits standard version as a tuple
+of three integers based on <cite>__version__</cite> string.</p>
+</dd></dl>
 
 <dl class="py data">
 <dt class="sig sig-object py" id="nifits.__standard_version__">
-<span class="sig-prename descclassname"><span class="pre">nifits.</span></span><span class="sig-name descname"><span class="pre">__standard_version__</span></span><a class="headerlink" href="#nifits.__standard_version__" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">nifits.</span></span><span class="sig-name descname"><span class="pre">__standard_version__</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'1.0'</span></em><a class="headerlink" href="#nifits.__standard_version__" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
+<dl class="py function">
+<dt class="sig sig-object py" id="nifits.__standard_version_int__">
+<span class="sig-prename descclassname"><span class="pre">nifits.</span></span><span class="sig-name descname"><span class="pre">__standard_version_int__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/nifits/io/niio.html#__standard_version_int__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.__standard_version_int__" title="Link to this definition">¶</a></dt>
+<dd><p>Returns the nifits standard version as a pair
+of integers (based on <cite>__standard_version__</cite> string).</p>
+</dd></dl>
+
+</section>
 </section>
 </section>
 
@@ -353,8 +401,14 @@
 <li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">nifits</span></code></a><ul>
 <li><a class="reference internal" href="#subpackages">Subpackages</a></li>
 <li><a class="reference internal" href="#package-contents">Package Contents</a><ul>
+<li><a class="reference internal" href="#functions">Functions</a></li>
+<li><a class="reference internal" href="#attributes">Attributes</a><ul>
 <li><a class="reference internal" href="#nifits.__version__"><code class="docutils literal notranslate"><span class="pre">__version__</span></code></a></li>
+<li><a class="reference internal" href="#nifits.__version_int__"><code class="docutils literal notranslate"><span class="pre">__version_int__()</span></code></a></li>
 <li><a class="reference internal" href="#nifits.__standard_version__"><code class="docutils literal notranslate"><span class="pre">__standard_version__</span></code></a></li>
+<li><a class="reference internal" href="#nifits.__standard_version_int__"><code class="docutils literal notranslate"><span class="pre">__standard_version_int__()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -368,7 +422,7 @@
       
     </aside>
   </div>
-</div><script src="../../_static/documentation_options.js?v=53b53b71"></script>
+</div><script src="../../_static/documentation_options.js?v=01f34227"></script>
     <script src="../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/scripts/furo.js?v=5fa4622c"></script>

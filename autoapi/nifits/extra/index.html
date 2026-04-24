@@ -6,7 +6,7 @@
 <link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" /><link rel="next" title="nifits.extra.extra" href="extra/index.html" /><link rel="prev" title="nifits.backend.backend" href="../backend/backend/index.html" />
 
     <!-- Generated with Sphinx 7.3.7 and Furo 2024.08.06 -->
-        <title>nifits.extra - NIFITS 0.0.8 documentation</title>
+        <title>nifits.extra - NIFITS 0.1.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=362ab14a" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?v=354aac6f" />
     <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=fd3f3429" />
@@ -168,7 +168,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../../../index.html"><div class="brand">NIFITS 0.0.8 documentation</div></a>
+      <a href="../../../index.html"><div class="brand">NIFITS 0.1.0 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -192,7 +192,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../../../index.html">
   
   
-  <span class="sidebar-brand-text">NIFITS 0.0.8 documentation</span>
+  <span class="sidebar-brand-text">NIFITS 0.1.0 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="../../../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -209,10 +209,12 @@
 </li>
 <li class="toctree-l3 current has-children current-page"><a class="current reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">nifits.extra</span></code></a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of nifits.extra</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l4"><a class="reference internal" href="extra/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">nifits.extra.extra</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="promote/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">nifits.extra.promote</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="../io/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">nifits.io</span></code></a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of nifits.io</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l4"><a class="reference internal" href="../io/oifits/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">nifits.io.oifits</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../io/niio/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">nifits.io.niio</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../io/utils/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">nifits.io.utils</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -266,6 +268,7 @@
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="extra/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">nifits.extra.extra</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="promote/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">nifits.extra.promote</span></code></a></li>
 </ul>
 </div>
 </section>
@@ -309,7 +312,7 @@
 <div class="table-wrapper autosummary longtable docutils container">
 <table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#nifits.extra.local_sqrtm" title="nifits.extra.local_sqrtm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">local_sqrtm</span></code></a>(amatrix)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nifits.extra.local_sqrtm" title="nifits.extra.local_sqrtm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">local_sqrtm</span></code></a>(amatrix[, atol])</p></td>
 <td><p><dl class="field-list simple">
 <dt class="field-odd">param amatrix<span class="colon">:</span></dt>
 <dd class="field-odd"><p>A square matrix</p>
@@ -353,13 +356,16 @@
 <tr class="row-even"><td><p><a class="reference internal" href="#id1" title="nifits.extra.STATIC_EXTENSIONS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">STATIC_EXTENSIONS</span></code></a></p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#nifits.extra.BackendLike" title="nifits.extra.BackendLike"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BackendLike</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nifits.extra.optim" title="nifits.extra.optim"><code class="xref py py-obj docutils literal notranslate"><span class="pre">optim</span></code></a></p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#nifits.extra.massq2sr" title="nifits.extra.massq2sr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">massq2sr</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#nifits.extra.BackendLike" title="nifits.extra.BackendLike"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BackendLike</span></code></a></p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#nifits.extra.sr2massq" title="nifits.extra.sr2massq"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sr2massq</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nifits.extra.massq2sr" title="nifits.extra.massq2sr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">massq2sr</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#nifits.extra.sr2massq" title="nifits.extra.sr2massq"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sr2massq</span></code></a></p></td>
 <td><p></p></td>
 </tr>
 </tbody>
@@ -397,22 +403,22 @@
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="nifits.extra.NIFITSClass.oi_array">
-<span class="sig-name descname"><span class="pre">oi_array</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="../../../nifits.io.html#nifits.io.oifits.OI_ARRAY" title="nifits.io.oifits.OI_ARRAY"><span class="pre">OI_ARRAY</span></a></em><a class="headerlink" href="#nifits.extra.NIFITSClass.oi_array" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">oi_array</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="../io/niio/index.html#nifits.io.niio.OI_ARRAY" title="nifits.io.niio.OI_ARRAY"><span class="pre">OI_ARRAY</span></a></em><a class="headerlink" href="#nifits.extra.NIFITSClass.oi_array" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="nifits.extra.NIFITSClass.ni_catm">
-<span class="sig-name descname"><span class="pre">ni_catm</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="../../../nifits.io.html#nifits.io.oifits.NI_CATM" title="nifits.io.oifits.NI_CATM"><span class="pre">NI_CATM</span></a></em><a class="headerlink" href="#nifits.extra.NIFITSClass.ni_catm" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">ni_catm</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="../io/niio/index.html#id0" title="nifits.io.niio.NI_CATM"><span class="pre">NI_CATM</span></a></em><a class="headerlink" href="#nifits.extra.NIFITSClass.ni_catm" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="nifits.extra.NIFITSClass.ni_fov">
-<span class="sig-name descname"><span class="pre">ni_fov</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="../../../nifits.io.html#nifits.io.oifits.NI_FOV" title="nifits.io.oifits.NI_FOV"><span class="pre">NI_FOV</span></a></em><a class="headerlink" href="#nifits.extra.NIFITSClass.ni_fov" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">ni_fov</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="../io/niio/index.html#nifits.io.niio.NI_FOV" title="nifits.io.niio.NI_FOV"><span class="pre">NI_FOV</span></a></em><a class="headerlink" href="#nifits.extra.NIFITSClass.ni_fov" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="nifits.extra.NIFITSClass.ni_kmat">
-<span class="sig-name descname"><span class="pre">ni_kmat</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="../../../nifits.io.html#nifits.io.oifits.NI_KMAT" title="nifits.io.oifits.NI_KMAT"><span class="pre">NI_KMAT</span></a></em><a class="headerlink" href="#nifits.extra.NIFITSClass.ni_kmat" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">ni_kmat</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="../io/niio/index.html#nifits.io.niio.NI_KMAT" title="nifits.io.niio.NI_KMAT"><span class="pre">NI_KMAT</span></a></em><a class="headerlink" href="#nifits.extra.NIFITSClass.ni_kmat" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -422,42 +428,42 @@
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="nifits.extra.NIFITSClass.oi_target">
-<span class="sig-name descname"><span class="pre">oi_target</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="../../../nifits.io.html#nifits.io.oifits.OI_TARGET" title="nifits.io.oifits.OI_TARGET"><span class="pre">OI_TARGET</span></a></em><a class="headerlink" href="#nifits.extra.NIFITSClass.oi_target" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">oi_target</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="../io/niio/index.html#nifits.io.niio.OI_TARGET" title="nifits.io.niio.OI_TARGET"><span class="pre">OI_TARGET</span></a></em><a class="headerlink" href="#nifits.extra.NIFITSClass.oi_target" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="nifits.extra.NIFITSClass.ni_mod">
-<span class="sig-name descname"><span class="pre">ni_mod</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="../../../nifits.io.html#nifits.io.oifits.NI_MOD" title="nifits.io.oifits.NI_MOD"><span class="pre">NI_MOD</span></a></em><a class="headerlink" href="#nifits.extra.NIFITSClass.ni_mod" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">ni_mod</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="../io/niio/index.html#nifits.io.niio.NI_MOD" title="nifits.io.niio.NI_MOD"><span class="pre">NI_MOD</span></a></em><a class="headerlink" href="#nifits.extra.NIFITSClass.ni_mod" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="nifits.extra.NIFITSClass.ni_iout">
-<span class="sig-name descname"><span class="pre">ni_iout</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="../../../nifits.io.html#nifits.io.oifits.NI_IOUT" title="nifits.io.oifits.NI_IOUT"><span class="pre">NI_IOUT</span></a></em><a class="headerlink" href="#nifits.extra.NIFITSClass.ni_iout" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">ni_iout</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="../io/niio/index.html#nifits.io.niio.NI_IOUT" title="nifits.io.niio.NI_IOUT"><span class="pre">NI_IOUT</span></a></em><a class="headerlink" href="#nifits.extra.NIFITSClass.ni_iout" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="nifits.extra.NIFITSClass.ni_kiout">
-<span class="sig-name descname"><span class="pre">ni_kiout</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="../../../nifits.io.html#nifits.io.oifits.NI_KIOUT" title="nifits.io.oifits.NI_KIOUT"><span class="pre">NI_KIOUT</span></a></em><a class="headerlink" href="#nifits.extra.NIFITSClass.ni_kiout" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">ni_kiout</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="../io/niio/index.html#nifits.io.niio.NI_KIOUT" title="nifits.io.niio.NI_KIOUT"><span class="pre">NI_KIOUT</span></a></em><a class="headerlink" href="#nifits.extra.NIFITSClass.ni_kiout" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="nifits.extra.NIFITSClass.ni_kcov">
-<span class="sig-name descname"><span class="pre">ni_kcov</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="../../../nifits.io.html#nifits.io.oifits.NI_KCOV" title="nifits.io.oifits.NI_KCOV"><span class="pre">NI_KCOV</span></a></em><a class="headerlink" href="#nifits.extra.NIFITSClass.ni_kcov" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">ni_kcov</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="../io/niio/index.html#nifits.io.niio.NI_KCOV" title="nifits.io.niio.NI_KCOV"><span class="pre">NI_KCOV</span></a></em><a class="headerlink" href="#nifits.extra.NIFITSClass.ni_kcov" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="nifits.extra.NIFITSClass.ni_dsamp">
-<span class="sig-name descname"><span class="pre">ni_dsamp</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="../../../nifits.io.html#nifits.io.oifits.NI_DSAMP" title="nifits.io.oifits.NI_DSAMP"><span class="pre">NI_DSAMP</span></a></em><a class="headerlink" href="#nifits.extra.NIFITSClass.ni_dsamp" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">ni_dsamp</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="../io/niio/index.html#nifits.io.niio.NI_DSAMP" title="nifits.io.niio.NI_DSAMP"><span class="pre">NI_DSAMP</span></a></em><a class="headerlink" href="#nifits.extra.NIFITSClass.ni_dsamp" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="nifits.extra.NIFITSClass.ni_oswavelength">
-<span class="sig-name descname"><span class="pre">ni_oswavelength</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="../../../nifits.io.html#nifits.io.oifits.NI_OSWAVELENGTH" title="nifits.io.oifits.NI_OSWAVELENGTH"><span class="pre">NI_OSWAVELENGTH</span></a></em><a class="headerlink" href="#nifits.extra.NIFITSClass.ni_oswavelength" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">ni_oswavelength</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="../io/niio/index.html#nifits.io.niio.NI_OSWAVELENGTH" title="nifits.io.niio.NI_OSWAVELENGTH"><span class="pre">NI_OSWAVELENGTH</span></a></em><a class="headerlink" href="#nifits.extra.NIFITSClass.ni_oswavelength" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="nifits.extra.NIFITSClass.ni_iotags">
-<span class="sig-name descname"><span class="pre">ni_iotags</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="../../../nifits.io.html#nifits.io.oifits.NI_IOTAGS" title="nifits.io.oifits.NI_IOTAGS"><span class="pre">NI_IOTAGS</span></a></em><a class="headerlink" href="#nifits.extra.NIFITSClass.ni_iotags" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">ni_iotags</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="../io/niio/index.html#nifits.io.niio.NI_IOTAGS" title="nifits.io.niio.NI_IOTAGS"><span class="pre">NI_IOTAGS</span></a></em><a class="headerlink" href="#nifits.extra.NIFITSClass.ni_iotags" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -467,8 +473,13 @@
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="nifits.extra.NIFITSClass.get_version">
+<span class="sig-name descname"><span class="pre">get_version</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">string</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nifits.extra.NIFITSClass.get_version" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="nifits.extra.NIFITSClass.to_nifits">
-<span class="sig-name descname"><span class="pre">to_nifits</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">static_only</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dynamic_only</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">static_hash</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">writefile</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nifits.extra.NIFITSClass.to_nifits" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">to_nifits</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">static_only</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dynamic_only</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">static_hash</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">writefile</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">checksum</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nifits.extra.NIFITSClass.to_nifits" title="Link to this definition">¶</a></dt>
 <dd><p>Write the extension objects to a nifits file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -481,14 +492,31 @@ the hash of the static file should be passed as <cite>static_hash</cite>.
 Defaultult: False</p></li>
 <li><p><strong>static_hash</strong> – (str) The hash of the static file.
 Default: “”</p></li>
+<li><p><strong>checksum</strong> – (bool) include checksum.</p></li>
 </ul>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="nifits.extra.NIFITSClass.extension_objects">
+<span class="sig-name descname"><span class="pre">extension_objects</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">check</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nifits.extra.NIFITSClass.extension_objects" title="Link to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Get a lits of the nifits extensions in this object.</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>a list of the extension objects of the file.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>extensions</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="nifits.extra.NIFITSClass.check_unit_coherence">
-<span class="sig-name descname"><span class="pre">check_unit_coherence</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nifits.extra.NIFITSClass.check_unit_coherence" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">check_unit_coherence</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nifits.extra.NIFITSClass.check_unit_coherence" title="Link to this definition">¶</a></dt>
 <dd><blockquote>
 <div><p>Check the coherence of the units of and prints the result</p>
 </div></blockquote>
@@ -496,11 +524,41 @@ Default: “”</p></li>
 <p>Otherwise, does nothing.</p>
 </dd></dl>
 
+<dl class="py method">
+<dt class="sig sig-object py" id="nifits.extra.NIFITSClass.refresh_primary_header">
+<span class="sig-name descname"><span class="pre">refresh_primary_header</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">all</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nifits.extra.NIFITSClass.refresh_primary_header" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>all</strong> – <cite>Bool</cite> (False) If Force the update of all relevent keywords.</p></li>
+<li><p><strong>Exceptions</strong></p></li>
+<li><p><strong>MJD_OBS</strong> (<em>* MJD-OBS is designated</em>)</p></li>
+<li><p><strong>MJD_END</strong> (<em>* MJD-END is designated</em>)</p></li>
+<li><p><strong>BASE</strong> (<em>*</em>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Options :</dt><dd><ul class="simple">
+<li><p>True : Force the update of the keyword</p></li>
+<li><p>None : Only update if centent contains <cite>generic</cite>
+for strings, NaN for floats or 0 for int.</p></li>
+<li><p>False : Do not update.</p></li>
+</ul>
+</dd>
+</dl>
 </dd></dl>
+
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="nifits.extra.optim">
+<span class="sig-prename descclassname"><span class="pre">nifits.extra.</span></span><span class="sig-name descname"><span class="pre">optim</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#nifits.extra.optim" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="nifits.extra.local_sqrtm">
-<span class="sig-prename descclassname"><span class="pre">nifits.extra.</span></span><span class="sig-name descname"><span class="pre">local_sqrtm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">amatrix</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nifits/extra/extra.html#local_sqrtm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.extra.local_sqrtm" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">nifits.extra.</span></span><span class="sig-name descname"><span class="pre">local_sqrtm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">amatrix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-16</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nifits/extra/extra.html#local_sqrtm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.extra.local_sqrtm" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>amatrix</strong> – A square matrix</p>
@@ -514,7 +572,7 @@ Default: “”</p></li>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="nifits.extra.Post">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nifits.extra.</span></span><span class="sig-name descname"><span class="pre">Post</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nifits</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../../../nifits.io.html#nifits.io.oifits.nifits" title="nifits.io.oifits.nifits"><span class="pre">nifits.io.oifits.nifits</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">module</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">np</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nifits/extra/extra.html#Post"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.extra.Post" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nifits.extra.</span></span><span class="sig-name descname"><span class="pre">Post</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nifits</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../io/niio/index.html#nifits.io.niio.nifits" title="nifits.io.niio.nifits"><span class="pre">nifits.io.niio.nifits</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">module</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">np</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nifits/extra/extra.html#Post"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.extra.Post" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="../backend/index.html#nifits.backend.NI_Backend" title="nifits.backend.NI_Backend"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nifits.backend.NI_Backend</span></code></a></p>
 <p>This variant of the backend class offers a statistically whitened alternate
 forward model with directly whitened observables by calling <code class="docutils literal notranslate"><span class="pre">w_</span></code> prefixed
@@ -526,7 +584,7 @@ return whitened observables. Compare it to <code class="docutils literal notrans
 instead of <code class="docutils literal notranslate"><span class="pre">self.nifits.ni_kiout.kiout</span></code>.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="nifits.extra.Post.create_whitening_matrix">
-<span class="sig-name descname"><span class="pre">create_whitening_matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">replace</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">md</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">types.ModuleType</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">np</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">local</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nifits/extra/extra.html#Post.create_whitening_matrix"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.extra.Post.create_whitening_matrix" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">create_whitening_matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">replace</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">md</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">types.ModuleType</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">np</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">local</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atol</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1e-16</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nifits/extra/extra.html#Post.create_whitening_matrix"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.extra.Post.create_whitening_matrix" title="Link to this definition">¶</a></dt>
 <dd><blockquote>
 <div><p>Updates the whitening matrix:</p>
 </div></blockquote>
@@ -1102,7 +1160,7 @@ to the center of the field of view</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="nifits.extra.PointCollection.plot_frame">
-<span class="sig-name descname"><span class="pre">plot_frame</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">z</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frame_index</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wl_index</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_index</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mycmap</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">marksize_increase</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colorbar</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xlabel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nifits/backend/backend.html#PointCollection.plot_frame"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.extra.PointCollection.plot_frame" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">plot_frame</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">z</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frame_index</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wl_index</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_index</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mycmap</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">marksize_increase</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colorbar</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xlabel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ylabel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">orientation_RA_DEC</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nifits/backend/backend.html#PointCollection.plot_frame"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.extra.PointCollection.plot_frame" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -1130,7 +1188,7 @@ to the center of the field of view</p></li>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="nifits.extra.OI_WAVELENGTH">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nifits.extra.</span></span><span class="sig-name descname"><span class="pre">OI_WAVELENGTH</span></span><a class="reference internal" href="../../../_modules/nifits/io/oifits.html#OI_WAVELENGTH"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.extra.OI_WAVELENGTH" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nifits.extra.</span></span><span class="sig-name descname"><span class="pre">OI_WAVELENGTH</span></span><a class="reference internal" href="../../../_modules/nifits/io/niio.html#OI_WAVELENGTH"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.extra.OI_WAVELENGTH" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">NI_EXTENSION</span></code></p>
 <p><code class="docutils literal notranslate"><span class="pre">NI_EXTENSION</span></code> Generic class for NIFITS extensions</p>
 <p><strong>Inherited methods:</strong></p>
@@ -1227,7 +1285,7 @@ typically Dec.</p></li>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="nifits.extra.FixedSource">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nifits.extra.</span></span><span class="sig-name descname"><span class="pre">FixedSource</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">samples</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../backend/index.html#nifits.backend.PointCollection" title="nifits.backend.PointCollection"><span class="pre">nifits.backend.PointCollection</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">temperature</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">astropy.units.quantity</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sp_dens</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">solid_angle</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">astropy.units.quantity</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">oi_wavelength</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../../../nifits.io.html#nifits.io.oifits.OI_WAVELENGTH" title="nifits.io.oifits.OI_WAVELENGTH"><span class="pre">nifits.io.oifits.OI_WAVELENGTH</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">iout_unit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">astropy.units.Unit</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">md</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">np</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nifits/extra/extra.html#FixedSource"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.extra.FixedSource" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nifits.extra.</span></span><span class="sig-name descname"><span class="pre">FixedSource</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">samples</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../backend/index.html#nifits.backend.PointCollection" title="nifits.backend.PointCollection"><span class="pre">nifits.backend.PointCollection</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">temperature</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">astropy.units.quantity</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sp_dens</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">solid_angle</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">astropy.units.quantity</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">oi_wavelength</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../io/niio/index.html#nifits.io.niio.OI_WAVELENGTH" title="nifits.io.niio.OI_WAVELENGTH"><span class="pre">nifits.io.niio.OI_WAVELENGTH</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">iout_unit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">astropy.units.Unit</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">md</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">np</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nifits/extra/extra.html#FixedSource"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.extra.FixedSource" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="../backend/index.html#nifits.backend.PointCollection" title="nifits.backend.PointCollection"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nifits.backend.PointCollection</span></code></a></p>
 <blockquote>
 <div><p>A class to hold arrays of coordinates. Handy to compute</p>
@@ -1596,10 +1654,14 @@ object by <cite>create_whitening_matrix</cite></p>
 <li><a class="reference internal" href="#nifits.extra.NIFITSClass.ni_oswavelength"><code class="docutils literal notranslate"><span class="pre">NIFITSClass.ni_oswavelength</span></code></a></li>
 <li><a class="reference internal" href="#nifits.extra.NIFITSClass.ni_iotags"><code class="docutils literal notranslate"><span class="pre">NIFITSClass.ni_iotags</span></code></a></li>
 <li><a class="reference internal" href="#nifits.extra.NIFITSClass.from_nifits"><code class="docutils literal notranslate"><span class="pre">NIFITSClass.from_nifits()</span></code></a></li>
+<li><a class="reference internal" href="#nifits.extra.NIFITSClass.get_version"><code class="docutils literal notranslate"><span class="pre">NIFITSClass.get_version()</span></code></a></li>
 <li><a class="reference internal" href="#nifits.extra.NIFITSClass.to_nifits"><code class="docutils literal notranslate"><span class="pre">NIFITSClass.to_nifits()</span></code></a></li>
+<li><a class="reference internal" href="#nifits.extra.NIFITSClass.extension_objects"><code class="docutils literal notranslate"><span class="pre">NIFITSClass.extension_objects()</span></code></a></li>
 <li><a class="reference internal" href="#nifits.extra.NIFITSClass.check_unit_coherence"><code class="docutils literal notranslate"><span class="pre">NIFITSClass.check_unit_coherence()</span></code></a></li>
+<li><a class="reference internal" href="#nifits.extra.NIFITSClass.refresh_primary_header"><code class="docutils literal notranslate"><span class="pre">NIFITSClass.refresh_primary_header()</span></code></a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#nifits.extra.optim"><code class="docutils literal notranslate"><span class="pre">optim</span></code></a></li>
 <li><a class="reference internal" href="#nifits.extra.local_sqrtm"><code class="docutils literal notranslate"><span class="pre">local_sqrtm()</span></code></a></li>
 <li><a class="reference internal" href="#nifits.extra.Post"><code class="docutils literal notranslate"><span class="pre">Post</span></code></a><ul>
 <li><a class="reference internal" href="#nifits.extra.Post.create_whitening_matrix"><code class="docutils literal notranslate"><span class="pre">Post.create_whitening_matrix()</span></code></a></li>
@@ -1704,7 +1766,7 @@ object by <cite>create_whitening_matrix</cite></p>
       
     </aside>
   </div>
-</div><script src="../../../_static/documentation_options.js?v=53b53b71"></script>
+</div><script src="../../../_static/documentation_options.js?v=01f34227"></script>
     <script src="../../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/scripts/furo.js?v=5fa4622c"></script>

@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" />
 
     <!-- Generated with Sphinx 7.3.7 and Furo 2024.08.06 -->
-        <title>nifits.extra.extra - NIFITS 0.0.8 documentation</title>
+        <title>nifits.extra.extra - NIFITS 0.1.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=362ab14a" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?v=354aac6f" />
     <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=fd3f3429" />
@@ -167,7 +167,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../../../index.html"><div class="brand">NIFITS 0.0.8 documentation</div></a>
+      <a href="../../../index.html"><div class="brand">NIFITS 0.1.0 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -191,7 +191,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../../../index.html">
   
   
-  <span class="sidebar-brand-text">NIFITS 0.0.8 documentation</span>
+  <span class="sidebar-brand-text">NIFITS 0.1.0 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="../../../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -208,10 +208,12 @@
 </li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="../../../autoapi/nifits/extra/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">nifits.extra</span></code></a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of nifits.extra</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l4"><a class="reference internal" href="../../../autoapi/nifits/extra/extra/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">nifits.extra.extra</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/nifits/extra/promote/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">nifits.extra.promote</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="../../../autoapi/nifits/io/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">nifits.io</span></code></a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of nifits.io</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/nifits/io/oifits/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">nifits.io.oifits</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/nifits/io/niio/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">nifits.io.niio</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/nifits/io/utils/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">nifits.io.utils</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -283,8 +285,8 @@
 
 <span class="c1"># extra.py</span>
 <span class="kn">import</span> <span class="nn">nifits.io</span> <span class="k">as</span> <span class="nn">io</span>
-<span class="kn">from</span> <span class="nn">nifits.io.oifits</span> <span class="kn">import</span> <span class="n">NIFITS_EXTENSIONS</span><span class="p">,</span> <span class="n">STATIC_EXTENSIONS</span>
-<span class="kn">from</span> <span class="nn">nifits.io.oifits</span> <span class="kn">import</span> <span class="n">nifits</span> <span class="k">as</span> <span class="n">NIFITSClass</span>
+<span class="kn">from</span> <span class="nn">nifits.io.niio</span> <span class="kn">import</span> <span class="n">NIFITS_EXTENSIONS</span><span class="p">,</span> <span class="n">STATIC_EXTENSIONS</span>
+<span class="kn">from</span> <span class="nn">nifits.io.niio</span> <span class="kn">import</span> <span class="n">nifits</span> <span class="k">as</span> <span class="n">NIFITSClass</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">astropy.units</span> <span class="k">as</span> <span class="nn">units</span>
@@ -297,12 +299,19 @@
 <span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span> <span class="k">as</span> <span class="n">norm</span>
 <span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">chi2</span> <span class="k">as</span> <span class="n">chi2</span>
 
+<span class="kn">from</span> <span class="nn">nifits.backend</span> <span class="kn">import</span> <span class="n">optim</span>
+<span class="c1"># from cotengra import einsum as neweinsum</span>
+<span class="c1"># from jax.numpy import einsum as neweinsum</span>
+<span class="c1"># from nifits.backend import neweinsum</span>
+<span class="c1"># from numpy import einsum as neweinsum</span>
+<span class="c1"># np.einsum = neweinsum</span>
+
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span>
 
 
 <div class="viewcode-block" id="local_sqrtm">
 <a class="viewcode-back" href="../../../autoapi/nifits/extra/index.html#nifits.extra.extra.local_sqrtm">[docs]</a>
-<span class="k">def</span> <span class="nf">local_sqrtm</span><span class="p">(</span><span class="n">amatrix</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">local_sqrtm</span><span class="p">(</span><span class="n">amatrix</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mf">1e-16</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Arguments:</span>
 <span class="sd">        amatrix : A square matrix</span>
@@ -313,7 +322,7 @@
     <span class="c1"># Eigendecomposition</span>
     <span class="n">evalues</span><span class="p">,</span> <span class="n">evectors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eig</span><span class="p">(</span><span class="n">amatrix</span><span class="p">)</span>
     <span class="c1"># Checking for singularity</span>
-    <span class="k">assert</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">evalues</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">(),</span> <span class="s2">&quot;The matrix is singular (or too close to it)&quot;</span>
+    <span class="k">assert</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">evalues</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="n">atol</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">(),</span> <span class="s2">&quot;The matrix is singular (or too close to it)&quot;</span>
     <span class="n">sqrt_matrix</span> <span class="o">=</span> <span class="n">evectors</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">evalues</span><span class="p">)</span> <span class="o">@</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">evectors</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">sqrt_matrix</span></div>
 
@@ -339,7 +348,8 @@
     <span class="k">def</span> <span class="nf">create_whitening_matrix</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                                 <span class="n">replace</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
                                 <span class="n">md</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">ModuleType</span> <span class="o">=</span> <span class="n">np</span><span class="p">,</span>
-                                <span class="n">local</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+                                <span class="n">local</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+                                <span class="n">atol</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-16</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">            Updates the whitening matrix:</span>
 
@@ -360,7 +370,7 @@
         <span class="n">Ws</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">amat</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_kcov</span><span class="o">.</span><span class="n">data_array</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">local</span><span class="p">:</span>
-                <span class="n">Ws</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">local_sqrtm</span><span class="p">(</span><span class="n">amat</span><span class="p">)))</span>
+                <span class="n">Ws</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">local_sqrtm</span><span class="p">(</span><span class="n">amat</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="n">atol</span><span class="p">)))</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">Ws</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">sqrtm</span><span class="p">(</span><span class="n">amat</span><span class="p">)))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">Ws</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">Ws</span><span class="p">)</span>
@@ -408,7 +418,7 @@
         <span class="c1"># Flatten the spectral and output dimension</span>
         <span class="n">flat_full_shape</span> <span class="o">=</span> <span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">flatshape</span><span class="p">,</span> <span class="n">full_shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
         <span class="n">flat_out</span> <span class="o">=</span> <span class="n">rearrange</span><span class="p">(</span><span class="n">signal</span><span class="p">,</span> <span class="s2">&quot;frame wavelength output source -&gt; frame (wavelength output) source&quot;</span><span class="p">)</span>
-        <span class="n">wout</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">md</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s2">&quot;f o i , f i m -&gt; f o m&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">Ws</span><span class="p">,</span> <span class="n">flat_out</span><span class="p">)</span>
+        <span class="n">wout</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s2">&quot;foi,fim-&gt;fom&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">Ws</span><span class="p">,</span> <span class="n">flat_out</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">wout</span></div>
 
 
@@ -598,7 +608,7 @@
         <span class="nb">print</span><span class="p">(</span><span class="n">ref_spectrum</span><span class="o">.</span><span class="n">unit</span><span class="p">)</span>
         <span class="n">threshold</span> <span class="o">=</span> <span class="n">ncx2</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">pfa</span><span class="p">,</span> <span class="n">df</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">fullyflatshape</span><span class="p">,</span> <span class="n">nc</span><span class="o">=</span><span class="mf">0.</span><span class="p">)</span>
         <span class="n">x</span> <span class="o">=</span> <span class="n">ref_spectrum</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
-        <span class="n">xTx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s2">&quot;o m , o m -&gt; m&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+        <span class="n">xTx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s2">&quot;om,om-&gt;m&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
         <span class="n">pdet_Pfa</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">ncx2</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">threshold</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">fullyflatshape</span><span class="p">,</span> <span class="n">xTx</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">pdet_Pfa</span></div>
 
@@ -673,7 +683,7 @@
         <span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="n">ref_spectrum</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">ref_spectrum</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Ref signal (x) unit: &quot;</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">unit</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Ref signal (x) shape: &quot;</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-        <span class="n">xtx</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s2">&quot;m i, i m -&gt; m&quot;</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+        <span class="n">xtx</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s2">&quot;mi,im-&gt;m&quot;</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
         <span class="n">lambda0</span> <span class="o">=</span> <span class="mf">1.0e-3</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">fullyflatshape</span>
         <span class="c1"># The solution lambda is the x^T.x value satisfying Pdet and Pfa</span>
         <span class="n">sol</span> <span class="o">=</span> <span class="n">leastsq</span><span class="p">(</span><span class="n">residual_pdet_Te</span><span class="p">,</span> <span class="n">lambda0</span><span class="p">,</span>
@@ -753,7 +763,7 @@
                                                     <span class="n">to_si</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="n">ref_spectrum</span><span class="o">.</span><span class="n">unit</span><span class="p">)</span>
         <span class="n">x</span> <span class="o">=</span> <span class="n">ref_spectrum</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
-        <span class="n">xTx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s2">&quot;o m , o m -&gt; m&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+        <span class="n">xTx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s2">&quot;om,om-&gt;m&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
         <span class="n">threshold</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">xTx</span><span class="p">)</span><span class="o">*</span><span class="n">norm</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">pfa</span><span class="p">)</span>
         <span class="c1"># threshold = ncx2.ppf(1-pfa, df=self.fullyflatshape, nc=0.)</span>
         <span class="n">pdet_Pfa</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">((</span><span class="n">threshold</span> <span class="o">-</span> <span class="n">xTx</span><span class="p">)</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">xTx</span><span class="p">))</span>
@@ -824,7 +834,7 @@
         <span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="n">ref_spectrum</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">ref_spectrum</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Ref signal (x) unit: &quot;</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">unit</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Ref signal (x) shape: &quot;</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-        <span class="n">xTx</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s2">&quot;m i, i m -&gt; m&quot;</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+        <span class="n">xTx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s2">&quot;mi,im-&gt;m&quot;</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
         <span class="n">threshold</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">xTx</span><span class="p">)</span><span class="o">*</span><span class="n">norm</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">pfa</span><span class="p">)</span>
         <span class="c1"># threshold = ncx2.ppf(1-pfa, df=self.fullyflatshape, nc=0.)</span>
         <span class="c1"># lambda0 = 1.0e-3 * self.fullyflatshape</span>
@@ -903,7 +913,7 @@
 
 
 <span class="kn">from</span> <span class="nn">nifits.backend</span> <span class="kn">import</span> <span class="n">PointCollection</span>
-<span class="kn">from</span> <span class="nn">nifits.io.oifits</span> <span class="kn">import</span> <span class="n">OI_WAVELENGTH</span>
+<span class="kn">from</span> <span class="nn">nifits.io.niio</span> <span class="kn">import</span> <span class="n">OI_WAVELENGTH</span>
 
 <div class="viewcode-block" id="BaseSource">
 <a class="viewcode-back" href="../../../autoapi/nifits/extra/index.html#nifits.extra.extra.BaseSource">[docs]</a>
@@ -1254,11 +1264,11 @@
 <span class="sd">        wout_full  : [ArrayLike] The resulting outputs with shape</span>
 <span class="sd">                    (nframes, )</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_table</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">data</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_table</span><span class="p">[</span><span class="s2">&quot;VALUE&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">data</span>
     <span class="n">full_shape</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">shape</span>
     <span class="n">flat_full_shape</span> <span class="o">=</span> <span class="p">(</span><span class="n">full_shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">full_shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">full_shape</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
     <span class="n">flat_out</span> <span class="o">=</span> <span class="n">rearrange</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="s2">&quot;frame wavelength output -&gt; frame (wavelength output)&quot;</span><span class="p">)</span>
-    <span class="n">wout</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">md</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s2">&quot;f o i , f i -&gt; f o&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">Ws</span><span class="p">,</span> <span class="n">flat_out</span><span class="p">)</span>
+    <span class="n">wout</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s2">&quot;foi,fi-&gt;fo&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">Ws</span><span class="p">,</span> <span class="n">flat_out</span><span class="p">)</span>
     <span class="n">wout_full</span> <span class="o">=</span> <span class="n">wout</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="n">full_shape</span><span class="p">))</span>
     <span class="k">return</span> <span class="n">wout_full</span></div>
 
@@ -1347,7 +1357,7 @@
       
     </aside>
   </div>
-</div><script src="../../../_static/documentation_options.js?v=53b53b71"></script>
+</div><script src="../../../_static/documentation_options.js?v=01f34227"></script>
     <script src="../../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/scripts/furo.js?v=5fa4622c"></script>

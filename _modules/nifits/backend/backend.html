@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" />
 
     <!-- Generated with Sphinx 7.3.7 and Furo 2024.08.06 -->
-        <title>nifits.backend.backend - NIFITS 0.0.8 documentation</title>
+        <title>nifits.backend.backend - NIFITS 0.1.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=362ab14a" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?v=354aac6f" />
     <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=fd3f3429" />
@@ -167,7 +167,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../../../index.html"><div class="brand">NIFITS 0.0.8 documentation</div></a>
+      <a href="../../../index.html"><div class="brand">NIFITS 0.1.0 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -191,7 +191,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../../../index.html">
   
   
-  <span class="sidebar-brand-text">NIFITS 0.0.8 documentation</span>
+  <span class="sidebar-brand-text">NIFITS 0.1.0 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="../../../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -208,10 +208,12 @@
 </li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="../../../autoapi/nifits/extra/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">nifits.extra</span></code></a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of nifits.extra</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l4"><a class="reference internal" href="../../../autoapi/nifits/extra/extra/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">nifits.extra.extra</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/nifits/extra/promote/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">nifits.extra.promote</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="../../../autoapi/nifits/io/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">nifits.io</span></code></a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of nifits.io</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/nifits/io/oifits/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">nifits.io.oifits</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/nifits/io/niio/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">nifits.io.niio</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/nifits/io/utils/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">nifits.io.utils</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -269,9 +271,14 @@
 
 <span class="kn">import</span> <span class="nn">astropy.units</span> <span class="k">as</span> <span class="nn">units</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="c1"># from cotengra import einsum as neweinsum</span>
+<span class="c1"># from jax.numpy import einsum as neweinsum</span>
+<span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">einsum</span> <span class="k">as</span> <span class="n">neweinsum</span>
+<span class="c1"># from einsum_bmm.einsum_bmm import einsum as neweinsum</span>
 
-<span class="kn">from</span> <span class="nn">nifits.io.oifits</span> <span class="kn">import</span> <span class="n">NIFITS_EXTENSIONS</span><span class="p">,</span> <span class="n">STATIC_EXTENSIONS</span>
-<span class="kn">from</span> <span class="nn">nifits.io.oifits</span> <span class="kn">import</span> <span class="n">nifits</span> <span class="k">as</span> <span class="n">NIFITSClass</span>
+<span class="kn">from</span> <span class="nn">nifits.io.niio</span> <span class="kn">import</span> <span class="n">NIFITS_EXTENSIONS</span><span class="p">,</span> <span class="n">STATIC_EXTENSIONS</span>
+<span class="kn">from</span> <span class="nn">nifits.io.niio</span> <span class="kn">import</span> <span class="n">nifits</span> <span class="k">as</span> <span class="n">NIFITSClass</span>
+<span class="kn">from</span> <span class="nn">nifits.io.niio</span> <span class="kn">import</span> <span class="n">__version__</span><span class="p">,</span> <span class="n">__version_int__</span><span class="p">,</span> <span class="n">__standard_version__</span><span class="p">,</span> <span class="n">__standard_version_int__</span>
 
 <span class="n">ModuleType</span> <span class="o">=</span> <span class="n">types</span><span class="o">.</span><span class="n">ModuleType</span>
 
@@ -285,6 +292,7 @@
 
 <span class="n">mas2rad</span> <span class="o">=</span> <span class="n">units</span><span class="o">.</span><span class="n">mas</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">units</span><span class="o">.</span><span class="n">rad</span><span class="p">)</span>
 <span class="n">rad2mas</span> <span class="o">=</span> <span class="n">units</span><span class="o">.</span><span class="n">rad</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">units</span><span class="o">.</span><span class="n">mas</span><span class="p">)</span>
+<span class="n">optim</span> <span class="o">=</span> <span class="kc">True</span>
 
 
 <span class="c1"># TODO Add methods to __add__ PointCollections for variable sampling</span>
@@ -485,28 +493,45 @@
 <a class="viewcode-back" href="../../../nifits.backend.html#nifits.backend.backend.PointCollection.plot_frame">[docs]</a>
     <span class="k">def</span> <span class="nf">plot_frame</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">z</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">frame_index</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">wl_index</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
                    <span class="n">out_index</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">mycmap</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">marksize_increase</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
-                   <span class="n">colorbar</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">xlabel</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+                   <span class="n">colorbar</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">xlabel</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                   <span class="n">title</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                   <span class="n">orientation_RA_DEC</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
         <span class="n">marksize</span> <span class="o">=</span> <span class="n">marksize_increase</span> <span class="o">*</span> <span class="mi">50000</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">z</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">orig_shape</span><span class="p">):</span>
+            <span class="n">myframe</span> <span class="o">=</span> <span class="n">z</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">myframe</span> <span class="o">=</span> <span class="n">get_frame</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">frame_index</span><span class="o">=</span><span class="n">frame_index</span><span class="p">,</span> <span class="n">wl_index</span><span class="o">=</span><span class="n">wl_index</span><span class="p">,</span> <span class="n">out_index</span><span class="o">=</span><span class="n">out_index</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">orig_shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">coords</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">z</span><span class="p">[</span><span class="n">frame_index</span><span class="p">,</span> <span class="n">wl_index</span><span class="p">,</span> <span class="n">out_index</span><span class="p">,</span> <span class="p">:],</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">coords</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">myframe</span><span class="p">,</span>
                         <span class="n">cmap</span><span class="o">=</span><span class="n">mycmap</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="n">marksize</span><span class="p">)</span>
             <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="s2">&quot;equal&quot;</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">z</span><span class="p">[</span><span class="n">frame_index</span><span class="p">,</span> <span class="n">wl_index</span><span class="p">,</span> <span class="n">out_index</span><span class="p">,</span> <span class="p">:]</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">orig_shape</span><span class="p">)),</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">myframe</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">orig_shape</span><span class="p">)),</span>
                        <span class="n">cmap</span><span class="o">=</span><span class="n">mycmap</span><span class="p">,</span> <span class="n">extent</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">extent</span><span class="p">)</span>
             <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="s2">&quot;equal&quot;</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">colorbar</span><span class="p">:</span>
             <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
-        <span class="k">if</span> <span class="n">xlabel</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
-            <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Relative position [mas]&quot;</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">xlabel</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">False</span><span class="p">:</span>
-            <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="n">xlabel</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">title</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
             <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Output </span><span class="si">{</span><span class="n">out_index</span><span class="si">}</span><span class="s2"> for frame </span><span class="si">{</span><span class="n">frame_index</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">title</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">False</span><span class="p">:</span>
-            <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span></div>
+            <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">orientation_RA_DEC</span><span class="p">:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">invert_xaxis</span><span class="p">()</span>
+            <span class="n">leftlabel</span> <span class="o">=</span> <span class="s2">&quot;E&quot;</span>
+            <span class="n">rightlabel</span> <span class="o">=</span> <span class="s2">&quot;W&quot;</span>
+        <span class="k">else</span> <span class="p">:</span>
+            <span class="n">leftlabel</span> <span class="o">=</span> <span class="s2">&quot;W&quot;</span>
+            <span class="n">rightlabel</span> <span class="o">=</span> <span class="s2">&quot;E&quot;</span>
+        <span class="k">if</span> <span class="n">xlabel</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&lt; </span><span class="si">{</span><span class="n">leftlabel</span><span class="si">}</span><span class="s2">       Relative R.A. [mas]       </span><span class="si">{</span><span class="n">rightlabel</span><span class="si">}</span><span class="s2"> &gt;&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">xlabel</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">False</span><span class="p">:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="n">xlabel</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">ylabel</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;&lt; S       Relative Dec. [mas]       N &gt;&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">ylabel</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">False</span><span class="p">:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="n">ylabel</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="PointCollection.__add__">
@@ -561,6 +586,11 @@
 </div>
 
 
+<div class="viewcode-block" id="get_frame">
+<a class="viewcode-back" href="../../../nifits.backend.html#nifits.backend.backend.get_frame">[docs]</a>
+<span class="k">def</span> <span class="nf">get_frame</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">frame_index</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">wl_index</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">out_index</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">z</span><span class="p">[</span><span class="n">frame_index</span><span class="p">,</span> <span class="n">wl_index</span><span class="p">,</span> <span class="n">out_index</span><span class="p">,</span> <span class="p">:]</span></div>
+
 
 <div class="viewcode-block" id="MovingCollection">
 <a class="viewcode-back" href="../../../nifits.backend.html#nifits.backend.backend.MovingCollection">[docs]</a>
@@ -607,7 +637,7 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="c1"># def __init__(self, myfits: type(io.oifits.NIFITS)):</span>
+    <span class="c1"># def __init__(self, myfits: type(io.nifits.NIFITS)):</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nifits</span><span class="p">:</span> <span class="n">NIFITSClass</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                  <span class="n">module</span><span class="o">=</span><span class="n">np</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">nifits</span> <span class="o">=</span> <span class="n">nifits</span>
@@ -703,8 +733,8 @@
         <span class="n">D</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_fov</span><span class="o">.</span><span class="n">header</span><span class="p">[</span><span class="s2">&quot;NIFITS FOV_TELDIAM&quot;</span><span class="p">]</span> \
              <span class="o">*</span> <span class="n">units</span><span class="o">.</span><span class="n">Unit</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_fov</span><span class="o">.</span><span class="n">header</span><span class="p">[</span><span class="s2">&quot;NIFITS FOV_TELDIAM_UNIT&quot;</span><span class="p">]))</span> \
             <span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">units</span><span class="o">.</span><span class="n">m</span><span class="p">)</span><span class="o">.</span><span class="n">value</span>
-        <span class="n">r_0</span> <span class="o">=</span> <span class="p">(</span> <span class="mi">2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">oi_wavelength</span><span class="o">.</span><span class="n">lambs</span> <span class="o">/</span> <span class="n">D</span><span class="p">)</span>  <span class="c1"># *units.rad.to(units.mas)</span>
-        <span class="n">offset</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_fov</span><span class="o">.</span><span class="n">data_table</span><span class="p">[</span><span class="s2">&quot;offsets&quot;</span><span class="p">])</span>
+        <span class="n">r_0</span> <span class="o">=</span> <span class="p">(</span> <span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">oi_wavelength</span><span class="o">.</span><span class="n">lambs</span> <span class="o">/</span> <span class="n">D</span><span class="p">)</span>  <span class="c1"># *units.rad.to(units.mas)</span>
+        <span class="n">offset</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_fov</span><span class="o">.</span><span class="n">data_table</span><span class="p">[</span><span class="s2">&quot;OFFSETS&quot;</span><span class="p">])</span>
 
         <span class="k">def</span> <span class="nf">xy2phasor</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">md</span><span class="o">=</span><span class="n">md</span><span class="p">):</span>
 <span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
@@ -754,7 +784,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># mods = md.array([a  for a in self.nifits.ni_mod.phasors]).T</span>
         <span class="n">mods</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_mod</span><span class="o">.</span><span class="n">all_phasors</span><span class="p">)</span>
-        <span class="n">col_area</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_mod</span><span class="o">.</span><span class="n">arrcol</span><span class="p">)</span>
+        <span class="n">col_area</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_mod</span><span class="o">.</span><span class="n">col_ar</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">mods</span> <span class="o">*</span> <span class="n">md</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">col_area</span><span class="p">)[:,</span> <span class="kc">None</span><span class="p">,</span> <span class="p">:]</span></div>
 
 
@@ -775,7 +805,7 @@
 <span class="sd">        Returns:</span>
 <span class="sd">            A vector of complex phasors</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">xy_array</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_mod</span><span class="o">.</span><span class="n">appxy</span>
+        <span class="n">xy_array</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_mod</span><span class="o">.</span><span class="n">ap_xy</span>
         <span class="n">lambs</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">oi_wavelength</span><span class="o">.</span><span class="n">lambs</span><span class="p">)</span>
         <span class="n">k</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">md</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="n">lambs</span>
         <span class="n">a</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">array</span><span class="p">((</span><span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">md</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
@@ -783,7 +813,9 @@
         <span class="c1"># print(a.shape)</span>
         <span class="c1"># phi = k[:,None,None,None] * md.array([anxy_array[:,:].dot(a[:,:]) for anxy_array in xy_array</span>
         <span class="c1">#                                     &quot;frame beam x, x mpoint -&gt; frame beam mpoint&quot; </span>
-        <span class="n">phi</span> <span class="o">=</span> <span class="n">k</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="n">md</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s2">&quot;f b x, x m -&gt; f b m&quot;</span><span class="p">,</span> <span class="n">xy_array</span><span class="p">[:,</span> <span class="p">:,</span> <span class="p">:],</span> <span class="n">a</span><span class="p">[:,</span> <span class="p">:])[:,</span> <span class="kc">None</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span>
+        
+        <span class="c1"># - sign included for consolidation of sign convention of V (0.0.10 - 0.8)</span>
+        <span class="n">phi</span> <span class="o">=</span> <span class="o">-</span> <span class="n">k</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="n">neweinsum</span><span class="p">(</span><span class="s2">&quot;fbx,xm-&gt;fbm&quot;</span><span class="p">,</span> <span class="n">xy_array</span><span class="p">[:,</span> <span class="p">:,</span> <span class="p">:],</span> <span class="n">a</span><span class="p">[:,</span> <span class="p">:])[:,</span> <span class="kc">None</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span>
         <span class="c1"># print(a.shape)</span>
         <span class="n">b</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">phi</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">include_mod</span><span class="p">:</span>
@@ -801,7 +833,7 @@
 <span class="sd">        Get intensity from an array of sources.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">E</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s2">&quot;w o i , t w i m -&gt; t w o m&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_catm</span><span class="o">.</span><span class="n">M</span><span class="p">,</span> <span class="n">xs</span><span class="p">)</span>
+        <span class="n">E</span> <span class="o">=</span> <span class="n">neweinsum</span><span class="p">(</span><span class="s2">&quot;woi,twim-&gt;twom&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_catm</span><span class="o">.</span><span class="n">M</span><span class="p">,</span> <span class="n">xs</span><span class="p">)</span>
         <span class="n">I</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">E</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
         <span class="k">return</span> <span class="n">I</span></div>
 
@@ -823,7 +855,7 @@
 <span class="sd">            The vector :math:`\boldsymbol{\kappa} = \mathbf{K}\cdot\mathbf{I}`</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">KI</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s2">&quot;k o, t w o m -&gt; t w k m&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_kmat</span><span class="o">.</span><span class="n">K</span><span class="p">[:,</span> <span class="p">:],</span> <span class="n">Iarray</span><span class="p">)</span>
+        <span class="n">KI</span> <span class="o">=</span> <span class="n">neweinsum</span><span class="p">(</span><span class="s2">&quot;ko,twom-&gt;twkm&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_kmat</span><span class="o">.</span><span class="n">K</span><span class="p">[:,</span> <span class="p">:],</span> <span class="n">Iarray</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">KI</span></div>
 
 
@@ -891,12 +923,12 @@
 <span class="sd">        **Returns** : A vector of complex phasors</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">xy_array</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_mod</span><span class="o">.</span><span class="n">appxy</span><span class="p">)</span>
+        <span class="n">xy_array</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_mod</span><span class="o">.</span><span class="n">ap_xy</span><span class="p">)</span>
         <span class="n">lambs</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">oi_wavelength</span><span class="o">.</span><span class="n">lambs</span><span class="p">)</span>
         <span class="n">k</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">md</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="n">lambs</span>
         <span class="n">a</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">array</span><span class="p">((</span><span class="n">alphas</span><span class="p">,</span> <span class="n">betas</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">md</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
         <span class="c1">#                                     &quot;frame beam x, x frame mpoint -&gt; frame beam mpoint&quot; </span>
-        <span class="n">phi</span> <span class="o">=</span> <span class="n">k</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="n">md</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s2">&quot;f b x, x f m -&gt; f b m&quot;</span><span class="p">,</span> <span class="n">xy_array</span><span class="p">[:,</span> <span class="p">:,</span> <span class="p">:],</span> <span class="n">a</span><span class="p">[:,</span> <span class="p">:])[:,</span> <span class="kc">None</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span>
+        <span class="n">phi</span> <span class="o">=</span> <span class="o">-</span> <span class="n">k</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="n">neweinsum</span><span class="p">(</span><span class="s2">&quot;fbx,xfm-&gt;fbm&quot;</span><span class="p">,</span> <span class="n">xy_array</span><span class="p">[:,</span> <span class="p">:,</span> <span class="p">:],</span> <span class="n">a</span><span class="p">[:,</span> <span class="p">:])[:,</span> <span class="kc">None</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span>
         <span class="n">b</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">phi</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">include_mod</span><span class="p">:</span>
             <span class="n">mods</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_modulation_phasor</span><span class="p">(</span><span class="n">md</span><span class="o">=</span><span class="n">md</span><span class="p">)[:,</span> <span class="p">:,</span> <span class="p">:,</span> <span class="kc">None</span><span class="p">]</span>
@@ -970,7 +1002,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_dsamp</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_oswavelength</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">):</span>
             <span class="k">return</span> <span class="n">Is</span>
-        <span class="n">Ids</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s2">&quot;l w, t w o m -&gt; t l o m&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_dsamp</span><span class="o">.</span><span class="n">D</span><span class="p">,</span> <span class="n">Is</span><span class="p">)</span>
+        <span class="n">Ids</span> <span class="o">=</span> <span class="n">neweinsum</span><span class="p">(</span><span class="s2">&quot;lw,twom-&gt;tlom&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_dsamp</span><span class="o">.</span><span class="n">D</span><span class="p">,</span> <span class="n">Is</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">Ids</span></div>
 
 
@@ -988,13 +1020,13 @@
         <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
         <span class="kn">from</span> <span class="nn">scipy.interpolate</span> <span class="kn">import</span> <span class="n">griddata</span>
         <span class="k">if</span> <span class="n">outputs</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">n_subplots</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_iout</span><span class="o">.</span><span class="n">data_table</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+            <span class="n">n_subplots</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_iout</span><span class="o">.</span><span class="n">data_table</span><span class="p">[</span><span class="s2">&quot;VALUE&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
             <span class="n">output_names</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;Output </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_subplots</span><span class="p">)]</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">n_subplots</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">outputs</span><span class="p">)</span>
             <span class="n">output_names</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;Output </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">outputs</span><span class="p">]</span>
-        <span class="n">n_frames</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_iout</span><span class="o">.</span><span class="n">data_table</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="n">n_wls</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_iout</span><span class="o">.</span><span class="n">data_table</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">n_frames</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_iout</span><span class="o">.</span><span class="n">data_table</span><span class="p">[</span><span class="s2">&quot;VALUE&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">n_wls</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_iout</span><span class="o">.</span><span class="n">data_table</span><span class="p">[</span><span class="s2">&quot;VALUE&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
         <span class="k">if</span> <span class="n">nrows_ncols</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">test_ncols</span> <span class="o">=</span> <span class="n">n_subplots</span> <span class="o">//</span> <span class="mi">2</span>
             <span class="k">if</span> <span class="n">test_ncols</span> <span class="o">&gt;</span> <span class="mi">4</span><span class="p">:</span>
@@ -1016,10 +1048,10 @@
         <span class="n">points</span> <span class="o">=</span> <span class="n">points</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">T</span>
         <span class="c1"># points = points.transpose(1,2,0)</span>
         <span class="c1"># print(&quot;points&quot;, points.shape)</span>
-        <span class="c1"># print(&quot;data&quot;, np.array(self.nifits.ni_iout.data_table[&quot;value&quot;]).shape)</span>
+        <span class="c1"># print(&quot;data&quot;, np.array(self.nifits.ni_iout.data_table[&quot;VALUE&quot;]).shape)</span>
 
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_subplots</span><span class="p">):</span>
-            <span class="n">thevals</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_iout</span><span class="o">.</span><span class="n">data_table</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">][:,</span> <span class="p">:,</span> <span class="n">i</span><span class="p">]</span>
+            <span class="n">thevals</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nifits</span><span class="o">.</span><span class="n">ni_iout</span><span class="o">.</span><span class="n">data_table</span><span class="p">[</span><span class="s2">&quot;VALUE&quot;</span><span class="p">][:,</span> <span class="p">:,</span> <span class="n">i</span><span class="p">]</span>
             <span class="n">thevals</span> <span class="o">=</span> <span class="n">thevals</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
             <span class="c1"># print(&quot;thevals&quot;, thevals.shape)</span>
             <span class="c1"># print(&quot;points&quot;, points.shape)</span>
@@ -1027,7 +1059,7 @@
             <span class="c1"># print(mygrid.shape)</span>
             <span class="c1"># print(np.min(mygrid), np.max(mygrid))</span>
             <span class="n">plt</span><span class="o">.</span><span class="n">sca</span><span class="p">(</span><span class="n">axarr</span><span class="o">.</span><span class="n">flat</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-            <span class="c1"># plt.imshow(self.nifits.ni_iout.data_table[&quot;value&quot;][:,:,i])</span>
+            <span class="c1"># plt.imshow(self.nifits.ni_iout.data_table[&quot;VALUE&quot;][:,:,i])</span>
             <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">mygrid</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cmap</span><span class="p">,</span> <span class="n">extent</span><span class="o">=</span><span class="n">gridextent</span><span class="p">)</span>
             <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
             <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="s2">&quot;auto&quot;</span><span class="p">)</span>
@@ -1066,7 +1098,7 @@
         <span class="n">mydot</span><span class="o">.</span><span class="n">node</span><span class="p">(</span><span class="s2">&quot;M&quot;</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="s2">&quot;rectangle&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="s2">&quot;22&quot;</span><span class="p">)</span>
         <span class="n">mpw</span> <span class="o">=</span> <span class="s2">&quot;2&quot;</span>
         <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">inpol</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">ni_iotag</span><span class="o">.</span><span class="n">inpola</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
-            <span class="n">innodename</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Iutput </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="se">\n</span><span class="s2"> pola </span><span class="si">{</span><span class="n">inpol</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="n">innodename</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Intput </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="se">\n</span><span class="s2"> pola </span><span class="si">{</span><span class="n">inpol</span><span class="si">}</span><span class="s2">&quot;</span>
             <span class="n">mydot</span><span class="o">.</span><span class="n">node</span><span class="p">(</span><span class="n">innodename</span><span class="p">,</span> <span class="n">penwidth</span><span class="o">=</span><span class="n">mpw</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="s2">&quot;rectangle&quot;</span><span class="p">,</span> <span class="n">margin</span><span class="o">=</span><span class="s2">&quot;0.01&quot;</span><span class="p">)</span>
             <span class="n">mydot</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="n">innodename</span><span class="p">,</span> <span class="s2">&quot;M&quot;</span><span class="p">,</span> <span class="n">penwidth</span><span class="o">=</span><span class="n">mpw</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="s2">&quot;rectangle&quot;</span><span class="p">,</span> <span class="n">margin</span><span class="o">=</span><span class="s2">&quot;0.01&quot;</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">aninput</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">ni_iotag</span><span class="o">.</span><span class="n">outdark</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
@@ -1190,7 +1222,7 @@
       
     </aside>
   </div>
-</div><script src="../../../_static/documentation_options.js?v=53b53b71"></script>
+</div><script src="../../../_static/documentation_options.js?v=01f34227"></script>
     <script src="../../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/scripts/furo.js?v=5fa4622c"></script>

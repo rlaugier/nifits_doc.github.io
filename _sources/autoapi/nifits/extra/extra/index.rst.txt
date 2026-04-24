@@ -71,7 +71,7 @@ Attributes
    nifits.extra.extra.sr2massq
 
 
-.. py:function:: local_sqrtm(amatrix)
+.. py:function:: local_sqrtm(amatrix, atol=1e-16)
 
    :param amatrix: A square matrix
 
@@ -79,7 +79,7 @@ Attributes
        sqrt_matrx : The square root of the input
 
 
-.. py:class:: Post(nifits: nifits.io.oifits.nifits = None, module=np)
+.. py:class:: Post(nifits: nifits.io.niio.nifits = None, module=np)
 
 
    Bases: :py:obj:`nifits.backend.NI_Backend`
@@ -96,7 +96,7 @@ Attributes
    instead of ``self.nifits.ni_kiout.kiout``.
 
 
-   .. py:method:: create_whitening_matrix(replace: bool = False, md: types.ModuleType = np, local: bool = True)
+   .. py:method:: create_whitening_matrix(replace: bool = False, md: types.ModuleType = np, local: bool = True, atol: float = 1e-16)
 
           Updates the whitening matrix:
 
@@ -428,7 +428,7 @@ Attributes
          (used for some plots).
 
 
-.. py:class:: FixedSource(samples: nifits.backend.PointCollection, temperature: astropy.units.quantity, sp_dens: numpy.ndarray, solid_angle: astropy.units.quantity, oi_wavelength: nifits.io.oifits.OI_WAVELENGTH, iout_unit: astropy.units.Unit, md=np)
+.. py:class:: FixedSource(samples: nifits.backend.PointCollection, temperature: astropy.units.quantity, sp_dens: numpy.ndarray, solid_angle: astropy.units.quantity, oi_wavelength: nifits.io.niio.OI_WAVELENGTH, iout_unit: astropy.units.Unit, md=np)
 
 
    Bases: :py:obj:`nifits.backend.PointCollection`

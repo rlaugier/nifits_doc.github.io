@@ -6,7 +6,7 @@
 <link rel="index" title="Index" href="../../../../genindex.html" /><link rel="search" title="Search" href="../../../../search.html" /><link rel="next" title="nifits.extra" href="../../extra/index.html" /><link rel="prev" title="nifits.backend" href="../index.html" />
 
     <!-- Generated with Sphinx 7.3.7 and Furo 2024.08.06 -->
-        <title>nifits.backend.backend - NIFITS 0.0.8 documentation</title>
+        <title>nifits.backend.backend - NIFITS 0.1.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=362ab14a" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/styles/furo.css?v=354aac6f" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=fd3f3429" />
@@ -168,7 +168,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../../../../index.html"><div class="brand">NIFITS 0.0.8 documentation</div></a>
+      <a href="../../../../index.html"><div class="brand">NIFITS 0.1.0 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -192,7 +192,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../../../../index.html">
   
   
-  <span class="sidebar-brand-text">NIFITS 0.0.8 documentation</span>
+  <span class="sidebar-brand-text">NIFITS 0.1.0 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="../../../../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -209,10 +209,12 @@
 </li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="../../extra/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">nifits.extra</span></code></a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of nifits.extra</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l4"><a class="reference internal" href="../../extra/extra/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">nifits.extra.extra</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../extra/promote/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">nifits.extra.promote</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="../../io/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">nifits.io</span></code></a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of nifits.io</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l4"><a class="reference internal" href="../../io/oifits/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">nifits.io.oifits</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../io/niio/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">nifits.io.niio</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../io/utils/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">nifits.io.utils</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -293,7 +295,10 @@ that have a numpy-compatible API.</p>
 <div class="table-wrapper autosummary longtable docutils container">
 <table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="../../../../nifits.backend.html#nifits.backend.backend.col_row_numbers" title="nifits.backend.backend.col_row_numbers"><code class="xref py py-obj docutils literal notranslate"><span class="pre">col_row_numbers</span></code></a>(n[, col_ceiling])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../../../nifits.backend.html#nifits.backend.backend.get_frame" title="nifits.backend.backend.get_frame"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_frame</span></code></a>(z[, frame_index, wl_index, out_index])</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../../../../nifits.backend.html#nifits.backend.backend.col_row_numbers" title="nifits.backend.backend.col_row_numbers"><code class="xref py py-obj docutils literal notranslate"><span class="pre">col_row_numbers</span></code></a>(n[, col_ceiling])</p></td>
 <td><p>Convenience function to decide the</p></td>
 </tr>
 </tbody>
@@ -317,6 +322,9 @@ that have a numpy-compatible API.</p>
 <tr class="row-even"><td><p><a class="reference internal" href="#nifits.backend.backend.rad2mas" title="nifits.backend.backend.rad2mas"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rad2mas</span></code></a></p></td>
 <td><p></p></td>
 </tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nifits.backend.backend.optim" title="nifits.backend.backend.optim"><code class="xref py py-obj docutils literal notranslate"><span class="pre">optim</span></code></a></p></td>
+<td><p></p></td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -338,6 +346,11 @@ that have a numpy-compatible API.</p>
 <dl class="py data">
 <dt class="sig sig-object py" id="nifits.backend.backend.rad2mas">
 <span class="sig-prename descclassname"><span class="pre">nifits.backend.backend.</span></span><span class="sig-name descname"><span class="pre">rad2mas</span></span><a class="headerlink" href="#nifits.backend.backend.rad2mas" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="nifits.backend.backend.optim">
+<span class="sig-prename descclassname"><span class="pre">nifits.backend.backend.</span></span><span class="sig-name descname"><span class="pre">optim</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#nifits.backend.backend.optim" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py class">
@@ -506,7 +519,7 @@ to the center of the field of view</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="nifits.backend.backend.PointCollection.plot_frame">
-<span class="sig-name descname"><span class="pre">plot_frame</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">z</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frame_index</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wl_index</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_index</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mycmap</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">marksize_increase</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colorbar</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xlabel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/nifits/backend/backend.html#PointCollection.plot_frame"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.backend.backend.PointCollection.plot_frame" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">plot_frame</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">z</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frame_index</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wl_index</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_index</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mycmap</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">marksize_increase</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colorbar</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xlabel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ylabel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">orientation_RA_DEC</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/nifits/backend/backend.html#PointCollection.plot_frame"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.backend.backend.PointCollection.plot_frame" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -531,6 +544,11 @@ to the center of the field of view</p></li>
 </dd></dl>
 
 </dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nifits.backend.backend.get_frame">
+<span class="sig-prename descclassname"><span class="pre">nifits.backend.backend.</span></span><span class="sig-name descname"><span class="pre">get_frame</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">z</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frame_index</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wl_index</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_index</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/nifits/backend/backend.html#get_frame"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.backend.backend.get_frame" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="nifits.backend.backend.MovingCollection">
@@ -566,7 +584,7 @@ to the center of the field of view</p></li>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="nifits.backend.backend.NI_Backend">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nifits.backend.backend.</span></span><span class="sig-name descname"><span class="pre">NI_Backend</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nifits</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../../../../nifits.io.html#nifits.io.oifits.nifits" title="nifits.io.oifits.nifits"><span class="pre">nifits.io.oifits.nifits</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">module</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">np</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/nifits/backend/backend.html#NI_Backend"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.backend.backend.NI_Backend" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nifits.backend.backend.</span></span><span class="sig-name descname"><span class="pre">NI_Backend</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nifits</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../../io/niio/index.html#nifits.io.niio.nifits" title="nifits.io.niio.nifits"><span class="pre">nifits.io.niio.nifits</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">module</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">np</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/nifits/backend/backend.html#NI_Backend"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.backend.backend.NI_Backend" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>A class to produce calculations based on the NIFITS standard.</p>
 <dl class="py attribute">
@@ -590,7 +608,7 @@ instrument information are added later with:</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="nifits.backend.backend.NI_Backend.add_instrument_definition">
-<span class="sig-name descname"><span class="pre">add_instrument_definition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nifits_instrument</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../../../../nifits.io.html#nifits.io.oifits.nifits" title="nifits.io.oifits.nifits"><span class="pre">nifits.io.oifits.nifits</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/nifits/backend/backend.html#NI_Backend.add_instrument_definition"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.backend.backend.NI_Backend.add_instrument_definition" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">add_instrument_definition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nifits_instrument</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../../io/niio/index.html#nifits.io.niio.nifits" title="nifits.io.niio.nifits"><span class="pre">nifits.io.niio.nifits</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/nifits/backend/backend.html#NI_Backend.add_instrument_definition"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.backend.backend.NI_Backend.add_instrument_definition" title="Link to this definition">¶</a></dt>
 <dd><p>Adds the instrument definition to the model.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -606,7 +624,7 @@ will be replaced</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="nifits.backend.backend.NI_Backend.add_observation_data">
-<span class="sig-name descname"><span class="pre">add_observation_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nifits_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../../../../nifits.io.html#nifits.io.oifits.nifits" title="nifits.io.oifits.nifits"><span class="pre">nifits.io.oifits.nifits</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/nifits/backend/backend.html#NI_Backend.add_observation_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.backend.backend.NI_Backend.add_observation_data" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">add_observation_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nifits_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../../io/niio/index.html#nifits.io.niio.nifits" title="nifits.io.niio.nifits"><span class="pre">nifits.io.niio.nifits</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/nifits/backend/backend.html#NI_Backend.add_observation_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.backend.backend.NI_Backend.add_observation_data" title="Link to this definition">¶</a></dt>
 <dd><p>Adds the observation data to the model.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -935,6 +953,7 @@ following the standard.</a></li>
 <li><a class="reference internal" href="#nifits.backend.backend.ArrayLike"><code class="docutils literal notranslate"><span class="pre">ArrayLike</span></code></a></li>
 <li><a class="reference internal" href="#nifits.backend.backend.mas2rad"><code class="docutils literal notranslate"><span class="pre">mas2rad</span></code></a></li>
 <li><a class="reference internal" href="#nifits.backend.backend.rad2mas"><code class="docutils literal notranslate"><span class="pre">rad2mas</span></code></a></li>
+<li><a class="reference internal" href="#nifits.backend.backend.optim"><code class="docutils literal notranslate"><span class="pre">optim</span></code></a></li>
 <li><a class="reference internal" href="#nifits.backend.backend.PointCollection"><code class="docutils literal notranslate"><span class="pre">PointCollection</span></code></a><ul>
 <li><a class="reference internal" href="#nifits.backend.backend.PointCollection.coords"><code class="docutils literal notranslate"><span class="pre">PointCollection.coords</span></code></a></li>
 <li><a class="reference internal" href="#nifits.backend.backend.PointCollection.coords_rad"><code class="docutils literal notranslate"><span class="pre">PointCollection.coords_rad</span></code></a></li>
@@ -953,6 +972,7 @@ following the standard.</a></li>
 <li><a class="reference internal" href="#nifits.backend.backend.PointCollection.transform"><code class="docutils literal notranslate"><span class="pre">PointCollection.transform()</span></code></a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#nifits.backend.backend.get_frame"><code class="docutils literal notranslate"><span class="pre">get_frame()</span></code></a></li>
 <li><a class="reference internal" href="#nifits.backend.backend.MovingCollection"><code class="docutils literal notranslate"><span class="pre">MovingCollection</span></code></a><ul>
 <li><a class="reference internal" href="#nifits.backend.backend.MovingCollection.coords_rad"><code class="docutils literal notranslate"><span class="pre">MovingCollection.coords_rad</span></code></a></li>
 <li><a class="reference internal" href="#nifits.backend.backend.MovingCollection.coords"><code class="docutils literal notranslate"><span class="pre">MovingCollection.coords</span></code></a></li>
@@ -995,7 +1015,7 @@ following the standard.</a></li>
       
     </aside>
   </div>
-</div><script src="../../../../_static/documentation_options.js?v=53b53b71"></script>
+</div><script src="../../../../_static/documentation_options.js?v=01f34227"></script>
     <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../../_static/scripts/furo.js?v=5fa4622c"></script>

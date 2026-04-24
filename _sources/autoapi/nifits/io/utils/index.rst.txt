@@ -1,0 +1,27 @@
+:py:mod:`nifits.io.utils`
+=========================
+
+.. py:module:: nifits.io.utils
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   nifits.io.utils.get_uv
+
+
+
+.. py:function:: get_uv(puparray)
+
+   Computes the uv baselines for a given pupil configuration.
+
+   Args:
+   uparray ``ArrayLike`` : [m] (n_tel, 2)
+
+

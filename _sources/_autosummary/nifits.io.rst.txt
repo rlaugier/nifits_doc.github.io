@@ -1,4 +1,4 @@
-nifits.io
+﻿nifits.io
 =========
 
 .. automodule:: nifits.io
@@ -27,5 +27,6 @@ nifits.io
    :toctree:
    :recursive:
 
-   nifits.io.oifits
+   nifits.io.niio
+   nifits.io.utils
 

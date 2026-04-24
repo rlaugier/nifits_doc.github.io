@@ -18,11 +18,45 @@ Subpackages
 Package Contents
 ----------------
 
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   nifits.__version_int__
+   nifits.__standard_version_int__
+
+
+
+Attributes
+~~~~~~~~~~
+
+.. autoapisummary::
+
+   nifits.__version__
+   nifits.__standard_version__
+
+
 .. py:data:: __version__
+   :value: '0.1.0'
 
    
+
+.. py:function:: __version_int__()
+
+   Returns the nifits standard version as a tuple
+   of three integers based on `__version__` string.
+
 
 .. py:data:: __standard_version__
+   :value: '1.0'
 
    
+
+.. py:function:: __standard_version_int__()
+
+   Returns the nifits standard version as a pair
+   of integers (based on `__standard_version__` string).
+
 

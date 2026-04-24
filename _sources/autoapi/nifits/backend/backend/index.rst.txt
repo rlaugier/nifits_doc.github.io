@@ -36,6 +36,7 @@ Functions
 
 .. autoapisummary::
 
+   nifits.backend.backend.get_frame
    nifits.backend.backend.col_row_numbers
 
 
@@ -49,6 +50,7 @@ Attributes
    nifits.backend.backend.ArrayLike
    nifits.backend.backend.mas2rad
    nifits.backend.backend.rad2mas
+   nifits.backend.backend.optim
 
 
 .. py:data:: ModuleType
@@ -64,6 +66,11 @@ Attributes
    
 
 .. py:data:: rad2mas
+
+   
+
+.. py:data:: optim
+   :value: True
 
    
 
@@ -186,7 +193,7 @@ Attributes
       :param resolution: The number of pixels across the width.
 
 
-   .. py:method:: plot_frame(z=None, frame_index=0, wl_index=0, out_index=0, mycmap=None, marksize_increase=1.0, colorbar=True, xlabel=True, title=True)
+   .. py:method:: plot_frame(z=None, frame_index=0, wl_index=0, out_index=0, mycmap=None, marksize_increase=1.0, colorbar=True, xlabel=True, ylabel=True, title=True, orientation_RA_DEC=True)
 
 
    .. py:method:: __add__(other)
@@ -203,6 +210,9 @@ Attributes
       :param matrix: A transformation matrix (3D)
       :param md: A module to do the operation
 
+
+
+.. py:function:: get_frame(z, frame_index=0, wl_index=0, out_index=0)
 
 
 .. py:class:: MovingCollection
@@ -229,7 +239,7 @@ Attributes
       
 
 
-.. py:class:: NI_Backend(nifits: nifits.io.oifits.nifits = None, module=np)
+.. py:class:: NI_Backend(nifits: nifits.io.niio.nifits = None, module=np)
 
 
    Bases: :py:obj:`object`
@@ -248,7 +258,7 @@ Attributes
       :param nifits: NIFITSClass
       :param module: A backend module for advanced math.
 
-   .. py:method:: add_instrument_definition(nifits_instrument: nifits.io.oifits.nifits = None, force: bool = False, verbose: bool = True)
+   .. py:method:: add_instrument_definition(nifits_instrument: nifits.io.niio.nifits = None, force: bool = False, verbose: bool = True)
 
       Adds the instrument definition to the model.
 
@@ -258,7 +268,7 @@ Attributes
       :param verbose: Get more printed information
 
 
-   .. py:method:: add_observation_data(nifits_data: nifits.io.oifits.nifits = None, force: bool = False, verbose: bool = True)
+   .. py:method:: add_observation_data(nifits_data: nifits.io.niio.nifits = None, force: bool = False, verbose: bool = True)
 
       Adds the observation data to the model.
 

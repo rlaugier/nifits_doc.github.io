@@ -11,6 +11,7 @@ Submodules
    :maxdepth: 1
 
    extra/index.rst
+   promote/index.rst
 
 
 Package Contents
@@ -55,6 +56,7 @@ Attributes
    nifits.extra.STATIC_EXTENSIONS
    nifits.extra.NIFITS_EXTENSIONS
    nifits.extra.STATIC_EXTENSIONS
+   nifits.extra.optim
    nifits.extra.BackendLike
    nifits.extra.massq2sr
    nifits.extra.sr2massq
@@ -161,7 +163,10 @@ Attributes
       Create the nifits object from the HDU extension of an opened fits file.
 
 
-   .. py:method:: to_nifits(filename: str = '', static_only: bool = False, dynamic_only: bool = False, static_hash: str = '', writefile: bool = True, overwrite: bool = False)
+   .. py:method:: get_version(string=False)
+
+
+   .. py:method:: to_nifits(filename: str = '', static_only: bool = False, dynamic_only: bool = False, static_hash: str = '', writefile: bool = True, overwrite: bool = False, checksum: bool = True)
 
       Write the extension objects to a nifits file.
 
@@ -173,9 +178,18 @@ Attributes
                            Defaultult: False
       :param static_hash: (str) The hash of the static file.
                           Default: ""
+      :param checksum: (bool) include checksum.
 
 
-   .. py:method:: check_unit_coherence()
+   .. py:method:: extension_objects(check=True)
+
+          Get a lits of the nifits extensions in this object.
+
+      :returns: a list of the extension objects of the file.
+      :rtype: extensions
+
+
+   .. py:method:: check_unit_coherence(verbose=True)
 
           Check the coherence of the units of and prints the result
       NI_IOUT, NI_KCOV, and NI_KIOUT if they exist.
@@ -183,8 +197,29 @@ Attributes
       Otherwise, does nothing.
 
 
+   .. py:method:: refresh_primary_header(all=False, verbose=True, **kwargs)
 
-.. py:function:: local_sqrtm(amatrix)
+      :param `all`: `Bool` (False) If Force the update of all relevent keywords.
+      :param Exceptions:
+      :param \* `MJD-OBS` is designated `MJD_OBS`:
+      :param \* `MJD-END` is designated `MJD_END`:
+      :param \* `BASE`:
+
+      Options :
+          * True : Force the update of the keyword
+          * None : Only update if centent contains `generic`
+            for strings, NaN for floats or 0 for int.
+          * False : Do not update.
+
+
+
+
+.. py:data:: optim
+   :value: True
+
+   
+
+.. py:function:: local_sqrtm(amatrix, atol=1e-16)
 
    :param amatrix: A square matrix
 
@@ -192,7 +227,7 @@ Attributes
        sqrt_matrx : The square root of the input
 
 
-.. py:class:: Post(nifits: nifits.io.oifits.nifits = None, module=np)
+.. py:class:: Post(nifits: nifits.io.niio.nifits = None, module=np)
 
 
    Bases: :py:obj:`nifits.backend.NI_Backend`
@@ -209,7 +244,7 @@ Attributes
    instead of ``self.nifits.ni_kiout.kiout``.
 
 
-   .. py:method:: create_whitening_matrix(replace: bool = False, md: types.ModuleType = np, local: bool = True)
+   .. py:method:: create_whitening_matrix(replace: bool = False, md: types.ModuleType = np, local: bool = True, atol: float = 1e-16)
 
           Updates the whitening matrix:
 
@@ -625,7 +660,7 @@ Attributes
       :param resolution: The number of pixels across the width.
 
 
-   .. py:method:: plot_frame(z=None, frame_index=0, wl_index=0, out_index=0, mycmap=None, marksize_increase=1.0, colorbar=True, xlabel=True, title=True)
+   .. py:method:: plot_frame(z=None, frame_index=0, wl_index=0, out_index=0, mycmap=None, marksize_increase=1.0, colorbar=True, xlabel=True, ylabel=True, title=True, orientation_RA_DEC=True)
 
 
    .. py:method:: __add__(other)
@@ -718,7 +753,7 @@ Attributes
          (used for some plots).
 
 
-.. py:class:: FixedSource(samples: nifits.backend.PointCollection, temperature: astropy.units.quantity, sp_dens: numpy.ndarray, solid_angle: astropy.units.quantity, oi_wavelength: nifits.io.oifits.OI_WAVELENGTH, iout_unit: astropy.units.Unit, md=np)
+.. py:class:: FixedSource(samples: nifits.backend.PointCollection, temperature: astropy.units.quantity, sp_dens: numpy.ndarray, solid_angle: astropy.units.quantity, oi_wavelength: nifits.io.niio.OI_WAVELENGTH, iout_unit: astropy.units.Unit, md=np)
 
 
    Bases: :py:obj:`nifits.backend.PointCollection`

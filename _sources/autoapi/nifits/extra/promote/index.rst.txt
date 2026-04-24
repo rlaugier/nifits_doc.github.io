@@ -1,0 +1,55 @@
+:py:mod:`nifits.extra.promote`
+==============================
+
+.. py:module:: nifits.extra.promote
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   nifits.extra.promote.convert_object
+
+
+
+Attributes
+~~~~~~~~~~
+
+.. autoapisummary::
+
+   nifits.extra.promote.default_subs
+   nifits.extra.promote.default_keywords
+
+
+.. py:data:: default_subs
+
+   
+
+.. py:data:: default_keywords
+
+   
+
+.. py:function:: convert_object(mynifits, conversion_list=default_subs, keywords_list=default_keywords)
+
+   Converts an NIFITS 0.x object into an NIFITS 1.0 object.
+
+   You can get the conversion list and the default header as follows:
+
+       ```python
+       mysubs = nifits.niio.SUBS_V1
+       mykeywords = nifits.niio.NI_NIFITS_DEFAULT_HEADER
+       ```
+
+   :param mynifits: an `nifits` object
+   :param conversion_list: A list of tuples for the substitution of columns
+   :param keywords_list: A Header object
+
+   :returns: A new nifits to the 1.0 standard
+   :rtype: newnifits
+
+

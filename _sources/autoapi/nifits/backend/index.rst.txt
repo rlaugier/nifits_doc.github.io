@@ -33,6 +33,11 @@ Functions
 
 .. autoapisummary::
 
+   nifits.backend.__version_int__
+   nifits.backend.__standard_version_int__
+   nifits.backend.__version_int__
+   nifits.backend.__standard_version_int__
+   nifits.backend.get_frame
    nifits.backend.col_row_numbers
 
 
@@ -44,12 +49,17 @@ Attributes
 
    nifits.backend.NIFITS_EXTENSIONS
    nifits.backend.STATIC_EXTENSIONS
+   nifits.backend.__version__
+   nifits.backend.__standard_version__
    nifits.backend.NIFITS_EXTENSIONS
    nifits.backend.STATIC_EXTENSIONS
+   nifits.backend.__version__
+   nifits.backend.__standard_version__
    nifits.backend.ModuleType
    nifits.backend.ArrayLike
    nifits.backend.mas2rad
    nifits.backend.rad2mas
+   nifits.backend.optim
 
 
 .. py:data:: NIFITS_EXTENSIONS
@@ -60,6 +70,28 @@ Attributes
    :value: [True, True, True, True, False, False, False, False, False, True, True, False]
 
    
+
+.. py:data:: __version__
+   :value: '0.1.0'
+
+   
+
+.. py:function:: __version_int__()
+
+   Returns the nifits standard version as a tuple
+   of three integers based on `__version__` string.
+
+
+.. py:data:: __standard_version__
+   :value: '1.0'
+
+   
+
+.. py:function:: __standard_version_int__()
+
+   Returns the nifits standard version as a pair
+   of integers (based on `__standard_version__` string).
+
 
 .. py:data:: NIFITS_EXTENSIONS
 
@@ -153,7 +185,10 @@ Attributes
       Create the nifits object from the HDU extension of an opened fits file.
 
 
-   .. py:method:: to_nifits(filename: str = '', static_only: bool = False, dynamic_only: bool = False, static_hash: str = '', writefile: bool = True, overwrite: bool = False)
+   .. py:method:: get_version(string=False)
+
+
+   .. py:method:: to_nifits(filename: str = '', static_only: bool = False, dynamic_only: bool = False, static_hash: str = '', writefile: bool = True, overwrite: bool = False, checksum: bool = True)
 
       Write the extension objects to a nifits file.
 
@@ -165,15 +200,62 @@ Attributes
                            Defaultult: False
       :param static_hash: (str) The hash of the static file.
                           Default: ""
+      :param checksum: (bool) include checksum.
 
 
-   .. py:method:: check_unit_coherence()
+   .. py:method:: extension_objects(check=True)
+
+          Get a lits of the nifits extensions in this object.
+
+      :returns: a list of the extension objects of the file.
+      :rtype: extensions
+
+
+   .. py:method:: check_unit_coherence(verbose=True)
 
           Check the coherence of the units of and prints the result
       NI_IOUT, NI_KCOV, and NI_KIOUT if they exist.
 
       Otherwise, does nothing.
 
+
+   .. py:method:: refresh_primary_header(all=False, verbose=True, **kwargs)
+
+      :param `all`: `Bool` (False) If Force the update of all relevent keywords.
+      :param Exceptions:
+      :param \* `MJD-OBS` is designated `MJD_OBS`:
+      :param \* `MJD-END` is designated `MJD_END`:
+      :param \* `BASE`:
+
+      Options :
+          * True : Force the update of the keyword
+          * None : Only update if centent contains `generic`
+            for strings, NaN for floats or 0 for int.
+          * False : Do not update.
+
+
+
+
+.. py:data:: __version__
+   :value: '0.1.0'
+
+   
+
+.. py:function:: __version_int__()
+
+   Returns the nifits standard version as a tuple
+   of three integers based on `__version__` string.
+
+
+.. py:data:: __standard_version__
+   :value: '1.0'
+
+   
+
+.. py:function:: __standard_version_int__()
+
+   Returns the nifits standard version as a pair
+   of integers (based on `__standard_version__` string).
 
 
 .. py:data:: ModuleType
@@ -189,6 +271,11 @@ Attributes
    
 
 .. py:data:: rad2mas
+
+   
+
+.. py:data:: optim
+   :value: True
 
    
 
@@ -311,7 +398,7 @@ Attributes
       :param resolution: The number of pixels across the width.
 
 
-   .. py:method:: plot_frame(z=None, frame_index=0, wl_index=0, out_index=0, mycmap=None, marksize_increase=1.0, colorbar=True, xlabel=True, title=True)
+   .. py:method:: plot_frame(z=None, frame_index=0, wl_index=0, out_index=0, mycmap=None, marksize_increase=1.0, colorbar=True, xlabel=True, ylabel=True, title=True, orientation_RA_DEC=True)
 
 
    .. py:method:: __add__(other)
@@ -328,6 +415,9 @@ Attributes
       :param matrix: A transformation matrix (3D)
       :param md: A module to do the operation
 
+
+
+.. py:function:: get_frame(z, frame_index=0, wl_index=0, out_index=0)
 
 
 .. py:class:: MovingCollection
@@ -354,7 +444,7 @@ Attributes
       
 
 
-.. py:class:: NI_Backend(nifits: nifits.io.oifits.nifits = None, module=np)
+.. py:class:: NI_Backend(nifits: nifits.io.niio.nifits = None, module=np)
 
 
    Bases: :py:obj:`object`
@@ -373,7 +463,7 @@ Attributes
       :param nifits: NIFITSClass
       :param module: A backend module for advanced math.
 
-   .. py:method:: add_instrument_definition(nifits_instrument: nifits.io.oifits.nifits = None, force: bool = False, verbose: bool = True)
+   .. py:method:: add_instrument_definition(nifits_instrument: nifits.io.niio.nifits = None, force: bool = False, verbose: bool = True)
 
       Adds the instrument definition to the model.
 
@@ -383,7 +473,7 @@ Attributes
       :param verbose: Get more printed information
 
 
-   .. py:method:: add_observation_data(nifits_data: nifits.io.oifits.nifits = None, force: bool = False, verbose: bool = True)
+   .. py:method:: add_observation_data(nifits_data: nifits.io.niio.nifits = None, force: bool = False, verbose: bool = True)
 
       Adds the observation data to the model.
 
