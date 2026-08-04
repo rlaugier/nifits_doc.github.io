@@ -359,7 +359,7 @@ Attributes
 
       Returns and hdu object to save into fits
 
-      .. admonition::
+      .. admonition:: Note
 
           This also updates the header if dimension changes
 
@@ -1149,7 +1149,7 @@ Attributes
       Create the nifits object from the HDU extension of an opened fits file.
 
 
-   .. py:method:: get_version(string=False)
+   .. py:method:: get_version(string=False, fix=False)
 
 
    .. py:method:: to_nifits(filename: str = '', static_only: bool = False, dynamic_only: bool = False, static_hash: str = '', writefile: bool = True, overwrite: bool = False, checksum: bool = True)
@@ -1189,7 +1189,6 @@ Attributes
       :param Exceptions:
       :param \* `MJD-OBS` is designated `MJD_OBS`:
       :param \* `MJD-END` is designated `MJD_END`:
-      :param \* `BASE`:
 
       Options :
           * True : Force the update of the keyword

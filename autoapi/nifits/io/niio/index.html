@@ -762,6 +762,10 @@ CHARA:    -2484228.6029109913, -4660044.467216573, 3567867.961141405</p>
 <dt class="sig sig-object py" id="nifits.io.niio.NI_EXTENSION.to_hdu">
 <span class="sig-name descname"><span class="pre">to_hdu</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/nifits/io/niio.html#NI_EXTENSION.to_hdu"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.io.niio.NI_EXTENSION.to_hdu" title="Link to this definition">¶</a></dt>
 <dd><p>Returns and hdu object to save into fits</p>
+<div class="admonition-note admonition">
+<p class="admonition-title">Note</p>
+<p>This also updates the header if dimension changes</p>
+</div>
 </dd></dl>
 
 <dl class="py method">
@@ -1734,7 +1738,7 @@ create the gaussian profiles of radius <span class="math notranslate nohighlight
 
 <dl class="py method">
 <dt class="sig sig-object py" id="nifits.io.niio.nifits.get_version">
-<span class="sig-name descname"><span class="pre">get_version</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">string</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/nifits/io/niio.html#nifits.get_version"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.io.niio.nifits.get_version" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">get_version</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">string</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/nifits/io/niio.html#nifits.get_version"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nifits.io.niio.nifits.get_version" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -1794,7 +1798,6 @@ Default: “”</p></li>
 <li><p><strong>Exceptions</strong></p></li>
 <li><p><strong>MJD_OBS</strong> (<em>* MJD-OBS is designated</em>)</p></li>
 <li><p><strong>MJD_END</strong> (<em>* MJD-END is designated</em>)</p></li>
-<li><p><strong>BASE</strong> (<em>*</em>)</p></li>
 </ul>
 </dd>
 </dl>

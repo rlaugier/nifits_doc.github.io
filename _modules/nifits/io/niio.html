@@ -334,7 +334,7 @@
     <span class="p">(</span><span class="s2">&quot;ARRCOL&quot;</span><span class="p">,</span> <span class="s2">&quot;COL_AR&quot;</span><span class="p">),</span>
     <span class="p">(</span><span class="s2">&quot;APPXY&quot;</span><span class="p">,</span> <span class="s2">&quot;AP_XY&quot;</span><span class="p">),</span>
     <span class="p">(</span><span class="s2">&quot;value&quot;</span><span class="p">,</span> <span class="s2">&quot;VALUE&quot;</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">&quot;offsets&quot;</span><span class="p">,</span> <span class="s2">&quot;OFFSETS&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;offsets&quot;</span><span class="p">,</span> <span class="s2">&quot;OFFSETS&quot;</span><span class="p">)</span>
 <span class="p">]</span>
 <span class="n">SUBS_V1_0to1</span> <span class="o">=</span> <span class="p">{}</span>
 <span class="n">SUBS_V1_1to0</span> <span class="o">=</span> <span class="p">{}</span>
@@ -561,8 +561,8 @@
     <span class="p">(</span><span class="s2">&quot;OBSERVER&quot;</span><span class="p">,</span> <span class="s2">&quot;generic observer&quot;</span><span class="p">,</span> <span class="s2">&quot;Who acquired the data&quot;</span><span class="p">),</span>
     <span class="p">(</span><span class="s2">&quot;OBJECT&quot;</span><span class="p">,</span> <span class="s2">&quot;generic object&quot;</span> <span class="p">,</span> <span class="s2">&quot;Object identifier&quot;</span><span class="p">),</span>
     <span class="p">(</span><span class="s2">&quot;INSMODE&quot;</span><span class="p">,</span> <span class="s2">&quot;generic mode&quot;</span> <span class="p">,</span> <span class="s2">&quot;Instrument mode&quot;</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">&quot;HIERARCH NIFITS NI_RMAJ&quot;</span><span class="p">,</span> <span class="n">__standard_version_int__</span><span class="p">()[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;Major version number of nifits standard (int)&quot;</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">&quot;HIERARCH NIFITS NI_RMIN&quot;</span><span class="p">,</span> <span class="n">__standard_version_int__</span><span class="p">()[</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;Minor version number of nifits standard (int)&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;HIERARCH NIFITS NI_REV_MAJOR&quot;</span><span class="p">,</span> <span class="n">__standard_version_int__</span><span class="p">()[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;Major version number of nifits standard (int)&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;HIERARCH NIFITS NI_REV_MINOR&quot;</span><span class="p">,</span> <span class="n">__standard_version_int__</span><span class="p">()[</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;Minor version number of nifits standard (int)&quot;</span><span class="p">),</span>
     <span class="p">(</span><span class="s2">&quot;HIERARCH NIFITS LIB_NAME&quot;</span><span class="p">,</span> <span class="n">__package__</span><span class="p">,</span> <span class="s2">&quot;Name of the sofware library used to write the file, optional (str)&quot;</span><span class="p">),</span>
     <span class="p">(</span><span class="s2">&quot;HIERARCH NIFITS LIB_REV&quot;</span><span class="p">,</span> <span class="n">__version__</span><span class="p">,</span> <span class="s2">&quot;Version of the software library used to write the file, optional (str) &quot;</span><span class="p">)</span>
 <span class="p">])</span>
@@ -694,7 +694,7 @@
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns and hdu object to save into fits</span>
 <span class="sd">        </span>
-<span class="sd">        .. admonition::</span>
+<span class="sd">        .. admonition:: Note</span>
 <span class="sd">        </span>
 <span class="sd">            This also updates the header if dimension changes</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -1644,9 +1644,24 @@
 
 <div class="viewcode-block" id="nifits.get_version">
 <a class="viewcode-back" href="../../../autoapi/nifits/io/niio/index.html#nifits.backend.nifits.get_version">[docs]</a>
-    <span class="k">def</span> <span class="nf">get_version</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">string</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="n">mav</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">header</span><span class="p">[</span><span class="s2">&quot;HIERARCH NIFITS NI_RMAJ&quot;</span><span class="p">]</span>
-        <span class="n">miv</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">header</span><span class="p">[</span><span class="s2">&quot;HIERARCH NIFITS NI_RMIN&quot;</span><span class="p">]</span>
+    <span class="k">def</span> <span class="nf">get_version</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">string</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">fix</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">mav</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">header</span><span class="p">[</span><span class="s2">&quot;HIERARCH NIFITS NI_REV_MAJOR&quot;</span><span class="p">]</span>
+            <span class="n">miv</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">header</span><span class="p">[</span><span class="s2">&quot;HIERARCH NIFITS NI_REV_MINOR&quot;</span><span class="p">]</span>
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Deprecated NI_RMAJ keyword, updating your keywords&quot;</span><span class="p">)</span>
+            <span class="c1"># mav = self.header[&quot;HIERARCH NIFITS NI_RMAJ&quot;]</span>
+            <span class="c1"># miv = self.header[&quot;HIERARCH NIFITS NI_RMIN&quot;]</span>
+            <span class="k">if</span> <span class="n">fix</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="s2">&quot;HIERARCH NIFITS NI_REV_MAJOR&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;Major version number of nifits standard (int)&quot;</span><span class="p">))</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="s2">&quot;HIERARCH NIFITS NI_REV_MAJOR&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;Major version number of nifits standard (int)&quot;</span><span class="p">))</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">popitem</span><span class="p">(</span><span class="s2">&quot;HIERARCH NIFITS NI_RMAJ&quot;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">popitem</span><span class="p">(</span><span class="s2">&quot;HIERARCH NIFITS NI_RMIN&quot;</span><span class="p">)</span>
+                <span class="n">mav</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">header</span><span class="p">[</span><span class="s2">&quot;HIERARCH NIFITS NI_REV_MAJOR&quot;</span><span class="p">]</span>
+                <span class="n">miv</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">header</span><span class="p">[</span><span class="s2">&quot;HIERARCH NIFITS NI_REV_MINOR&quot;</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">mav</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="n">miv</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="k">if</span> <span class="n">string</span><span class="p">:</span>
             <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">mav</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">miv</span><span class="si">}</span><span class="s2">&quot;</span>
         <span class="k">else</span><span class="p">:</span>
@@ -1682,7 +1697,7 @@
         <span class="c1"># a hash for each extension</span>
         
         <span class="n">hdulist</span> <span class="o">=</span> <span class="n">fits</span><span class="o">.</span><span class="n">HDUList</span><span class="p">()</span>
-        <span class="n">hdu</span> <span class="o">=</span> <span class="n">fits</span><span class="o">.</span><span class="n">PrimaryHDU</span><span class="p">()</span>
+        <span class="n">hdu</span> <span class="o">=</span> <span class="n">fits</span><span class="o">.</span><span class="n">PrimaryHDU</span><span class="p">(</span><span class="n">header</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">header</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">static_only</span><span class="p">:</span>
             <span class="n">extension_list</span> <span class="o">=</span> <span class="n">NIFITS_EXTENSIONS</span><span class="p">[</span><span class="n">STATIC_EXTENSIONS</span><span class="p">]</span>
         <span class="k">elif</span> <span class="n">dynamic_only</span><span class="p">:</span>
@@ -1807,7 +1822,6 @@
 <span class="sd">            Exceptions:</span>
 <span class="sd">            * `MJD-OBS` is designated `MJD_OBS`</span>
 <span class="sd">            * `MJD-END` is designated `MJD_END`</span>
-<span class="sd">            * `BASE`</span>
 
 <span class="sd">        Options : </span>
 <span class="sd">            * True : Force the update of the keyword</span>
